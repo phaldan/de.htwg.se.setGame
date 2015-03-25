@@ -7,18 +7,16 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import de.htwg.se.setgame.model.AField;
 import de.htwg.se.setgame.model.ICard;
+import de.htwg.se.setgame.model.IField;
 import de.htwg.se.setgame.model.IPack;
 
 /**
  * Class Field.
  * 
  * @author David Simon & Raina Bertolini
- * @date 7.12.201NUMBERFORONELINE
- * @category Modell
  */
-public class Field extends AField {
+public class Field implements IField {
 	private int sizeOfField;
 	public static final int INITIALVALUEOFFIELD = 12;
 	public static final int MAX = 81;

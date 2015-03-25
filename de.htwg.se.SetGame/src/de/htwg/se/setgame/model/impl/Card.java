@@ -1,14 +1,11 @@
 package de.htwg.se.setgame.model.impl;
 
-import de.htwg.se.setgame.model.ACard;
 import de.htwg.se.setgame.model.ICard;
 
 /**
  * @author David Simon & Raina Bertolini
- * 
  */
-
-public class Card extends ACard {
+public class Card implements ICard {
 	private String color;
 	private String form;
 	private String panelFilling;
