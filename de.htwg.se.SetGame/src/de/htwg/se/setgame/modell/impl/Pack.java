@@ -1,15 +1,16 @@
 package de.htwg.se.setgame.modell.impl;
 
+import de.htwg.se.setgame.modell.ICard;
+import de.htwg.se.setgame.modell.IPack;
+
 import java.util.LinkedList;
 import java.util.List;
-
-import de.htwg.se.setgame.modell.ICard;
 
 /**
  * @author David Simon & Raina Bertolini class use to create all the
  *         combinations of the pack
  */
-public class Pack implements de.htwg.se.setgame.modell.IPack {
+public class Pack implements IPack {
 
 	/**
 	 * Instance variable
@@ -18,9 +19,9 @@ public class Pack implements de.htwg.se.setgame.modell.IPack {
 	public static final String[] FORME = { "ovally", "wave", "balk" };
 	public static final String[] COLORS = { "red", "green", "purple" };
 	public static final String[] FILL = { "halffill", "fill", "empty" };
-	public static final int[] NUMBEROFCOMPONET = { 1, 2, 3 };
-	private static final int SIZEOFARRAY = 81;
-	private static final int NUMBEROFEACHCARD = 3;
+	public static final Integer[] NUMBEROFCOMPONET = { 1, 2, 3 };
+	public static final int SIZEOFARRAY = 81;
+	public static final int NUMBEROFEACHCARD = 3;
 	private int colorIndex = 0;
 	private int formeIndex = 0;
 	private int fillgingIndex = 0;

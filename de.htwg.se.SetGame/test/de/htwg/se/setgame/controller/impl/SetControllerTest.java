@@ -1,6 +1,5 @@
 package de.htwg.se.setgame.controller.impl;
 
-
 import java.util.LinkedList;
 
 import org.junit.Before;
@@ -9,25 +8,18 @@ import org.junit.Test;
 import de.htwg.se.setgame.modell.ICard;
 
 public class SetControllerTest {
-	SetController setcontroll;
-	LinkedList<ICard> aSetListe;
+    SetController target;
+    LinkedList<ICard> list;
 
-	@Before
-	public void setUp() {
-		this.setcontroll = new SetController();
-		this.aSetListe = new LinkedList<ICard>();
-		aSetListe.addAll(this.setcontroll.getSetInField());
-	}
+    @Before
+    public void setUp() {
+        target = new SetController();
+        list = new LinkedList<>(target.getSetInField());
+    }
 
-	@Test
-	public void testSetController() {
-		System.out.println(this.setcontroll.getPlayerOnePoints());
-	}
-
-	@Test
-	public void testIsAsetForController() {
-		setcontroll.isASetForController(aSetListe.get(0), aSetListe.get(1), aSetListe.get(2), setcontroll.getPlayerOne());
-		
-	}
+    @Test
+    public void testIsAssetForController() {
+        target.isASetForController(list.get(0), list.get(1), list.get(2), target.getPlayerOne());
+    }
 
 }

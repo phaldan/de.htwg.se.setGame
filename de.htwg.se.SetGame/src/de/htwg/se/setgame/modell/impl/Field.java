@@ -20,13 +20,13 @@ import de.htwg.se.setgame.modell.IPack;
  */
 public class Field extends AField {
 	private int sizeOfField;
-	private static final int INITIALVALUEOFFIELD = 12;
-	private static final int MAX = 81;
-	private static final int ONE = 1;
-	private static final int NUMBERFORONELINE = 3;
+	public static final int INITIALVALUEOFFIELD = 12;
+	public static final int MAX = 81;
+	public static final int ONE = 1;
+	public static final int NUMBERFORONELINE = 3;
+	public static final int LEGHTFORSTRING = Pack.FILL[0].length();
 	private Set<Integer> listeofcontains;
 	private Map<Integer, Integer> ramdomListe;
-	private static final int LEGHTFORSTRING = Pack.FILL[0].length();
 	private Map<Integer, ICard> cardInFieldGame;
 	/** 
 	 * pack for the game are the cards and the random positions

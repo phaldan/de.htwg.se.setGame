@@ -1,38 +1,24 @@
 package de.htwg.se.setgame.modell.impl;
+
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 public class CardTest {
 
-	Card card = null;
-	@Before
-	public void setUp() {
-		this.card = new Card("red", "wave", "fill", 1);
+    Card target;
 
-	}
-	@Test
-	public void testCard() {
-		assert(card != null);
-		
-	}
+    @Before
+    public void setUp() {
+        target = new Card("red", "wave", "fill", 1);
+    }
 
-	@Test
-	public void testGetColor() {
-		assert(card.getColor() != null);
-	}
-	@Test
-	public void testGetFomr() {
-		assert(card.getForm() != null);
-	}
-
-	@Test
-	public void testGetPanelFilling() {
-		assert(card.getPanelFilling() != null);
-	}
-
-	@Test
-	public void testGetNumberOfComponents() {
-		assert(card.getNumberOfComponents() != -1);
-	}
-
+    @Test
+    public void testInitialState() {
+        assertNotNull(target);
+        assertNotNull(target.getColor());
+        assertNotNull(target.getForm());
+        assertNotNull(target.getPanelFilling());
+        assertNotEquals(-1, target.getNumberOfComponents());
+    }
 }
