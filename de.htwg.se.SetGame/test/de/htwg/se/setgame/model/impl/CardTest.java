@@ -1,4 +1,4 @@
-package de.htwg.se.setgame.modell.impl;
+package de.htwg.se.setgame.model.impl;
 
 import org.junit.Before;
 import org.junit.Test;

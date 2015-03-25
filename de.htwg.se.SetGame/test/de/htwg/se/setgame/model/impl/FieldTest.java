@@ -1,6 +1,6 @@
-package de.htwg.se.setgame.modell.impl;
+package de.htwg.se.setgame.model.impl;
 
-import de.htwg.se.setgame.modell.ICard;
+import de.htwg.se.setgame.model.ICard;
 import org.junit.Before;
 import org.junit.Test;
 

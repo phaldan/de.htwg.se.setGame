@@ -1,4 +1,4 @@
-package de.htwg.se.setgame.modell;
+package de.htwg.se.setgame.model;
 
 import java.util.List;
 import java.util.Map;
@@ -8,15 +8,15 @@ public interface IField {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see setgame.modell.IField#startUp()
+	 * @see setgame.model.IField#startUp()
 	 */
 	void startUp();
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see setgame.modell.IField#foundSet(setgame.modell.Card,
-	 * setgame.modell.Card, setgame.modell.Card)
+	 * @see setgame.model.IField#foundSet(setgame.model.Card,
+	 * setgame.model.Card, setgame.model.Card)
 	 */
 	 /**
 	 * @param cardOne card set

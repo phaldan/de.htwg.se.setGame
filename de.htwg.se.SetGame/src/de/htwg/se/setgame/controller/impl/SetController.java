@@ -8,11 +8,11 @@ import java.util.Map;
 import com.google.inject.Inject;
 
 import de.htwg.se.setgame.controller.IController;
-import de.htwg.se.setgame.modell.ICard;
-import de.htwg.se.setgame.modell.IField;
-import de.htwg.se.setgame.modell.IPack;
-import de.htwg.se.setgame.modell.impl.Field;
-import de.htwg.se.setgame.modell.impl.Pack;
+import de.htwg.se.setgame.model.ICard;
+import de.htwg.se.setgame.model.IField;
+import de.htwg.se.setgame.model.IPack;
+import de.htwg.se.setgame.model.impl.Field;
+import de.htwg.se.setgame.model.impl.Pack;
 import de.htwg.se.setgame.util.observer.Observable;
 
 
@@ -72,7 +72,7 @@ public class SetController extends Observable implements IController {
 	 */
 	@Inject
 	public SetController() {
-		this.field = new de.htwg.se.setgame.modell.impl.Field();
+		this.field = new de.htwg.se.setgame.model.impl.Field();
 		this.counter = 0;
 		this.field.startUp();
 		this.playerOne = 1;
@@ -349,7 +349,7 @@ public class SetController extends Observable implements IController {
 	}
 
 	/* (non-Javadoc)
-	 * @see de.htwg.se.setgame.controller.impl.ISuperController#isASetForController(de.htwg.se.setgame.modell.impl.Card, de.htwg.se.setgame.modell.impl.Card, de.htwg.se.setgame.modell.impl.Card, int)
+	 * @see de.htwg.se.setgame.controller.impl.ISuperController#isASetForController(de.htwg.se.setgame.model.impl.Card, de.htwg.se.setgame.model.impl.Card, de.htwg.se.setgame.model.impl.Card, int)
 	 */
 	@Override
 	public void isASetForController(ICard cardOne, ICard cardTwo,

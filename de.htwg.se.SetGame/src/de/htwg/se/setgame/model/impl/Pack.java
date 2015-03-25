@@ -1,7 +1,7 @@
-package de.htwg.se.setgame.modell.impl;
+package de.htwg.se.setgame.model.impl;
 
-import de.htwg.se.setgame.modell.ICard;
-import de.htwg.se.setgame.modell.IPack;
+import de.htwg.se.setgame.model.ICard;
+import de.htwg.se.setgame.model.IPack;
 
 import java.util.LinkedList;
 import java.util.List;
