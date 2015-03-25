@@ -1,13 +1,10 @@
-package setgame.modell.impl;
+package de.htwg.se.setgame.modell.impl;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.htwg.se.setgame.modell.ICard;
-import de.htwg.se.setgame.modell.impl.Card;
-
 public class CardTest {
 
-	ICard card = null;
+	Card card = null;
 	@Before
 	public void setUp() {
 		this.card = new Card("red", "wave", "fill", 1);

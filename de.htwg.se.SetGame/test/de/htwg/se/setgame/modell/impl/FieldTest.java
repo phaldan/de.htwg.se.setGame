@@ -1,4 +1,4 @@
-package setgame.modell.impl;
+package de.htwg.se.setgame.modell.impl;
 
 import static org.junit.Assert.*;
 
@@ -10,7 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.htwg.se.setgame.modell.ICard;
-import de.htwg.se.setgame.modell.impl.Field;
 
 public class FieldTest {
 	Field field;

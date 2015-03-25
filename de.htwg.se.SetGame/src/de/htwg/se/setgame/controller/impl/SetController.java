@@ -319,7 +319,7 @@ public class SetController extends Observable implements IController {
 	}
 
 	/* (non-Javadoc)
-	 * @see setgame.controller.impl.ISuperController#getCardinGame()
+	 * @see de.htwg.se.setgame.controller.impl.ISuperController#getCardinGame()
 	 */
 	@Override
 	public List<ICard> getCardinGame() {
@@ -327,7 +327,7 @@ public class SetController extends Observable implements IController {
 	}
 
 	/* (non-Javadoc)
-	 * @see setgame.controller.impl.ISuperController#getField()
+	 * @see de.htwg.se.setgame.controller.impl.ISuperController#getField()
 	 */
 	@Override
 	public Field getField() {
@@ -335,7 +335,7 @@ public class SetController extends Observable implements IController {
 	}
 
 	/* (non-Javadoc)
-	 * @see setgame.controller.impl.ISuperController#areSetInField()
+	 * @see de.htwg.se.setgame.controller.impl.ISuperController#areSetInField()
 	 */
 	@Override
 	public boolean areSetInField() {
@@ -349,7 +349,7 @@ public class SetController extends Observable implements IController {
 	}
 
 	/* (non-Javadoc)
-	 * @see setgame.controller.impl.ISuperController#isASetForController(setgame.modell.impl.Card, setgame.modell.impl.Card, setgame.modell.impl.Card, int)
+	 * @see de.htwg.se.setgame.controller.impl.ISuperController#isASetForController(de.htwg.se.setgame.modell.impl.Card, de.htwg.se.setgame.modell.impl.Card, de.htwg.se.setgame.modell.impl.Card, int)
 	 */
 	@Override
 	public void isASetForController(ICard cardOne, ICard cardTwo,
@@ -368,7 +368,7 @@ public class SetController extends Observable implements IController {
 	}
 
 	/* (non-Javadoc)
-	 * @see setgame.controller.impl.ISuperController#getASetInGame()
+	 * @see de.htwg.se.setgame.controller.impl.ISuperController#getASetInGame()
 	 */
 	@Override
 	public List<ICard> getASetInGame(){
@@ -376,7 +376,7 @@ public class SetController extends Observable implements IController {
 	}
 
 	/* (non-Javadoc)
-	 * @see setgame.controller.impl.ISuperController#stillSetInGame()
+	 * @see de.htwg.se.setgame.controller.impl.ISuperController#stillSetInGame()
 	 */
 	@Override
 	public boolean stillSetInGame() {
@@ -389,7 +389,7 @@ public class SetController extends Observable implements IController {
 	}
 
 	/* (non-Javadoc)
-	 * @see setgame.controller.impl.ISuperController#getSetInField()
+	 * @see de.htwg.se.setgame.controller.impl.ISuperController#getSetInField()
 	 */
 	@Override
 	public List<ICard> getSetInField(){
@@ -398,7 +398,7 @@ public class SetController extends Observable implements IController {
 	}
 
 	/* (non-Javadoc)
-	 * @see setgame.controller.impl.ISuperController#getPlayerOnePoints()
+	 * @see de.htwg.se.setgame.controller.impl.ISuperController#getPlayerOnePoints()
 	 */
 	@Override
 	public int getPlayerOnePoints(){
@@ -406,7 +406,7 @@ public class SetController extends Observable implements IController {
 	}
 
 	/* (non-Javadoc)
-	 * @see setgame.controller.impl.ISuperController#getPlayerTwoPoints()
+	 * @see de.htwg.se.setgame.controller.impl.ISuperController#getPlayerTwoPoints()
 	 */
 	@Override
 	public int getPlayerTwoPoints(){
@@ -414,7 +414,7 @@ public class SetController extends Observable implements IController {
 	}
 
 	/* (non-Javadoc)
-	 * @see setgame.controller.impl.ISuperController#getPlayerOne()
+	 * @see de.htwg.se.setgame.controller.impl.ISuperController#getPlayerOne()
 	 */
 	@Override
 	public int getPlayerOne(){
@@ -422,7 +422,7 @@ public class SetController extends Observable implements IController {
 	}
 
 	/* (non-Javadoc)
-	 * @see setgame.controller.impl.ISuperController#getPlayerTwo()
+	 * @see de.htwg.se.setgame.controller.impl.ISuperController#getPlayerTwo()
 	 */
 	@Override
 	public int getPlayerTwo(){
