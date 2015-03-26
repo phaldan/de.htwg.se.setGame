@@ -1,13 +1,14 @@
 package de.htwg.se.setgame.util.observer;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Implement IObservable with ArrayList.
+ */
+public abstract class Observable implements IObservable {
 
-public class Observable implements IObservable {
-
-	private List<IObserver> subscribers = new ArrayList<IObserver>(2);
+	private List<IObserver> subscribers = new ArrayList<>();
 
 	public void addObserver(IObserver s) {
 		subscribers.add(s);
@@ -25,11 +26,13 @@ public class Observable implements IObservable {
 		notifyObservers(null);
 	}
 
-	@Override
 	public void notifyObservers(Event e) {
-		for ( Iterator<IObserver> iter = subscribers.iterator(); iter.hasNext();) {
-			IObserver observer = iter.next();
-			observer.update(e);
+		for (IObserver o: subscribers) {
+			o.update(e);
 		}
+	}
+
+	public int countObservers() {
+		return subscribers.size();
 	}
 }
