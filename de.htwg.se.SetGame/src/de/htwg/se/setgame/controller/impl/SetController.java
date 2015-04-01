@@ -117,8 +117,8 @@ public class SetController extends Observable implements IController {
 	private boolean isInField(ICard cardOne, ICard cardTwo, ICard cardThree) {
 		this.counter = 0;
 		for (ICard card : field.getCardsInField()) {
-			if (card.comparTo(cardOne) || card.comparTo(cardTwo)
-					|| card.comparTo(cardThree)) {
+			if (card.compareTo(cardOne) || card.compareTo(cardTwo)
+					|| card.compareTo(cardThree)) {
 				counter++;
 			}
 		}

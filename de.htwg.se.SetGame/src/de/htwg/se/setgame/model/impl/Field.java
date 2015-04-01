@@ -114,9 +114,9 @@ public class Field implements IField {
 
 		TreeSet<Integer> keyOfcardInField = new TreeSet<Integer>();
 		for (Integer key : this.getCardInFieldGame().keySet()) {
-			if (this.getCardInFieldGame().get(key).comparTo(cardOne)
-					|| this.getCardInFieldGame().get(key).comparTo(cardTwo)
-					|| this.getCardInFieldGame().get(key).comparTo(cardThree)) {
+			if (this.getCardInFieldGame().get(key).compareTo(cardOne)
+					|| this.getCardInFieldGame().get(key).compareTo(cardTwo)
+					|| this.getCardInFieldGame().get(key).compareTo(cardThree)) {
 				keyOfcardInField.add(key);
 				this.packForGame.remove(this.getCardInFieldGame().get(key));
 			}
