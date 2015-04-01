@@ -22,7 +22,7 @@ public class ObservableTest {
         }
     }
 
-    private class EventImpl extends Event {
+    private class EventImpl implements Event {
     }
 
 
