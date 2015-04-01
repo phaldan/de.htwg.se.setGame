@@ -21,7 +21,7 @@ public interface ICard {
     /**
      * @return number of components
      */
-    int getNumberOfComponents();
+    Integer getNumberOfComponents();
 
     /**
      * @return string method
