@@ -34,6 +34,7 @@ public class SetControllerTest {
     @Before
     public void setUp() {
         field = new Field();
+        field.startUp();
         target = new SetController(new FactoryStub());
         list = new LinkedList<>(target.getSetInField());
     }

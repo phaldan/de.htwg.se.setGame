@@ -73,7 +73,6 @@ public class SetController extends Observable implements IController {
 	public SetController(ModelFactory factory) {
 		field = factory.createField();
 		this.counter = 0;
-		this.field.startUp();
 		this.playerOne = 1;
 		this.playerTwo = 2;
 		this.playerOneCounter = 0;

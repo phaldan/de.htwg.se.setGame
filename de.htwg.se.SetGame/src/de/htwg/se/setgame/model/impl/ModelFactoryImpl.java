@@ -11,7 +11,9 @@ public class ModelFactoryImpl implements ModelFactory {
 
     @Override
     public IField createField() {
-        return new Field();
+        IField field = new Field();
+        field.startUp();
+        return field;
     }
 
     @Override
