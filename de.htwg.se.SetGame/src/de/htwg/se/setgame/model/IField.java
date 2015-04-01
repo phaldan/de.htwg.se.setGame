@@ -5,19 +5,11 @@ import java.util.Map;
 
 public interface IField {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see setgame.model.IField#startUp()
+	/**
+	 * Initiate field.
 	 */
 	void startUp();
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see setgame.model.IField#foundSet(setgame.model.Card,
-	 * setgame.model.Card, setgame.model.Card)
-	 */
 	 /**
 	 * @param cardOne card set
 	 * @param cardTwo card set
@@ -31,9 +23,9 @@ public interface IField {
 	List<ICard> getCardsInField();
 
 	/**
-	 * @param liste change cards in field
+	 * @param list change cards in field
 	 */
-	void changeCards(List<ICard> liste);
+	void changeCards(List<ICard> list);
 
 	/**
 	 * @return get unused cards
@@ -49,6 +41,7 @@ public interface IField {
 	 * @return all Cards in game
 	 */
 	List<ICard> getAllCardsInGame();
+
 	/**
 	 * @return index and cards in game
 	 */

@@ -20,9 +20,8 @@ public class FieldTest {
 
     @Test
     public void testStartUp() {
-        assertEquals(Field.INITIALVALUEOFFIELD, field.getSizeofField());
+        assertEquals(Field.INITIAL_VALUE_OF_FIELD, field.getSizeofField());
         assertEquals(Field.MAX, field.getAllCardsInGame().size());
-        assertEquals(Field.MAX, field.getRamdomListe().size());
         assertTrue(field.getCardInFieldGame().values().containsAll(field.getCardsInField()));
     }
 
