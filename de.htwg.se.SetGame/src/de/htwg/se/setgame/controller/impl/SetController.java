@@ -11,7 +11,7 @@ import de.htwg.se.setgame.controller.IController;
 import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.model.IField;
 import de.htwg.se.setgame.model.IPack;
-import de.htwg.se.setgame.model.impl.Pack;
+import de.htwg.se.setgame.model.ModelFactory;
 import de.htwg.se.setgame.util.observer.Observable;
 
 
@@ -70,8 +70,8 @@ public class SetController extends Observable implements IController {
 	 * Logic Construct make for the game a new field with a new pack!!!
 	 */
 	@Inject
-	public SetController() {
-		this.field = new de.htwg.se.setgame.model.impl.Field();
+	public SetController(ModelFactory factory) {
+		field = factory.createField();
 		this.counter = 0;
 		this.field.startUp();
 		this.playerOne = 1;
@@ -79,7 +79,7 @@ public class SetController extends Observable implements IController {
 		this.playerOneCounter = 0;
 		this.playerTwoCounter = 0;
 		checkIfIsASeTInGame();
-		pack = new Pack();
+		pack = factory.createPack();
 	}
 	@Override
 	public void newGame(){

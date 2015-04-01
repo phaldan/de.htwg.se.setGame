@@ -1,7 +1,13 @@
 package de.htwg.se.setgame.controller.impl;
 
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
+import de.htwg.se.setgame.model.IField;
+import de.htwg.se.setgame.model.IPack;
+import de.htwg.se.setgame.model.ModelFactory;
+import de.htwg.se.setgame.model.impl.Field;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,10 +16,25 @@ import de.htwg.se.setgame.model.ICard;
 public class SetControllerTest {
     SetController target;
     LinkedList<ICard> list;
+    IField field;
+
+    private class FactoryStub implements ModelFactory {
+
+        @Override
+        public IField createField() {
+            return field;
+        }
+
+        @Override
+        public IPack createPack() {
+            return null;
+        }
+    }
 
     @Before
     public void setUp() {
-        target = new SetController();
+        field = new Field();
+        target = new SetController(new FactoryStub());
         list = new LinkedList<>(target.getSetInField());
     }
 
