@@ -8,6 +8,7 @@ import org.junit.Test;
 import de.htwg.se.setgame.model.ICard;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class PackTest {
 
@@ -20,11 +21,14 @@ public class PackTest {
 
     @Test
     public void testGetCards() {
-        for (ICard card : target.getPack()) {
-            assertInArray(Pack.COLORS, card.getColor());
-            assertInArray(Pack.FORME, card.getForm());
-            assertInArray(Pack.FILL, card.getPanelFilling());
-            assertInArray(Pack.NUMBEROFCOMPONET, card.getNumberOfComponents());
+        List<ICard> list = target.getPack();
+        assertEquals(Card.COUNT.length * Card.COLOR.length * Card.FILL.length * Card.FORM.length, list.size());
+
+        for (ICard card : list) {
+            assertInArray(Card.COLOR, card.getColor());
+            assertInArray(Card.FORM, card.getForm());
+            assertInArray(Card.FILL, card.getPanelFilling());
+            assertInArray(Card.COUNT, card.getNumberOfComponents());
         }
     }
 

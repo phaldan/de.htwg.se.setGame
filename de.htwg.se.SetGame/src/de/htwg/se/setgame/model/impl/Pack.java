@@ -3,6 +3,7 @@ package de.htwg.se.setgame.model.impl;
 import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.model.IPack;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,108 +13,48 @@ import java.util.List;
  */
 public class Pack implements IPack {
 
-	/**
-	 * Instance variable
-	 */
-	private ICard pack[] = creatCards();
-	public static final String[] FORME = { "ovally", "wave", "balk" };
-	public static final String[] COLORS = { "red", "green", "purple" };
-	public static final String[] FILL = { "halffill", "fill", "empty" };
-	public static final Integer[] NUMBEROFCOMPONET = { 1, 2, 3 };
-	public static final int SIZEOFARRAY = 81;
-	public static final int NUMBEROFEACHCARD = 3;
-	private int colorIndex = 0;
-	private int formeIndex = 0;
-	private int fillgingIndex = 0;
-	private int numbersIdex = 0;
+    /**
+     * Instance variable
+     */
+    public static final String[] FILL = {"halffill", "fill", "empty"};
+    private List<ICard> list;
 
-	/**
-	 * Construct for card
-	 */
+    /**
+     * Construct for card
+     */
+    public Pack() {
+        int size = Card.COUNT.length * Card.COLOR.length * Card.FILL.length * Card.COUNT.length;
+        list = new ArrayList<>(size);
+        initiateList();
+    }
 
-	public Pack() {
+    private void initiateList() {
+        for (String form : Card.FORM) {
+            addFill(form);
+        }
+    }
 
-	}
+    private void addFill(String form) {
+        for (String fill : Card.FILL) {
+            addColor(form, fill);
+        }
+    }
 
-	/**
-	 * @return the finish pack of the Game
-	 */
-	protected Card[] creatCards() {
-		Card list[] = new Card[SIZEOFARRAY];
-		for (int i = 0; i < SIZEOFARRAY; i++) {
+    private void addColor(String form, String fill) {
+        for (String color : Card.COLOR) {
+            addCount(form, fill, color);
+        }
+    }
 
-			list[i] = new Card(COLORS[colorIndex], FORME[formeIndex],
-					FILL[fillgingIndex], NUMBEROFCOMPONET[numbersIdex]);
-			setFormedIndex();
+    private void addCount(String form, String fill, String color) {
+        for (Integer count : Card.COUNT) {
+            ICard card = new Card(color, form, fill, count);
+            list.add(card);
+        }
+    }
 
-		}
-
-		return list;
-
-	}
-
-	/**
-	 * set number of index form
-	 */
-	private void setFormedIndex() {
-		int t = this.formeIndex + 1;
-		if (t == NUMBEROFEACHCARD) {
-			setFillIndex();
-			this.formeIndex = 0;
-		} else {
-			this.formeIndex = t;
-		}
-
-	}
-
-	/**
-	 * set index of the fill
-	 */
-	private void setFillIndex() {
-		int t = this.fillgingIndex + 1;
-		if (t == NUMBEROFEACHCARD) {
-			this.fillgingIndex = 0;
-			setComponentsOfIndex();
-		} else {
-			this.fillgingIndex = t;
-		}
-
-	}
-
-	/**
-	 * set index of number of Components
-	 */
-	private void setComponentsOfIndex() {
-		int t = this.numbersIdex + 1;
-		if (t == NUMBEROFEACHCARD) {
-			this.numbersIdex = 0;
-			setColorIndex();
-		} else {
-			this.numbersIdex = t;
-		}
-	}
-
-	/**
-	 * Set Color Index
-	 */
-	private void setColorIndex() {
-		int t = this.colorIndex + 1;
-		if (t == NUMBEROFEACHCARD) {
-			this.colorIndex = 0;
-		}
-		this.colorIndex = t;
-
-	}
-
-	/**
-	 * @return pack of cards
-	 */
-	@Override
-	public List<ICard> getPack() {
-		List<ICard> liste = new LinkedList<ICard>();
-		for (ICard card : this.pack) {
-			liste.add(card);
-		}
-		return liste;
-	}
+    @Override
+    public List<ICard> getPack() {
+        return list;
+    }
 }

@@ -3,8 +3,12 @@ package de.htwg.se.setgame.model;
 import java.util.List;
 
 /**
- * Created by philipp on 10.01.15.
+ * @author Philipp
  */
 public interface IPack {
+
+    /**
+     * @return pack of cards
+     */
     List<ICard> getPack();
 }
