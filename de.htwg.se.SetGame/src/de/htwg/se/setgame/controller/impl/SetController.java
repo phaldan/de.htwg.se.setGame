@@ -11,7 +11,6 @@ import de.htwg.se.setgame.controller.IController;
 import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.model.IField;
 import de.htwg.se.setgame.model.IPack;
-import de.htwg.se.setgame.model.impl.Field;
 import de.htwg.se.setgame.model.impl.Pack;
 import de.htwg.se.setgame.util.observer.Observable;
 
@@ -330,8 +329,8 @@ public class SetController extends Observable implements IController {
 	 * @see de.htwg.se.setgame.controller.impl.ISuperController#getField()
 	 */
 	@Override
-	public Field getField() {
-		return (Field) this.field;
+	public IField getField() {
+		return  this.field;
 	}
 
 	/* (non-Javadoc)
