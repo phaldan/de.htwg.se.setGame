@@ -13,10 +13,6 @@ import java.util.List;
  */
 public class Pack implements IPack {
 
-    /**
-     * Instance variable
-     */
-    public static final String[] FILL = {"halffill", "fill", "empty"};
     private List<ICard> list;
 
     /**
