@@ -1,13 +1,12 @@
 package de.htwg.se.setgame.controller.impl;
 
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 
 import de.htwg.se.setgame.model.IField;
 import de.htwg.se.setgame.model.IPack;
 import de.htwg.se.setgame.model.ModelFactory;
 import de.htwg.se.setgame.model.impl.Field;
+import de.htwg.se.setgame.model.impl.Pack;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -33,7 +32,7 @@ public class SetControllerTest {
 
     @Before
     public void setUp() {
-        field = new Field();
+        field = new Field(new Pack());
         field.startUp();
         target = new SetController(new FactoryStub());
         list = new LinkedList<>(target.getSetInField());

@@ -3,7 +3,6 @@ package de.htwg.se.setgame.model.impl;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
@@ -25,11 +24,14 @@ public class Field implements IField {
     private Map<Integer, Integer> randomList;
     private Map<Integer, ICard> cardInFieldGame;
     private List<ICard> packForGame;
+    private IPack pack;
 
     /**
      * startup of the objects
      */
-    public Field() {
+    public Field(IPack pack) {
+        this.pack = pack;
+
         sizeOfField = INITIAL_VALUE_OF_FIELD;
         cardInFieldGame = new TreeMap<>();
         randomList = new TreeMap<>();
@@ -38,12 +40,12 @@ public class Field implements IField {
 
     @Override
     public void startUp() {
-        Map<Integer, ICard> packForTheGame = new TreeMap<>();
         rand();
-        IPack IPack = new Pack();
+
+        Map<Integer, ICard> packForTheGame = new TreeMap<>();
         int i = 0;
-        for (ICard card : IPack.getPack()) {
-            packForTheGame.put(this.getRandomList().get(i), card);
+        for (ICard card : pack.getPack()) {
+            packForTheGame.put(getRandomList().get(i), card);
             i++;
         }
         packForGame.addAll(packForTheGame.values());
@@ -64,21 +66,16 @@ public class Field implements IField {
                 }
             }
             if (b) {
-
-                this.getRandomList().put(key, element);
-
+                getRandomList().put(key, element);
                 tem[key] = element;
             }
-
         }
         return getRandomList();
-
     }
 
     private void startUpOfField() {
         for (int index = 0; index < sizeOfField; index++) {
             this.getCardInFieldGame().put(index, this.packForGame.get(index));
-
         }
     }
 
@@ -113,16 +110,13 @@ public class Field implements IField {
             } else if (this.getCardInFieldGame().get(index) == null
                     && listCardAreNotInFieldCards.isEmpty()) {
                 this.getCardInFieldGame().remove(index);
-
             } else if (!(this.getCardInFieldGame().containsKey(index))
                     && !(listCardAreNotInFieldCards.isEmpty())) {
                 this.getCardInFieldGame().put(index,
                         listCardAreNotInFieldCards.getFirst());
                 listCardAreNotInFieldCards.removeFirst();
-
             }
         }
-
     }
 
     @Override
