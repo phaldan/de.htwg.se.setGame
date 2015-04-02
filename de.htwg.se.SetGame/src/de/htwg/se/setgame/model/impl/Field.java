@@ -36,10 +36,11 @@ public class Field implements IField {
         cardInFieldGame = new TreeMap<>();
         randomList = new TreeMap<>();
         packForGame = new LinkedList<>();
+
+        startUp();
     }
 
-    @Override
-    public void startUp() {
+    private void startUp() {
         rand();
 
         Map<Integer, ICard> packForTheGame = new TreeMap<>();
@@ -165,15 +166,6 @@ public class Field implements IField {
     @Override
     public Map<Integer, ICard> getCardInFieldGame() {
         return cardInFieldGame;
-    }
-
-    @Override
-    public void clear() {
-        packForGame.clear();
-        cardInFieldGame.clear();
-        packForGame.clear();
-        sizeOfField = INITIAL_VALUE_OF_FIELD;
-        startUp();
     }
 
     @Override

@@ -15,7 +15,6 @@ public class FieldTest {
     @Before
     public void setUp() {
         target = new Field(new Pack());
-        target.startUp();
     }
 
     @Test

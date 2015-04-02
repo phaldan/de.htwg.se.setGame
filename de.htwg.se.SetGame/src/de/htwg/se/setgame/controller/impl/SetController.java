@@ -22,48 +22,16 @@ import de.htwg.se.setgame.util.observer.Observable;
  */
 public class SetController extends Observable implements IController {
 
-	/**
-	 *  field
-	 */
+	private ModelFactory factory;
 	private IField field;
-
-	/**
-	 * counter
-	 */
 	private int counter;
-
-	/**
-	 * IPack
-	 */
 	private IPack pack;
-
-	/**
-	 * number for set
-	 */
 	private static final int NUMBEROFSETCARDS = 3;
-	/**
-	 * 		numforgotrguth;
-	 */
 	private static final int THREE = 3;
-	/**
-	 * a number for
-	 */
 	private static final int THOUSAND = 1000;
-	/**
-	 * 
-	 */
-	private final int playerOne;
-	/**
-	 * 
-	 */
-	private final int playerTwo;
-	/**
-	 * 
-	 */
+	private static final int playerOne = 1;
+	private static final int playerTwo = 2;
 	private int playerOneCounter;
-	/**
-	 * 
-	 */
 	private int playerTwoCounter;
 
 	/**
@@ -71,21 +39,18 @@ public class SetController extends Observable implements IController {
 	 */
 	@Inject
 	public SetController(ModelFactory factory) {
-		field = factory.createField();
-		this.counter = 0;
-		this.playerOne = 1;
-		this.playerTwo = 2;
-		this.playerOneCounter = 0;
-		this.playerTwoCounter = 0;
-		checkIfIsASeTInGame();
+		this.factory = factory;
 		pack = factory.createPack();
+		newGame();
 	}
+
 	@Override
 	public void newGame(){
-		this.field.clear();
-		this.counter = 0;
-		this.playerOneCounter = 0;
-		this.playerTwoCounter = 0;
+		field = factory.createField();
+		checkIfIsASeTInGame();
+		counter = 0;
+		playerOneCounter = 0;
+		playerTwoCounter = 0;
 		notifyObservers();
 	}
 

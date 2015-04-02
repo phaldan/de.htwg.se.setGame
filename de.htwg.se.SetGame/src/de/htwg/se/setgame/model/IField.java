@@ -5,11 +5,6 @@ import java.util.Map;
 
 public interface IField {
 
-	/**
-	 * Initiate field.
-	 */
-	void startUp();
-
 	 /**
 	 * @param cardOne card set
 	 * @param cardTwo card set
@@ -46,11 +41,6 @@ public interface IField {
 	 * @return index and cards in game
 	 */
 	Map<Integer, ICard> getCardInFieldGame();
-
-	/**
-	 *  reset everything
-	 */
-	void clear();
 
 	/**
 	 * @param size set size of field
