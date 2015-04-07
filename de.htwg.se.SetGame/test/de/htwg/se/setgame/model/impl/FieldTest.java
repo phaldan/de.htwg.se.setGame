@@ -14,11 +14,12 @@ public class FieldTest {
 
     @Before
     public void setUp() {
-        target = new Field(new Pack());
+        target = new Field(new Pack(), 3);
     }
 
     @Test
     public void testStartUp() {
+        assertEquals(3, target.getCardsInField().size());
         assertEquals(Field.MAX, target.getAllCardsInGame().size());
         assertTrue(target.getCardInFieldGame().values().containsAll(target.getCardsInField()));
     }
@@ -44,9 +45,7 @@ public class FieldTest {
         list.add(target.getCardInFieldGame().get(0));
         list.add(target.getUnusedCards().get(0));
         list.add(target.getUnusedCards().get(1));
-
         target.changeCards(list);
-
     }
 
     @Test

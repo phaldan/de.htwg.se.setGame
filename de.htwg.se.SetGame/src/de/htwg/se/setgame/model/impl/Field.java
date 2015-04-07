@@ -16,7 +16,6 @@ import de.htwg.se.setgame.model.IPack;
  * @author David Simon & Raina Bertolini
  */
 public class Field implements IField {
-    public static final int INITIAL_VALUE_OF_FIELD = 12;
     public static final int MAX = 81;
     public static final int ONE = 1;
 
@@ -29,10 +28,10 @@ public class Field implements IField {
     /**
      * startup of the objects
      */
-    public Field(IPack pack) {
+    public Field(IPack pack, int size) {
         this.pack = pack;
+        this.size = size;
 
-        size = INITIAL_VALUE_OF_FIELD;
         cardInFieldGame = new TreeMap<>();
         randomList = new TreeMap<>();
         packForGame = new LinkedList<>();

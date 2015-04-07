@@ -1,5 +1,9 @@
 package de.htwg.se.setgame.model.impl;
 
+import static org.junit.Assert.*;
+
+import de.htwg.se.setgame.model.IField;
+import de.htwg.se.setgame.model.ModelFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,11 +21,13 @@ public class ModelFactoryImplTest {
 
     @Test
     public void createField_success() {
-        target.createField();
+        IField field = target.createField();
+        assertNotNull(field);
+        assertEquals(ModelFactoryImpl.INITIAL_FIELD_SIZE, field.getCardInFieldGame().size());
     }
 
     @Test
     public void createPack_success() {
-        target.createPack();
+        assertNotNull(target.createPack());
     }
 }

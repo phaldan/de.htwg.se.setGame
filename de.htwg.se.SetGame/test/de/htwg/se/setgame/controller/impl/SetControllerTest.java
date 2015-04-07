@@ -32,7 +32,7 @@ public class SetControllerTest {
 
     @Before
     public void setUp() {
-        field = new Field(new Pack());
+        field = new Field(new Pack(), 3);
         target = new SetController(new FactoryStub());
         list = new LinkedList<>(target.getSetInField());
     }

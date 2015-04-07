@@ -9,9 +9,11 @@ import de.htwg.se.setgame.model.ModelFactory;
  */
 public class ModelFactoryImpl implements ModelFactory {
 
+    public static final int INITIAL_FIELD_SIZE = 12;
+
     @Override
     public IField createField() {
-        return new Field(createPack());
+        return new Field(createPack(), INITIAL_FIELD_SIZE);
     }
 
     @Override
