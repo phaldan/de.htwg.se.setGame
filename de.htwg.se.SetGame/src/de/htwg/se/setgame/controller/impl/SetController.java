@@ -135,7 +135,7 @@ public class SetController extends Observable implements IController {
 	@Override
 	public void setFieldSize(int size){
 		if(size > 0){
-			this.field.setSizeOfField(size);
+			this.field.setSize(size);
 		}
 		checkIfIsASeTInGame();
 	}

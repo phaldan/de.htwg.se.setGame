@@ -28,11 +28,6 @@ public interface IField {
 	List<ICard> getUnusedCards();
 
 	/**
-	 * @return size of field
-	 */
-	int getSizeofField();
-
-	/**
 	 * @return all Cards in game
 	 */
 	List<ICard> getAllCardsInGame();
@@ -45,6 +40,6 @@ public interface IField {
 	/**
 	 * @param size set size of field
 	 */
-	void setSizeOfField(int size);
+	void setSize(int size);
 
 }

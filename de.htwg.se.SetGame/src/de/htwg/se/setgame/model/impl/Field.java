@@ -20,7 +20,7 @@ public class Field implements IField {
     public static final int MAX = 81;
     public static final int ONE = 1;
 
-    private int sizeOfField;
+    private int size;
     private Map<Integer, Integer> randomList;
     private Map<Integer, ICard> cardInFieldGame;
     private List<ICard> packForGame;
@@ -32,7 +32,7 @@ public class Field implements IField {
     public Field(IPack pack) {
         this.pack = pack;
 
-        sizeOfField = INITIAL_VALUE_OF_FIELD;
+        size = INITIAL_VALUE_OF_FIELD;
         cardInFieldGame = new TreeMap<>();
         randomList = new TreeMap<>();
         packForGame = new LinkedList<>();
@@ -75,7 +75,7 @@ public class Field implements IField {
     }
 
     private void startUpOfField() {
-        for (int index = 0; index < sizeOfField; index++) {
+        for (int index = 0; index < size; index++) {
             this.getCardInFieldGame().put(index, this.packForGame.get(index));
         }
     }
@@ -93,7 +93,6 @@ public class Field implements IField {
         }
         for (Integer key : keyOfCardInField) {
             this.getCardInFieldGame().remove(key);
-
         }
         fillField();
     }
@@ -102,7 +101,7 @@ public class Field implements IField {
         LinkedList<ICard> listCardAreNotInFieldCards = new LinkedList<>();
         listCardAreNotInFieldCards.addAll(getUnusedCards());
 
-        for (int index = 0; index < sizeOfField; index++) {
+        for (int index = 0; index < size; index++) {
             if (this.getCardInFieldGame().get(index) == null
                     && !(listCardAreNotInFieldCards.isEmpty())) {
                 this.getCardInFieldGame().put(index,
@@ -126,10 +125,10 @@ public class Field implements IField {
     }
 
     @Override
-    public void setSizeOfField(int size) {
-        if (size != sizeOfField && size >= 3 && size <= getUnusedCards().size()) {
+    public void setSize(int size) {
+        if (size != this.size && size >= 3 && size <= getUnusedCards().size()) {
             this.cardInFieldGame.clear();
-            this.sizeOfField = size;
+            this.size = size;
             fillField();
         }
     }
@@ -147,11 +146,6 @@ public class Field implements IField {
         list.addAll(this.packForGame);
         list.removeAll(this.getCardInFieldGame().values());
         return list;
-    }
-
-    @Override
-    public int getSizeofField() {
-        return getCardInFieldGame().size();
     }
 
     @Override

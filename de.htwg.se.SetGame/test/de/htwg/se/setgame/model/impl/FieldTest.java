@@ -19,7 +19,6 @@ public class FieldTest {
 
     @Test
     public void testStartUp() {
-        assertEquals(Field.INITIAL_VALUE_OF_FIELD, target.getSizeofField());
         assertEquals(Field.MAX, target.getAllCardsInGame().size());
         assertTrue(target.getCardInFieldGame().values().containsAll(target.getCardsInField()));
     }
@@ -35,7 +34,7 @@ public class FieldTest {
 
     @Test
     public void testSetSizeOfField() {
-        target.setSizeOfField(15);
+        target.setSize(15);
         assertEquals(15, target.getCardsInField().size());
     }
 
