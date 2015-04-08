@@ -23,7 +23,7 @@ public class ModelFactoryImplTest {
     public void createField_success() {
         IField field = target.createField();
         assertNotNull(field);
-        assertEquals(ModelFactoryImpl.INITIAL_FIELD_SIZE, field.getCardInFieldGame().size());
+        assertEquals(ModelFactoryImpl.INITIAL_FIELD_SIZE, field.getCardsInField().size());
     }
 
     @Test

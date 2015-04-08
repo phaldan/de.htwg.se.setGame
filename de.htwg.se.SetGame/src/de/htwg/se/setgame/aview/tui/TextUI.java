@@ -141,12 +141,12 @@ public class TextUI implements IObserver {
 
 		controller.isASetForController(cardOne, cardTwo, cardThree, player);
 		logger.info(newLine + "Congratilations it is a SET!! ! size == "
-				+ controller.getField().getAllCardsInGame().size());
+				+ controller.getField().getCardsInField().size());
 
 	}
 
 	private ICard getCard(Integer[] arrayForSerNumber, int i) {
-		return controller.getField().getCardInFieldGame().get(arrayForSerNumber[i]);
+		return controller.getField().getCardsInField().get(arrayForSerNumber[i]);
 	}
 
 	/**
@@ -171,14 +171,14 @@ public class TextUI implements IObserver {
 		if (this.controller.getSetInField().size() >= THREE) {
 			logger.info("solved" + this.controller.getSetInField().toString()
 					+ newLine
-					+ controller.getField().getAllCardsInGame().size());
+					+ controller.getField().getCardsInField().size());
 			this.controller.isASetForController(this.controller.getSetInField()
 							.get(ZERO), this.controller.getSetInField().get(ONE),
 					this.controller.getSetInField().get(TWO), THREE);
 			printTUI();
 		} else {
 			logger.info("number of cards = "
-					+ controller.getField().getAllCardsInGame().size());
+					+ controller.getField().getCardsInField().size());
 			printTUI();
 
 		}

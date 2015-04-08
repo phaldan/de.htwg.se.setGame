@@ -2,9 +2,6 @@ package de.htwg.se.setgame.model.impl;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.TreeSet;
 
 import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.model.IField;
@@ -16,149 +13,96 @@ import de.htwg.se.setgame.model.IPack;
  * @author David Simon & Raina Bertolini
  */
 public class Field implements IField {
-    public static final int MAX = 81;
-    public static final int ONE = 1;
+    public static final int MIN_SIZE = 3;
 
-    private int size;
-    private Map<Integer, Integer> randomList;
-    private Map<Integer, ICard> cardInFieldGame;
-    private List<ICard> packForGame;
-    private IPack pack;
+    private int size = 0;
+    private LinkedList<ICard> unusedCards;
+    private LinkedList<ICard> cards = new LinkedList<>();
+    private SetChecker checker = new SetChecker();
 
     /**
      * startup of the objects
      */
     public Field(IPack pack, int size) {
-        this.pack = pack;
-        this.size = size;
-
-        cardInFieldGame = new TreeMap<>();
-        randomList = new TreeMap<>();
-        packForGame = new LinkedList<>();
-
-        startUp();
-    }
-
-    private void startUp() {
-        rand();
-
-        Map<Integer, ICard> packForTheGame = new TreeMap<>();
-        int i = 0;
-        for (ICard card : pack.getPack()) {
-            packForTheGame.put(getRandomList().get(i), card);
-            i++;
-        }
-        packForGame.addAll(packForTheGame.values());
-
-        startUpOfField();
-    }
-
-    private Map<Integer, Integer> rand() {
-        int[] tem = new int[MAX];
-        boolean b;
-        for (int key = 0; key < MAX; key++) {
-            b = true;
-            int element = (int) (Math.random() * MAX + ONE);
-            for (int t = 0; t < MAX; t++) {
-                if (element == tem[t] && key > 0) {
-                    key = key - 1;
-                    b = false;
-                }
-            }
-            if (b) {
-                getRandomList().put(key, element);
-                tem[key] = element;
-            }
-        }
-        return getRandomList();
-    }
-
-    private void startUpOfField() {
-        for (int index = 0; index < size; index++) {
-            this.getCardInFieldGame().put(index, this.packForGame.get(index));
-        }
+        unusedCards = new LinkedList<>(pack.getPack());
+        setSize(size);
     }
 
     @Override
     public void foundSet(ICard cardOne, ICard cardTwo, ICard cardThree) {
-        TreeSet<Integer> keyOfCardInField = new TreeSet<>();
-        for (Integer key : this.getCardInFieldGame().keySet()) {
-            if (this.getCardInFieldGame().get(key).compareTo(cardOne)
-                    || this.getCardInFieldGame().get(key).compareTo(cardTwo)
-                    || this.getCardInFieldGame().get(key).compareTo(cardThree)) {
-                keyOfCardInField.add(key);
-                this.packForGame.remove(this.getCardInFieldGame().get(key));
-            }
+        if (containsCards(cardOne, cardTwo, cardThree) && SetChecker.isSet(cardOne, cardTwo, cardThree)) {
+            removeCards(cardOne, cardTwo, cardThree);
+            restock();
         }
-        for (Integer key : keyOfCardInField) {
-            this.getCardInFieldGame().remove(key);
-        }
-        fillField();
+
     }
 
-    private void fillField() {
-        LinkedList<ICard> listCardAreNotInFieldCards = new LinkedList<>();
-        listCardAreNotInFieldCards.addAll(getUnusedCards());
+    private boolean containsCards(ICard one, ICard two, ICard three) {
+        return cards.contains(one) && cards.contains(two) && cards.contains(three);
+    }
 
-        for (int index = 0; index < size; index++) {
-            if (this.getCardInFieldGame().get(index) == null
-                    && !(listCardAreNotInFieldCards.isEmpty())) {
-                this.getCardInFieldGame().put(index,
-                        listCardAreNotInFieldCards.getFirst());
-                listCardAreNotInFieldCards.removeFirst();
-            } else if (this.getCardInFieldGame().get(index) == null
-                    && listCardAreNotInFieldCards.isEmpty()) {
-                this.getCardInFieldGame().remove(index);
-            } else if (!(this.getCardInFieldGame().containsKey(index))
-                    && !(listCardAreNotInFieldCards.isEmpty())) {
-                this.getCardInFieldGame().put(index,
-                        listCardAreNotInFieldCards.getFirst());
-                listCardAreNotInFieldCards.removeFirst();
-            }
-        }
+    private void removeCards(ICard one, ICard two, ICard three) {
+        cards.remove(one);
+        cards.remove(two);
+        cards.remove(three);
     }
 
     @Override
     public List<ICard> getCardsInField() {
-        return new LinkedList<>(getCardInFieldGame().values());
+        return cards;
     }
 
     @Override
     public void setSize(int size) {
-        if (size != this.size && size >= 3 && size <= getUnusedCards().size()) {
-            this.cardInFieldGame.clear();
+        if (size >= MIN_SIZE && size <= unusedCards.size()) {
             this.size = size;
-            fillField();
+            restock();
+            reduce();
         }
     }
 
-    @Override
-    public void changeCards(List<ICard> list) {
-        for (int i = 0; i < list.size(); i++) {
-            this.cardInFieldGame.put(i, list.get(i));
+    private void restock() {
+        do {
+            processRestock();
+        } while (!hasSet());
+    }
+
+    private void processRestock() {
+        int max = size-cards.size();
+        for (int i = 0; i < max; i++) {
+            addCard();
         }
+    }
+
+    private void addCard() {
+        Double index = (Math.random()*unusedCards.size());
+        ICard c = unusedCards.remove(index.intValue());
+        cards.add(c);
+    }
+
+    private boolean hasSet() {
+        if (!checker.check(cards)) {
+            removeCard();
+            removeCard();
+            return false;
+        }
+        return true;
+    }
+
+    private void reduce() {
+        int max = cards.size()-size;
+        for (int i = 0; i < max; i++) {
+            removeCard();
+        }
+    }
+
+    private void removeCard() {
+        unusedCards.add(cards.poll());
     }
 
     @Override
     public List<ICard> getUnusedCards() {
-        LinkedList<ICard> list = new LinkedList<>();
-        list.addAll(this.packForGame);
-        list.removeAll(this.getCardInFieldGame().values());
-        return list;
-    }
-
-    @Override
-    public List<ICard> getAllCardsInGame() {
-        return this.packForGame;
-    }
-
-    private Map<Integer, Integer> getRandomList() {
-        return randomList;
-    }
-
-    @Override
-    public Map<Integer, ICard> getCardInFieldGame() {
-        return cardInFieldGame;
+        return unusedCards;
     }
 
     @Override

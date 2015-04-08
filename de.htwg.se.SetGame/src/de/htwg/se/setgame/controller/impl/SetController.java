@@ -4,6 +4,7 @@ package de.htwg.se.setgame.controller.impl;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import com.google.inject.Inject;
 
@@ -47,30 +48,11 @@ public class SetController extends Observable implements IController {
 	@Override
 	public void newGame(){
 		field = factory.createField();
-		checkIfIsASeTInGame();
 		counter = 0;
 		playerOneCounter = 0;
 		playerTwoCounter = 0;
 		notifyObservers();
 	}
-
-	/**
-	 * 
-	 */
-	private void checkIfIsASeTInGame() {
-		List<ICard> liste = new LinkedList<ICard>();
-		liste.addAll(getSet(this.field.getAllCardsInGame()));
-		if(liste.size() < NUMBEROFSETCARDS){
-			int i = 0;
-			while(!changeCardsInGame() && i < THOUSAND){
-				i++;
-			}
-			
-		}
-		changeCardsInGame();
-		notifyObservers();
-	}
-
 
 	/**
 	 * @param cardOne
@@ -100,44 +82,16 @@ public class SetController extends Observable implements IController {
 	 * @return return true if is a set.
 	 */
 	private boolean isASet(ICard cardOne, ICard cardTwo, ICard cardThree) {
-
-		if (!isInField(cardOne, cardTwo, cardThree)) {
-			return false;
-		} else {
-			if (proveIfIsASet(cardOne, cardTwo, cardThree)) {
-				field.foundSet(cardOne, cardTwo, cardThree);
-				if(getASetInGame().size() >= THREE){
-					return true;
-				} else if (allTheSetsInField(this.field.getAllCardsInGame())) {
-					changeCardsInGame();
-					return true;
-				}
-			}
-		}
-		return false;
+		int size = field.getUnusedCards().size();
+		field.foundSet(cardOne, cardTwo, cardThree);
+		return size > field.getUnusedCards().size();
 	}
 
-	/**
-	 * @param list is the Cards in field the new ones if there is no set anymore.
-	 * @return true if still set in fields
-	 */
-	private boolean allTheSetsInField(List<ICard> list) {
-		if (!getSet(list).isEmpty()) {
-			return true;
-		}
-		if (changeCardsInGame()) {
-			return true;
-		}
- 
-		return false;
- 
-	}
 	@Override
 	public void setFieldSize(int size){
 		if(size > 0){
 			this.field.setSize(size);
 		}
-		checkIfIsASeTInGame();
 	}
 
 	/**
@@ -150,7 +104,6 @@ public class SetController extends Observable implements IController {
 		List<ICard> allCards = new LinkedList<ICard>();
 		allCards.addAll(field.getUnusedCards());
 		if (!allCards.isEmpty() && !getSet(allCards).isEmpty()) {
-			field.changeCards(getSet(allCards));
 			return true;
 		}
 		return false;
@@ -286,7 +239,7 @@ public class SetController extends Observable implements IController {
 	 */
 	@Override
 	public List<ICard> getCardinGame() {
-		return this.field.getAllCardsInGame();
+		return this.field.getCardsInField();
 	}
 
 	/* (non-Javadoc)
@@ -343,12 +296,7 @@ public class SetController extends Observable implements IController {
 	 */
 	@Override
 	public boolean stillSetInGame() {
-		LinkedList<ICard> liste = new LinkedList<ICard>();
-		liste.addAll(getSet(this.field.getAllCardsInGame()));
-		if(liste.isEmpty()){
-			return false;
-		}
-		return true;
+		return !field.getUnusedCards().isEmpty();
 	}
 
 	/* (non-Javadoc)
@@ -399,7 +347,11 @@ public class SetController extends Observable implements IController {
 
 	@Override
 	public Map<Integer, ICard> getCardsAndTheIndexOfCardInField() {
-		return this.field.getCardInFieldGame();
+		Map<Integer, ICard> map = new TreeMap<>();
+		for (int i = 0; i < field.getCardsInField().size(); i++) {
+			map.put(i, field.getCardsInField().get(i));
+		}
+		return map;
 	}
 
 	@Override
