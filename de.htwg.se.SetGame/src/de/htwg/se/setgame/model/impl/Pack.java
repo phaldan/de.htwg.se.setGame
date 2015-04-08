@@ -53,17 +53,4 @@ public class Pack implements IPack {
     public List<ICard> getPack() {
         return list;
     }
-
-    @Override
-    public boolean isSet(ICard one, ICard two, ICard three) {
-        return compare(one.getColor(), two.getColor(), three.getColor())
-                && compare(one.getForm(), two.getForm(), three.getForm())
-                && compare(one.getPanelFilling(), two.getPanelFilling(), three.getPanelFilling())
-                && compare(one.getNumberOfComponents(), two.getNumberOfComponents(), three.getNumberOfComponents());
-    }
-
-    private boolean compare(Object one, Object two, Object three) {
-        return one.equals(two) && one.equals(three) && two.equals(three)
-            || !one.equals(two) && !one.equals(three) && !two.equals(three);
-    }
 }
