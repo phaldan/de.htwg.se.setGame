@@ -1,0 +1,23 @@
+<component name="libraryTable">
+  <library name="db4o-8.0.184.15484-all-java5">
+    <ANNOTATIONS>
+      <root url="file://$USER_HOME$/Desktop/db4o-8.0.184.15484-all-java5.jar" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="file://$USER_HOME$/Desktop/db4o-8.0.184.15484-all-java5.jar" />
+      <root url="file://$USER_HOME$/Desktop/db4o-8.0.184.15484-all-java5.jar" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="file://$USER_HOME$/Desktop/db4o-8.0.184.15484-all-java5.jar" />
+    </JAVADOC>
+    <NATIVE>
+      <root url="file://$USER_HOME$/Desktop/db4o-8.0.184.15484-all-java5.jar" />
+    </NATIVE>
+    <SOURCES>
+      <root url="file://$USER_HOME$/Desktop/db4o-8.0.184.15484-all-java5.jar" />
+      <root url="file://$USER_HOME$/Desktop/db4o-8.0.184.15484-all-java5.jar" />
+    </SOURCES>
+    <jarDirectory url="file://$USER_HOME$/Desktop/db4o-8.0.184.15484-all-java5.jar" recursive="false" />
+    <jarDirectory url="file://$USER_HOME$/Desktop/db4o-8.0.184.15484-all-java5.jar" recursive="false" type="SOURCES" />
+  </library>
+</component>

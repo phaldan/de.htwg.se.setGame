@@ -13,13 +13,13 @@ import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.model.IField;
 import de.htwg.se.setgame.model.IPack;
 import de.htwg.se.setgame.model.ModelFactory;
+import de.htwg.se.setgame.persistence.IPackDAO;
 import de.htwg.se.setgame.util.observer.Observable;
 
 
 
 /**
  * @author raina
- *
  */
 public class SetController extends Observable implements IController {
 
@@ -34,19 +34,21 @@ public class SetController extends Observable implements IController {
 	private static final int playerTwo = 2;
 	private int playerOneCounter;
 	private int playerTwoCounter;
+	private IPackDAO packDAO;
 
 	/**
 	 * Logic Construct make for the game a new field with a new pack!!!
 	 */
 	@Inject
-	public SetController(ModelFactory factory) {
+	public SetController(ModelFactory factory, IPackDAO packDAO) {
 		this.factory = factory;
 		pack = factory.createPack();
+		this.packDAO = packDAO;
 		newGame();
 	}
 
 	@Override
-	public void newGame(){
+	public void newGame() {
 		field = factory.createField();
 		counter = 0;
 		playerOneCounter = 0;
@@ -74,7 +76,7 @@ public class SetController extends Observable implements IController {
 		return false;
 
 	}
- 
+
 	/**
 	 * @param cardOne
 	 * @param cardTwo
@@ -88,8 +90,8 @@ public class SetController extends Observable implements IController {
 	}
 
 	@Override
-	public void setFieldSize(int size){
-		if(size > 0){
+	public void setFieldSize(int size) {
+		if (size > 0) {
 			this.field.setSize(size);
 		}
 	}
@@ -128,17 +130,17 @@ public class SetController extends Observable implements IController {
 	 * @return
 	 */
 	private boolean proveNumberOfComponents(ICard cardOne, ICard cardTwo,
-			ICard cardThree) {
+											ICard cardThree) {
 		if (cardOne.getNumberOfComponents() == cardTwo.getNumberOfComponents()
 				&& cardOne.getNumberOfComponents() == cardThree
-						.getNumberOfComponents()) {
+				.getNumberOfComponents()) {
 			return true;
 		} else if (cardOne.getNumberOfComponents() != cardTwo
 				.getNumberOfComponents()
 				&& cardOne.getNumberOfComponents() != cardThree
-						.getNumberOfComponents()
+				.getNumberOfComponents()
 				&& cardTwo.getNumberOfComponents() != cardThree
-						.getNumberOfComponents()) {
+				.getNumberOfComponents()) {
 			return true;
 		}
 		return false;
@@ -173,7 +175,7 @@ public class SetController extends Observable implements IController {
 	 * @return
 	 */
 	private boolean proveString(String stringOne, String stringTwo,
-			String stringThree) {
+								String stringThree) {
 		if (stringOne.compareTo(stringTwo) == 0
 				&& stringOne.compareTo(stringThree) == 0 && stringTwo.compareTo(stringThree) == 0) {
 			return true;
@@ -247,7 +249,7 @@ public class SetController extends Observable implements IController {
 	 */
 	@Override
 	public IField getField() {
-		return  this.field;
+		return this.field;
 	}
 
 	/* (non-Javadoc)
@@ -275,7 +277,7 @@ public class SetController extends Observable implements IController {
 				this.playerOneCounter = this.playerOneCounter + 1;
 			} else if (this.playerTwo == player) {
 				this.playerTwoCounter = this.playerTwoCounter + 1;
-			
+
 			}
 			if (playerOne == player || player == this.playerTwo || player >= 0) {
 				notifyObservers();
@@ -287,7 +289,7 @@ public class SetController extends Observable implements IController {
 	 * @see de.htwg.se.setgame.controller.impl.ISuperController#getASetInGame()
 	 */
 	@Override
-	public List<ICard> getASetInGame(){
+	public List<ICard> getASetInGame() {
 		return getSet(this.field.getCardsInField());
 	}
 
@@ -303,16 +305,16 @@ public class SetController extends Observable implements IController {
 	 * @see de.htwg.se.setgame.controller.impl.ISuperController#getSetInField()
 	 */
 	@Override
-	public List<ICard> getSetInField(){
+	public List<ICard> getSetInField() {
 		return getSet(this.field.getCardsInField());
-		
+
 	}
 
 	/* (non-Javadoc)
 	 * @see de.htwg.se.setgame.controller.impl.ISuperController#getPlayerOnePoints()
 	 */
 	@Override
-	public int getPlayerOnePoints(){
+	public int getPlayerOnePoints() {
 		return this.playerOneCounter;
 	}
 
@@ -320,7 +322,7 @@ public class SetController extends Observable implements IController {
 	 * @see de.htwg.se.setgame.controller.impl.ISuperController#getPlayerTwoPoints()
 	 */
 	@Override
-	public int getPlayerTwoPoints(){
+	public int getPlayerTwoPoints() {
 		return this.playerTwoCounter;
 	}
 
@@ -328,7 +330,7 @@ public class SetController extends Observable implements IController {
 	 * @see de.htwg.se.setgame.controller.impl.ISuperController#getPlayerOne()
 	 */
 	@Override
-	public int getPlayerOne(){
+	public int getPlayerOne() {
 		return this.playerOne;
 	}
 
@@ -336,7 +338,7 @@ public class SetController extends Observable implements IController {
 	 * @see de.htwg.se.setgame.controller.impl.ISuperController#getPlayerTwo()
 	 */
 	@Override
-	public int getPlayerTwo(){
+	public int getPlayerTwo() {
 		return this.playerTwo;
 	}
 
@@ -357,5 +359,10 @@ public class SetController extends Observable implements IController {
 	@Override
 	public IPack getPack() {
 		return pack;
+	}
+
+	@Override
+	public void loadFromDB(String name) {
+		this.pack = packDAO.readPack();
 	}
 }

@@ -15,7 +15,7 @@ import de.htwg.se.setgame.util.observer.IObserver;
  */
 public class TextUI implements IObserver {
 
-    public static final String MESSAGE_WELCOME = "Welcome to SetGame!!!! %nWell ist not that hard to play ;)%nIf you found a set please write : set PlayerOne (or PlayerTwo) and the number of the fields 1 2 3 (0-11)%nif you need a tipp plese write h%nif you want to know the solution please write s%nIf you want to know the game point please write GetPoints%nif you want to solve the set with out knowing just write solve%nSet size of the field 3-80 size number%nFor a newGame please write nw%nHave fun!!! if you want to finish the game please write exit";
+    public static final String MESSAGE_WELCOME = "Welcome to SetGame!!!! %nWell it is not that hard to play ;)%nIf you found a set please write : set PlayerOne (or PlayerTwo) and the number of the fields 1 2 3 (0-11)%nif you need a tip, please write h%nif you want to know the solution please write s%nIf you want to know the game point please write GetPoints%nif you want to solve the set with out knowing just write solve%nSet size of the field 3-80 size number%nFor a newGame please write nw%nHave fun!!! if you want to finish the game please write exit";
 
     private IController controller;
 	private static final int ZERO = 0;
@@ -76,7 +76,7 @@ public class TextUI implements IObserver {
 	 * 
 	 */
 	private void lastMessage() {
-		logger.info("Hey dude! there is no longger stes in game for you here is the Points ;) "
+		logger.info("Hey dude! there are no longer sets in game for you, here are the points ;) "
 				+ this.newLine
 				+ "Player 1 = "
 				+ controller.getPlayerOnePoints()
