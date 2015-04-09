@@ -19,17 +19,13 @@ import de.htwg.se.setgame.util.observer.Observable;
 
 /**
  * @author raina
- *
  */
 public class SetController extends Observable implements IController {
 
 	private ModelFactory factory;
 	private IField field;
-	private int counter;
 	private IPack pack;
-	private static final int NUMBEROFSETCARDS = 3;
-	private static final int THREE = 3;
-	private static final int THOUSAND = 1000;
+	private static final int NUMBER_OF_SET_CARDS = 3;
 	private static final int playerOne = 1;
 	private static final int playerTwo = 2;
 	private int playerOneCounter;
@@ -48,39 +44,11 @@ public class SetController extends Observable implements IController {
 	@Override
 	public void newGame(){
 		field = factory.createField();
-		counter = 0;
 		playerOneCounter = 0;
 		playerTwoCounter = 0;
 		notifyObservers();
 	}
 
-	/**
-	 * @param cardOne
-	 * @param cardTwo
-	 * @param cardThree
-	 * @return true if all the cards are in the field is only a safety Method
-	 */
-	private boolean isInField(ICard cardOne, ICard cardTwo, ICard cardThree) {
-		this.counter = 0;
-		for (ICard card : field.getCardsInField()) {
-			if (card.compareTo(cardOne) || card.compareTo(cardTwo)
-					|| card.compareTo(cardThree)) {
-				counter++;
-			}
-		}
-		if (this.counter == NUMBEROFSETCARDS) {
-			return true;
-		}
-		return false;
-
-	}
- 
-	/**
-	 * @param cardOne
-	 * @param cardTwo
-	 * @param cardThree
-	 * @return return true if is a set.
-	 */
 	private boolean isASet(ICard cardOne, ICard cardTwo, ICard cardThree) {
 		int size = field.getUnusedCards().size();
 		field.foundSet(cardOne, cardTwo, cardThree);
@@ -89,89 +57,37 @@ public class SetController extends Observable implements IController {
 
 	@Override
 	public void setFieldSize(int size){
-		if(size > 0){
-			this.field.setSize(size);
-		}
+		field.setSize(size);
 	}
 
-	/**
-	 * changed the Cards in the field if necessary. to
-	 */
-	/**
-	 * @return
-	 */
-	private boolean changeCardsInGame() {
-		List<ICard> allCards = new LinkedList<ICard>();
-		allCards.addAll(field.getUnusedCards());
-		if (!allCards.isEmpty() && !getSet(allCards).isEmpty()) {
-			return true;
-		}
-		return false;
-
-	}
-
-	/**
-	 * @param cardOne
-	 * @param cardTwo
-	 * @param cardThree
-	 * @return
-	 */
 	private boolean proveColor(ICard cardOne, ICard cardTwo, ICard cardThree) {
 		return proveString(cardOne.getColor(), cardTwo.getColor(),
 				cardThree.getColor());
 	}
 
-	/**
-	 * @param cardOne
-	 * @param cardTwo
-	 * @param cardThree
-	 * @return
-	 */
 	private boolean proveNumberOfComponents(ICard cardOne, ICard cardTwo,
 			ICard cardThree) {
-		if (cardOne.getNumberOfComponents() == cardTwo.getNumberOfComponents()
-				&& cardOne.getNumberOfComponents() == cardThree
-						.getNumberOfComponents()) {
+		if (cardOne.getNumberOfComponents().equals(cardTwo.getNumberOfComponents())
+				&& cardOne.getNumberOfComponents().equals(cardThree.getNumberOfComponents())) {
 			return true;
-		} else if (cardOne.getNumberOfComponents() != cardTwo
-				.getNumberOfComponents()
-				&& cardOne.getNumberOfComponents() != cardThree
-						.getNumberOfComponents()
-				&& cardTwo.getNumberOfComponents() != cardThree
-						.getNumberOfComponents()) {
+		} else if (!cardOne.getNumberOfComponents().equals(cardTwo.getNumberOfComponents())
+				&& !cardOne.getNumberOfComponents().equals(cardThree.getNumberOfComponents())
+				&& !cardTwo.getNumberOfComponents().equals(cardThree.getNumberOfComponents())) {
 			return true;
 		}
 		return false;
 	}
 
-	/**
-	 * @param cardOne
-	 * @param cardTwo
-	 * @param cardThree
-	 * @return
-	 */
 	private boolean proveFilling(ICard cardOne, ICard cardTwo, ICard cardThree) {
 		return proveString(cardOne.getPanelFilling(),
 				cardTwo.getPanelFilling(), cardThree.getPanelFilling());
 	}
 
-	/**
-	 * @param cardOne
-	 * @param cardTwo
-	 * @param cardThree
-	 * @return
-	 */
 	private boolean proveForm(ICard cardOne, ICard cardTwo, ICard cardThree) {
 		return proveString(cardOne.getForm(), cardTwo.getForm(),
 				cardThree.getForm());
 	}
 
-	/**
-	 * @param stringOne
-	 * @param stringTwo
-	 * @param stringThree
-	 * @return
-	 */
 	private boolean proveString(String stringOne, String stringTwo,
 			String stringThree) {
 		if (stringOne.compareTo(stringTwo) == 0
@@ -185,30 +101,16 @@ public class SetController extends Observable implements IController {
 		return false;
 	}
 
-	/**
-	 * @param cardOne
-	 * @param cardTwo
-	 * @param cardThree
-	 * @return
-	 */
 	private boolean proveIfIsASet(ICard cardOne, ICard cardTwo, ICard cardThree) {
-		if (proveColor(cardOne, cardTwo, cardThree)
+		return proveColor(cardOne, cardTwo, cardThree)
 				&& proveFilling(cardOne, cardTwo, cardThree)
 				&& proveNumberOfComponents(cardOne, cardTwo, cardThree)
-				&& proveForm(cardOne, cardTwo, cardThree)) {
-			return true;
-		}
-		return false;
-
+				&& proveForm(cardOne, cardTwo, cardThree);
 	}
 
-	/**
-	 * @param list
-	 * @return
-	 */
 	private List<ICard> getSet(List<ICard> list) {
-		LinkedList<ICard> setList = new LinkedList<ICard>();
-		if (list.size() >= NUMBEROFSETCARDS) {
+		LinkedList<ICard> setList = new LinkedList<>();
+		if (list.size() >= NUMBER_OF_SET_CARDS) {
 
 			for (ICard cardOne : list) {
 				for (ICard cardTwo : list) {
@@ -234,110 +136,66 @@ public class SetController extends Observable implements IController {
 		return setList;
 	}
 
-	/* (non-Javadoc)
-	 * @see de.htwg.se.setgame.controller.impl.ISuperController#getCardinGame()
-	 */
 	@Override
 	public List<ICard> getCardinGame() {
 		return this.field.getCardsInField();
 	}
 
-	/* (non-Javadoc)
-	 * @see de.htwg.se.setgame.controller.impl.ISuperController#getField()
-	 */
 	@Override
 	public IField getField() {
 		return  this.field;
 	}
 
-	/* (non-Javadoc)
-	 * @see de.htwg.se.setgame.controller.impl.ISuperController#areSetInField()
-	 */
-	@Override
-	public boolean areSetInField() {
-		LinkedList<ICard> liste = new LinkedList<ICard>();
-		liste.addAll(getSet(this.field.getCardsInField()));
-		if (liste.isEmpty()) {
-			return changeCardsInGame();
-
-		}
-		return true;
-	}
-
-	/* (non-Javadoc)
-	 * @see de.htwg.se.setgame.controller.impl.ISuperController#isASetForController(de.htwg.se.setgame.model.impl.Card, de.htwg.se.setgame.model.impl.Card, de.htwg.se.setgame.model.impl.Card, int)
-	 */
 	@Override
 	public void isASetForController(ICard cardOne, ICard cardTwo,
 									ICard cardThree, int player) {
 		if (isASet(cardOne, cardTwo, cardThree)) {
-			if (this.playerOne == player) {
+			if (SetController.playerOne == player) {
 				this.playerOneCounter = this.playerOneCounter + 1;
-			} else if (this.playerTwo == player) {
+			} else if (SetController.playerTwo == player) {
 				this.playerTwoCounter = this.playerTwoCounter + 1;
 			
 			}
-			if (playerOne == player || player == this.playerTwo || player >= 0) {
+			if (playerOne == player || player == SetController.playerTwo || player >= 0) {
 				notifyObservers();
 			}
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see de.htwg.se.setgame.controller.impl.ISuperController#getASetInGame()
-	 */
 	@Override
 	public List<ICard> getASetInGame(){
 		return getSet(this.field.getCardsInField());
 	}
 
-	/* (non-Javadoc)
-	 * @see de.htwg.se.setgame.controller.impl.ISuperController#stillSetInGame()
-	 */
 	@Override
 	public boolean stillSetInGame() {
 		return !field.getUnusedCards().isEmpty();
 	}
 
-	/* (non-Javadoc)
-	 * @see de.htwg.se.setgame.controller.impl.ISuperController#getSetInField()
-	 */
 	@Override
 	public List<ICard> getSetInField(){
 		return getSet(this.field.getCardsInField());
 		
 	}
 
-	/* (non-Javadoc)
-	 * @see de.htwg.se.setgame.controller.impl.ISuperController#getPlayerOnePoints()
-	 */
 	@Override
 	public int getPlayerOnePoints(){
 		return this.playerOneCounter;
 	}
 
-	/* (non-Javadoc)
-	 * @see de.htwg.se.setgame.controller.impl.ISuperController#getPlayerTwoPoints()
-	 */
 	@Override
 	public int getPlayerTwoPoints(){
 		return this.playerTwoCounter;
 	}
 
-	/* (non-Javadoc)
-	 * @see de.htwg.se.setgame.controller.impl.ISuperController#getPlayerOne()
-	 */
 	@Override
 	public int getPlayerOne(){
-		return this.playerOne;
+		return SetController.playerOne;
 	}
 
-	/* (non-Javadoc)
-	 * @see de.htwg.se.setgame.controller.impl.ISuperController#getPlayerTwo()
-	 */
 	@Override
 	public int getPlayerTwo(){
-		return this.playerTwo;
+		return SetController.playerTwo;
 	}
 
 	@Override
