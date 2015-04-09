@@ -1,12 +1,14 @@
 package de.htwg.se.setgame.controller.impl;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import de.htwg.se.setgame.model.IField;
 import de.htwg.se.setgame.model.IPack;
 import de.htwg.se.setgame.model.ModelFactory;
 import de.htwg.se.setgame.model.impl.Field;
 import de.htwg.se.setgame.model.impl.Pack;
+import de.htwg.se.setgame.persistence.IPackDAO;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -30,10 +32,38 @@ public class SetControllerTest {
         }
     }
 
+    private class Dao implements IPackDAO {
+
+        @Override
+        public List<IPack> readAllPacks() {
+            return null;
+        }
+
+        @Override
+        public void storePack(IPack pack) {
+
+        }
+
+        @Override
+        public void deletePack(IPack pack) {
+
+        }
+
+        @Override
+        public boolean containsCard(String color, String form, String panelFilling) {
+            return false;
+        }
+
+        @Override
+        public IPack readFirstPack() {
+            return null;
+        }
+    }
+
     @Before
     public void setUp() {
         field = new Field(new Pack(), 3);
-        target = new SetController(new FactoryStub());
+        target = new SetController(new FactoryStub(), new Dao());
         list = new LinkedList<>(target.getSetInField());
     }
 

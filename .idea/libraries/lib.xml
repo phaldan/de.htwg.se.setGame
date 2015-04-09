@@ -6,6 +6,7 @@
       <root url="jar://$PROJECT_DIR$/de.htwg.se.SetGame/lib/guice-assistedinject-3.0.jar!/" />
       <root url="jar://$PROJECT_DIR$/de.htwg.se.SetGame/lib/javax.inject.jar!/" />
       <root url="jar://$PROJECT_DIR$/de.htwg.se.SetGame/lib/guice-3.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/de.htwg.se.SetGame/lib/db4o-8.0.184.15484-all-java5.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
