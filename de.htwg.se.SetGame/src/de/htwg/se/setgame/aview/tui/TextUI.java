@@ -15,7 +15,7 @@ import de.htwg.se.setgame.util.observer.IObserver;
  */
 public class TextUI implements IObserver {
 
-    public static final String MESSAGE_WELCOME = "Welcome to SetGame!!!! %nWell ist not that hard to play ;)%nIf you found a set please write : set PlayerOne (or PlayerTwo) and the number of the fields 1 2 3 (0-11)%nif you need a tipp plese write h%nif you want to know the solution please write s%nIf you want to know the game point please write GetPoints%nif you want to solve the set with out knowing just write solve%nSet size of the field 3-80 size number%nFor a newGame please write nw%nHave fun!!! if you want to finish the game please write exit";
+    public static final String MESSAGE_WELCOME = "Welcome to SetGame!!!!\nWell it is not that hard to play ;)\nIf you found a set please write : set PlayerOne (or PlayerTwo) and the number of the fields 1 2 3 (0-11)\nif you need a tip please write h\nif you want to know the solution please write s\nIf you want to know the game point please write GetPoints\nif you want to solve the set with out knowing just write solve\nSet size of the field 3-80 size number\nFor a newGame please write nw\nHave fun!!! if you want to finish the game please write exit";
 
     private IController controller;
 	private static final int ZERO = 0;
@@ -28,29 +28,19 @@ public class TextUI implements IObserver {
 	private Logger logger = Logger.getLogger("de.htwg.se.setgame.aview.tui");
 
 	/**
-	 * @param controller
+	 * @param controller Instance of IController
 	 */
 	@Inject
 	public TextUI(IController controller) {
 		this.controller = controller;
 		controller.addObserver(this);
-
 	}
 
-	/* (non-Javadoc)
-	 * @see de.htwg.se.setgame.util.observer.IObserver#update(de.htwg.se.setgame.util.observer.Event)
-	 */
 	@Override
 	public void update(Event e) {
 		printTUI();
 	}
 
-	/**
-	 * @param stringOne
-	 * @param stringTwo
-	 * @param stringTree
-	 * @param player
-	 */
 	private void setIn(String stringOne, String stringTwo, String stringTree, String player) {
 		Integer[] arrayForSerNumber = new Integer[THREE];
 		arrayForSerNumber[ZERO] = Integer.parseInt(stringOne);
@@ -58,13 +48,12 @@ public class TextUI implements IObserver {
 		arrayForSerNumber[TWO] = Integer.parseInt(stringTree);
 		boolean b = true;
 
-		for (int index1 = 0; index1 < arrayForSerNumber.length; index1++) {
-			if (arrayForSerNumber[index1] < ZERO || arrayForSerNumber[index1] > controller.getCardInFieldGame().size()) {
+		for (Integer anArrayForSerNumber : arrayForSerNumber) {
+			if (anArrayForSerNumber < ZERO || anArrayForSerNumber > controller.getCardInFieldGame().size()) {
 				b = false;
 				logger.info(this.newLine + "wrong number please number between 0-11");
 				break;
 			}
-
 		}
 		if (b) {
 			printASet(arrayForSerNumber, player);
@@ -72,30 +61,27 @@ public class TextUI implements IObserver {
 
 	}
 
-	/**
-	 * 
-	 */
 	private void lastMessage() {
-		logger.info("Hey dude! there is no longger stes in game for you here is the Points ;) "
+		logger.info("Hey dude! there is no longer sets in game for you here is the Points ;) "
 				+ this.newLine
 				+ "Player 1 = "
 				+ controller.getPlayerOnePoints()
 				+ this.newLine
 				+ "Player Two " + controller.getPlayerTwoPoints());
 		if (controller.getPlayerTwoPoints() < controller.getPlayerOnePoints()) {
-			logger.info("Gongratilations player one Dude you are amazing!!");
+			logger.info("Congratulations player one! Dude you are amazing!!");
 		} else if (controller.getPlayerTwoPoints() > controller
 				.getPlayerOnePoints()) {
-			logger.info("Congratilations player Two Dude you are amazing!!");
+			logger.info("Congratulations player two! Dude you are amazing!!");
 		} else {
-			logger.info("nobody wins nobody pays the dinne xD");
+			logger.info("nobody wins nobody pays the dine! xD");
 		}
 
 	}
 
 	/**
-	 * @param line
-	 * @return
+	 * @param line Terminal input.
+	 * @return Returns true, when the game has not finished.
 	 */
 	public boolean processInputLine(String line) {
 		logger.info(newLine + controller.getCardinGame().size());
@@ -128,10 +114,6 @@ public class TextUI implements IObserver {
 
 	}
 
-	/**
-	 * @param arrayForSerNumber
-	 * @param string
-	 */
 	private void printASet(Integer[] arrayForSerNumber, String string) {
 		int player = string.equals("PlayerOne") ? controller.getPlayerOne(): controller.getPlayerTwo();
 
@@ -140,7 +122,7 @@ public class TextUI implements IObserver {
 		ICard cardThree = getCard(arrayForSerNumber, THREE);
 
 		controller.isASetForController(cardOne, cardTwo, cardThree, player);
-		logger.info(newLine + "Congratilations it is a SET!! ! size == "
+		logger.info(newLine + "Congratulations it is a SET!! ! size == "
 				+ controller.getField().getCardsInField().size());
 
 	}
@@ -149,24 +131,17 @@ public class TextUI implements IObserver {
 		return controller.getField().getCardsInField().get(arrayForSerNumber[i]);
 	}
 
-	/**
-	 * @param string
-	 * @return
-	 */
 	private boolean compareIfPlayerIsRight(String string) {
 		return string.equals("PlayerOne") || string.equals("PlayerTwo");
 	}
 
 	/**
-	 * 
+	 * Shows TUI main menu.
 	 */
 	public void printTUI() {
-		logger.info(String.format(MESSAGE_WELCOME) + this.controller.getField().toString());
+		logger.info(MESSAGE_WELCOME + this.controller.getField().toString());
 	}
 
-	/**
-	 * 
-	 */
 	private void solve() {
 		if (this.controller.getSetInField().size() >= THREE) {
 			logger.info("solved" + this.controller.getSetInField().toString()
@@ -184,18 +159,12 @@ public class TextUI implements IObserver {
 		}
 	}
 
-	/**
-	 * 
-	 */
 	private void help() {
-		logger.info("A tipp your set begiss with  " + this.newLine
+		logger.info("A tip your set begins with  " + this.newLine
 				+ controller.getASetInGame().get(ZERO));
 
 	}
 
-	/**
-	 * 
-	 */
 	private void solution() {
 		for (ICard card : controller.getSetInField()) {
 			for (Integer key : controller.getCardsAndTheIndexOfCardInField().keySet()) {
@@ -210,17 +179,11 @@ public class TextUI implements IObserver {
 		}
 	}
 
-	/**
-	 * 
-	 */
 	private void newGame() {
 		this.controller.newGame();
 
 	}
 
-	/**
-	 * 
-	 */
 	private void getPoints() {
 		logger.info(this.newLine + "Player one = "
 				+ controller.getPlayerOnePoints() + this.newLine
@@ -229,9 +192,6 @@ public class TextUI implements IObserver {
 
 	}
 
-	/**
-	 * @param string
-	 */
 	private void changeSize(String string) {
 		Integer i = Integer.parseInt(string);
 		this.controller.setFieldSize(i);
@@ -239,9 +199,6 @@ public class TextUI implements IObserver {
 
 	}
 
-	/**
-	 * @param string
-	 */
 	private void proveSomeStringsFromMet(String string) {
 		if (string.compareTo("solve") == ZERO) {
 			solve();
