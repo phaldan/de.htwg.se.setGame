@@ -92,4 +92,10 @@ public interface IController extends IObservable {
 	 * @return IPack
 	 */
 	IPack getPack();
+
+	/**
+	 * @return Pack from DB
+	 */
+	void loadFromDB(String name);
+
 }

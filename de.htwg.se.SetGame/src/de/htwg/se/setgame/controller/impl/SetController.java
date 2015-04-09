@@ -13,6 +13,7 @@ import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.model.IField;
 import de.htwg.se.setgame.model.IPack;
 import de.htwg.se.setgame.model.ModelFactory;
+import de.htwg.se.setgame.persistence.IPackDAO;
 import de.htwg.se.setgame.util.observer.Observable;
 
 
@@ -30,19 +31,21 @@ public class SetController extends Observable implements IController {
 	private static final int playerTwo = 2;
 	private int playerOneCounter;
 	private int playerTwoCounter;
+	private IPackDAO packDAO;
 
 	/**
 	 * Logic Construct make for the game a new field with a new pack!!!
 	 */
 	@Inject
-	public SetController(ModelFactory factory) {
+	public SetController(ModelFactory factory, IPackDAO packDAO) {
 		this.factory = factory;
 		pack = factory.createPack();
+		this.packDAO = packDAO;
 		newGame();
 	}
 
 	@Override
-	public void newGame(){
+	public void newGame() {
 		field = factory.createField();
 		playerOneCounter = 0;
 		playerTwoCounter = 0;
@@ -143,7 +146,7 @@ public class SetController extends Observable implements IController {
 
 	@Override
 	public IField getField() {
-		return  this.field;
+		return this.field;
 	}
 
 	@Override
@@ -154,7 +157,7 @@ public class SetController extends Observable implements IController {
 				this.playerOneCounter = this.playerOneCounter + 1;
 			} else if (SetController.playerTwo == player) {
 				this.playerTwoCounter = this.playerTwoCounter + 1;
-			
+
 			}
 			if (playerOne == player || player == SetController.playerTwo || player >= 0) {
 				notifyObservers();
@@ -163,7 +166,7 @@ public class SetController extends Observable implements IController {
 	}
 
 	@Override
-	public List<ICard> getASetInGame(){
+	public List<ICard> getASetInGame() {
 		return getSet(this.field.getCardsInField());
 	}
 
@@ -173,28 +176,27 @@ public class SetController extends Observable implements IController {
 	}
 
 	@Override
-	public List<ICard> getSetInField(){
+	public List<ICard> getSetInField() {
 		return getSet(this.field.getCardsInField());
-		
 	}
 
 	@Override
-	public int getPlayerOnePoints(){
+	public int getPlayerOnePoints() {
 		return this.playerOneCounter;
 	}
 
 	@Override
-	public int getPlayerTwoPoints(){
+	public int getPlayerTwoPoints() {
 		return this.playerTwoCounter;
 	}
 
 	@Override
-	public int getPlayerOne(){
+	public int getPlayerOne() {
 		return SetController.playerOne;
 	}
 
 	@Override
-	public int getPlayerTwo(){
+	public int getPlayerTwo() {
 		return SetController.playerTwo;
 	}
 
@@ -215,5 +217,10 @@ public class SetController extends Observable implements IController {
 	@Override
 	public IPack getPack() {
 		return pack;
+	}
+
+	@Override
+	public void loadFromDB(String name) {
+		this.pack = packDAO.readFirstPack();
 	}
 }

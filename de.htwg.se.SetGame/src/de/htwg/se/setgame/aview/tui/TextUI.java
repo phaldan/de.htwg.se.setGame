@@ -62,7 +62,7 @@ public class TextUI implements IObserver {
 	}
 
 	private void lastMessage() {
-		logger.info("Hey dude! there is no longer sets in game for you here is the Points ;) "
+		logger.info("Hey dude! there are no longer sets in game for you, here are the points ;) "
 				+ this.newLine
 				+ "Player 1 = "
 				+ controller.getPlayerOnePoints()
