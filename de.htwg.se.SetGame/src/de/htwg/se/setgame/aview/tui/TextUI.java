@@ -18,6 +18,7 @@ public class TextUI implements IObserver {
     public static final String MESSAGE_WELCOME = "Welcome to SetGame!!!!\nWell it is not that hard to play ;)\nIf you found a set please write : set PlayerOne (or PlayerTwo) and the number of the fields 1 2 3 (0-11)\nif you need a tip please write h\nif you want to know the solution please write s\nIf you want to know the game point please write GetPoints\nif you want to solve the set with out knowing just write solve\nSet size of the field 3-80 size number\nFor a newGame please write nw\nHave fun!!! if you want to finish the game please write exit";
 
     private IController controller;
+	private ActionList actions;
 	private static final int ZERO = 0;
 	private static final int ONE = 1;
 	private static final int TWO = 1;
@@ -34,6 +35,7 @@ public class TextUI implements IObserver {
 	public TextUI(IController controller) {
 		this.controller = controller;
 		controller.addObserver(this);
+		actions = new ActionList(controller);
 	}
 
 	@Override
@@ -94,6 +96,10 @@ public class TextUI implements IObserver {
 		boolean cont = true;
 		String[] splintWords = line.split(" ");
 		int index = ZERO;
+		String cmd = splintWords[index];
+		if (actions.get(cmd) != null) {
+			logger.info(actions.get(cmd).execute(splintWords));
+		}
 		if (splintWords[index].compareTo("set") == ZERO) {
 			if (compareIfPlayerIsRight(splintWords[ONE]) && splintWords.length > FOUR) {
 				setIn(splintWords[TWO], splintWords[THREE], splintWords[FOUR], splintWords[ONE]);
