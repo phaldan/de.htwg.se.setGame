@@ -107,8 +107,6 @@ public class TextUI implements IObserver {
 
 		} else if (splintWords[index].compareTo("GetPoints") == ZERO) {
 			getPoints();
-		} else if (splintWords[index].compareTo("h") == ZERO) {
-			help();
 		} else if (splintWords[index].compareTo("exit") == ZERO) {
 			cont = false;
 		} else if (splintWords[index].compareTo("size") == ZERO) {
@@ -163,12 +161,6 @@ public class TextUI implements IObserver {
 			printTUI();
 
 		}
-	}
-
-	private void help() {
-		logger.info("A tip your set begins with  " + this.newLine
-				+ controller.getASetInGame().get(ZERO));
-
 	}
 
 	private void solution() {
