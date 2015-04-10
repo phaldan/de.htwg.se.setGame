@@ -19,10 +19,15 @@ public class ActionListTest {
 
     @Test
     public void get_success() {
-        assertNotNull(target.get(HelpAction.CMD));
-        assertNotNull(target.get(PointsAction.CMD));
-        assertNotNull(target.get(ResizeAction.CMD));
-        assertNotNull(target.get(NewAction.CMD));
+        assertEntry(HelpAction.CMD);
+        assertEntry(PointsAction.CMD);
+        assertEntry(ResizeAction.CMD);
+        assertEntry(NewAction.CMD);
+        assertEntry(SolutionAction.CMD);
+    }
+
+    private void assertEntry(String command) {
+        assertNotNull(target.get(command));
     }
 
     @Test
