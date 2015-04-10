@@ -2,6 +2,8 @@ package de.htwg.se.setgame.aview.tui;
 
 import de.htwg.se.setgame.controller.IController;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -22,5 +24,9 @@ public class ActionList {
 
     public Action get(String command) {
         return map.get(command);
+    }
+
+    public List<Action> getAll() {
+        return new LinkedList<>(map.values());
     }
 }

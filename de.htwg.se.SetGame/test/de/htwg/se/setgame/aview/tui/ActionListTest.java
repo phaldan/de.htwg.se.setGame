@@ -1,6 +1,8 @@
 package de.htwg.se.setgame.aview.tui;
 
 import static org.junit.Assert.*;
+
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -8,9 +10,25 @@ import org.junit.Test;
  */
 public class ActionListTest {
 
+    private ActionList target;
+
+    @Before
+    public void setUp() {
+        target = new ActionList(new ControllerDummy());
+    }
+
     @Test
-    public void test() {
-        ActionList target = new ActionList(new ControllerDummy());
+    public void get_success() {
         assertNotNull(target.get(HelpAction.CMD));
+    }
+
+    @Test
+    public void get_fail() {
+        assertNull(target.get("test"));
+    }
+
+    @Test
+    public void getAll_success() {
+        assertNotNull(target.getAll());
     }
 }
