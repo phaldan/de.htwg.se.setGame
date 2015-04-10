@@ -15,7 +15,7 @@ import de.htwg.se.setgame.util.observer.IObserver;
  */
 public class TextUI implements IObserver {
 
-    public static final String MESSAGE_WELCOME = "Welcome to SetGame!!!!\nWell it is not that hard to play ;)\nIf you found a set please write : set PlayerOne (or PlayerTwo) and the number of the fields 1 2 3 (0-11)\nif you want to know the solution please write s\nIf you want to know the game point please write GetPoints\nif you want to solve the set with out knowing just write solve\nSet size of the field 3-80 size number\nFor a newGame please write nw\nHave fun!!! if you want to finish the game please write exit";
+    public static final String MESSAGE_WELCOME = "Welcome to SetGame!!!!\nWell it is not that hard to play ;)\nIf you found a set please write : set PlayerOne (or PlayerTwo) and the number of the fields 1 2 3 (0-11)\nif you want to know the solution please write s\nif you want to solve the set with out knowing just write solve\nSet size of the field 3-80 size number\nFor a newGame please write nw\nHave fun!!! if you want to finish the game please write exit";
 
     private IController controller;
 	private ActionList actions;
@@ -104,9 +104,6 @@ public class TextUI implements IObserver {
 			if (compareIfPlayerIsRight(splintWords[ONE]) && splintWords.length > FOUR) {
 				setIn(splintWords[TWO], splintWords[THREE], splintWords[FOUR], splintWords[ONE]);
 			}
-
-		} else if (splintWords[index].compareTo("GetPoints") == ZERO) {
-			getPoints();
 		} else if (splintWords[index].compareTo("exit") == ZERO) {
 			cont = false;
 		} else if (splintWords[index].compareTo("size") == ZERO) {
@@ -151,12 +148,16 @@ public class TextUI implements IObserver {
 	private String getMenu() {
 		StringBuilder builder = new StringBuilder("MENU:\n");
 		for (Action action: actions.getAll()) {
-			builder.append(action.getCommand());
-			builder.append(": ");
-			builder.append(action.getDescription());
-			builder.append("\n");
+			addMenuEntry(action, builder);
 		}
 		return builder.toString();
+	}
+
+	private void addMenuEntry(Action action, StringBuilder builder) {
+		builder.append(action.getCommand());
+		builder.append(": ");
+		builder.append(action.getDescription());
+		builder.append("\n");
 	}
 
 	private void solve() {
@@ -192,14 +193,6 @@ public class TextUI implements IObserver {
 
 	private void newGame() {
 		this.controller.newGame();
-
-	}
-
-	private void getPoints() {
-		logger.info(this.newLine + "Player one = "
-				+ controller.getPlayerOnePoints() + this.newLine
-				+ "Player Two = " + controller.getPlayerTwoPoints()
-				+ this.newLine);
 
 	}
 
