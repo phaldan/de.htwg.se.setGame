@@ -93,4 +93,9 @@ public class ControllerDummy extends Observable implements IController {
     public void loadFromDB(String name) {
 
     }
+
+    @Override
+    public ICard getFirstInSet() {
+        return null;
+    }
 }

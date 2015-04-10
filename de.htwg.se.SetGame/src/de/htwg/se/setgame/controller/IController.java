@@ -98,4 +98,9 @@ public interface IController extends IObservable {
 	 */
 	void loadFromDB(String name);
 
+	/**
+	 * @return Get first ICard of valid set.
+	 */
+	ICard getFirstInSet();
+
 }

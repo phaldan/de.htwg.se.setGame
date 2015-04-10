@@ -223,4 +223,10 @@ public class SetController extends Observable implements IController {
 	public void loadFromDB(String name) {
 		this.pack = packDAO.readFirstPack();
 	}
+
+	@Override
+	public ICard getFirstInSet() {
+		LinkedList<ICard> list = new LinkedList<>(getSetInField());
+		return list.peekFirst();
+	}
 }
