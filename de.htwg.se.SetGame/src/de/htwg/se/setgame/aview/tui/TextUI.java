@@ -15,7 +15,7 @@ import de.htwg.se.setgame.util.observer.IObserver;
  */
 public class TextUI implements IObserver {
 
-    public static final String MESSAGE_WELCOME = "Welcome to SetGame!!!!\nWell it is not that hard to play ;)\nIf you found a set please write : set PlayerOne (or PlayerTwo) and the number of the fields 1 2 3 (0-11)\nif you want to know the solution please write s\nif you want to solve the set with out knowing just write solve\nFor a newGame please write nw\nHave fun!!! if you want to finish the game please write exit";
+    public static final String MESSAGE_WELCOME = "Welcome to SetGame!!!!\nWell it is not that hard to play ;)\nIf you found a set please write : set PlayerOne (or PlayerTwo) and the number of the fields 1 2 3 (0-11)\nif you want to know the solution please write s\nif you want to solve the set with out knowing just write solve\nHave fun!!! if you want to finish the game please write exit";
 
     private IController controller;
 	private ActionList actions;
@@ -189,19 +189,12 @@ public class TextUI implements IObserver {
 		}
 	}
 
-	private void newGame() {
-		this.controller.newGame();
-
-	}
-
 	private void proveSomeStringsFromMet(String string) {
 		if (string.compareTo("solve") == ZERO) {
 			solve();
 		} else if (string.compareTo("s") == ZERO) {
 			solution();
 
-		} else if (string.compareTo("nw") == ZERO) {
-			newGame();
 		}
 
 	}
