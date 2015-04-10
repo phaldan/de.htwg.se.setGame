@@ -16,6 +16,7 @@ public class ActionList {
 
     public ActionList(IController controller) {
         add(new HelpAction(controller));
+        add(new PointsAction(controller));
     }
 
     private void add(Action action) {

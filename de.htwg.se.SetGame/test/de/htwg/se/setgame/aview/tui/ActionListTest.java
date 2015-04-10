@@ -20,6 +20,7 @@ public class ActionListTest {
     @Test
     public void get_success() {
         assertNotNull(target.get(HelpAction.CMD));
+        assertNotNull(target.get(PointsAction.CMD));
     }
 
     @Test
