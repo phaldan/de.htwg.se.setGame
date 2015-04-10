@@ -22,6 +22,7 @@ public class ActionListTest {
         assertNotNull(target.get(HelpAction.CMD));
         assertNotNull(target.get(PointsAction.CMD));
         assertNotNull(target.get(ResizeAction.CMD));
+        assertNotNull(target.get(NewAction.CMD));
     }
 
     @Test

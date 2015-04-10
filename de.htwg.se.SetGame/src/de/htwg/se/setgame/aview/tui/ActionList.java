@@ -18,6 +18,7 @@ public class ActionList {
         add(new HelpAction(controller));
         add(new PointsAction(controller));
         add(new ResizeAction(controller));
+        add(new NewAction(controller));
     }
 
     private void add(Action action) {
