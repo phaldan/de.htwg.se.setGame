@@ -5,7 +5,6 @@ import org.apache.log4j.Logger;
 import com.google.inject.Inject;
 
 import de.htwg.se.setgame.controller.IController;
-import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.util.observer.Event;
 import de.htwg.se.setgame.util.observer.IObserver;
 
@@ -15,17 +14,12 @@ import de.htwg.se.setgame.util.observer.IObserver;
  */
 public class TextUI implements IObserver {
 
-    public static final String MESSAGE_WELCOME = "Welcome to SetGame!!!!\nWell it is not that hard to play ;)\nIf you found a set please write : set PlayerOne (or PlayerTwo) and the number of the fields 1 2 3 (0-11)\nHave fun!!!";
+    public static final String MESSAGE_WELCOME = "Welcome to SetGame!!!!\nWell it is not that hard to play ;)\nHave fun!!!";
+	private static final int ZERO = 0;
 
     private IController controller;
 	private ActionList actions;
-	private static final int ZERO = 0;
-	private static final int ONE = 1;
-	private static final int TWO = 1;
-	private static final int THREE = 1;
-	private static final int FOUR = 1;
 	private String newLine = System.getProperty("line.separator");
-
 	private Logger logger = Logger.getLogger("de.htwg.se.setgame.aview.tui");
 
 	/**
@@ -41,26 +35,6 @@ public class TextUI implements IObserver {
 	@Override
 	public void update(Event e) {
 		printTUI();
-	}
-
-	private void setIn(String stringOne, String stringTwo, String stringTree, String player) {
-		Integer[] arrayForSerNumber = new Integer[THREE];
-		arrayForSerNumber[ZERO] = Integer.parseInt(stringOne);
-		arrayForSerNumber[ONE] = Integer.parseInt(stringTwo);
-		arrayForSerNumber[TWO] = Integer.parseInt(stringTree);
-		boolean b = true;
-
-		for (Integer anArrayForSerNumber : arrayForSerNumber) {
-			if (anArrayForSerNumber < ZERO || anArrayForSerNumber > controller.getCardInFieldGame().size()) {
-				b = false;
-				logger.info(this.newLine + "wrong number please number between 0-11");
-				break;
-			}
-		}
-		if (b) {
-			printASet(arrayForSerNumber, player);
-		}
-
 	}
 
 	private void lastMessage() {
@@ -100,34 +74,8 @@ public class TextUI implements IObserver {
 		if (actions.get(cmd) != null) {
 			logger.info(actions.get(cmd).execute(splintWords));
 		}
-		if (splintWords[index].compareTo("set") == ZERO) {
-			if (compareIfPlayerIsRight(splintWords[ONE]) && splintWords.length > FOUR) {
-				setIn(splintWords[TWO], splintWords[THREE], splintWords[FOUR], splintWords[ONE]);
-			}
-		}
 		return cont;
 
-	}
-
-	private void printASet(Integer[] arrayForSerNumber, String string) {
-		int player = string.equals("PlayerOne") ? controller.getPlayerOne(): controller.getPlayerTwo();
-
-		ICard cardOne = getCard(arrayForSerNumber, ZERO);
-		ICard cardTwo = getCard(arrayForSerNumber, ONE);
-		ICard cardThree = getCard(arrayForSerNumber, THREE);
-
-		controller.isASetForController(cardOne, cardTwo, cardThree, player);
-		logger.info(newLine + "Congratulations it is a SET!! ! size == "
-				+ controller.getField().getCardsInField().size());
-
-	}
-
-	private ICard getCard(Integer[] arrayForSerNumber, int i) {
-		return controller.getField().getCardsInField().get(arrayForSerNumber[i]);
-	}
-
-	private boolean compareIfPlayerIsRight(String string) {
-		return string.equals("PlayerOne") || string.equals("PlayerTwo");
 	}
 
 	/**
