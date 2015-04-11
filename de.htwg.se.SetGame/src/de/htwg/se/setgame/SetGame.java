@@ -53,7 +53,7 @@ public final class SetGame {
 		}
 
         tui = new TextUI(controller);
-        tui.printTUI();
+		tui.printTUI();
     }
 	public IController getIController(){
 		return controller;

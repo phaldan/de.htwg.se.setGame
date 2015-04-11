@@ -1,5 +1,6 @@
 package de.htwg.se.setgame.aview.tui;
 
+import de.htwg.se.setgame.model.ICard;
 import org.apache.log4j.Logger;
 
 import com.google.inject.Inject;
@@ -8,17 +9,26 @@ import de.htwg.se.setgame.controller.IController;
 import de.htwg.se.setgame.util.observer.Event;
 import de.htwg.se.setgame.util.observer.IObserver;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Map;
+
 /**
  * @author raina
- *
  */
 public class TextUI implements IObserver {
 
     public static final String MESSAGE_WELCOME = "Welcome to SetGame!!!!\nWell it is not that hard to play ;)\nHave fun!!!";
-	private static final int ZERO = 0;
+	public static final String SEPARATOR = " ";
+	public static final String INVALID_ACTION = "Unknown action.";
+	public static final String MENU = "%2s: %s%n";
+	public static final String FIELD = "%2d: %s%n";
+	public static final String MENU_HEADLINE = "MENU:%n";
+	public static final String FIELD_HEADLINE = "FIELD:%n";
 
     private IController controller;
 	private ActionList actions;
+	private boolean cont = true;
 	private String newLine = System.getProperty("line.separator");
 	private Logger logger = Logger.getLogger("de.htwg.se.setgame.aview.tui");
 
@@ -27,9 +37,13 @@ public class TextUI implements IObserver {
 	 */
 	@Inject
 	public TextUI(IController controller) {
+		this(controller, new ActionList(controller));
+	}
+
+	public TextUI(IController controller, ActionList actions) {
 		this.controller = controller;
+		this.actions = actions;
 		controller.addObserver(this);
-		actions = new ActionList(controller);
 	}
 
 	@Override
@@ -52,7 +66,6 @@ public class TextUI implements IObserver {
 		} else {
 			logger.info("nobody wins nobody pays the dine! xD");
 		}
-
 	}
 
 	/**
@@ -60,45 +73,42 @@ public class TextUI implements IObserver {
 	 * @return Returns true, when the game has not finished.
 	 */
 	public boolean processInputLine(String line) {
-		logger.info(newLine + controller.getCardinGame().size());
-
 		if (!controller.stillSetInGame() || controller.getCardinGame().isEmpty()) {
 			lastMessage();
 			return false;
 		}
-
-		boolean cont = true;
-		String[] splintWords = line.split(" ");
-		int index = ZERO;
-		String cmd = splintWords[index];
-		if (actions.get(cmd) != null) {
-			logger.info(actions.get(cmd).execute(splintWords));
-		}
+		executeAction(line.split(SEPARATOR));
 		return cont;
+	}
 
+	private void executeAction(String[] inputArray) {
+		LinkedList<String> list = new LinkedList<>(Arrays.asList(inputArray));
+		Action action = actions.get(list.peekFirst());
+		logger.info((action == null) ? INVALID_ACTION : action.execute(inputArray));
 	}
 
 	/**
-	 * Shows TUI main menu.
+	 * Print
 	 */
 	public void printTUI() {
 		logger.info(MESSAGE_WELCOME);
-		logger.info(getMenu());
-		logger.info(controller.getField());
+		printMenu();
+		printField();
 	}
 
-	private String getMenu() {
-		StringBuilder builder = new StringBuilder("MENU:\n");
+	private void printMenu() {
+		StringBuilder builder = new StringBuilder(String.format(MENU_HEADLINE));
 		for (Action action: actions.getAll()) {
-			addMenuEntry(action, builder);
+			builder.append(String.format(MENU, action.getCommand(), action.getDescription()));
 		}
-		return builder.toString();
+		logger.info(builder.toString());
 	}
 
-	private void addMenuEntry(Action action, StringBuilder builder) {
-		builder.append(action.getCommand());
-		builder.append(": ");
-		builder.append(action.getDescription());
-		builder.append("\n");
+	private void printField() {
+		StringBuilder builder = new StringBuilder(String.format(FIELD_HEADLINE));
+		for (Map.Entry<Integer, ICard> entry: controller.getCardsAndTheIndexOfCardInField().entrySet()) {
+			builder.append(String.format(FIELD, entry.getKey(), entry.getValue()));
+		}
+		logger.info(builder.toString());
 	}
 }
