@@ -20,6 +20,7 @@ public class ActionList {
         add(new ResizeAction(controller));
         add(new NewAction(controller));
         add(new SolutionAction(controller));
+        add(new SolveAction(controller));
     }
 
     private void add(Action action) {
