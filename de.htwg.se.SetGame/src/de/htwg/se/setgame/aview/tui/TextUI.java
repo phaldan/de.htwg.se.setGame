@@ -15,7 +15,7 @@ import de.htwg.se.setgame.util.observer.IObserver;
  */
 public class TextUI implements IObserver {
 
-    public static final String MESSAGE_WELCOME = "Welcome to SetGame!!!!\nWell it is not that hard to play ;)\nIf you found a set please write : set PlayerOne (or PlayerTwo) and the number of the fields 1 2 3 (0-11)\nHave fun!!! if you want to finish the game please write exit";
+    public static final String MESSAGE_WELCOME = "Welcome to SetGame!!!!\nWell it is not that hard to play ;)\nIf you found a set please write : set PlayerOne (or PlayerTwo) and the number of the fields 1 2 3 (0-11)\nHave fun!!!";
 
     private IController controller;
 	private ActionList actions;
@@ -104,8 +104,6 @@ public class TextUI implements IObserver {
 			if (compareIfPlayerIsRight(splintWords[ONE]) && splintWords.length > FOUR) {
 				setIn(splintWords[TWO], splintWords[THREE], splintWords[FOUR], splintWords[ONE]);
 			}
-		} else if (splintWords[index].compareTo("exit") == ZERO) {
-			cont = false;
 		}
 		return cont;
 
