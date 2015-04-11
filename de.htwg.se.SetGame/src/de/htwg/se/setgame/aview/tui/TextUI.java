@@ -23,14 +23,18 @@ public class TextUI implements IObserver {
 	public static final String INVALID_ACTION = "Unknown action.";
 	public static final String MENU = "%2s: %s%n";
 	public static final String FIELD = "%2d: %s%n";
-	public static final String MENU_HEADLINE = "MENU:%n";
-	public static final String FIELD_HEADLINE = "FIELD:%n";
+	public static final String MENU_HEADLINE = "MENU:\n";
+	public static final String FIELD_HEADLINE = "FIELD:\n";
+	public static final String GAME_FINISH = "Hey dude! there are no longer sets in game for you, here are the points ;)";
+	public static final String PLAYER_POINTS = "PlayerOne=%d | PlayerTwo=%d";
+	public static final String WINNER_NOBODY = "Nobody wins, nobody pays the dine! xD";
+	public static final String WINNER_PLAYER1 = "Congratulations PlayerOne!";
+	public static final String WINNER_PLAYER2 = "Congratulations PlayerTwo!";
 
     private IController controller;
 	private ActionList actions;
 	private boolean cont = true;
-	private String newLine = System.getProperty("line.separator");
-	private Logger logger = Logger.getLogger("de.htwg.se.setgame.aview.tui");
+	private static final Logger logger = Logger.getLogger("de.htwg.se.setgame.aview.tui");
 
 	/**
 	 * @param controller Instance of IController
@@ -48,24 +52,8 @@ public class TextUI implements IObserver {
 
 	@Override
 	public void update(Event e) {
+		cont = true;
 		printTUI();
-	}
-
-	private void lastMessage() {
-		logger.info("Hey dude! there are no longer sets in game for you, here are the points ;) "
-				+ this.newLine
-				+ "Player 1 = "
-				+ controller.getPlayerOnePoints()
-				+ this.newLine
-				+ "Player Two " + controller.getPlayerTwoPoints());
-		if (controller.getPlayerTwoPoints() < controller.getPlayerOnePoints()) {
-			logger.info("Congratulations player one! Dude you are amazing!!");
-		} else if (controller.getPlayerTwoPoints() > controller
-				.getPlayerOnePoints()) {
-			logger.info("Congratulations player two! Dude you are amazing!!");
-		} else {
-			logger.info("nobody wins nobody pays the dine! xD");
-		}
 	}
 
 	/**
@@ -79,6 +67,18 @@ public class TextUI implements IObserver {
 		}
 		executeAction(line.split(SEPARATOR));
 		return cont;
+	}
+
+	private void lastMessage() {
+		logger.info(GAME_FINISH);
+		logger.info(String.format(PLAYER_POINTS, controller.getPlayerOnePoints(), controller.getPlayerTwoPoints()));
+		if (controller.getPlayerTwoPoints() < controller.getPlayerOnePoints()) {
+			logger.info(WINNER_PLAYER1);
+		} else if (controller.getPlayerTwoPoints() > controller.getPlayerOnePoints()) {
+			logger.info(WINNER_PLAYER2);
+		} else {
+			logger.info(WINNER_NOBODY);
+		}
 	}
 
 	private void executeAction(String[] inputArray) {
@@ -97,7 +97,7 @@ public class TextUI implements IObserver {
 	}
 
 	private void printMenu() {
-		StringBuilder builder = new StringBuilder(String.format(MENU_HEADLINE));
+		StringBuilder builder = new StringBuilder(MENU_HEADLINE);
 		for (Action action: actions.getAll()) {
 			builder.append(String.format(MENU, action.getCommand(), action.getDescription()));
 		}
@@ -105,7 +105,7 @@ public class TextUI implements IObserver {
 	}
 
 	private void printField() {
-		StringBuilder builder = new StringBuilder(String.format(FIELD_HEADLINE));
+		StringBuilder builder = new StringBuilder(FIELD_HEADLINE);
 		for (Map.Entry<Integer, ICard> entry: controller.getCardsAndTheIndexOfCardInField().entrySet()) {
 			builder.append(String.format(FIELD, entry.getKey(), entry.getValue()));
 		}
