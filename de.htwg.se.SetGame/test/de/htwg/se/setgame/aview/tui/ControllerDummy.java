@@ -98,4 +98,9 @@ public class ControllerDummy extends Observable implements IController {
     public ICard getFirstInSet() {
         return null;
     }
+
+    @Override
+    public void exit() {
+
+    }
 }

@@ -103,4 +103,9 @@ public interface IController extends IObservable {
 	 */
 	ICard getFirstInSet();
 
+	/**
+	 * Close game.
+	 */
+	void exit();
+
 }

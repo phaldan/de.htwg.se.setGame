@@ -229,4 +229,9 @@ public class SetController extends Observable implements IController {
 		LinkedList<ICard> list = new LinkedList<>(getSetInField());
 		return list.peekFirst();
 	}
+
+	@Override
+	public void exit() {
+
+	}
 }
