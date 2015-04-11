@@ -1,0 +1,33 @@
+package de.htwg.se.setgame.aview.tui;
+
+import de.htwg.se.setgame.controller.IController;
+
+/**
+ * @author Philipp Daniels
+ */
+public class CloseAction extends Action {
+
+    public static final String CMD = "x";
+    public static final String DESC = "If you want to finish the game.";
+    public static final String OUTPUT = "Finish game.";
+
+    public CloseAction(IController controller) {
+        super(controller);
+    }
+
+    @Override
+    public String getCommand() {
+        return CMD;
+    }
+
+    @Override
+    public String getDescription() {
+        return DESC;
+    }
+
+    @Override
+    public String execute(String[] input) {
+        getController().exit();
+        return OUTPUT;
+    }
+}

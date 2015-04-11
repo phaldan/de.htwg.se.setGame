@@ -21,6 +21,7 @@ public class ActionList {
         add(new NewAction(controller));
         add(new SolutionAction(controller));
         add(new SolveAction(controller));
+        add(new CloseAction(controller));
     }
 
     private void add(Action action) {

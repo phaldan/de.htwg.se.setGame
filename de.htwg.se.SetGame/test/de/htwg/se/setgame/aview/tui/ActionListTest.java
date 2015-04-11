@@ -25,6 +25,7 @@ public class ActionListTest {
         assertEntry(NewAction.CMD);
         assertEntry(SolutionAction.CMD);
         assertEntry(SolveAction.CMD);
+        assertEntry(CloseAction.CMD);
     }
 
     private void assertEntry(String command) {
