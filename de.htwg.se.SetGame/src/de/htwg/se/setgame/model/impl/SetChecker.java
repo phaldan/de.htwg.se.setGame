@@ -16,10 +16,24 @@ public class SetChecker {
      * @return Returns true, when all three cards are together a valid set.
      */
     public static boolean isSet(ICard one, ICard two, ICard three) {
-        return compare(one.getColor(), two.getColor(), three.getColor())
-                && compare(one.getForm(), two.getForm(), three.getForm())
-                && compare(one.getPanelFilling(), two.getPanelFilling(), three.getPanelFilling())
-                && compare(one.getNumberOfComponents(), two.getNumberOfComponents(), three.getNumberOfComponents());
+        return compareColor(one, two, three) && compareForm(one, two, three)
+                && compareFill(one, two, three) && compareCount(one, two, three);
+    }
+
+    private static boolean compareColor(ICard one, ICard two, ICard three) {
+        return compare(one.getColor(), two.getColor(), three.getColor());
+    }
+
+    private static boolean compareForm(ICard one, ICard two, ICard three) {
+        return compare(one.getForm(), two.getForm(), three.getForm());
+    }
+
+    private static boolean compareFill(ICard one, ICard two, ICard three) {
+        return compare(one.getPanelFilling(), two.getPanelFilling(), three.getPanelFilling());
+    }
+
+    private static boolean compareCount(ICard one, ICard two, ICard three) {
+        return compare(one.getNumberOfComponents(), two.getNumberOfComponents(), three.getNumberOfComponents());
     }
 
     private static boolean compare(Object one, Object two, Object three) {
