@@ -15,7 +15,7 @@ import de.htwg.se.setgame.util.observer.IObserver;
  */
 public class TextUI implements IObserver {
 
-    public static final String MESSAGE_WELCOME = "Welcome to SetGame!!!!\nWell it is not that hard to play ;)\nIf you found a set please write : set PlayerOne (or PlayerTwo) and the number of the fields 1 2 3 (0-11)\nif you want to solve the set with out knowing just write solve\nHave fun!!! if you want to finish the game please write exit";
+    public static final String MESSAGE_WELCOME = "Welcome to SetGame!!!!\nWell it is not that hard to play ;)\nIf you found a set please write : set PlayerOne (or PlayerTwo) and the number of the fields 1 2 3 (0-11)\nHave fun!!! if you want to finish the game please write exit";
 
     private IController controller;
 	private ActionList actions;
@@ -107,8 +107,6 @@ public class TextUI implements IObserver {
 		} else if (splintWords[index].compareTo("exit") == ZERO) {
 			cont = false;
 		}
-		proveSomeStringsFromMet(splintWords[index]);
-
 		return cont;
 
 	}
@@ -156,28 +154,5 @@ public class TextUI implements IObserver {
 		builder.append(": ");
 		builder.append(action.getDescription());
 		builder.append("\n");
-	}
-
-	private void solve() {
-		if (this.controller.getSetInField().size() >= THREE) {
-			logger.info("solved" + this.controller.getSetInField().toString()
-					+ newLine
-					+ controller.getField().getCardsInField().size());
-			this.controller.isASetForController(this.controller.getSetInField()
-							.get(ZERO), this.controller.getSetInField().get(ONE),
-					this.controller.getSetInField().get(TWO), THREE);
-			printTUI();
-		} else {
-			logger.info("number of cards = "
-					+ controller.getField().getCardsInField().size());
-			printTUI();
-
-		}
-	}
-
-	private void proveSomeStringsFromMet(String string) {
-		if (string.compareTo("solve") == ZERO) {
-			solve();
-		}
 	}
 }
