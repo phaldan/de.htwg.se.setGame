@@ -18,28 +18,24 @@ public final class SetGame {
 	private IController controller;
 	private static SetGame instance = null;
 
-	public static SetGame getInstance(){
+	public static SetGame getInstance() throws IOException {
 		return getInstance(true);
 	}
 
-	public static SetGame getInstance(boolean activateGui){
+	public static SetGame getInstance(boolean activateGui) throws IOException {
 		return (instance == null) ? instance = new SetGame(activateGui): instance;
 	}
 
-    private SetGame(boolean activateGui){
+    private SetGame(boolean activateGui) throws IOException {
         initLogger();
         initDependencyInjector();
         initUserInterface(activateGui);
     }
 
-    private void initLogger() {
-        try {
-            Properties props = new Properties();
-            props.load(getClass().getResourceAsStream("/log4j.properties"));
-            PropertyConfigurator.configure(props);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private void initLogger() throws IOException {
+		Properties props = new Properties();
+		props.load(getClass().getResourceAsStream("/log4j.properties"));
+		PropertyConfigurator.configure(props);
     }
 
     private void initDependencyInjector() {
@@ -63,7 +59,7 @@ public final class SetGame {
 		return tui;
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		SetGame.getInstance();
 		boolean cont = true;
 		scanner = new Scanner(System.in);
