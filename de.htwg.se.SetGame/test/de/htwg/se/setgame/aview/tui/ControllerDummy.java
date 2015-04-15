@@ -70,11 +70,6 @@ public class ControllerDummy extends Observable implements IController {
     }
 
     @Override
-    public List<ICard> getCardInFieldGame() {
-        return null;
-    }
-
-    @Override
     public Map<Integer, ICard> getCardsAndTheIndexOfCardInField() {
         return null;
     }

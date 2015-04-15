@@ -73,11 +73,6 @@ public interface IController extends IObservable {
 	void setFieldSize(int size);
 
 	/**
-	 * @return cards in field
-	 */
-	List<ICard> getCardInFieldGame();
-
-	/**
 	 * @return index and card in the index
 	 */
 	Map<Integer, ICard> getCardsAndTheIndexOfCardInField();
