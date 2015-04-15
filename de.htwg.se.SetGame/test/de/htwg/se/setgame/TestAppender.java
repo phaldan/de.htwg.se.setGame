@@ -2,6 +2,7 @@ package de.htwg.se.setgame;
 
 import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.spi.LoggingEvent;
+import org.junit.Ignore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
 /**
  * @author Philipp Daniels
  */
+@Ignore
 public class TestAppender extends AppenderSkeleton {
 
     private final List<LoggingEvent> log = new ArrayList<>();
