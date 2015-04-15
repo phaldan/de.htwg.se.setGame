@@ -23,7 +23,12 @@ public final class SetGame {
 	}
 
 	public static SetGame getInstance(boolean activateGui) throws IOException {
-		return (instance == null) ? instance = new SetGame(activateGui): instance;
+		return (instance == null) ? createInstance(activateGui): instance;
+	}
+
+	private static SetGame createInstance(boolean activateGui) throws IOException {
+		instance = new SetGame(activateGui);
+		return instance;
 	}
 
     private SetGame(boolean activateGui) throws IOException {
