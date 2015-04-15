@@ -13,7 +13,9 @@ public class PlayerTest {
 
     @Before
     public void setUp() {
-        target = new Player(1337, "name");
+        target = new Player();
+        target.setName("name");
+        target.setId(1337);
     }
 
     @Test

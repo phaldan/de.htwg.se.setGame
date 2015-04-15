@@ -11,15 +11,6 @@ public class Player implements IPlayer {
     private String name;
     private int score = 0;
 
-    /**
-     * @param id Player id.
-     * @param name Player name.
-     */
-    public Player(int id, String name) {
-        setId(id);
-        setName(name);
-    }
-
     @Override
     public int getId() {
         return id;
