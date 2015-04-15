@@ -27,8 +27,8 @@ public class SetController extends Observable implements IController {
 	private IField field;
 	private IPack pack;
 	private static final int NUMBER_OF_SET_CARDS = 3;
-	private static final int playerOne = 1;
-	private static final int playerTwo = 2;
+	private static final int PLAYER_ONE = 1;
+	private static final int PLAYER_TWO = 2;
 	private int playerOneCounter;
 	private int playerTwoCounter;
 	private IPackDAO packDAO;
@@ -157,13 +157,13 @@ public class SetController extends Observable implements IController {
 	public void isASetForController(ICard cardOne, ICard cardTwo,
 									ICard cardThree, int player) {
 		if (isASet(cardOne, cardTwo, cardThree)) {
-			if (SetController.playerOne == player) {
+			if (SetController.PLAYER_ONE == player) {
 				this.playerOneCounter = this.playerOneCounter + 1;
-			} else if (SetController.playerTwo == player) {
+			} else if (SetController.PLAYER_TWO == player) {
 				this.playerTwoCounter = this.playerTwoCounter + 1;
 
 			}
-			if (playerOne == player || player == SetController.playerTwo || player >= 0) {
+			if (PLAYER_ONE == player || player == SetController.PLAYER_TWO || player >= 0) {
 				notifyObservers();
 			}
 		}
@@ -196,12 +196,12 @@ public class SetController extends Observable implements IController {
 
 	@Override
 	public int getPlayerOne() {
-		return SetController.playerOne;
+		return SetController.PLAYER_ONE;
 	}
 
 	@Override
 	public int getPlayerTwo() {
-		return SetController.playerTwo;
+		return SetController.PLAYER_TWO;
 	}
 
 	@Override
