@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.htwg.se.SetGame</groupId>
-	<artifactId>de.htwg.se.SetGame</artifactId>
+	<artifactId>de.htwg.se.SetGame2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>SE2013WS-03-SET2</name>
 	<build>
