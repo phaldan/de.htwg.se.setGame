@@ -11,6 +11,9 @@ public class CloseAction extends Action {
     public static final String DESC = "If you want to finish the game.";
     public static final String OUTPUT = "Finish game.";
 
+    /**
+     * @param controller Instance of IController
+     */
     public CloseAction(IController controller) {
         super(controller);
     }

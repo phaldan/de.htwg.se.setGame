@@ -11,6 +11,9 @@ public class HelpAction extends Action {
     public static final String DESC = "If you need a tip";
     public static final String OUTPUT = "A tip your set begins with %s";
 
+    /**
+     * @param controller Instance of IController
+     */
     public HelpAction(IController controller) {
         super(controller);
     }

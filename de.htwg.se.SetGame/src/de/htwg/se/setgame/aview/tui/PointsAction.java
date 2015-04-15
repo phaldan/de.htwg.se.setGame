@@ -11,6 +11,9 @@ public class PointsAction extends Action {
     public static final String DESC = "If you want to know the game point";
     public static final String OUTPUT = "Player one = %s%nPlayer Two = %s%n";
 
+    /**
+     * @param controller Instance of IController
+     */
     public PointsAction(IController controller) {
         super(controller);
     }

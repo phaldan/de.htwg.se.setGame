@@ -13,6 +13,9 @@ public abstract class Action {
         this.controller = controller;
     }
 
+    /**
+     * @return Return instance of IController
+     */
     protected IController getController() {
         return controller;
     }

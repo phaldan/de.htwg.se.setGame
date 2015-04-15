@@ -24,6 +24,9 @@ public class SetAction extends Action {
     public static final int FIELD2 = 3;
     public static final int FIELD3 = 4;
 
+    /**
+     * @param controller Instance of IController
+     */
     public SetAction(IController controller) {
         super(controller);
     }

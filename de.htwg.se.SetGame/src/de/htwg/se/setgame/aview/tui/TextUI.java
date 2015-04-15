@@ -44,6 +44,10 @@ public class TextUI implements IObserver {
 		this(controller, new ActionList(controller));
 	}
 
+	/**
+	 * @param controller Instance of IController
+	 * @param actions Instance of ActionList
+	 */
 	public TextUI(IController controller, ActionList actions) {
 		this.controller = controller;
 		this.actions = actions;

@@ -11,6 +11,9 @@ public class NewAction extends Action {
     public static final String DESC = "For a newGame.";
     public static final String OUTPUT = "Create a new a game instance.";
 
+    /**
+     * @param controller Instance of IController
+     */
     public NewAction(IController controller) {
         super(controller);
     }

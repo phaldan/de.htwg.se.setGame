@@ -14,6 +14,9 @@ public class ActionList {
 
     private Map<String, Action> map = new TreeMap<>();
 
+    /**
+     * @param controller Instance of IController
+     */
     public ActionList(IController controller) {
         add(new HelpAction(controller));
         add(new PointsAction(controller));
@@ -29,10 +32,17 @@ public class ActionList {
         map.put(action.getCommand(), action);
     }
 
+    /**
+     * @param command Identifier of an Action implementation
+     * @return Returns instance of Action
+     */
     public Action get(String command) {
         return map.get(command);
     }
 
+    /**
+     * @return Returns List with all Action implementations
+     */
     public List<Action> getAll() {
         return new LinkedList<>(map.values());
     }

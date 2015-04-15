@@ -19,6 +19,9 @@ public class SolveAction extends Action {
     public static final int SECOND = 1;
     public static final int THIRD = 2;
 
+    /**
+     * @param controller Instance of IController
+     */
     public SolveAction(IController controller) {
         super(controller);
     }

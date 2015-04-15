@@ -15,6 +15,9 @@ public class SolutionAction extends Action {
     public static final String OUTPUT = "SOLUTION:\n";
     public static final String FORMAT = "%d: %s%n";
 
+    /**
+     * @param controller Instance of IController
+     */
     public SolutionAction(IController controller) {
         super(controller);
     }

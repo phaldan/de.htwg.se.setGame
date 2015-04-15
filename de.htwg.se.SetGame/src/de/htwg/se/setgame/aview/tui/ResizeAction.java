@@ -12,6 +12,9 @@ public class ResizeAction extends Action {
     public static final String OUTPUT = "Resize field to %s";
     public static final int INDEX = 1;
 
+    /**
+     * @param controller Instance of IController
+     */
     public ResizeAction(IController controller) {
         super(controller);
     }
