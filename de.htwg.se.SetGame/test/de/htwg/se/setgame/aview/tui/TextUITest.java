@@ -26,6 +26,7 @@ public class TextUITest {
     private int player2;
     private Action action;
     private boolean actionExecute;
+    private List<Action> actions;
 
     private class Controller extends ControllerDummy {
 
@@ -54,7 +55,7 @@ public class TextUITest {
 
         @Override
         public List<Action> getAll() {
-            return new LinkedList<>();
+            return actions;
         }
 
         @Override
@@ -65,13 +66,20 @@ public class TextUITest {
 
     private class ActionDummy extends Action {
 
+        private String commandStub;
+
         public ActionDummy() {
             super(new ControllerDummy());
         }
 
+        public ActionDummy(String command) {
+            super(new ControllerDummy());
+            commandStub = command;
+        }
+
         @Override
         public String getCommand() {
-            return null;
+            return commandStub;
         }
 
         @Override
@@ -95,6 +103,7 @@ public class TextUITest {
         player1 = 0;
         player2 = 0;
         actionExecute = false;
+        actions = new LinkedList<>();
 
         testAppender = new TestAppender();
         Logger.getRootLogger().removeAllAppenders();
@@ -105,12 +114,14 @@ public class TextUITest {
     public void printTUI_success() {
         ICard card = new CardDummy();
         cards.put(0, card);
+        actions.add(new ActionDummy("action"));
 
         target.printTUI();
 
         String result = testAppender.getLog();
         assertFalse(result.isEmpty());
         assertTrue(result.contains(card.toString()));
+        assertTrue(result.contains("action"));
     }
 
     @Test
