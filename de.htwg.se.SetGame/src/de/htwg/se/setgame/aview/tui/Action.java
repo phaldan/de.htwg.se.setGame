@@ -7,7 +7,7 @@ import de.htwg.se.setgame.controller.IController;
  */
 public abstract class Action {
 
-    protected IController controller;
+    private IController controller;
 
     public Action(IController controller) {
         this.controller = controller;

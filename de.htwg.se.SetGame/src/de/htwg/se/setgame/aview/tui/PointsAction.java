@@ -27,6 +27,6 @@ public class PointsAction extends Action {
 
     @Override
     public String execute(String[] input) {
-        return String.format(PointsAction.OUTPUT, controller.getPlayerOnePoints(), controller.getPlayerTwoPoints());
+        return String.format(PointsAction.OUTPUT, getController().getPlayerOnePoints(), getController().getPlayerTwoPoints());
     }
 }
