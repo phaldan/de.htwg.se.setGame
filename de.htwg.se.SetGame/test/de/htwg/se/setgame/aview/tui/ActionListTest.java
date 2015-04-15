@@ -2,6 +2,7 @@ package de.htwg.se.setgame.aview.tui;
 
 import static org.junit.Assert.*;
 
+import de.htwg.se.setgame.aview.tui.action.*;
 import org.junit.Before;
 import org.junit.Test;
 
