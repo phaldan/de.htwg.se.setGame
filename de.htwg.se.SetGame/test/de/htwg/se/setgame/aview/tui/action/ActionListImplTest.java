@@ -9,13 +9,13 @@ import org.junit.Test;
 /**
  * @author Philipp Daniels
  */
-public class ActionListTest {
+public class ActionListImplTest {
 
-    private ActionList target;
+    private ActionListImpl target;
 
     @Before
     public void setUp() {
-        target = new ActionList(new ControllerDummy());
+        target = new ActionListImpl(new ControllerDummy());
     }
 
     @Test
@@ -32,15 +32,5 @@ public class ActionListTest {
 
     private void assertEntry(String command) {
         assertNotNull(target.get(command));
-    }
-
-    @Test
-    public void get_fail() {
-        assertNull(target.get("test"));
-    }
-
-    @Test
-    public void getAll_success() {
-        assertNotNull(target.getAll());
     }
 }

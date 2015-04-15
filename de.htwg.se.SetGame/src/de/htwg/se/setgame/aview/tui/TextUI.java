@@ -1,6 +1,6 @@
 package de.htwg.se.setgame.aview.tui;
 
-import de.htwg.se.setgame.aview.tui.action.ActionList;
+import de.htwg.se.setgame.aview.tui.action.ActionListImpl;
 import de.htwg.se.setgame.model.ICard;
 import org.apache.log4j.Logger;
 
@@ -42,12 +42,12 @@ public class TextUI implements IObserver {
 	 */
 	@Inject
 	public TextUI(IController controller) {
-		this(controller, new ActionList(controller));
+		this(controller, new ActionListImpl(controller));
 	}
 
 	/**
 	 * @param controller Instance of IController
-	 * @param actions Instance of ActionList
+	 * @param actions Instance of ActionListImpl
 	 */
 	public TextUI(IController controller, ActionList actions) {
 		this.controller = controller;

@@ -3,7 +3,6 @@ package de.htwg.se.setgame.aview.tui;
 import static org.junit.Assert.*;
 
 import de.htwg.se.setgame.TestAppender;
-import de.htwg.se.setgame.aview.tui.action.ActionList;
 import de.htwg.se.setgame.model.ICard;
 import org.apache.log4j.Logger;
 import org.junit.Before;
@@ -58,10 +57,6 @@ public class TextUITest {
     }
 
     private class ActionListStub extends ActionList {
-
-        public ActionListStub() {
-            super(new ControllerDummy());
-        }
 
         @Override
         public List<Action> getAll() {
