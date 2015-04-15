@@ -1,5 +1,8 @@
 package de.htwg.se.setgame.model;
 
+/**
+ * @author Philipp
+ */
 public interface ICard {
 
     /**
