@@ -7,6 +7,9 @@ import de.htwg.se.setgame.model.ModelFactory;
 import de.htwg.se.setgame.model.impl.ModelFactoryImpl;
 import de.htwg.se.setgame.persistence.IPackDAO;
 
+/**
+ * @author Philipp
+ */
 public class SetGameModule extends AbstractModule {
 
 	@Override

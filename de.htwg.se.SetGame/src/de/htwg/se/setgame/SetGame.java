@@ -12,16 +12,28 @@ import de.htwg.se.setgame.aview.gui.GUI;
 import de.htwg.se.setgame.aview.tui.TextUI;
 import de.htwg.se.setgame.controller.IController;
 
+/**
+ * @author Philipp
+ */
 public final class SetGame {
 	private static Scanner scanner;
 	private static TextUI tui;
 	private IController controller;
 	private static SetGame instance = null;
 
+	/**
+	 * @return Instance of SetGame
+	 * @throws IOException
+	 */
 	public static SetGame getInstance() throws IOException {
 		return getInstance(true);
 	}
 
+	/**
+	 * @param activateGui Flag to disable GUI
+	 * @return Instance of SetGame
+	 * @throws IOException
+	 */
 	public static SetGame getInstance(boolean activateGui) throws IOException {
 		return (instance == null) ? createInstance(activateGui): instance;
 	}
@@ -56,14 +68,18 @@ public final class SetGame {
         tui = new TextUI(controller);
 		tui.printTUI();
     }
+
+	/**
+	 * @return Return instance IController
+	 */
 	public IController getIController(){
 		return controller;
 	}
 
-	public TextUI getTextUI(){
-		return tui;
-	}
-
+	/**
+	 * @param args Command line parameter
+	 * @throws IOException
+	 */
 	public static void main(String[] args) throws IOException {
 		SetGame.getInstance();
 		boolean cont = true;
