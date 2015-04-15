@@ -1,6 +1,6 @@
-package de.htwg.se.setgame.aview.tui;
+package de.htwg.se.setgame.aview.tui.action;
 
-import de.htwg.se.setgame.aview.tui.action.*;
+import de.htwg.se.setgame.aview.tui.Action;
 import de.htwg.se.setgame.controller.IController;
 
 import java.util.LinkedList;
