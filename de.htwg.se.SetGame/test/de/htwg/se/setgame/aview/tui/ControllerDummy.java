@@ -30,11 +30,6 @@ public class ControllerDummy extends Observable implements IController {
     }
 
     @Override
-    public List<ICard> getASetInGame() {
-        return null;
-    }
-
-    @Override
     public boolean stillSetInGame() {
         return false;
     }

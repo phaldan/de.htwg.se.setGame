@@ -33,11 +33,6 @@ public interface IController extends IObservable {
 	IField getField();
 
 	/**
-	 * @return return a set
-	 */
-	List<ICard> getASetInGame();
-
-	/**
 	 * @return look trough the pack and see if still a set
 	 */
 	boolean stillSetInGame();

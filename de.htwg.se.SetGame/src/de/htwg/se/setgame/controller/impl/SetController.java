@@ -15,8 +15,6 @@ import de.htwg.se.setgame.model.IPack;
 import de.htwg.se.setgame.model.ModelFactory;
 import de.htwg.se.setgame.util.observer.Observable;
 
-
-
 /**
  * @author raina
  */
@@ -167,13 +165,8 @@ public class SetController extends Observable implements IController {
 	}
 
 	@Override
-	public List<ICard> getASetInGame() {
-		return getSet(this.field.getCardsInField());
-	}
-
-	@Override
 	public boolean stillSetInGame() {
-		return !field.getUnusedCards().isEmpty();
+		return !getSetInField().isEmpty();
 	}
 
 	@Override
