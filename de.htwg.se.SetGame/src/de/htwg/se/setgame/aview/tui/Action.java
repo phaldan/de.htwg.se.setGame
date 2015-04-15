@@ -9,6 +9,9 @@ public abstract class Action {
 
     private IController controller;
 
+    /**
+     * @param controller Instance of IController
+     */
     public Action(IController controller) {
         this.controller = controller;
     }
