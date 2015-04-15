@@ -520,7 +520,7 @@ public class GameField extends JPanel implements ActionListener {
 	}
 	 
 	public static void saveUrlFor(String card) {
-		for (ICard key : GUI.getController().getField().getCardsInField()) {
+		for (ICard key : GUI.getController().getCardsAndTheIndexOfCardInField().values()) {
 			if (card.equals(key.toString())) {
 				urlListe.add(cardToPicture.get(cardkey));
 				saveList.add(key);
