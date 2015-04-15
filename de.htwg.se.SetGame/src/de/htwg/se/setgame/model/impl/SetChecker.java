@@ -37,8 +37,15 @@ public class SetChecker {
     }
 
     private static boolean compare(Object one, Object two, Object three) {
-        return one.equals(two) && one.equals(three) && two.equals(three)
-                || !one.equals(two) && !one.equals(three) && !two.equals(three);
+        return isAllSame(one, two, three) || isAllDifferent(one, two, three);
+    }
+
+    private static boolean isAllSame(Object one, Object two, Object three) {
+        return one.equals(two) && one.equals(three) && two.equals(three);
+    }
+
+    private static boolean isAllDifferent(Object one, Object two, Object three) {
+        return !one.equals(two) && !one.equals(three) && !two.equals(three);
     }
 
     private List<ICard> cards;
