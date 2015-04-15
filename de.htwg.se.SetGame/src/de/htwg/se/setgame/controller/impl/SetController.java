@@ -139,11 +139,6 @@ public class SetController extends Observable implements IController {
 	}
 
 	@Override
-	public List<ICard> getCardinGame() {
-		return this.field.getCardsInField();
-	}
-
-	@Override
 	public IField getField() {
 		return this.field;
 	}

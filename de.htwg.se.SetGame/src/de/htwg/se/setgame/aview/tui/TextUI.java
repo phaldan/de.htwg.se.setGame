@@ -55,7 +55,7 @@ public class TextUI implements IObserver {
 	 * @return Returns true, when the game has not finished.
 	 */
 	public boolean processInputLine(String line) {
-		if (!controller.stillSetInGame() || controller.getCardinGame().isEmpty()) {
+		if (!controller.stillSetInGame()) {
 			lastMessage();
 			return false;
 		}

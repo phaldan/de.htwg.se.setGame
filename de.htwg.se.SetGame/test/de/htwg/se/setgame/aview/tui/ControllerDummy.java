@@ -19,11 +19,6 @@ public class ControllerDummy extends Observable implements IController {
     }
 
     @Override
-    public List<ICard> getCardinGame() {
-        return null;
-    }
-
-    @Override
     public IField getField() {
         return null;
     }

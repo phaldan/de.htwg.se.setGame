@@ -23,11 +23,6 @@ public interface IController extends IObservable {
 	void isASetForController(ICard cardOne, ICard cardTwo, ICard cardThree, int player);
 
 	/**
-	 * @return card in game
-	 */
-	List<ICard> getCardinGame();
-
-	/**
 	 * @return field
 	 */
 	IField getField();

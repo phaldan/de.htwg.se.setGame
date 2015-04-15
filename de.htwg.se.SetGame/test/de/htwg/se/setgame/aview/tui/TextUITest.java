@@ -22,7 +22,6 @@ public class TextUITest {
     private TextUI target;
     private Map<Integer, ICard> cards;
     private boolean setInGame;
-    private List<ICard> cardinGame;
     private int player1;
     private int player2;
     private Action action;
@@ -38,11 +37,6 @@ public class TextUITest {
         @Override
         public boolean stillSetInGame() {
             return setInGame;
-        }
-
-        @Override
-        public List<ICard> getCardinGame() {
-            return cardinGame;
         }
 
         @Override
@@ -98,7 +92,6 @@ public class TextUITest {
 
         cards = new TreeMap<>();
         setInGame = false;
-        cardinGame = new LinkedList<>();
         player1 = 0;
         player2 = 0;
         actionExecute = false;
@@ -134,12 +127,6 @@ public class TextUITest {
     }
 
     @Test
-    public void processInputLine_failNobodyWinsNoCards() {
-        setInGame = true;
-        assertWinner(TextUI.WINNER_NOBODY);
-    }
-
-    @Test
     public void processInputLine_failPlayerWins() {
         player1 = 1;
         assertWinner(TextUI.WINNER_PLAYER1);
@@ -164,7 +151,6 @@ public class TextUITest {
     @Test
     public void processInputLine_failInvalidAction() {
         setInGame = true;
-        cardinGame.add(new CardDummy());
 
         assertTrue(target.processInputLine("test"));
         assertTrue(testAppender.getLog().contains(TextUI.INVALID_ACTION));
@@ -173,7 +159,6 @@ public class TextUITest {
     @Test
     public void processInputLine_success() {
         setInGame = true;
-        cardinGame.add(new CardDummy());
         action = new ActionDummy();
 
         assertTrue(target.processInputLine("test"));
