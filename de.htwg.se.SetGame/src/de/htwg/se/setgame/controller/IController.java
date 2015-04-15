@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import de.htwg.se.setgame.model.ICard;
-import de.htwg.se.setgame.model.IPack;
 import de.htwg.se.setgame.util.observer.IObservable;
 
 /**

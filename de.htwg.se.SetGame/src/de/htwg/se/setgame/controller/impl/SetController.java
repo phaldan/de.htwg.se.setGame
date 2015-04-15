@@ -11,7 +11,6 @@ import com.google.inject.Inject;
 import de.htwg.se.setgame.controller.IController;
 import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.model.IField;
-import de.htwg.se.setgame.model.IPack;
 import de.htwg.se.setgame.model.ModelFactory;
 import de.htwg.se.setgame.util.observer.Observable;
 
@@ -22,7 +21,6 @@ public class SetController extends Observable implements IController {
 
 	private ModelFactory factory;
 	private IField field;
-	private IPack pack;
 	private static final int NUMBER_OF_SET_CARDS = 3;
 	private static final int PLAYER_ONE = 1;
 	private static final int PLAYER_TWO = 2;
@@ -35,7 +33,6 @@ public class SetController extends Observable implements IController {
 	@Inject
 	public SetController(ModelFactory factory) {
 		this.factory = factory;
-		pack = factory.createPack();
 		reset();
 	}
 
