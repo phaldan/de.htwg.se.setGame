@@ -90,11 +90,6 @@ public class ControllerDummy extends Observable implements IController {
     }
 
     @Override
-    public void loadFromDB(String name) {
-
-    }
-
-    @Override
     public ICard getFirstInSet() {
         return null;
     }

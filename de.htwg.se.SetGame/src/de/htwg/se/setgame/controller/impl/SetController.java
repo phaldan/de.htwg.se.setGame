@@ -13,7 +13,6 @@ import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.model.IField;
 import de.htwg.se.setgame.model.IPack;
 import de.htwg.se.setgame.model.ModelFactory;
-import de.htwg.se.setgame.persistence.IPackDAO;
 import de.htwg.se.setgame.util.observer.Observable;
 
 
@@ -31,16 +30,14 @@ public class SetController extends Observable implements IController {
 	private static final int PLAYER_TWO = 2;
 	private int playerOneCounter;
 	private int playerTwoCounter;
-	private IPackDAO packDAO;
 
 	/**
 	 * Logic Construct make for the game a new field with a new pack!!!
 	 */
 	@Inject
-	public SetController(ModelFactory factory, IPackDAO packDAO) {
+	public SetController(ModelFactory factory) {
 		this.factory = factory;
 		pack = factory.createPack();
-		this.packDAO = packDAO;
 		reset();
 	}
 
@@ -221,11 +218,6 @@ public class SetController extends Observable implements IController {
 	@Override
 	public IPack getPack() {
 		return pack;
-	}
-
-	@Override
-	public void loadFromDB(String name) {
-		this.pack = packDAO.readFirstPack();
 	}
 
 	@Override

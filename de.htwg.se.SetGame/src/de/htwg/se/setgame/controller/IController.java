@@ -94,11 +94,6 @@ public interface IController extends IObservable {
 	IPack getPack();
 
 	/**
-	 * @return Pack from DB
-	 */
-	void loadFromDB(String name);
-
-	/**
 	 * @return Get first ICard of valid set.
 	 */
 	ICard getFirstInSet();
