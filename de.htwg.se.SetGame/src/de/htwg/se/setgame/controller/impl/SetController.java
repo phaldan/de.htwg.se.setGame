@@ -41,15 +41,19 @@ public class SetController extends Observable implements IController {
 		this.factory = factory;
 		pack = factory.createPack();
 		this.packDAO = packDAO;
-		newGame();
+		reset();
 	}
 
-	@Override
-	public void newGame() {
+	private void reset() {
 		field = factory.createField();
 		playerOneCounter = 0;
 		playerTwoCounter = 0;
 		notifyObservers();
+	}
+
+	@Override
+	public void newGame() {
+		reset();
 	}
 
 	private boolean isASet(ICard cardOne, ICard cardTwo, ICard cardThree) {
