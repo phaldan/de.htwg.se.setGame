@@ -4,7 +4,6 @@ import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.model.IPack;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**

@@ -1,12 +1,11 @@
 package de.htwg.se.setgame.persistence;
 
-import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.model.IPack;
 
 import java.util.List;
 
 /**
- * Created by Pavan on 09.04.2015.
+ * @author Pavan
  */
 public interface IPackDAO {
 
