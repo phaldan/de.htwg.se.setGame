@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.Scanner;
 
+import de.htwg.se.setgame.aview.tui.action.ActionListImpl;
 import org.apache.log4j.PropertyConfigurator;
 
 import com.google.inject.Guice;
@@ -65,7 +66,7 @@ public final class SetGame {
 			new GUI(controller);
 		}
 
-        tui = new TextUI(controller);
+        tui = new TextUI(controller, new ActionListImpl(controller));
 		tui.printTUI();
     }
 

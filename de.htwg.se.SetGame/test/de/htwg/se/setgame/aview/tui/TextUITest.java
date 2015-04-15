@@ -113,7 +113,6 @@ public class TextUITest {
         ICard card = new CardDummy();
         cards.put(0, card);
 
-        target = new TextUI(new Controller());
         target.printTUI();
 
         String result = testAppender.getLog();

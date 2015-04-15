@@ -1,10 +1,7 @@
 package de.htwg.se.setgame.aview.tui;
 
-import de.htwg.se.setgame.aview.tui.action.ActionListImpl;
 import de.htwg.se.setgame.model.ICard;
 import org.apache.log4j.Logger;
-
-import com.google.inject.Inject;
 
 import de.htwg.se.setgame.controller.IController;
 import de.htwg.se.setgame.util.observer.Event;
@@ -36,14 +33,6 @@ public class TextUI implements IObserver {
 	private ActionList actions;
 	private boolean cont = true;
 	private static final Logger LOGGER = Logger.getLogger("de.htwg.se.setgame.aview.tui");
-
-	/**
-	 * @param controller Instance of IController
-	 */
-	@Inject
-	public TextUI(IController controller) {
-		this(controller, new ActionListImpl(controller));
-	}
 
 	/**
 	 * @param controller Instance of IController
