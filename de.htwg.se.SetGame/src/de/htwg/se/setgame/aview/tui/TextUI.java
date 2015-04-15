@@ -34,7 +34,7 @@ public class TextUI implements IObserver {
     private IController controller;
 	private ActionList actions;
 	private boolean cont = true;
-	private static final Logger logger = Logger.getLogger("de.htwg.se.setgame.aview.tui");
+	private static final Logger LOGGER = Logger.getLogger("de.htwg.se.setgame.aview.tui");
 
 	/**
 	 * @param controller Instance of IController
@@ -69,29 +69,33 @@ public class TextUI implements IObserver {
 		return cont;
 	}
 
+	private void output(String message) {
+		LOGGER.info(message);
+	}
+
 	private void lastMessage() {
-		logger.info(GAME_FINISH);
-		logger.info(String.format(PLAYER_POINTS, controller.getPlayerOnePoints(), controller.getPlayerTwoPoints()));
+		output(GAME_FINISH);
+		output(String.format(PLAYER_POINTS, controller.getPlayerOnePoints(), controller.getPlayerTwoPoints()));
 		if (controller.getPlayerTwoPoints() < controller.getPlayerOnePoints()) {
-			logger.info(WINNER_PLAYER1);
+			output(WINNER_PLAYER1);
 		} else if (controller.getPlayerTwoPoints() > controller.getPlayerOnePoints()) {
-			logger.info(WINNER_PLAYER2);
+			output(WINNER_PLAYER2);
 		} else {
-			logger.info(WINNER_NOBODY);
+			output(WINNER_NOBODY);
 		}
 	}
 
 	private void executeAction(String[] inputArray) {
 		LinkedList<String> list = new LinkedList<>(Arrays.asList(inputArray));
 		Action action = actions.get(list.peekFirst());
-		logger.info((action == null) ? INVALID_ACTION : action.execute(inputArray));
+		output((action == null) ? INVALID_ACTION : action.execute(inputArray));
 	}
 
 	/**
 	 * Print
 	 */
 	public void printTUI() {
-		logger.info(MESSAGE_WELCOME);
+		output(MESSAGE_WELCOME);
 		printMenu();
 		printField();
 	}
@@ -101,7 +105,7 @@ public class TextUI implements IObserver {
 		for (Action action: actions.getAll()) {
 			builder.append(String.format(MENU, action.getCommand(), action.getDescription()));
 		}
-		logger.info(builder.toString());
+		output(builder.toString());
 	}
 
 	private void printField() {
@@ -109,6 +113,6 @@ public class TextUI implements IObserver {
 		for (Map.Entry<Integer, ICard> entry: controller.getCardsAndTheIndexOfCardInField().entrySet()) {
 			builder.append(String.format(FIELD, entry.getKey(), entry.getValue()));
 		}
-		logger.info(builder.toString());
+		output(builder.toString());
 	}
 }
