@@ -4,7 +4,7 @@
 	<groupId>de.htwg.se.SetGame</groupId>
 	<artifactId>de.htwg.se.SetGame</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>SE2013WS-03-SET</name>
+	<name>SE2013WS-03-SET2</name>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<testSourceDirectory>test</testSourceDirectory>
