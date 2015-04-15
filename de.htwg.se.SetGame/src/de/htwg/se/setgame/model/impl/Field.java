@@ -25,7 +25,8 @@ public class Field implements IField {
      */
     public Field(IPack pack, int size) {
         unusedCards = new LinkedList<>(pack.getPack());
-        setSize(size);
+        this.size = size;
+        resize();
     }
 
     @Override
@@ -56,9 +57,13 @@ public class Field implements IField {
     public void setSize(int size) {
         if (size >= MIN_SIZE && size <= unusedCards.size()) {
             this.size = size;
-            restock();
-            reduce();
+            resize();
         }
+    }
+
+    private void resize() {
+        restock();
+        reduce();
     }
 
     private void restock() {
