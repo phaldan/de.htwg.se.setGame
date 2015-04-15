@@ -139,11 +139,6 @@ public class SetController extends Observable implements IController {
 	}
 
 	@Override
-	public IField getField() {
-		return this.field;
-	}
-
-	@Override
 	public void isASetForController(ICard cardOne, ICard cardTwo,
 									ICard cardThree, int player) {
 		if (isASet(cardOne, cardTwo, cardThree)) {

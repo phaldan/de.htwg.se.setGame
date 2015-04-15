@@ -2,7 +2,6 @@ package de.htwg.se.setgame.aview.tui;
 
 import de.htwg.se.setgame.controller.IController;
 import de.htwg.se.setgame.model.ICard;
-import de.htwg.se.setgame.model.IField;
 import de.htwg.se.setgame.util.observer.Observable;
 
 import java.util.List;
@@ -16,11 +15,6 @@ public class ControllerDummy extends Observable implements IController {
     @Override
     public void isASetForController(ICard cardOne, ICard cardTwo, ICard cardThree, int player) {
 
-    }
-
-    @Override
-    public IField getField() {
-        return null;
     }
 
     @Override

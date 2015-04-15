@@ -5,12 +5,10 @@ import java.util.Map;
 
 import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.model.IPack;
-import de.htwg.se.setgame.model.IField;
 import de.htwg.se.setgame.util.observer.IObservable;
 
 /**
  * @author raina
- *
  */
 public interface IController extends IObservable {
 
@@ -21,11 +19,6 @@ public interface IController extends IObservable {
 	 * @param player which player is
 	 */
 	void isASetForController(ICard cardOne, ICard cardTwo, ICard cardThree, int player);
-
-	/**
-	 * @return field
-	 */
-	IField getField();
 
 	/**
 	 * @return look trough the pack and see if still a set
@@ -58,7 +51,7 @@ public interface IController extends IObservable {
 	int getPlayerTwo();
 
 	/**
-	 * 	reset game
+	 * Reset game
 	 */
 	void newGame();
 
