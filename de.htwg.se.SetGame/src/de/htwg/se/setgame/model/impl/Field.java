@@ -16,8 +16,8 @@ public class Field implements IField {
     public static final int MIN_SIZE = 3;
 
     private int size = 0;
-    private LinkedList<ICard> unusedCards;
-    private LinkedList<ICard> cards = new LinkedList<>();
+    private List<ICard> unusedCards;
+    private List<ICard> cards = new LinkedList<>();
     private SetChecker checker = new SetChecker();
 
     /**
@@ -102,7 +102,8 @@ public class Field implements IField {
     }
 
     private void removeCard() {
-        unusedCards.add(cards.poll());
+        ICard c = cards.remove(0);
+        unusedCards.add(c);
     }
 
     @Override
