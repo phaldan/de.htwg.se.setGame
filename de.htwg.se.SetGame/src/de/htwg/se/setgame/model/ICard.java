@@ -34,4 +34,23 @@ public interface ICard {
      */
     boolean compareTo(ICard card);
 
+    /**
+     * @param color set the color of a card
+     */
+    void setColor(String color);
+
+    /**
+     * @param form set form of card
+     */
+    void setForm(String form);
+
+    /**
+     * @param panelFilling set filling of card
+     */
+    void setPanelFilling(String panelFilling);
+
+    /**
+     * @param numberOfComponents set count of card
+     */
+    void setNumberOfComponents(int numberOfComponents);
 }

@@ -14,7 +14,12 @@ public class CardTest {
     }
 
     private Card getInstance() {
-        return new Card(Card.COLOR_1, Card.FORM_1, Card.FILL_1, Card.COUNT_1);
+        Card c = new Card();
+        c.setColor(Card.COLOR_1);
+        c.setForm(Card.FORM_1);
+        c.setPanelFilling(Card.FILL_1);
+        c.setNumberOfComponents(Card.COUNT_1);
+        return c;
     }
 
     @Test

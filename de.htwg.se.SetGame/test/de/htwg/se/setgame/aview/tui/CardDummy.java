@@ -30,4 +30,24 @@ public class CardDummy implements ICard {
     public boolean compareTo(ICard card) {
         return false;
     }
+
+    @Override
+    public void setColor(String color) {
+
+    }
+
+    @Override
+    public void setForm(String form) {
+
+    }
+
+    @Override
+    public void setPanelFilling(String panelFilling) {
+
+    }
+
+    @Override
+    public void setNumberOfComponents(int numberOfComponents) {
+
+    }
 }

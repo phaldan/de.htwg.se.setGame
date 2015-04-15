@@ -44,9 +44,17 @@ public class Pack implements IPack {
 
     private void addCount(String form, String fill, String color) {
         for (Integer count : Card.COUNT) {
-            ICard card = new Card(color, form, fill, count);
-            list.add(card);
+            list.add(createCard(form, fill, color, count));
         }
+    }
+
+    private ICard createCard(String form, String fill, String color, Integer count) {
+        ICard card = new Card();
+        card.setNumberOfComponents(count);
+        card.setPanelFilling(fill);
+        card.setForm(form);
+        card.setColor(color);
+        return card;
     }
 
     @Override

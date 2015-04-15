@@ -25,27 +25,12 @@ public class Card implements ICard {
     public static final Integer COUNT_2 = 2;
     public static final Integer COUNT_3 = 3;
     public static final Integer[] COUNT = {COUNT_1, COUNT_2, COUNT_3};
-    public static final String SEPERATOR = "|";
+    public static final String SEPARATOR = "|";
 
     private String color;
     private String form;
     private String panelFilling;
     private Integer count;
-
-    /**
-     * This method create a new card object
-     *
-     * @param color card color
-     * @param form card form
-     * @param panelFilling card background
-     * @param count number of components
-     */
-    public Card(String color, String form, String panelFilling, int count) {
-        setColor(color);
-        setForm(form);
-        setPanelFilling(panelFilling);
-        setNumberOfComponents(count);
-    }
 
     /**
      * Default constructor
@@ -61,7 +46,7 @@ public class Card implements ICard {
      * @param color set the color of a card
      * @throws IllegalArgumentException if the color is not allowed
      */
-    protected void setColor(String color) {
+    public void setColor(String color) {
         if (Arrays.asList(COLOR).contains(color)) {
             this.color = color;
         } else {
@@ -78,7 +63,7 @@ public class Card implements ICard {
      * @param form set the form of the Card
      * @throws IllegalArgumentException if the form is not allowed
      */
-    protected void setForm(String form) {
+    public void setForm(String form) {
         if (Arrays.asList(FORM).contains(form)) {
             this.form = form;
         } else {
@@ -95,7 +80,7 @@ public class Card implements ICard {
      * @param panelFilling filling of the card
      * @throws IllegalArgumentException if filling is not allowed
      */
-    protected void setPanelFilling(String panelFilling) {
+    public void setPanelFilling(String panelFilling) {
         if (Arrays.asList(FILL).contains(panelFilling)) {
             this.panelFilling = panelFilling;
         } else {
@@ -112,7 +97,7 @@ public class Card implements ICard {
      * @param numberOfComponents number of components
      * @throws IllegalArgumentException if numberOfComponents is not allowed
      */
-    protected void setNumberOfComponents(int numberOfComponents) {
+    public void setNumberOfComponents(int numberOfComponents) {
         if (Arrays.asList(COUNT).contains(numberOfComponents)) {
             this.count = numberOfComponents;
         } else {
@@ -127,12 +112,12 @@ public class Card implements ICard {
         addEntry(sb, form);
         addEntry(sb, panelFilling);
         addEntry(sb, count.toString());
-        sb.append(SEPERATOR);
+        sb.append(SEPARATOR);
         return sb.toString();
     }
 
     private void addEntry(StringBuilder builder, String string) {
-        builder.append(SEPERATOR);
+        builder.append(SEPARATOR);
         builder.append(string);
     }
 
