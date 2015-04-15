@@ -204,11 +204,6 @@ public class SetController extends Observable implements IController {
 	}
 
 	@Override
-	public IPack getPack() {
-		return pack;
-	}
-
-	@Override
 	public ICard getFirstInSet() {
 		LinkedList<ICard> list = new LinkedList<>(getSetInField());
 		return list.peekFirst();

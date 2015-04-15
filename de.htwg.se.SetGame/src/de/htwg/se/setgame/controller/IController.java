@@ -78,12 +78,6 @@ public interface IController extends IObservable {
 	Map<Integer, ICard> getCardsAndTheIndexOfCardInField();
 
 	/**
-	 *
-	 * @return IPack
-	 */
-	IPack getPack();
-
-	/**
 	 * @return Get first ICard of valid set.
 	 */
 	ICard getFirstInSet();

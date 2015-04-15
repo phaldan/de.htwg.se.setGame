@@ -3,7 +3,6 @@ package de.htwg.se.setgame.aview.tui;
 import de.htwg.se.setgame.controller.IController;
 import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.model.IField;
-import de.htwg.se.setgame.model.IPack;
 import de.htwg.se.setgame.util.observer.Observable;
 
 import java.util.List;
@@ -71,11 +70,6 @@ public class ControllerDummy extends Observable implements IController {
 
     @Override
     public Map<Integer, ICard> getCardsAndTheIndexOfCardInField() {
-        return null;
-    }
-
-    @Override
-    public IPack getPack() {
         return null;
     }
 
