@@ -9,6 +9,7 @@ import java.util.TreeMap;
 import com.google.inject.Inject;
 
 import de.htwg.se.setgame.controller.IController;
+import de.htwg.se.setgame.controller.event.CloseEvent;
 import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.model.IField;
 import de.htwg.se.setgame.model.ModelFactory;
@@ -198,6 +199,6 @@ public class SetController extends Observable implements IController {
 
 	@Override
 	public void exit() {
-
+		notifyObservers(new CloseEvent());
 	}
 }
