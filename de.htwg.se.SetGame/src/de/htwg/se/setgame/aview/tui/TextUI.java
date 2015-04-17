@@ -1,5 +1,6 @@
 package de.htwg.se.setgame.aview.tui;
 
+import de.htwg.se.setgame.controller.event.CloseEvent;
 import de.htwg.se.setgame.model.ICard;
 import org.apache.log4j.Logger;
 
@@ -28,6 +29,7 @@ public class TextUI implements IObserver {
 	public static final String WINNER_NOBODY = "Nobody wins, nobody pays the dine! xD";
 	public static final String WINNER_PLAYER1 = "Congratulations PlayerOne!";
 	public static final String WINNER_PLAYER2 = "Congratulations PlayerTwo!";
+	public static final String CLOSE = "Stop input processing";
 
     private IController controller;
 	private ActionList actions;
@@ -46,8 +48,13 @@ public class TextUI implements IObserver {
 
 	@Override
 	public void update(Event e) {
-		cont = true;
-		printTUI();
+		if (e != null && e.getClass().equals(CloseEvent.class)) {
+			cont = false;
+			output(CLOSE);
+		} else {
+			cont = true;
+			printTUI();
+		}
 	}
 
 	/**
@@ -60,7 +67,7 @@ public class TextUI implements IObserver {
 			return false;
 		}
 		executeAction(line.split(SEPARATOR));
-		return cont;
+		return getContinue();
 	}
 
 	private void output(String message) {
@@ -108,5 +115,12 @@ public class TextUI implements IObserver {
 			builder.append(String.format(FIELD, entry.getKey(), entry.getValue()));
 		}
 		output(builder.toString());
+	}
+
+	/**
+	 * @return Return false, when command line input processing will be stopped.
+	 */
+	protected boolean getContinue() {
+		return cont;
 	}
 }

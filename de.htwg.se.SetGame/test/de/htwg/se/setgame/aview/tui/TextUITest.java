@@ -3,7 +3,9 @@ package de.htwg.se.setgame.aview.tui;
 import static org.junit.Assert.*;
 
 import de.htwg.se.setgame.TestAppender;
+import de.htwg.se.setgame.controller.event.CloseEvent;
 import de.htwg.se.setgame.model.ICard;
+import de.htwg.se.setgame.util.observer.Event;
 import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
@@ -94,6 +96,10 @@ public class TextUITest {
         }
     }
 
+    private class EventDummy implements Event {
+
+    }
+
     @Before
     public void setUp() {
         target = new TextUI(new Controller(), new ActionListStub());
@@ -130,6 +136,16 @@ public class TextUITest {
 
         target.update(null);
         assertFalse(testAppender.getLog().isEmpty());
+        assertTrue(target.getContinue());
+    }
+
+    @Test
+    public void update_success_withEvent() {
+        cards.put(0, new CardDummy());
+
+        target.update(new EventDummy());
+        assertFalse(testAppender.getLog().isEmpty());
+        assertTrue(target.getContinue());
     }
 
     @Test
@@ -175,5 +191,13 @@ public class TextUITest {
         assertTrue(target.processInputLine("test"));
         assertFalse(testAppender.getLog().contains(TextUI.INVALID_ACTION));
         assertTrue(actionExecute);
+    }
+
+    @Test
+    public void update_success_closeEvent() {
+        target.update(new CloseEvent());
+
+        assertTrue(testAppender.getLog().contains(TextUI.CLOSE));
+        assertFalse(target.getContinue());
     }
 }
