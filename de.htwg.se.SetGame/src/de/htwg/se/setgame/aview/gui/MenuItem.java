@@ -3,11 +3,13 @@ package de.htwg.se.setgame.aview.gui;
 import de.htwg.se.setgame.controller.IController;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * @author Philipp Daniels
  */
-public abstract class MenuItem extends JMenuItem {
+public abstract class MenuItem extends JMenuItem implements ActionListener {
 
     private IController controller;
     private JOptionPane pane;
@@ -35,6 +37,13 @@ public abstract class MenuItem extends JMenuItem {
      */
     public JOptionPane getPane() {
         return pane;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+        if (actionEvent.getSource().equals(this)) {
+            execute();
+        }
     }
 
     /**

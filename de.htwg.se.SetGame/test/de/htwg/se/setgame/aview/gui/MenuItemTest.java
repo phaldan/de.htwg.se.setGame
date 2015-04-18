@@ -2,9 +2,12 @@ package de.htwg.se.setgame.aview.gui;
 
 import de.htwg.se.setgame.aview.ControllerDummy;
 import de.htwg.se.setgame.controller.IController;
+import org.junit.Before;
 import org.junit.Test;
 
 import javax.swing.*;
+
+import java.awt.event.ActionEvent;
 
 import static org.junit.Assert.*;
 
@@ -21,18 +24,41 @@ public class MenuItemTest {
 
         @Override
         public void execute() {
-
+            execute = true;
         }
+    }
 
+    private MenuItem target;
+    private ControllerDummy controller;
+    private JOptionPane pane;
+    private boolean execute;
+
+    @Before
+    public void setUp() {
+        controller = new ControllerDummy();
+        pane = new JOptionPane();
+        execute = false;
+
+        target = new Impl(controller, "test", pane);
     }
 
     @Test
-    public void test() {
-        IController c = new ControllerDummy();
-        JOptionPane p = new JOptionPane();
-        MenuItem target = new Impl(c, "test", p);
-        assertEquals(c, target.getController());
+    public void constructor() {
+        assertEquals(controller, target.getController());
         assertEquals("test", target.getText());
-        assertEquals(p, target.getPane());
+        assertEquals(pane, target.getPane());
+    }
+
+    @Test
+    public void actionPerformed_fail() {
+        MenuItem different = new Impl(controller, "", pane);
+        target.actionPerformed(new ActionEvent(different, 0, ""));
+        assertFalse(execute);
+    }
+
+    @Test
+    public void actionPerformed_success() {
+        target.actionPerformed(new ActionEvent(target, 0, ""));
+        assertTrue(execute);
     }
 }
