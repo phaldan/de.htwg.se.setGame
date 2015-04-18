@@ -4,58 +4,60 @@ import java.awt.GridLayout;
 
 import javax.swing.*;
 
-import com.google.inject.Inject;
-
 import de.htwg.se.setgame.controller.IController;
 import de.htwg.se.setgame.util.observer.Event;
 import de.htwg.se.setgame.util.observer.IObserver;
 
+/**
+ * @author Philipp Daniels
+ */
 public class GUI extends JFrame implements IObserver {
 
 	private static final long serialVersionUID = 1L;
 	private static IController controller;
-	private static final int CELLSIZE = 10;
+	private static final String TITLE = "SET - The ultimate challenge!";
 
 	private SetButton setbutton;
 	private GameField gamefield;
 
-	@Inject
-	public GUI(final IController controller) {
+	/**
+	 * @param controller Instance of IController
+	 */
+	public GUI(IController controller) {
 		GUI.setController(controller);
 		controller.addObserver(this);
 
-		this.setJMenuBar(new MenuBar(controller));
-
-		JPanel mainPanel = new JPanel();
-		JPanel miniPanel = new JPanel();
-		
-		
-		mainPanel.setLayout(new GridLayout(2,1));
-		miniPanel.setLayout(new GridLayout(2,1));
-		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
 		setbutton = new SetButton();
 		gamefield = new GameField();
-		mainPanel.add(gamefield);
-		miniPanel.add(setbutton);
-		mainPanel.add(miniPanel);
-		mainPanel.setBorder(BorderFactory.createEmptyBorder(CELLSIZE, CELLSIZE, CELLSIZE, CELLSIZE));
-		this.setContentPane(mainPanel);
 
-		this.setTitle("SET - The ultimate challenge!");
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.pack();
-		this.setVisible(true);
-		
+		setJMenuBar(new MenuBar(controller));
+		setContentPane(createMainPanel());
+		setTitle(TITLE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		pack();
+		setVisible(true);
 	}
 
+	private JPanel createMainPanel() {
+		JPanel mainPanel = new JPanel();
+		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
+		mainPanel.add(gamefield);
+		mainPanel.add(createMiniPanel());
+		return mainPanel;
+	}
 
+	private JPanel createMiniPanel() {
+		JPanel panel = new JPanel();
+		panel.setLayout(new GridLayout(2, 1));
+		panel.add(setbutton);
+		return panel;
+	}
 
 	@SuppressWarnings("static-access")
 	@Override
 	public void update(Event e) {
 		setbutton.updateSB();
 		gamefield.updateLink();
-
 	}
 
 	public static IController getController() {
