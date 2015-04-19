@@ -14,7 +14,6 @@ import de.htwg.se.setgame.util.observer.IObserver;
 public class GUI extends JFrame implements IObserver {
 
 	private static final long serialVersionUID = 1L;
-	private static IController controller;
 	private static final String TITLE = "SET - The ultimate challenge!";
 
 	private SetButton setbutton;
@@ -24,11 +23,10 @@ public class GUI extends JFrame implements IObserver {
 	 * @param controller Instance of IController
 	 */
 	public GUI(IController controller) {
-		GUI.setController(controller);
 		controller.addObserver(this);
 
-		setbutton = new SetButton();
-		gamefield = new GameField();
+		setbutton = new SetButton(controller);
+		gamefield = new GameField(controller);
 
 		setJMenuBar(new MenuBar(controller));
 		setContentPane(createMainPanel());
@@ -53,18 +51,9 @@ public class GUI extends JFrame implements IObserver {
 		return panel;
 	}
 
-	@SuppressWarnings("static-access")
 	@Override
 	public void update(Event e) {
 		setbutton.updateSB();
 		gamefield.updateLink();
-	}
-
-	public static IController getController() {
-		return controller;
-	}
-
-	public static void setController(IController controller) {
-		GUI.controller = controller;
 	}
 }

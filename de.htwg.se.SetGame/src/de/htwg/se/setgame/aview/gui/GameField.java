@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import de.htwg.se.setgame.controller.IController;
 import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.model.IPack;
 import de.htwg.se.setgame.model.impl.Pack;
@@ -143,8 +144,10 @@ public class GameField extends JPanel implements ActionListener {
 	private static List<String> test;
 
 	private static Integer cardkey = Integer.valueOf(ZERO);
+	private IController controller;
 
-	public GameField() {
+	public GameField(IController controller) {
+		this.controller = controller;
 
 		cardToPicture = new TreeMap<Integer, String>();
 		saveList = new LinkedList<ICard>();
@@ -448,8 +451,10 @@ public class GameField extends JPanel implements ActionListener {
 		index = ZERO;
 	}
 
-	public static void updateLink() {
-
+	/**
+	 *
+	 */
+	public void updateLink() {
 		urlListe.clear();
 		saveList.clear();
 
@@ -459,10 +464,9 @@ public class GameField extends JPanel implements ActionListener {
 
 		reset();
 		updateGF();
-
 	}
 
-	private static void updateGF() {
+	private void updateGF() {
 		resource13 = ImageIcon.class.getResource(urlListe.get(number1));
 		resource14 = ImageIcon.class.getResource(urlListe.get(number2));
 		resource15 = ImageIcon.class.getResource(urlListe.get(number3));
@@ -503,24 +507,24 @@ public class GameField extends JPanel implements ActionListener {
 		b12.setIcon(icon24);
 	}
 	
-	public static int numberGiven() {
+	private int numberGiven() {
 		return pack.getPack().size();
 	}
 	
-	public static void saveUrl() {
+	private void saveUrl() {
 		for (int index1 = 0; index1 < numberGiven() ; index1++) {
 			string(index1);
 			cardkey++;
 		}
 	}
 	
-	public static void string(int index1) {
+	private void string(int index1) {
 		String s = pack.getPack().get(index1).toString();
 		saveUrlFor(s);
 	}
 	 
-	public static void saveUrlFor(String card) {
-		for (ICard key : GUI.getController().getCardsAndTheIndexOfCardInField().values()) {
+	private void saveUrlFor(String card) {
+		for (ICard key : controller.getCardsAndTheIndexOfCardInField().values()) {
 			if (card.equals(key.toString())) {
 				urlListe.add(cardToPicture.get(cardkey));
 				saveList.add(key);
