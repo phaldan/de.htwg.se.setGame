@@ -1,6 +1,8 @@
 package de.htwg.se.setgame.aview.gui;
 
 import de.htwg.se.setgame.controller.IController;
+import de.htwg.se.setgame.util.observer.*;
+import de.htwg.se.setgame.util.observer.Event;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -15,9 +17,9 @@ import javax.swing.JTextField;
 /**
  * @author raina
  */
-public class SetButton extends JPanel implements ActionListener {
+public class SetButton extends JPanel implements ActionListener, IObserver {
     private static final long serialVersionUID = 1L;
-    private JButton setbutton;
+    private JButton setButton;
     private IController controller;
 
     private static final int ZERO = 0;
@@ -33,6 +35,8 @@ public class SetButton extends JPanel implements ActionListener {
      */
     public SetButton(IController controller) {
         this.controller = controller;
+        controller.addObserver(this);
+
         JPanel panel1 = new JPanel();
         JPanel panel2 = new JPanel();
 
@@ -46,11 +50,9 @@ public class SetButton extends JPanel implements ActionListener {
         player1.setEditable(false);
         player2.setEditable(false);
 
-
-        setbutton = new JButton("SET");
-        setbutton.addActionListener(this);
-        panel1.add(setbutton);
-
+        setButton = new JButton("SET");
+        setButton.addActionListener(this);
+        panel1.add(setButton);
 
         panel2.setLayout(new GridLayout(ONE, FOUR));
         panel2.add(p1);
@@ -66,7 +68,7 @@ public class SetButton extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
-        if (source.equals(setbutton)) {
+        if (source.equals(setButton)) {
             choice();
         }
         updateSB();
@@ -86,13 +88,13 @@ public class SetButton extends JPanel implements ActionListener {
         }
     }
 
-    /**
-     *
-     */
-    public void updateSB() {
+    private void updateSB() {
         player1.setText(Integer.toString(controller.getPlayerOnePoints()));
         player2.setText(Integer.toString(controller.getPlayerTwoPoints()));
     }
 
-
+    @Override
+    public void update(Event e) {
+        updateSB();
+    }
 }

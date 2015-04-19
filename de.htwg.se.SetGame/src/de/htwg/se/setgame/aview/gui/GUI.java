@@ -16,7 +16,6 @@ public class GUI extends JFrame implements IObserver {
 	private static final long serialVersionUID = 1L;
 	private static final String TITLE = "SET - The ultimate challenge!";
 
-	private SetButton setbutton;
 	private GameField gamefield;
 
 	/**
@@ -25,35 +24,33 @@ public class GUI extends JFrame implements IObserver {
 	public GUI(IController controller) {
 		controller.addObserver(this);
 
-		setbutton = new SetButton(controller);
 		gamefield = new GameField(controller);
 
 		setJMenuBar(new MenuBar(controller));
-		setContentPane(createMainPanel());
+		setContentPane(createMainPanel(controller));
 		setTitle(TITLE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
 		setVisible(true);
 	}
 
-	private JPanel createMainPanel() {
+	private JPanel createMainPanel(IController controller) {
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
 		mainPanel.add(gamefield);
-		mainPanel.add(createMiniPanel());
+		mainPanel.add(createMiniPanel(controller));
 		return mainPanel;
 	}
 
-	private JPanel createMiniPanel() {
+	private JPanel createMiniPanel(IController controller) {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(2, 1));
-		panel.add(setbutton);
+		panel.add(new SetButton(controller));
 		return panel;
 	}
 
 	@Override
 	public void update(Event e) {
-		setbutton.updateSB();
 		gamefield.updateLink();
 	}
 }
