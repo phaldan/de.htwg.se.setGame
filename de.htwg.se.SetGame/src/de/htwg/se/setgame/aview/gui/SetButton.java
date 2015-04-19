@@ -1,7 +1,6 @@
 package de.htwg.se.setgame.aview.gui;
 
 import de.htwg.se.setgame.controller.IController;
-import de.htwg.se.setgame.util.observer.*;
 import de.htwg.se.setgame.util.observer.Event;
 
 import java.awt.*;
@@ -17,7 +16,7 @@ import javax.swing.JTextField;
 /**
  * @author raina
  */
-public class SetButton extends JPanel implements ActionListener, IObserver {
+public class SetButton extends Panel {
     private static final long serialVersionUID = 1L;
     private JButton setButton;
     private IController controller;

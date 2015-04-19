@@ -3,6 +3,8 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.Scanner;
 
+import de.htwg.se.setgame.aview.gui.GameField;
+import de.htwg.se.setgame.aview.gui.SetButton;
 import de.htwg.se.setgame.aview.tui.action.ActionListImpl;
 import org.apache.log4j.PropertyConfigurator;
 
@@ -63,7 +65,8 @@ public final class SetGame {
 
     private void initUserInterface(boolean activateGui) {
         if (activateGui) {
-			new GUI(controller);
+			GUI gui = new GUI(controller, new GameField(controller), new SetButton(controller));
+			gui.setVisible(true);
 		}
 
         tui = new TextUI(controller, new ActionListImpl(controller));

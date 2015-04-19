@@ -3,7 +3,6 @@ package de.htwg.se.setgame.aview.gui;
 import java.awt.GridLayout;
 import java.util.List;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.Map;
@@ -21,12 +20,11 @@ import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.model.IPack;
 import de.htwg.se.setgame.model.impl.Pack;
 import de.htwg.se.setgame.util.observer.Event;
-import de.htwg.se.setgame.util.observer.IObserver;
 
 /**
  * @author raina
  */
-public class GameField extends JPanel implements ActionListener, IObserver {
+public class GameField extends Panel {
 
 	private static final long serialVersionUID = 1L;
 	private static int index = 0;

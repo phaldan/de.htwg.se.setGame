@@ -12,32 +12,33 @@ import de.htwg.se.setgame.controller.IController;
 public class GUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private static final String TITLE = "SET - The ultimate challenge!";
+	public static final String TITLE = "SET - The ultimate challenge!";
 
 	/**
 	 * @param controller Instance of IController
+	 * @param field Instance of GameField
+	 * @param button Instance of SetButton
 	 */
-	public GUI(IController controller) {
+	public GUI(IController controller, Panel field, Panel button) {
 		setJMenuBar(new MenuBar(controller));
-		setContentPane(createMainPanel(controller));
+		setContentPane(createMainPanel(field, button));
 		setTitle(TITLE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
-		setVisible(true);
 	}
 
-	private JPanel createMainPanel(IController controller) {
+	private JPanel createMainPanel(Panel field, Panel button) {
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
-		mainPanel.add(new GameField(controller));
-		mainPanel.add(createMiniPanel(controller));
+		mainPanel.add(field);
+		mainPanel.add(createMiniPanel(button));
 		return mainPanel;
 	}
 
-	private JPanel createMiniPanel(IController controller) {
+	private JPanel createMiniPanel(Panel button) {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(2, 1));
-		panel.add(new SetButton(controller));
+		panel.add(button);
 		return panel;
 	}
 }
