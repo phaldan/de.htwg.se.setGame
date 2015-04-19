@@ -14,10 +14,12 @@ public class PackDb4oDAO implements IPackDAO {
 
     private ObjectContainer db;
 
-    public PackDb4oDAO(){
+    /**
+     * Default constructor
+     */
+    public PackDb4oDAO() {
         db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "pack.data");
     }
-
 
     @Override
     public List<IPack> readAllPacks() {
@@ -32,11 +34,13 @@ public class PackDb4oDAO implements IPackDAO {
 
     @Override
     public void storePack(IPack pack) {
-       db.store(pack);
+        db.store(pack);
     }
 
     @Override
-    public void deletePack(final IPack pack) {db.delete(pack);}
+    public void deletePack(IPack pack) {
+        db.delete(pack);
+    }
 
     @Override
     public boolean containsCard(String color, String form, String panelFilling) {
