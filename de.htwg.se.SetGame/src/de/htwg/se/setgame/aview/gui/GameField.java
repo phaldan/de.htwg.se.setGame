@@ -20,11 +20,13 @@ import de.htwg.se.setgame.controller.IController;
 import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.model.IPack;
 import de.htwg.se.setgame.model.impl.Pack;
+import de.htwg.se.setgame.util.observer.Event;
+import de.htwg.se.setgame.util.observer.IObserver;
 
 /**
  * @author raina
  */
-public class GameField extends JPanel implements ActionListener {
+public class GameField extends JPanel implements ActionListener, IObserver {
 
 	private static final long serialVersionUID = 1L;
 	private static int index = 0;
@@ -457,10 +459,8 @@ public class GameField extends JPanel implements ActionListener {
 		index = ZERO;
 	}
 
-	/**
-	 *
-	 */
-	public void updateLink() {
+	@Override
+	public void update(Event e) {
 		urlList.clear();
 		saveList.clear();
 
@@ -537,5 +537,4 @@ public class GameField extends JPanel implements ActionListener {
 			}
 		}
 	}
-
 }
