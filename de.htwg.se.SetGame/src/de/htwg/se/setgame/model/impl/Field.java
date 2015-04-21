@@ -55,7 +55,8 @@ public class Field implements IField {
 
     @Override
     public void setSize(int size) {
-        if (size >= MIN_SIZE && size <= unusedCards.size()) {
+        int diff =  size-this.size;
+        if (size >= MIN_SIZE && diff <= unusedCards.size()) {
             this.size = size;
             resize();
         }
