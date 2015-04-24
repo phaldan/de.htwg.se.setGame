@@ -21,6 +21,8 @@ public class SetButton extends Panel {
     public static final String DIALOG_MESSAGE = "Which Player?";
     public static final String PLAYER1 = "Player 1";
     public static final String PLAYER2 = "Player 2";
+    public static final int GRID_COLS = 4;
+    public static final int GRID_ROWS = 1;
     private JTextField player1;
     private JTextField player2;
     private JOptionPane pane;
@@ -62,7 +64,7 @@ public class SetButton extends Panel {
 
     private JPanel createTextFields() {
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(1, 4));
+        panel.setLayout(new GridLayout(GRID_ROWS, GRID_COLS));
 
         player1 = createPlayer(PLAYER1, panel);
         player2 = createPlayer(PLAYER2, panel);
@@ -73,7 +75,7 @@ public class SetButton extends Panel {
     private JTextField createPlayer(String text, JPanel panel) {
         panel.add(new JLabel(text));
 
-        JTextField field = new JTextField(DEFAULT_TEXT_FIELD, 5);
+        JTextField field = new JTextField(DEFAULT_TEXT_FIELD);
         field.setEditable(false);
         panel.add(field);
 
