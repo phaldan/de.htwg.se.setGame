@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import java.net.URL;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -53,9 +54,8 @@ public class CardToImageMapperTest {
         this.count = count;
         this.fill = fill;
         this.form = form;
-        URL url = target.getImage(new CardStub());
         String name = String.format(CardToImageMapper.NAME, index);
-        assertTrue(url.toString().contains(name));
+        assertEquals(name, target.getImage(new CardStub()));
     }
 
     @Test

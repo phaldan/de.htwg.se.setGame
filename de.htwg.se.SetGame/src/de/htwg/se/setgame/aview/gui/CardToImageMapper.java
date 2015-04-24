@@ -53,10 +53,9 @@ public class CardToImageMapper {
         form.put("balk", 2);
     }
 
-    public URL getImage(ICard c) {
+    public String getImage(ICard c) {
         int index = getColor(c) + getCount(c) + getFill(c) + getForm(c);
-        String name = String.format(NAME, index);
-        return getClass().getResource(name);
+        return String.format(NAME, index);
     }
 
     private int getColor(ICard card) {
