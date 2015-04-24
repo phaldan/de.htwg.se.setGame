@@ -15,6 +15,8 @@ import de.htwg.se.setgame.aview.gui.GUI;
 import de.htwg.se.setgame.aview.tui.TextUI;
 import de.htwg.se.setgame.controller.IController;
 
+import javax.swing.*;
+
 /**
  * @author Philipp
  */
@@ -65,7 +67,8 @@ public final class SetGame {
 
     private void initUserInterface(boolean activateGui) {
         if (activateGui) {
-			GUI gui = new GUI(controller, new GameField(controller), new SetButton(controller));
+			GameField field = new GameField(controller);
+			GUI gui = new GUI(controller, field, new SetButton(controller, new JOptionPane()));
 			gui.setVisible(true);
 		}
 
