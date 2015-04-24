@@ -2,7 +2,6 @@ package de.htwg.se.setgame.aview.gui;
 
 import de.htwg.se.setgame.model.ICard;
 
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,6 +14,9 @@ public class CardToImageMapper {
     private static final int COUNT_OFFSET = 9;
     private static final int FILL_OFFSET = 3;
     private static final int FORM_OFFSET = 1;
+    private static final int COUNT_1 = 1;
+    private static final int COUNT_2 = 2;
+    private static final int COUNT_3 = 3;
     public static final String NAME = "/pack/%d.gif";
 
     private Map<String, Integer> color = new HashMap<>();
@@ -36,9 +38,9 @@ public class CardToImageMapper {
     }
 
     private void initCount() {
-        count.put(1, 0);
-        count.put(2, 1);
-        count.put(3, 2);
+        count.put(COUNT_1, 0);
+        count.put(COUNT_2, 1);
+        count.put(COUNT_3, 2);
     }
 
     private void initFill() {

@@ -5,10 +5,8 @@ import de.htwg.se.setgame.model.impl.Card;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.net.URL;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 /**
  * @author Philipp Daniels
