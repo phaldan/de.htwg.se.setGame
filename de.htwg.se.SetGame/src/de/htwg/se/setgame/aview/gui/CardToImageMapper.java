@@ -17,7 +17,7 @@ public class CardToImageMapper {
     private static final int COUNT_1 = 1;
     private static final int COUNT_2 = 2;
     private static final int COUNT_3 = 3;
-    public static final String NAME = "/pack/%d.gif";
+    public static final String NAME = "pack/%d.gif";
 
     private Map<String, Integer> color = new HashMap<>();
     private Map<Integer, Integer> count = new HashMap<>();

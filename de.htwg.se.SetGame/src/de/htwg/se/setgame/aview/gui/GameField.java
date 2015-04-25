@@ -1,8 +1,9 @@
 package de.htwg.se.setgame.aview.gui;
 
+import java.io.File;
+import java.net.MalformedURLException;
 import java.util.List;
 import java.awt.event.ActionEvent;
-import java.net.URL;
 import java.util.LinkedList;
 import java.util.Map;
 
@@ -56,16 +57,18 @@ public class GameField extends Panel {
     }
 
     private void updateFields() {
-        for (Map.Entry<Integer, ICard> entry : cards.entrySet()) {
-            Field field = fields.get(entry.getKey());
-            setFieldImage(entry.getValue(), field);
-        }
+        try {
+            for (Map.Entry<Integer, ICard> entry : cards.entrySet()) {
+                Field field = fields.get(entry.getKey());
+                setFieldImage(entry.getValue(), field);
+            }
+        } catch (MalformedURLException e) {}
     }
 
-    private void setFieldImage(ICard card, Field field) {
+    private void setFieldImage(ICard card, Field field) throws MalformedURLException {
         String image = mapper.getImage(card);
-        URL url = getClass().getResource(image);
-        field.setImage(url);
+        File file = new File(image);
+        field.setImage(file.toURI().toURL());
     }
 
     @Override
