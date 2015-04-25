@@ -6,6 +6,7 @@ import de.htwg.se.setgame.util.observer.Observable;
 
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * @author Philipp Daniels
@@ -59,7 +60,7 @@ public class ControllerDummy extends Observable implements IController {
 
     @Override
     public Map<Integer, ICard> getCardsAndTheIndexOfCardInField() {
-        return null;
+        return new TreeMap<>();
     }
 
     @Override
