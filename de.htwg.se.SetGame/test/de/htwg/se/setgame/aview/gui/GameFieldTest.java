@@ -123,6 +123,13 @@ public class GameFieldTest {
     }
 
     @Test
+    public void actionPerformed_fail() {
+        target.actionPerformed(null);
+        assertNull(dialogTitle);
+        assertNull(dialogMessage);
+    }
+
+    @Test
     public void actionPerformed_success() {
         selectField();
         target.actionPerformed(null);
