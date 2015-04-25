@@ -68,7 +68,7 @@ public final class SetGame {
     private void initUserInterface(boolean activateGui) {
         if (activateGui) {
 			GameField field = new GameField(controller);
-			GUI gui = new GUI(controller, field, new SetButton(controller, new JOptionPane()));
+			GUI gui = new GUI(controller, field, new SetButton(controller, new JOptionPane(), field));
 			gui.setVisible(true);
 		}
 

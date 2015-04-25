@@ -1,10 +1,12 @@
 package de.htwg.se.setgame.aview.gui;
 
 import de.htwg.se.setgame.controller.IController;
+import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.util.observer.Event;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.*;
 
 import javax.swing.*;
 
@@ -27,15 +29,17 @@ public class SetButton extends Panel {
     private JTextField player2;
     private JOptionPane pane;
     private JDialog dialog;
+    private GameField field;
 
     /**
      * @param controller Instance of IController
      */
-    public SetButton(IController controller, JOptionPane pane) {
+    public SetButton(IController controller, JOptionPane pane, GameField field) {
         this.controller = controller;
         controller.addObserver(this);
         initPanel();
         initPane(pane);
+        this.field = field;
     }
 
     private void initPanel() {
@@ -92,7 +96,8 @@ public class SetButton extends Panel {
         dialog.setVisible(true);
         Object selected = pane.getValue();
         int player = selected.equals(PLAYER1) ? 1 : 2;
-        controller.isASetForController(GameField.getCardforSetOne(), GameField.getCardforSetTwo(), GameField.getCardforSetThree(), player);
+        LinkedList<ICard> list = new LinkedList<>(field.getSelected());
+        controller.isASetForController(list.poll(), list.poll(), list.poll(), player);
     }
 
     private void updateSB() {

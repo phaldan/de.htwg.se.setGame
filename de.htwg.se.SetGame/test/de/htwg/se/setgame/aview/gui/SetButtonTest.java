@@ -1,7 +1,6 @@
 package de.htwg.se.setgame.aview.gui;
 
 import de.htwg.se.setgame.aview.ControllerDummy;
-import de.htwg.se.setgame.controller.IController;
 import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.util.observer.Event;
 import org.junit.Before;
@@ -10,6 +9,8 @@ import org.junit.Test;
 import javax.swing.*;
 
 import java.awt.*;
+import java.util.*;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -75,11 +76,23 @@ public class SetButtonTest {
         }
     }
 
+    private class Field extends GameField {
+
+        public Field() {
+            super(new Controller());
+        }
+
+        @Override
+        public List<ICard> getSelected() {
+            return new LinkedList<>();
+        }
+    }
+
     @Before
     public void setUp() {
         player1 = 0;
         player2 = 0;
-        target = new SetButton(new Controller(), new PaneMock());
+        target = new SetButton(new Controller(), new PaneMock(), new Field());
     }
 
     @Test
