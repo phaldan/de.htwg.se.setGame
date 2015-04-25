@@ -24,6 +24,9 @@ public class CardToImageMapper {
     private Map<String, Integer> fill = new HashMap<>();
     private Map<String, Integer> form = new HashMap<>();
 
+    /**
+     * Default constructor
+     */
     public CardToImageMapper() {
         initColor();
         initCount();
@@ -55,6 +58,10 @@ public class CardToImageMapper {
         form.put("balk", 2);
     }
 
+    /**
+     * @param c Instance of ICard
+     * @return Returns filename
+     */
     public String getImage(ICard c) {
         int index = getColor(c) + getCount(c) + getFill(c) + getForm(c);
         return String.format(NAME, index);

@@ -79,11 +79,10 @@ public class SetButton extends Panel {
     private JTextField createPlayer(String text, JPanel panel) {
         panel.add(new JLabel(text));
 
-        JTextField field = new JTextField(DEFAULT_TEXT_FIELD);
-        field.setEditable(false);
-        panel.add(field);
-
-        return field;
+        JTextField textField = new JTextField(DEFAULT_TEXT_FIELD);
+        textField.setEditable(false);
+        panel.add(textField);
+        return textField;
     }
 
     @Override

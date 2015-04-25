@@ -25,6 +25,10 @@ public class MessageDialog {
         this(new JOptionPane());
     }
 
+    /**
+     * @param title Dialog title
+     * @param message Dialog message
+     */
     public void show(String title, String message) {
         pane.setMessage(message);
         JDialog dialog = pane.createDialog(title);
