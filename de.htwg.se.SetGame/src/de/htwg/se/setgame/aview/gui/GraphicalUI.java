@@ -9,7 +9,7 @@ import de.htwg.se.setgame.controller.IController;
 /**
  * @author Philipp Daniels
  */
-public class GUI extends JFrame {
+public class GraphicalUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	public static final String TITLE = "SET - The ultimate challenge!";
@@ -19,7 +19,7 @@ public class GUI extends JFrame {
 	 * @param field Instance of GameField
 	 * @param button Instance of SetButton
 	 */
-	public GUI(IController controller, Panel field, Panel button) {
+	public GraphicalUI(IController controller, Panel field, Panel button) {
 		setJMenuBar(new MenuBar(controller));
 		setContentPane(createMainPanel(field, button));
 		setTitle(TITLE);

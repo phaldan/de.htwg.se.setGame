@@ -4,6 +4,7 @@ import java.util.Properties;
 import java.util.Scanner;
 
 import de.htwg.se.setgame.aview.gui.GameField;
+import de.htwg.se.setgame.aview.gui.GraphicalUI;
 import de.htwg.se.setgame.aview.gui.SetButton;
 import de.htwg.se.setgame.aview.tui.action.ActionListImpl;
 import org.apache.log4j.PropertyConfigurator;
@@ -11,7 +12,6 @@ import org.apache.log4j.PropertyConfigurator;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-import de.htwg.se.setgame.aview.gui.GUI;
 import de.htwg.se.setgame.aview.tui.TextUI;
 import de.htwg.se.setgame.controller.IController;
 
@@ -35,7 +35,7 @@ public final class SetGame {
 	}
 
 	/**
-	 * @param activateGui Flag to disable GUI
+	 * @param activateGui Flag to disable GraphicalUI
 	 * @return Instance of SetGame
 	 * @throws IOException
 	 */
@@ -68,7 +68,7 @@ public final class SetGame {
     private void initUserInterface(boolean activateGui) {
         if (activateGui) {
 			GameField field = new GameField(controller);
-			GUI gui = new GUI(controller, field, new SetButton(controller, new JOptionPane(), field));
+			GraphicalUI gui = new GraphicalUI(controller, field, new SetButton(controller, new JOptionPane(), field));
 			gui.setVisible(true);
 		}
 

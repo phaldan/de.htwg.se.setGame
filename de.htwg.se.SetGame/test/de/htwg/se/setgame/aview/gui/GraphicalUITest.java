@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 /**
  * @author Philipp Daniels
  */
-public class GUITest {
+public class GraphicalUITest {
 
     private class PanelDummy extends Panel {
 
@@ -27,8 +27,8 @@ public class GUITest {
 
     @Test
     public void test() {
-        GUI target = new GUI(new ControllerDummy(), new PanelDummy(), new PanelDummy());
-        assertEquals(GUI.TITLE, target.getTitle());
+        GraphicalUI target = new GraphicalUI(new ControllerDummy(), new PanelDummy(), new PanelDummy());
+        assertEquals(GraphicalUI.TITLE, target.getTitle());
         assertNotNull(target.getJMenuBar());
         assertNotNull(target.getContentPane());
         assertEquals(JFrame.EXIT_ON_CLOSE, target.getDefaultCloseOperation());
