@@ -3,10 +3,6 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.Scanner;
 
-import de.htwg.se.setgame.aview.gui.GameField;
-import de.htwg.se.setgame.aview.gui.GraphicalUI;
-import de.htwg.se.setgame.aview.gui.SetButton;
-import de.htwg.se.setgame.aview.tui.action.ActionListImpl;
 import org.apache.log4j.PropertyConfigurator;
 
 import com.google.inject.Guice;
@@ -15,13 +11,12 @@ import com.google.inject.Injector;
 import de.htwg.se.setgame.aview.tui.TextUI;
 import de.htwg.se.setgame.controller.IController;
 
-import javax.swing.*;
+import de.htwg.se.setgame.aview.ViewFactory;
 
 /**
  * @author Philipp
  */
 public final class SetGame {
-	private static Scanner scanner;
 	private static TextUI tui;
 	private IController controller;
 	private static SetGame instance = null;
@@ -66,14 +61,13 @@ public final class SetGame {
     }
 
     private void initUserInterface(boolean activateGui) {
+		ViewFactory factory = new ViewFactory(controller);
+
         if (activateGui) {
-			GameField field = new GameField(controller);
-			GraphicalUI gui = new GraphicalUI(controller, field, new SetButton(controller, new JOptionPane(), field));
-			gui.setVisible(true);
+			factory.createGUI().setVisible(true);
 		}
 
-        tui = new TextUI(controller, new ActionListImpl(controller));
-		tui.printTUI();
+		tui = factory.createTUI();
     }
 
 	/**
@@ -89,9 +83,14 @@ public final class SetGame {
 	 */
 	public static void main(String[] args) throws IOException {
 		SetGame.getInstance();
+		handleTuiProcessing();
+	}
+
+	private static void handleTuiProcessing() {
 		boolean cont = true;
-		scanner = new Scanner(System.in);
-		while(cont){ 
+		Scanner scanner = new Scanner(System.in);
+
+		while (cont) {
 			cont = tui.processInputLine(scanner.nextLine());
 		}
 	}
