@@ -1,6 +1,4 @@
 package de.htwg.se.setgame;
-import java.io.IOException;
-import java.util.Properties;
 import java.util.Scanner;
 
 import org.apache.log4j.PropertyConfigurator;
@@ -23,9 +21,8 @@ public final class SetGame {
 
 	/**
 	 * @return Instance of SetGame
-	 * @throws IOException
 	 */
-	public static SetGame getInstance() throws IOException {
+	public static SetGame getInstance() {
 		return getInstance(true);
 	}
 
@@ -39,27 +36,20 @@ public final class SetGame {
 	/**
 	 * @param activateGui Flag to disable GraphicalUI
 	 * @return Instance of SetGame
-	 * @throws IOException
 	 */
-	public static SetGame getInstance(boolean activateGui) throws IOException {
+	public static SetGame getInstance(boolean activateGui) {
 		return (instance == null) ? createInstance(activateGui): instance;
 	}
 
-	private static SetGame createInstance(boolean activateGui) throws IOException {
+	private static SetGame createInstance(boolean activateGui) {
 		instance = new SetGame(activateGui);
 		return instance;
 	}
 
-    private SetGame(boolean activateGui) throws IOException {
-        initLogger();
+    private SetGame(boolean activateGui) {
+		PropertyConfigurator.configure("log4j.properties");
         initDependencyInjector();
         initUserInterface(activateGui);
-    }
-
-    private void initLogger() throws IOException {
-		Properties props = new Properties();
-		props.load(getClass().getResourceAsStream("/log4j.properties"));
-		PropertyConfigurator.configure(props);
     }
 
     private void initDependencyInjector() {
@@ -86,9 +76,8 @@ public final class SetGame {
 
 	/**
 	 * @param args Command line parameter
-	 * @throws IOException
 	 */
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		SetGame.getInstance();
 		handleTuiProcessing();
 	}
