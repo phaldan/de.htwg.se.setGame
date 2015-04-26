@@ -1,7 +1,9 @@
 package de.htwg.se.setgame.aview.gui;
 
 import de.htwg.se.setgame.aview.ControllerDummy;
+import de.htwg.se.setgame.controller.event.CloseEvent;
 import de.htwg.se.setgame.util.observer.Event;
+import org.junit.Before;
 import org.junit.Test;
 
 import javax.swing.*;
@@ -25,12 +27,25 @@ public class GraphicalUITest {
         }
     }
 
+    private GraphicalUI target;
+
+    @Before
+    public void setUp() {
+        target = new GraphicalUI(new ControllerDummy(), new PanelDummy(), new PanelDummy());
+    }
+
     @Test
     public void test() {
-        GraphicalUI target = new GraphicalUI(new ControllerDummy(), new PanelDummy(), new PanelDummy());
         assertEquals(GraphicalUI.TITLE, target.getTitle());
         assertNotNull(target.getJMenuBar());
         assertNotNull(target.getContentPane());
         assertEquals(JFrame.EXIT_ON_CLOSE, target.getDefaultCloseOperation());
+    }
+
+    @Test
+    public void update_success() {
+        target.setVisible(true);
+        target.update(new CloseEvent());
+        assertFalse(target.isVisible());
     }
 }
