@@ -1,6 +1,7 @@
 package de.htwg.se.setgame.aview.gui;
 
 import de.htwg.se.setgame.controller.IController;
+import de.htwg.se.setgame.controller.event.CloseEvent;
 import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.util.observer.Event;
 
@@ -28,7 +29,6 @@ public class SetButton extends Panel {
     private JTextField player1;
     private JTextField player2;
     private JOptionPane pane;
-    private JDialog dialog;
     private GameField field;
 
     /**
@@ -37,9 +37,9 @@ public class SetButton extends Panel {
     public SetButton(IController controller, JOptionPane pane, GameField field) {
         this.controller = controller;
         controller.addObserver(this);
-        initPanel();
-        initPane(pane);
         this.field = field;
+        this.pane = pane;
+        initPanel();
     }
 
     private void initPanel() {
@@ -55,15 +55,6 @@ public class SetButton extends Panel {
         JPanel panel = new JPanel();
         panel.add(button);
         return panel;
-    }
-
-    private void initPane(JOptionPane pane) {
-        this.pane = pane;
-        pane.setMessage(DIALOG_MESSAGE);
-        pane.setMessageType(JOptionPane.QUESTION_MESSAGE);
-        pane.setOptionType(JOptionPane.DEFAULT_OPTION);
-        pane.setOptions(new Object[]{PLAYER1, PLAYER2});
-        dialog = pane.createDialog(this, DIALOG_TITLE);
     }
 
     private JPanel createTextFields() {
@@ -92,11 +83,25 @@ public class SetButton extends Panel {
     }
 
     private void choice() {
-        dialog.setVisible(true);
-        Object selected = pane.getValue();
+        Object selected = getDialogValue();
         int player = selected.equals(PLAYER1) ? 1 : 2;
         LinkedList<ICard> list = new LinkedList<>(field.getSelected());
         controller.isASetForController(list.poll(), list.poll(), list.poll(), player);
+    }
+
+    private Object getDialogValue() {
+        pane.setMessage(DIALOG_MESSAGE);
+        pane.setMessageType(JOptionPane.QUESTION_MESSAGE);
+        pane.setOptionType(JOptionPane.DEFAULT_OPTION);
+        pane.setOptions(new Object[]{PLAYER1, PLAYER2});
+        createDialog();
+        return pane.getValue();
+    }
+
+    private void createDialog() {
+        JDialog dialog = pane.createDialog(this, DIALOG_TITLE);
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        dialog.setVisible(true);
     }
 
     private void updateSB() {
@@ -106,7 +111,9 @@ public class SetButton extends Panel {
 
     @Override
     public void update(Event e) {
-        updateSB();
+        if (e == null || !e.getClass().equals(CloseEvent.class)) {
+            updateSB();
+        }
     }
 
     /**

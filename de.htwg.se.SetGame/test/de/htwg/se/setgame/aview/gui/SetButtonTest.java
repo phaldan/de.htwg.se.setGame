@@ -96,14 +96,6 @@ public class SetButtonTest {
     }
 
     @Test
-    public void initPane_success() {
-        assertEquals(SetButton.DIALOG_TITLE, paneTitle);
-        assertEquals(SetButton.DIALOG_MESSAGE, paneMessage);
-        assertNotNull(paneOptions);
-        assertTrue(paneOptions.length > 0);
-    }
-
-    @Test
     public void getPlayer1_success() {
         assertNotNull(target.getPlayer1());
         assertEquals(SetButton.DEFAULT_TEXT_FIELD, target.getPlayer1().getText());
@@ -144,6 +136,10 @@ public class SetButtonTest {
         assertTrue(paneVisible);
         assertEquals(Integer.toString(player1Points), target.getPlayer1().getText());
         assertEquals(Integer.toString(player2Points), target.getPlayer2().getText());
+        assertEquals(SetButton.DIALOG_TITLE, paneTitle);
+        assertEquals(SetButton.DIALOG_MESSAGE, paneMessage);
+        assertNotNull(paneOptions);
+        assertTrue(paneOptions.length > 0);
 
         //TODO check parameter of isASetForController call
     }
