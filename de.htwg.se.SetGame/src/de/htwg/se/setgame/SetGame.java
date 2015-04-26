@@ -30,6 +30,13 @@ public final class SetGame {
 	}
 
 	/**
+	 * Reset instance
+	 */
+	protected static void clearInstance() {
+		instance = null;
+	}
+
+	/**
 	 * @param activateGui Flag to disable GraphicalUI
 	 * @return Instance of SetGame
 	 * @throws IOException
