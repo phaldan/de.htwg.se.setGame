@@ -32,6 +32,7 @@ public class MessageDialog {
     public void show(String title, String message) {
         pane.setMessage(message);
         JDialog dialog = pane.createDialog(title);
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         dialog.setVisible(true);
     }
 
