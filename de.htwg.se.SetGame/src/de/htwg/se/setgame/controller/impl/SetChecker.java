@@ -1,4 +1,4 @@
-package de.htwg.se.setgame.model.impl;
+package de.htwg.se.setgame.controller.impl;
 
 import de.htwg.se.setgame.model.ICard;
 
