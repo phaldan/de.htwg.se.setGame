@@ -1,4 +1,4 @@
-package de.htwg.se.setgame.aview.tui;
+package de.htwg.se.setgame.aview;
 
 import de.htwg.se.setgame.model.ICard;
 

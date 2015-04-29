@@ -3,6 +3,7 @@ package de.htwg.se.setgame.aview.tui;
 import static org.junit.Assert.*;
 
 import de.htwg.se.setgame.TestAppender;
+import de.htwg.se.setgame.aview.CardDummy;
 import de.htwg.se.setgame.aview.ControllerDummy;
 import de.htwg.se.setgame.controller.event.CloseEvent;
 import de.htwg.se.setgame.model.ICard;

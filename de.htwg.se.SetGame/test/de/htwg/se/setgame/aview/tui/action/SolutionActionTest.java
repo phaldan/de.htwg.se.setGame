@@ -2,7 +2,7 @@ package de.htwg.se.setgame.aview.tui.action;
 
 import static org.junit.Assert.*;
 
-import de.htwg.se.setgame.aview.tui.CardDummy;
+import de.htwg.se.setgame.aview.CardDummy;
 import de.htwg.se.setgame.aview.ControllerDummy;
 import de.htwg.se.setgame.model.ICard;
 import org.junit.Before;

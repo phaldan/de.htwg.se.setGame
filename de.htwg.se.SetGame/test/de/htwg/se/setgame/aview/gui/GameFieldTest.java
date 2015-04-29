@@ -1,7 +1,7 @@
 package de.htwg.se.setgame.aview.gui;
 
 import de.htwg.se.setgame.aview.ControllerDummy;
-import de.htwg.se.setgame.aview.tui.CardDummy;
+import de.htwg.se.setgame.aview.CardDummy;
 import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.util.observer.Event;
 import org.junit.Before;
