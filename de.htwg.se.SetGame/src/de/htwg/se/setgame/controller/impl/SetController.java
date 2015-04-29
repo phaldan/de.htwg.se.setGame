@@ -1,6 +1,5 @@
 package de.htwg.se.setgame.controller.impl;
 
-
 import com.google.inject.Inject;
 import de.htwg.se.setgame.controller.IController;
 import de.htwg.se.setgame.controller.event.CloseEvent;
@@ -21,6 +20,7 @@ public class SetController extends Observable implements IController {
 
     private ModelFactory factory;
     private IField field;
+    private SetChecker checker;
     private static final int NUMBER_OF_SET_CARDS = 3;
     private static final int PLAYER_ONE = 1;
     private static final int PLAYER_TWO = 2;
@@ -29,10 +29,21 @@ public class SetController extends Observable implements IController {
 
     /**
      * Logic Construct make for the game a new field with a new pack!!!
+     *
+     * @param factory Instance of ModelFactory
      */
     @Inject
     public SetController(ModelFactory factory) {
+        this(factory, new SetChecker());
+    }
+
+    /**
+     * @param factory Instance of ModelFactory
+     * @param checker Instance of SetChecker
+     */
+    protected SetController(ModelFactory factory, SetChecker checker) {
         this.factory = factory;
+        this.checker = checker;
         reset();
     }
 
@@ -48,63 +59,9 @@ public class SetController extends Observable implements IController {
         reset();
     }
 
-    private boolean isASet(ICard cardOne, ICard cardTwo, ICard cardThree) {
-        int size = field.getUnusedCards().size();
-        field.foundSet(cardOne, cardTwo, cardThree);
-        return size > field.getUnusedCards().size();
-    }
-
     @Override
     public void setFieldSize(int size) {
         field.setSize(size);
-    }
-
-    private boolean proveColor(ICard cardOne, ICard cardTwo, ICard cardThree) {
-        return proveString(cardOne.getColor(), cardTwo.getColor(),
-                cardThree.getColor());
-    }
-
-    private boolean proveNumberOfComponents(ICard cardOne, ICard cardTwo,
-                                            ICard cardThree) {
-        if (cardOne.getNumberOfComponents().equals(cardTwo.getNumberOfComponents())
-                && cardOne.getNumberOfComponents().equals(cardThree.getNumberOfComponents())) {
-            return true;
-        } else if (!cardOne.getNumberOfComponents().equals(cardTwo.getNumberOfComponents())
-                && !cardOne.getNumberOfComponents().equals(cardThree.getNumberOfComponents())
-                && !cardTwo.getNumberOfComponents().equals(cardThree.getNumberOfComponents())) {
-            return true;
-        }
-        return false;
-    }
-
-    private boolean proveFilling(ICard cardOne, ICard cardTwo, ICard cardThree) {
-        return proveString(cardOne.getPanelFilling(),
-                cardTwo.getPanelFilling(), cardThree.getPanelFilling());
-    }
-
-    private boolean proveForm(ICard cardOne, ICard cardTwo, ICard cardThree) {
-        return proveString(cardOne.getForm(), cardTwo.getForm(),
-                cardThree.getForm());
-    }
-
-    private boolean proveString(String stringOne, String stringTwo,
-                                String stringThree) {
-        if (stringOne.compareTo(stringTwo) == 0
-                && stringOne.compareTo(stringThree) == 0 && stringTwo.compareTo(stringThree) == 0) {
-            return true;
-        } else if (stringOne.compareTo(stringTwo) != 0
-                && stringOne.compareTo(stringThree) != 0
-                && stringTwo.compareTo(stringThree) != 0) {
-            return true;
-        }
-        return false;
-    }
-
-    private boolean proveIfIsASet(ICard cardOne, ICard cardTwo, ICard cardThree) {
-        return proveColor(cardOne, cardTwo, cardThree)
-                && proveFilling(cardOne, cardTwo, cardThree)
-                && proveNumberOfComponents(cardOne, cardTwo, cardThree)
-                && proveForm(cardOne, cardTwo, cardThree);
     }
 
     private List<ICard> getSet(List<ICard> list) {
@@ -116,7 +73,7 @@ public class SetController extends Observable implements IController {
                     if (!cardOne.equals(cardTwo)) {
                         for (ICard cardThree : list) {
 
-                            if (proveIfIsASet(cardOne, cardTwo, cardThree)
+                            if (checker.isSet(cardOne, cardTwo, cardThree)
                                     && !cardThree.equals(cardOne)
                                     && !(cardTwo.equals(cardThree))) {
 
@@ -138,7 +95,7 @@ public class SetController extends Observable implements IController {
     @Override
     public void isASetForController(ICard cardOne, ICard cardTwo,
                                     ICard cardThree, int player) {
-        if (isASet(cardOne, cardTwo, cardThree)) {
+        if (checker.isSet(cardOne, cardTwo, cardThree)) {
             if (SetController.PLAYER_ONE == player) {
                 this.playerOneCounter = this.playerOneCounter + 1;
             } else if (SetController.PLAYER_TWO == player) {
