@@ -32,7 +32,7 @@ public class Field implements IField {
 
     @Override
     public void foundSet(ICard cardOne, ICard cardTwo, ICard cardThree) {
-        if (containsCards(cardOne, cardTwo, cardThree) && SetChecker.isSet(cardOne, cardTwo, cardThree)) {
+        if (containsCards(cardOne, cardTwo, cardThree) && checker.isSet(cardOne, cardTwo, cardThree)) {
             removeCards(cardOne, cardTwo, cardThree);
             restock();
         }

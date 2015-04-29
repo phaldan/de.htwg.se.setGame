@@ -15,36 +15,36 @@ public class SetChecker {
      * @param three Instance of ICard
      * @return Returns true, when all three cards are together a valid set.
      */
-    public static boolean isSet(ICard one, ICard two, ICard three) {
+    public boolean isSet(ICard one, ICard two, ICard three) {
         return compareColor(one, two, three) && compareForm(one, two, three)
                 && compareFill(one, two, three) && compareCount(one, two, three);
     }
 
-    private static boolean compareColor(ICard one, ICard two, ICard three) {
+    private boolean compareColor(ICard one, ICard two, ICard three) {
         return compare(one.getColor(), two.getColor(), three.getColor());
     }
 
-    private static boolean compareForm(ICard one, ICard two, ICard three) {
+    private boolean compareForm(ICard one, ICard two, ICard three) {
         return compare(one.getForm(), two.getForm(), three.getForm());
     }
 
-    private static boolean compareFill(ICard one, ICard two, ICard three) {
+    private boolean compareFill(ICard one, ICard two, ICard three) {
         return compare(one.getPanelFilling(), two.getPanelFilling(), three.getPanelFilling());
     }
 
-    private static boolean compareCount(ICard one, ICard two, ICard three) {
+    private boolean compareCount(ICard one, ICard two, ICard three) {
         return compare(one.getNumberOfComponents(), two.getNumberOfComponents(), three.getNumberOfComponents());
     }
 
-    private static boolean compare(Object one, Object two, Object three) {
+    private boolean compare(Object one, Object two, Object three) {
         return isAllSame(one, two, three) || isAllDifferent(one, two, three);
     }
 
-    private static boolean isAllSame(Object one, Object two, Object three) {
+    private boolean isAllSame(Object one, Object two, Object three) {
         return one.equals(two) && one.equals(three) && two.equals(three);
     }
 
-    private static boolean isAllDifferent(Object one, Object two, Object three) {
+    private boolean isAllDifferent(Object one, Object two, Object three) {
         return !one.equals(two) && !one.equals(three) && !two.equals(three);
     }
 
@@ -90,6 +90,6 @@ public class SetChecker {
         ICard one = cards.get(oneI);
         ICard two = cards.get(twoI);
         ICard three = cards.get(threeI);
-        return SetChecker.isSet(one, two, three);
+        return isSet(one, two, three);
     }
 }
