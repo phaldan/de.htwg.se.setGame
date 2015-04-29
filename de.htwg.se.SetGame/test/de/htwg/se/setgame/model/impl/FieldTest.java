@@ -55,11 +55,6 @@ public class FieldTest {
         }
 
         @Override
-        public boolean compareTo(ICard card) {
-            return false;
-        }
-
-        @Override
         public void setColor(String color) {
 
         }

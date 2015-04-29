@@ -32,12 +32,6 @@ public interface ICard {
     String toString();
 
     /**
-     * @param card ICard instance
-     * @return true if card is the same
-     */
-    boolean compareTo(ICard card);
-
-    /**
      * @param color set the color of a card
      */
     void setColor(String color);

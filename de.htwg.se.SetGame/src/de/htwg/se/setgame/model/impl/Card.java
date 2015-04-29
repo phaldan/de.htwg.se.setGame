@@ -35,7 +35,8 @@ public class Card implements ICard {
     /**
      * Default constructor
      */
-    protected Card() {}
+    protected Card() {
+    }
 
     @Override
     public String getColor() {
@@ -119,26 +120,5 @@ public class Card implements ICard {
     private void addEntry(StringBuilder builder, String string) {
         builder.append(SEPARATOR);
         builder.append(string);
-    }
-
-    @Override
-    public boolean compareTo(ICard card) {
-        return compareColor(card) && compareCount(card) && compareForm(card) && compareFill(card);
-    }
-
-    private boolean compareColor(ICard card) {
-        return color.equals(card.getColor());
-    }
-
-    private boolean compareForm(ICard card) {
-        return form.equals(card.getForm());
-    }
-
-    private boolean compareFill(ICard card) {
-        return panelFilling.equals(card.getPanelFilling());
-    }
-
-    private boolean compareCount(ICard card) {
-        return count.equals(card.getNumberOfComponents());
     }
 }

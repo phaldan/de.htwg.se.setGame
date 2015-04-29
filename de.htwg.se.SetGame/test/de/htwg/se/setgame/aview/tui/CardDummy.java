@@ -27,11 +27,6 @@ public class CardDummy implements ICard {
     }
 
     @Override
-    public boolean compareTo(ICard card) {
-        return false;
-    }
-
-    @Override
     public void setColor(String color) {
 
     }

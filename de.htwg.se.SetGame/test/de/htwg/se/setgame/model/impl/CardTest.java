@@ -92,42 +92,4 @@ public class CardTest {
         assertTrue(string.contains(Card.FILL_1));
         assertTrue(string.contains(Card.COUNT_1.toString()));
     }
-
-    @Test
-    public void compareTo_success() {
-        target = getInstance();
-        assertTrue(target.compareTo(getInstance()));
-    }
-
-    @Test
-    public void compareTo_failColor() {
-        target = getInstance();
-        Card c = getInstance();
-        c.setColor(Card.COLOR_2);
-        assertFalse(target.compareTo(c));
-    }
-
-    @Test
-    public void compareTo_failForm() {
-        target = getInstance();
-        Card c = getInstance();
-        c.setForm(Card.FORM_2);
-        assertFalse(target.compareTo(c));
-    }
-
-    @Test
-    public void compareTo_failFill() {
-        target = getInstance();
-        Card c = getInstance();
-        c.setPanelFilling(Card.FILL_2);
-        assertFalse(target.compareTo(c));
-    }
-
-    @Test
-    public void compareTo_failCount() {
-        target = getInstance();
-        Card c = getInstance();
-        c.setNumberOfComponents(Card.COUNT_2);
-        assertFalse(target.compareTo(c));
-    }
 }
