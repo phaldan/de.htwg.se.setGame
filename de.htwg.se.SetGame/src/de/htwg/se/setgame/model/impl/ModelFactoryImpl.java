@@ -2,6 +2,7 @@ package de.htwg.se.setgame.model.impl;
 
 import de.htwg.se.setgame.model.IField;
 import de.htwg.se.setgame.model.IPack;
+import de.htwg.se.setgame.model.ISet;
 import de.htwg.se.setgame.model.ModelFactory;
 
 /**
@@ -20,4 +21,11 @@ public class ModelFactoryImpl implements ModelFactory {
     public IPack createPack() {
         return new Pack();
     }
+
+    @Override
+    public ISet createSet() {
+        return new Set();
+    }
+
+
 }
