@@ -22,26 +22,14 @@ public class SetControllerTest {
     private IField field;
     private Event event;
 
-    private class FactoryStub implements ModelFactory {
-
+    private class FactoryStub extends ModelFactoryDummy {
         @Override
         public IField createField() {
             return field;
         }
-
-        @Override
-        public IPack createPack() {
-            return null;
-        }
-
-        @Override
-        public ISet createSet() {
-            return null;
-        }
     }
 
     private class Observer implements IObserver {
-
         @Override
         public void update(Event e) {
             event = e;
