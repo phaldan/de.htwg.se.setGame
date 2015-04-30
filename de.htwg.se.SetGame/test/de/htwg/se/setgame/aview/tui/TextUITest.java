@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import de.htwg.se.setgame.TestAppender;
 import de.htwg.se.setgame.model.CardDummy;
-import de.htwg.se.setgame.aview.ControllerDummy;
+import de.htwg.se.setgame.controller.ControllerDummy;
 import de.htwg.se.setgame.controller.event.CloseEvent;
 import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.util.observer.Event;

@@ -1,6 +1,6 @@
 package de.htwg.se.setgame.aview.tui;
 
-import de.htwg.se.setgame.aview.ControllerDummy;
+import de.htwg.se.setgame.controller.ControllerDummy;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,5 +1,6 @@
 package de.htwg.se.setgame.aview;
 
+import de.htwg.se.setgame.controller.ControllerDummy;
 import org.junit.Before;
 import org.junit.Test;
 

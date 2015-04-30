@@ -1,6 +1,5 @@
-package de.htwg.se.setgame.aview;
+package de.htwg.se.setgame.controller;
 
-import de.htwg.se.setgame.controller.IController;
 import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.util.observer.Observable;
 
