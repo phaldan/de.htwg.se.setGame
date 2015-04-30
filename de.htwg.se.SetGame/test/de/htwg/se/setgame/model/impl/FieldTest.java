@@ -95,50 +95,10 @@ public class FieldTest {
         cards.add(new CardStub("color", "form", "fill", 1));
     }
 
-    private ICard createCard() {
-        return new CardStub("color", "form", "fill", 2);
-    }
-
     @Test
     public void initialState() {
         assertEquals(Field.MIN_SIZE, target.getCardsInField().size());
         assertEquals(cards.size()-Field.MIN_SIZE, target.getUnusedCards().size());
-    }
-
-    @Test
-    public void foundSet_success() {
-        List<ICard> list = target.getCardsInField();
-        target.foundSet(list.get(0), list.get(1), list.get(2));
-        assertEquals(cards.size()- Field.MIN_SIZE - Field.MIN_SIZE, target.getUnusedCards().size());
-    }
-
-    @Test
-    public void foundSet_fail_firstNotContained() {
-        List<ICard> list = target.getCardsInField();
-        target.foundSet(createCard(), list.get(1), list.get(2));
-        assertEquals(cards.size()- Field.MIN_SIZE, target.getUnusedCards().size());
-    }
-
-    @Test
-    public void foundSet_fail_secondNotContained() {
-        List<ICard> list = target.getCardsInField();
-        target.foundSet(list.get(0), createCard(), list.get(2));
-        assertEquals(cards.size()- Field.MIN_SIZE, target.getUnusedCards().size());
-    }
-
-    @Test
-    public void foundSet_fail_thirdNotContained() {
-        List<ICard> list = target.getCardsInField();
-        target.foundSet(list.get(0), list.get(1), createCard());
-        assertEquals(cards.size()- Field.MIN_SIZE, target.getUnusedCards().size());
-    }
-
-    @Test
-    public void foundSet_fail_notASet() {
-        target.setSize(4);
-        List<ICard> list = target.getCardsInField();
-        target.foundSet(list.get(0), list.get(1), list.get(3));
-        assertEquals(cards.size()- 4, target.getUnusedCards().size());
     }
 
     @Test

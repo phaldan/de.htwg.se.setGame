@@ -1,12 +1,11 @@
 package de.htwg.se.setgame.controller.impl;
 
 import de.htwg.se.setgame.model.ICard;
+import de.htwg.se.setgame.model.ISet;
 import de.htwg.se.setgame.model.impl.Card;
+import de.htwg.se.setgame.model.impl.Set;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.LinkedList;
-import java.util.List;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -27,10 +26,18 @@ public class SetCheckerTest {
         return new CardStub(color, form, fill, count);
     }
 
+    private boolean isSet(ICard one, ICard two, ICard three) {
+        ISet set = new Set();
+        set.setFirst(one);
+        set.setSecond(two);
+        set.setThird(three);
+        return target.isSet(set);
+    }
+
     @Test
     public void isSet_success_allSame() {
         ICard c = createCard(Card.COLOR_1, Card.FORM_1, Card.FILL_1, Card.COUNT_1);
-        assertTrue(target.isSet(c, c, c));
+        assertTrue(isSet(c, c, c));
     }
 
     @Test
@@ -38,7 +45,7 @@ public class SetCheckerTest {
         ICard one   = createCard(Card.COLOR_1, Card.FORM_1, Card.FILL_1, Card.COUNT_1);
         ICard two   = createCard(Card.COLOR_2, Card.FORM_2, Card.FILL_2, Card.COUNT_2);
         ICard three = createCard(Card.COLOR_3, Card.FORM_3, Card.FILL_3, Card.COUNT_3);
-        assertTrue(target.isSet(one, two, three));
+        assertTrue(isSet(one, two, three));
     }
 
     @Test
@@ -46,7 +53,7 @@ public class SetCheckerTest {
         ICard one   = createCard(Card.COLOR_1, Card.FORM_1, Card.FILL_1, Card.COUNT_1);
         ICard two   = createCard(Card.COLOR_1, Card.FORM_2, Card.FILL_2, Card.COUNT_2);
         ICard three = createCard(Card.COLOR_1, Card.FORM_3, Card.FILL_3, Card.COUNT_3);
-        assertTrue(target.isSet(one, two, three));
+        assertTrue(isSet(one, two, three));
     }
 
     @Test
@@ -54,7 +61,7 @@ public class SetCheckerTest {
         ICard one   = createCard(Card.COLOR_1, Card.FORM_1, Card.FILL_1, Card.COUNT_1);
         ICard two   = createCard(Card.COLOR_2, Card.FORM_1, Card.FILL_2, Card.COUNT_2);
         ICard three = createCard(Card.COLOR_3, Card.FORM_1, Card.FILL_3, Card.COUNT_3);
-        assertTrue(target.isSet(one, two, three));
+        assertTrue(isSet(one, two, three));
     }
 
     @Test
@@ -62,7 +69,7 @@ public class SetCheckerTest {
         ICard one   = createCard(Card.COLOR_1, Card.FORM_1, Card.FILL_1, Card.COUNT_1);
         ICard two   = createCard(Card.COLOR_2, Card.FORM_2, Card.FILL_1, Card.COUNT_2);
         ICard three = createCard(Card.COLOR_3, Card.FORM_3, Card.FILL_1, Card.COUNT_3);
-        assertTrue(target.isSet(one, two, three));
+        assertTrue(isSet(one, two, three));
     }
 
     @Test
@@ -70,7 +77,7 @@ public class SetCheckerTest {
         ICard one   = createCard(Card.COLOR_1, Card.FORM_1, Card.FILL_1, Card.COUNT_1);
         ICard two   = createCard(Card.COLOR_2, Card.FORM_2, Card.FILL_2, Card.COUNT_1);
         ICard three = createCard(Card.COLOR_3, Card.FORM_3, Card.FILL_3, Card.COUNT_1);
-        assertTrue(target.isSet(one, two, three));
+        assertTrue(isSet(one, two, three));
     }
 
     @Test
@@ -78,7 +85,7 @@ public class SetCheckerTest {
         ICard one   = createCard(Card.COLOR_1, Card.FORM_1, Card.FILL_1, Card.COUNT_1);
         ICard two   = createCard(Card.COLOR_2, Card.FORM_1, Card.FILL_1, Card.COUNT_2);
         ICard three = createCard(Card.COLOR_3, Card.FORM_1, Card.FILL_1, Card.COUNT_3);
-        assertTrue(target.isSet(one, two, three));
+        assertTrue(isSet(one, two, three));
     }
 
     @Test
@@ -86,7 +93,7 @@ public class SetCheckerTest {
         ICard one   = createCard(Card.COLOR_1, Card.FORM_1, Card.FILL_1, Card.COUNT_1);
         ICard two   = createCard(Card.COLOR_1, Card.FORM_2, Card.FILL_2, Card.COUNT_2);
         ICard three = createCard(Card.COLOR_2, Card.FORM_3, Card.FILL_3, Card.COUNT_3);
-        assertFalse(target.isSet(one, two, three));
+        assertFalse(isSet(one, two, three));
     }
 
     @Test
@@ -94,7 +101,7 @@ public class SetCheckerTest {
         ICard one   = createCard(Card.COLOR_1, Card.FORM_1, Card.FILL_1, Card.COUNT_1);
         ICard two   = createCard(Card.COLOR_2, Card.FORM_2, Card.FILL_2, Card.COUNT_2);
         ICard three = createCard(Card.COLOR_3, Card.FORM_2, Card.FILL_3, Card.COUNT_3);
-        assertFalse(target.isSet(one, two, three));
+        assertFalse(isSet(one, two, three));
     }
 
     @Test
@@ -102,7 +109,7 @@ public class SetCheckerTest {
         ICard one   = createCard(Card.COLOR_1, Card.FORM_1, Card.FILL_2, Card.COUNT_1);
         ICard two   = createCard(Card.COLOR_2, Card.FORM_2, Card.FILL_2, Card.COUNT_2);
         ICard three = createCard(Card.COLOR_3, Card.FORM_3, Card.FILL_3, Card.COUNT_3);
-        assertFalse(target.isSet(one, two, three));
+        assertFalse(isSet(one, two, three));
     }
 
     @Test
@@ -110,34 +117,6 @@ public class SetCheckerTest {
         ICard one   = createCard(Card.COLOR_1, Card.FORM_1, Card.FILL_1, Card.COUNT_1);
         ICard two   = createCard(Card.COLOR_2, Card.FORM_2, Card.FILL_2, Card.COUNT_3);
         ICard three = createCard(Card.COLOR_3, Card.FORM_3, Card.FILL_3, Card.COUNT_3);
-        assertFalse(target.isSet(one, two, three));
-    }
-
-    @Test
-    public void check_success_threeCards() {
-        List<ICard> list = new LinkedList<>();
-        list.add(createCard(Card.COLOR_1, Card.FORM_1, Card.FILL_1, Card.COUNT_1));
-        list.add(createCard(Card.COLOR_2, Card.FORM_2, Card.FILL_2, Card.COUNT_2));
-        list.add(createCard(Card.COLOR_3, Card.FORM_3, Card.FILL_3, Card.COUNT_3));
-        assertTrue(target.check(list));
-    }
-
-    @Test
-    public void check_success_fourCards() {
-        List<ICard> list = new LinkedList<>();
-        list.add(createCard(Card.COLOR_1, Card.FORM_1, Card.FILL_1, Card.COUNT_1));
-        list.add(createCard(Card.COLOR_1, Card.FORM_2, Card.FILL_2, Card.COUNT_2));
-        list.add(createCard(Card.COLOR_2, Card.FORM_2, Card.FILL_2, Card.COUNT_2));
-        list.add(createCard(Card.COLOR_2, Card.FORM_3, Card.FILL_3, Card.COUNT_3));
-        list.add(createCard(Card.COLOR_3, Card.FORM_3, Card.FILL_3, Card.COUNT_3));
-        assertTrue(target.check(list));
-    }
-
-    @Test
-    public void check_fail() {
-        ICard one   = createCard(Card.COLOR_1, Card.FORM_1, Card.FILL_1, Card.COUNT_1);
-        ICard two   = createCard(Card.COLOR_1, Card.FORM_2, Card.FILL_2, Card.COUNT_2);
-        ICard three = createCard(Card.COLOR_2, Card.FORM_3, Card.FILL_3, Card.COUNT_3);
-        assertFalse(target.isSet(one, two, three));
+        assertFalse(isSet(one, two, three));
     }
 }

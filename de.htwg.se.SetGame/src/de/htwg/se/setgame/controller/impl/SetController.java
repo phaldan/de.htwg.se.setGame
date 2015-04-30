@@ -5,6 +5,7 @@ import de.htwg.se.setgame.controller.IController;
 import de.htwg.se.setgame.controller.event.CloseEvent;
 import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.model.IField;
+import de.htwg.se.setgame.model.ISet;
 import de.htwg.se.setgame.model.ModelFactory;
 import de.htwg.se.setgame.util.observer.Observable;
 
@@ -21,7 +22,7 @@ public class SetController extends Observable implements IController {
     private ModelFactory factory;
     private IField field;
     private SetChecker checker;
-    private static final int NUMBER_OF_SET_CARDS = 3;
+    private CardSet cardSet;
     private static final int PLAYER_ONE = 1;
     private static final int PLAYER_TWO = 2;
     private int playerOneCounter;
@@ -35,6 +36,7 @@ public class SetController extends Observable implements IController {
     @Inject
     public SetController(ModelFactory factory) {
         this(factory, new SetChecker());
+
     }
 
     /**
@@ -42,8 +44,18 @@ public class SetController extends Observable implements IController {
      * @param checker Instance of SetChecker
      */
     protected SetController(ModelFactory factory, SetChecker checker) {
+        this(factory, checker, new CardSet(factory, checker));
+    }
+
+    /**
+     * @param factory Instance of ModelFactory
+     * @param checker Instance of SetChecker
+     * @param cardSet Instance of CardSet
+     */
+    protected SetController(ModelFactory factory, SetChecker checker, CardSet cardSet) {
         this.factory = factory;
         this.checker = checker;
+        this.cardSet = cardSet;
         reset();
     }
 
@@ -64,38 +76,14 @@ public class SetController extends Observable implements IController {
         field.setSize(size);
     }
 
-    private List<ICard> getSet(List<ICard> list) {
-        LinkedList<ICard> setList = new LinkedList<>();
-        if (list.size() >= NUMBER_OF_SET_CARDS) {
-
-            for (ICard cardOne : list) {
-                for (ICard cardTwo : list) {
-                    if (!cardOne.equals(cardTwo)) {
-                        for (ICard cardThree : list) {
-
-                            if (checker.isSet(cardOne, cardTwo, cardThree)
-                                    && !cardThree.equals(cardOne)
-                                    && !(cardTwo.equals(cardThree))) {
-
-                                setList.add(cardOne);
-                                setList.add(cardTwo);
-                                setList.add(cardThree);
-                                return setList;
-                            }
-                        }
-                    }
-                }
-            }
-
-        }
-
-        return setList;
-    }
-
     @Override
     public void isASetForController(ICard cardOne, ICard cardTwo,
                                     ICard cardThree, int player) {
-        if (checker.isSet(cardOne, cardTwo, cardThree)) {
+        ISet set = factory.createSet();
+        set.setFirst(cardOne);
+        set.setSecond(cardTwo);
+        set.setThird(cardThree);
+        if (checker.isSet(set)) {
             if (SetController.PLAYER_ONE == player) {
                 this.playerOneCounter = this.playerOneCounter + 1;
             } else if (SetController.PLAYER_TWO == player) {
@@ -115,7 +103,7 @@ public class SetController extends Observable implements IController {
 
     @Override
     public List<ICard> getSetInField() {
-        return getSet(this.field.getCardsInField());
+        return cardSet.getSet(field.getCardsInField()).getAll();
     }
 
     @Override

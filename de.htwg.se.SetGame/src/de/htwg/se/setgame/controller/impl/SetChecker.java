@@ -1,8 +1,6 @@
 package de.htwg.se.setgame.controller.impl;
 
-import de.htwg.se.setgame.model.ICard;
-
-import java.util.List;
+import de.htwg.se.setgame.model.ISet;
 
 /**
  * @author Philipp Daniels
@@ -10,30 +8,27 @@ import java.util.List;
 public class SetChecker {
 
     /**
-     * @param one Instance of ICard
-     * @param two Instance of ICard
-     * @param three Instance of ICard
+     * @param set Instance of ISet
      * @return Returns true, when all three cards are together a valid set.
      */
-    public boolean isSet(ICard one, ICard two, ICard three) {
-        return compareColor(one, two, three) && compareForm(one, two, three)
-                && compareFill(one, two, three) && compareCount(one, two, three);
+    public boolean isSet(ISet set) {
+        return compareColor(set) && compareForm(set) && compareFill(set) && compareCount(set);
     }
 
-    private boolean compareColor(ICard one, ICard two, ICard three) {
-        return compare(one.getColor(), two.getColor(), three.getColor());
+    private boolean compareColor(ISet s) {
+        return compare(s.getFirst().getColor(), s.getSecond().getColor(), s.getThird().getColor());
     }
 
-    private boolean compareForm(ICard one, ICard two, ICard three) {
-        return compare(one.getForm(), two.getForm(), three.getForm());
+    private boolean compareForm(ISet s) {
+        return compare(s.getFirst().getForm(), s.getSecond().getForm(), s.getThird().getForm());
     }
 
-    private boolean compareFill(ICard one, ICard two, ICard three) {
-        return compare(one.getPanelFilling(), two.getPanelFilling(), three.getPanelFilling());
+    private boolean compareFill(ISet s) {
+        return compare(s.getFirst().getPanelFilling(), s.getSecond().getPanelFilling(), s.getThird().getPanelFilling());
     }
 
-    private boolean compareCount(ICard one, ICard two, ICard three) {
-        return compare(one.getNumberOfComponents(), two.getNumberOfComponents(), three.getNumberOfComponents());
+    private boolean compareCount(ISet s) {
+        return compare(s.getFirst().getNumberOfComponents(), s.getSecond().getNumberOfComponents(), s.getThird().getNumberOfComponents());
     }
 
     private boolean compare(Object one, Object two, Object three) {
@@ -46,50 +41,5 @@ public class SetChecker {
 
     private boolean isAllDifferent(Object one, Object two, Object three) {
         return !one.equals(two) && !one.equals(three) && !two.equals(three);
-    }
-
-    private List<ICard> cards;
-
-    /**
-     * @param cards List of cards
-     * @return Returns false, when list of cards has not a single valid set.
-     */
-    public boolean check(List<ICard> cards) {
-        this.cards = cards;
-        return hasSetOne();
-    }
-
-    private boolean hasSetOne() {
-        for (int i=0; i< cards.size()-2; i++) {
-            if (hasSetTwo(i)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean hasSetTwo(int one) {
-        for (int i=one + 1; i < cards.size()-1; i++) {
-            if (hasSetThree(one, i)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean hasSetThree(int oneI, int twoI) {
-        for (int i=twoI+1; i < cards.size(); i++) {
-            if (checkSet(oneI, twoI, i)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean checkSet(int oneI, int twoI, int threeI) {
-        ICard one = cards.get(oneI);
-        ICard two = cards.get(twoI);
-        ICard three = cards.get(threeI);
-        return isSet(one, two, three);
     }
 }

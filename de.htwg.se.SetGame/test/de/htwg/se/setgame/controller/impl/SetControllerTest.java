@@ -1,10 +1,7 @@
 package de.htwg.se.setgame.controller.impl;
 
 import de.htwg.se.setgame.controller.event.CloseEvent;
-import de.htwg.se.setgame.model.ICard;
-import de.htwg.se.setgame.model.IField;
-import de.htwg.se.setgame.model.IPack;
-import de.htwg.se.setgame.model.ModelFactory;
+import de.htwg.se.setgame.model.*;
 import de.htwg.se.setgame.model.impl.Field;
 import de.htwg.se.setgame.model.impl.Pack;
 import de.htwg.se.setgame.util.observer.Event;
@@ -21,10 +18,9 @@ import static org.junit.Assert.*;
  */
 public class SetControllerTest {
 
-    SetController target;
-    LinkedList<ICard> list;
-    IField field;
-    Event event;
+    private SetController target;
+    private IField field;
+    private Event event;
 
     private class FactoryStub implements ModelFactory {
 
@@ -37,9 +33,14 @@ public class SetControllerTest {
         public IPack createPack() {
             return null;
         }
+
+        @Override
+        public ISet createSet() {
+            return null;
+        }
     }
 
-    private class Oberserver implements IObserver {
+    private class Observer implements IObserver {
 
         @Override
         public void update(Event e) {
@@ -52,17 +53,11 @@ public class SetControllerTest {
         field = new Field(new Pack(), 3);
         event = null;
         target = new SetController(new FactoryStub());
-        list = new LinkedList<>(target.getSetInField());
-    }
-
-    @Test
-    public void testIsAssetForController() {
-        target.isASetForController(list.get(0), list.get(1), list.get(2), target.getPlayerOne());
     }
 
     @Test
     public void exit_success() {
-        target.addObserver(new Oberserver());
+        target.addObserver(new Observer());
         target.exit();
         assertEquals(CloseEvent.class, event.getClass());
     }

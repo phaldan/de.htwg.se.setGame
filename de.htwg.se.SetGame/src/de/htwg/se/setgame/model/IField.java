@@ -7,13 +7,6 @@ import java.util.List;
  */
 public interface IField {
 
-	 /**
-	 * @param cardOne card set
-	 * @param cardTwo card set
-	 * @param cardThree card set
-	 */
-	void foundSet(ICard cardOne, ICard cardTwo, ICard cardThree);
-
 	/**
 	 * @return cardsInField
 	 */

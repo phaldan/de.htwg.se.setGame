@@ -31,25 +31,6 @@ public class Field implements IField {
     }
 
     @Override
-    public void foundSet(ICard cardOne, ICard cardTwo, ICard cardThree) {
-        if (containsCards(cardOne, cardTwo, cardThree) && checker.isSet(cardOne, cardTwo, cardThree)) {
-            removeCards(cardOne, cardTwo, cardThree);
-            restock();
-        }
-
-    }
-
-    private boolean containsCards(ICard one, ICard two, ICard three) {
-        return cards.contains(one) && cards.contains(two) && cards.contains(three);
-    }
-
-    private void removeCards(ICard one, ICard two, ICard three) {
-        cards.remove(one);
-        cards.remove(two);
-        cards.remove(three);
-    }
-
-    @Override
     public List<ICard> getCardsInField() {
         return cards;
     }
@@ -88,7 +69,7 @@ public class Field implements IField {
     }
 
     private boolean hasSet() {
-        if (!checker.check(cards)) {
+        if (!true) {
             removeCard();
             removeCard();
             return false;
