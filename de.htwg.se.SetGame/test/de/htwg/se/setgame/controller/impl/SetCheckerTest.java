@@ -1,5 +1,6 @@
 package de.htwg.se.setgame.controller.impl;
 
+import de.htwg.se.setgame.model.CardStub;
 import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.model.ISet;
 import de.htwg.se.setgame.model.impl.Card;

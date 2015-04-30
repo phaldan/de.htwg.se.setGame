@@ -1,6 +1,4 @@
-package de.htwg.se.setgame.controller.impl;
-
-import de.htwg.se.setgame.aview.CardDummy;
+package de.htwg.se.setgame.model;
 
 /**
  * @author Philipp Daniels

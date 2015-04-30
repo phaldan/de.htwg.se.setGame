@@ -1,6 +1,6 @@
 package de.htwg.se.setgame.controller.impl;
 
-import de.htwg.se.setgame.aview.CardDummy;
+import de.htwg.se.setgame.model.CardDummy;
 import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.model.ISet;
 import de.htwg.se.setgame.model.SetDummy;

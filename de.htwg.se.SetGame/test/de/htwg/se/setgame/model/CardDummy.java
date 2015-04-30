@@ -1,6 +1,4 @@
-package de.htwg.se.setgame.aview;
-
-import de.htwg.se.setgame.model.ICard;
+package de.htwg.se.setgame.model;
 
 /**
  * @author Philipp Daniels

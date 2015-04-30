@@ -1,6 +1,6 @@
 package de.htwg.se.setgame.model.impl;
 
-import de.htwg.se.setgame.aview.CardDummy;
+import de.htwg.se.setgame.model.CardDummy;
 import org.junit.Before;
 import org.junit.Test;
 
