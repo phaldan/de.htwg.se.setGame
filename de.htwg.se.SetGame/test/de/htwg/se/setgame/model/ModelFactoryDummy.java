@@ -19,4 +19,14 @@ public class ModelFactoryDummy implements ModelFactory {
     public ISet createSet() {
         return null;
     }
+
+    @Override
+    public ICardList createCardList() {
+        return null;
+    }
+
+    @Override
+    public ICard createCard() {
+        return null;
+    }
 }

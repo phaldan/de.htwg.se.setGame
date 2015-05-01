@@ -35,4 +35,14 @@ public class ModelFactoryImplTest {
     public void createSet_success() {
         assertNotNull(target.createSet());
     }
+
+    @Test
+    public void createCardList_success() {
+        assertNotNull(target.createCardList());
+    }
+
+    @Test
+    public void createCard_success() {
+        assertNotNull(target.createCard());
+    }
 }
