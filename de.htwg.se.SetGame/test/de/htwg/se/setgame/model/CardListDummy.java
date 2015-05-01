@@ -1,5 +1,6 @@
 package de.htwg.se.setgame.model;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -12,12 +13,12 @@ public class CardListDummy implements ICardList {
     }
 
     @Override
-    public boolean removeCard(ICard card) {
-        return false;
+    public ICard removeCard(ICard card) {
+        return null;
     }
 
     @Override
     public List<ICard> getCards() {
-        return null;
+        return new LinkedList<>();
     }
 }

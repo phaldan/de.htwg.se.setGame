@@ -14,9 +14,9 @@ public interface ICardList {
 
     /**
      * @param card Instance of ICard
-     * @return Returns true, when remove was successful
+     * @return Returns removed ICard instance, or null
      */
-    boolean removeCard(ICard card);
+    ICard removeCard(ICard card);
 
     /**
      * @return Returns a list of ICard instances

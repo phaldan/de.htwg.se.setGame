@@ -19,8 +19,8 @@ public class CardList implements ICardList {
     }
 
     @Override
-    public boolean removeCard(ICard card) {
-        return cards.remove(card);
+    public ICard removeCard(ICard card) {
+        return cards.remove(card) ? card : null;
     }
 
     @Override

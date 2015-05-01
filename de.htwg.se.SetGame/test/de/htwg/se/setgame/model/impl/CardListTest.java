@@ -36,7 +36,7 @@ public class CardListTest {
     public void removeCard_success() {
         CardDummy card = new CardDummy();
         target.addCard(card);
-        assertTrue(target.removeCard(card));
+        assertEquals(card, target.removeCard(card));
         assertFalse(target.getCards().contains(card));
         assertEquals(0, target.getCards().size());
     }
