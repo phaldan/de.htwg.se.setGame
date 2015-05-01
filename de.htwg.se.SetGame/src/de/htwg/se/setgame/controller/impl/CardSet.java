@@ -16,6 +16,10 @@ public class CardSet {
     private ModelFactory factory;
     private SetChecker checker;
 
+    /**
+     * @param factory Instance of ModelFactory
+     * @param checker Instance of SetChecker
+     */
     public CardSet(ModelFactory factory, SetChecker checker) {
         this.factory = factory;
         this.checker = checker;

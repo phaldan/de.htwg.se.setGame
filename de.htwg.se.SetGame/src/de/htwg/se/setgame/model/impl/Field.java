@@ -3,7 +3,6 @@ package de.htwg.se.setgame.model.impl;
 import java.util.LinkedList;
 import java.util.List;
 
-import de.htwg.se.setgame.controller.impl.SetChecker;
 import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.model.IField;
 import de.htwg.se.setgame.model.IPack;
@@ -19,7 +18,6 @@ public class Field implements IField {
     private int size = 0;
     private List<ICard> unusedCards;
     private List<ICard> cards = new LinkedList<>();
-    private SetChecker checker = new SetChecker();
 
     /**
      * startup of the objects
