@@ -15,10 +15,18 @@ public class Resize {
     private ICardList unusedCards;
     private int newSize;
 
+    /**
+     * @param checker Instance of CardSet
+     */
     public Resize(CardSet checker) {
         this.checker = checker;
     }
 
+    /**
+     * @param fieldCards Instance of ICardList
+     * @param unusedCards Instance of ICardList
+     * @param newSize New size for fieldCards
+     */
     public void resize(ICardList fieldCards, ICardList unusedCards, int newSize) {
         this.fieldCards = fieldCards;
         this.unusedCards = unusedCards;
