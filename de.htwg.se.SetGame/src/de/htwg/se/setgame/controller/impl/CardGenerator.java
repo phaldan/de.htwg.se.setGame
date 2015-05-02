@@ -4,6 +4,8 @@ import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.model.ICardList;
 import de.htwg.se.setgame.model.ModelFactory;
 
+import java.util.List;
+
 /**
  * @author Philipp Daniels
  */
@@ -39,6 +41,7 @@ public class CardGenerator {
     protected ICardList generate() {
         list = factory.createCardList();
         addForm();
+        randomize();
         return list;
     }
 
@@ -73,5 +76,19 @@ public class CardGenerator {
         card.setForm(form);
         card.setColor(color);
         return card;
+    }
+
+    private void randomize() {
+        List<ICard> cards = list.getCards();
+        int size = cards.size();
+        processRandomize(cards, size);
+    }
+
+    private void processRandomize(List<ICard> cards, int size) {
+        Double rand;
+        for (int i = 0; i < size; i++) {
+            rand = Math.random() * (size - 1);
+            cards.add(cards.remove(rand.intValue()));
+        }
     }
 }
