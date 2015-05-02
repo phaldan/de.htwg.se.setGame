@@ -2,14 +2,10 @@ package de.htwg.se.setgame.controller.impl;
 
 import de.htwg.se.setgame.controller.event.CloseEvent;
 import de.htwg.se.setgame.model.*;
-import de.htwg.se.setgame.model.impl.Field;
-import de.htwg.se.setgame.model.impl.Pack;
 import de.htwg.se.setgame.util.observer.Event;
 import de.htwg.se.setgame.util.observer.IObserver;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.LinkedList;
 
 import static org.junit.Assert.*;
 
@@ -19,13 +15,18 @@ import static org.junit.Assert.*;
 public class SetControllerTest {
 
     private SetController target;
-    private IField field;
     private Event event;
 
     private class FactoryStub extends ModelFactoryDummy {
+
         @Override
-        public IField createField() {
-            return field;
+        public ICardList createCardList() {
+            return new CardListDummy();
+        }
+
+        @Override
+        public ICard createCard() {
+            return new CardDummy();
         }
     }
 
@@ -38,7 +39,6 @@ public class SetControllerTest {
 
     @Before
     public void setUp() {
-        field = new Field(new Pack(), 3);
         event = null;
         target = new SetController(new FactoryStub());
     }
@@ -48,6 +48,33 @@ public class SetControllerTest {
         target.addObserver(new Observer());
         target.exit();
         assertEquals(CloseEvent.class, event.getClass());
+    }
+
+    @Test
+    public void getCardsAndTheIndexOfCardInField_fail() {
+        assertNotNull(target.getCardsAndTheIndexOfCardInField());
+        assertTrue(target.getCardsAndTheIndexOfCardInField().isEmpty());
+    }
+
+    @Test
+    public void getSetInField_fail() {
+        assertNotNull(target.getSetInField());
+        assertTrue(target.getSetInField().isEmpty());
+    }
+
+    @Test
+    public void stillSetInGame_fail() {
+        assertFalse(target.stillSetInGame());
+    }
+
+    @Test
+    public void getFirstInSet_fail() {
+        assertNull(target.getFirstInSet());
+    }
+
+    @Test
+    public void newGame_success() {
+        target.newGame();
     }
 
 }
