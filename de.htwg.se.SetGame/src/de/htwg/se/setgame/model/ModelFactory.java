@@ -6,11 +6,6 @@ package de.htwg.se.setgame.model;
 public interface ModelFactory {
 
     /**
-     * @return Return new IField instance
-     */
-    IField createField();
-
-    /**
      * @return Return new IPack instance
      */
     IPack createPack();
