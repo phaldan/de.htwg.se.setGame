@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class CardList implements ICardList {
 
-    private LinkedList<ICard> cards = new LinkedList<>();
+    private List<ICard> cards = new LinkedList<>();
 
     @Override
     public void addCard(ICard card) {
