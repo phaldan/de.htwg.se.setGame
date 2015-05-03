@@ -4,6 +4,7 @@ import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.model.IPlayer;
 import de.htwg.se.setgame.util.observer.Observable;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -75,6 +76,6 @@ public class ControllerDummy extends Observable implements IController {
 
     @Override
     public List<IPlayer> getPlayers() {
-        return null;
+        return new LinkedList<>();
     }
 }

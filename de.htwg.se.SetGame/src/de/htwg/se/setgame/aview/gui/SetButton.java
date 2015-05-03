@@ -3,6 +3,7 @@ package de.htwg.se.setgame.aview.gui;
 import de.htwg.se.setgame.controller.IController;
 import de.htwg.se.setgame.controller.event.CloseEvent;
 import de.htwg.se.setgame.model.ICard;
+import de.htwg.se.setgame.model.IPlayer;
 import de.htwg.se.setgame.util.observer.Event;
 
 import java.awt.*;
@@ -23,13 +24,11 @@ public class SetButton extends Panel {
     public static final String DIALOG_TITLE = "Choice";
     public static final String DIALOG_MESSAGE = "Which Player?";
     public static final String PLAYER1 = "Player 1";
-    public static final String PLAYER2 = "Player 2";
     public static final int GRID_COLS = 4;
     public static final int GRID_ROWS = 1;
-    private JTextField player1;
-    private JTextField player2;
     private JOptionPane pane;
     private GameField field;
+    private Map<JTextField, IPlayer> players = new HashMap<>();
 
     /**
      * @param controller Instance of IController
@@ -60,11 +59,15 @@ public class SetButton extends Panel {
     private JPanel createTextFields() {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(GRID_ROWS, GRID_COLS));
-
-        player1 = createPlayer(PLAYER1, panel);
-        player2 = createPlayer(PLAYER2, panel);
-
+        createPlayers(panel);
         return panel;
+    }
+
+    private void createPlayers(JPanel panel) {
+        for (IPlayer player: controller.getPlayers()) {
+            JTextField textField = createPlayer(player.getName(), panel);
+            players.put(textField, player);
+        }
     }
 
     private JTextField createPlayer(String text, JPanel panel) {
@@ -86,6 +89,7 @@ public class SetButton extends Panel {
         Object selected = getDialogValue();
         int player = selected.equals(PLAYER1) ? 1 : 2;
         LinkedList<ICard> list = new LinkedList<>(field.getSelected());
+        //TODO must be replaced with method to handle IPlayer instance
         controller.isASetForController(list.poll(), list.poll(), list.poll(), player);
     }
 
@@ -93,7 +97,7 @@ public class SetButton extends Panel {
         pane.setMessage(DIALOG_MESSAGE);
         pane.setMessageType(JOptionPane.QUESTION_MESSAGE);
         pane.setOptionType(JOptionPane.DEFAULT_OPTION);
-        pane.setOptions(new Object[]{PLAYER1, PLAYER2});
+        pane.setOptions(players.values().toArray());
         createDialog();
         return pane.getValue();
     }
@@ -105,8 +109,9 @@ public class SetButton extends Panel {
     }
 
     private void updateSB() {
-        player1.setText(Integer.toString(controller.getPlayerOnePoints()));
-        player2.setText(Integer.toString(controller.getPlayerTwoPoints()));
+        for (Map.Entry<JTextField, IPlayer> map: players.entrySet()) {
+            map.getKey().setText(Integer.toString(map.getValue().getScore()));
+        }
     }
 
     @Override
@@ -114,19 +119,5 @@ public class SetButton extends Panel {
         if (e == null || !e.getClass().equals(CloseEvent.class)) {
             updateSB();
         }
-    }
-
-    /**
-     * @return Return Player1 TextField
-     */
-    protected JTextField getPlayer1() {
-        return player1;
-    }
-
-    /**
-     * @return Return Player2 TextField
-     */
-    protected JTextField getPlayer2() {
-        return player2;
     }
 }
