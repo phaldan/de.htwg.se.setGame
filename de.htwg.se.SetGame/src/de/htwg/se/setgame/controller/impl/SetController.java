@@ -3,10 +3,7 @@ package de.htwg.se.setgame.controller.impl;
 import com.google.inject.Inject;
 import de.htwg.se.setgame.controller.IController;
 import de.htwg.se.setgame.controller.event.CloseEvent;
-import de.htwg.se.setgame.model.ICard;
-import de.htwg.se.setgame.model.ICardList;
-import de.htwg.se.setgame.model.ISet;
-import de.htwg.se.setgame.model.ModelFactory;
+import de.htwg.se.setgame.model.*;
 import de.htwg.se.setgame.util.observer.Observable;
 
 import java.util.LinkedList;
@@ -137,5 +134,10 @@ public class SetController extends Observable implements IController {
     @Override
     public void exit() {
         notifyObservers(new CloseEvent());
+    }
+
+    @Override
+    public List<IPlayer> getPlayers() {
+        return null;
     }
 }

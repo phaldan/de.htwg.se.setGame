@@ -1,6 +1,7 @@
 package de.htwg.se.setgame.controller;
 
 import de.htwg.se.setgame.model.ICard;
+import de.htwg.se.setgame.model.IPlayer;
 import de.htwg.se.setgame.util.observer.Observable;
 
 import java.util.List;
@@ -70,5 +71,10 @@ public class ControllerDummy extends Observable implements IController {
     @Override
     public void exit() {
 
+    }
+
+    @Override
+    public List<IPlayer> getPlayers() {
+        return null;
     }
 }

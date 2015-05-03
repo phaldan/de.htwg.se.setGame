@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import de.htwg.se.setgame.model.ICard;
+import de.htwg.se.setgame.model.IPlayer;
 import de.htwg.se.setgame.util.observer.IObservable;
 
 /**
@@ -73,5 +74,10 @@ public interface IController extends IObservable {
 	 * Close game.
 	 */
 	void exit();
+
+	/**
+	 * @return Get list of IPlayer instances
+	 */
+	List<IPlayer> getPlayers();
 
 }
