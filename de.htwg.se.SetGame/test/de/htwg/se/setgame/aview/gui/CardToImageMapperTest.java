@@ -1,7 +1,6 @@
 package de.htwg.se.setgame.aview.gui;
 
 import de.htwg.se.setgame.model.CardDummy;
-import de.htwg.se.setgame.model.impl.Card;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -58,16 +57,16 @@ public class CardToImageMapperTest {
 
     @Test
     public void getImage_success_first() {
-        assertGetImage(Card.COLOR_1, Card.COUNT_3, Card.FILL_1, Card.FORM_2, 19);
+        assertGetImage(CardToImageMapper.COLOR_1, CardToImageMapper.COUNT_3, CardToImageMapper.FILL_1, CardToImageMapper.FORM_2, 19);
     }
 
     @Test
     public void getImage_success_second() {
-        assertGetImage(Card.COLOR_3, Card.COUNT_2, Card.FILL_2, Card.FORM_1, 66);
+        assertGetImage(CardToImageMapper.COLOR_3, CardToImageMapper.COUNT_2, CardToImageMapper.FILL_2, CardToImageMapper.FORM_1, 66);
     }
 
     @Test
     public void getImage_success_third() {
-        assertGetImage(Card.COLOR_2, Card.COUNT_1, Card.FILL_3, Card.FORM_3, 35);
+        assertGetImage(CardToImageMapper.COLOR_2, CardToImageMapper.COUNT_1, CardToImageMapper.FILL_3, CardToImageMapper.FORM_3, 35);
     }
 }

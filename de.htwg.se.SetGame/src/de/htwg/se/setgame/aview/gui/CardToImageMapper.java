@@ -10,13 +10,22 @@ import java.util.Map;
  */
 public class CardToImageMapper {
 
+    protected static final String COLOR_1 = "red";
+    protected static final String COLOR_2 = "green";
+    protected static final String COLOR_3 = "purple";
+    protected static final String FORM_1 = "ovally";
+    protected static final String FORM_2 = "wave";
+    protected static final String FORM_3 = "balk";
+    protected static final String FILL_1 = "halffill";
+    protected static final String FILL_2 = "fill";
+    protected static final String FILL_3 = "empty";
+    protected static final int COUNT_1 = 1;
+    protected static final int COUNT_2 = 2;
+    protected static final int COUNT_3 = 3;
     private static final int COLOR_OFFSET = 27;
     private static final int COUNT_OFFSET = 9;
     private static final int FILL_OFFSET = 3;
     private static final int FORM_OFFSET = 1;
-    private static final int COUNT_1 = 1;
-    private static final int COUNT_2 = 2;
-    private static final int COUNT_3 = 3;
     public static final String NAME = "de.htwg.se.SetGame/src/pack/%d.gif";
 
     private Map<String, Integer> color = new HashMap<>();
@@ -35,9 +44,9 @@ public class CardToImageMapper {
     }
 
     private void initColor() {
-        color.put("red", 0);
-        color.put("green", 1);
-        color.put("purple", 2);
+        color.put(COLOR_1, 0);
+        color.put(COLOR_2, 1);
+        color.put(COLOR_3, 2);
     }
 
     private void initCount() {
@@ -47,15 +56,15 @@ public class CardToImageMapper {
     }
 
     private void initFill() {
-        fill.put("halffill", 0);
-        fill.put("fill", 1);
-        fill.put("empty", 2);
+        fill.put(FILL_1, 0);
+        fill.put(FILL_2, 1);
+        fill.put(FILL_3, 2);
     }
 
     private void initForm() {
-        form.put("ovally", 0);
-        form.put("wave", 1);
-        form.put("balk", 2);
+        form.put(FORM_1, 0);
+        form.put(FORM_2, 1);
+        form.put(FORM_3, 2);
     }
 
     /**
