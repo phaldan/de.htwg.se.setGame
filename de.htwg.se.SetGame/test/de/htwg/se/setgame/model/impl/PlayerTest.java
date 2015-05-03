@@ -42,4 +42,10 @@ public class PlayerTest {
         target.setScore(50);
         assertEquals(50, target.getScore());
     }
+
+    @Test
+    public void toString_success() {
+        target.setName("name");
+        assertTrue(target.toString().contains("name"));
+    }
 }
