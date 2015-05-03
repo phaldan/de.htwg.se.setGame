@@ -2,6 +2,7 @@ package de.htwg.se.setgame.controller.impl;
 
 import com.google.inject.Inject;
 import de.htwg.se.setgame.controller.IController;
+import de.htwg.se.setgame.controller.event.AddEvent;
 import de.htwg.se.setgame.controller.event.CloseEvent;
 import de.htwg.se.setgame.model.*;
 import de.htwg.se.setgame.util.observer.Observable;
@@ -101,12 +102,19 @@ public class SetController extends Observable implements IController {
 
     @Override
     public void add(ISet set, IPlayer player) {
-
+        if (getPlayers().contains(player) && checker.isSet(set)) {
+            fieldCards.removeCard(set.getFirst());
+            fieldCards.removeCard(set.getSecond());
+            fieldCards.removeCard(set.getThird());
+            setFieldSize(size);
+            player.setScore(player.getScore() + 1);
+            notifyObservers(new AddEvent());
+        }
     }
 
     @Override
     public ISet createSet() {
-        return null;
+        return factory.createSet();
     }
 
     @Override
