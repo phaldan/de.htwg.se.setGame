@@ -22,5 +22,10 @@ public class ModelFactoryImpl implements ModelFactory {
         return new Card();
     }
 
+    @Override
+    public IPlayer createPlayer() {
+        return new Player();
+    }
+
 
 }

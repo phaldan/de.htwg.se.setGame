@@ -19,4 +19,9 @@ public class ModelFactoryDummy implements ModelFactory {
     public ICard createCard() {
         return null;
     }
+
+    @Override
+    public IPlayer createPlayer() {
+        return null;
+    }
 }

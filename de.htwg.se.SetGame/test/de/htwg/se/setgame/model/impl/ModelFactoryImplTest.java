@@ -31,4 +31,9 @@ public class ModelFactoryImplTest {
     public void createCard_success() {
         assertNotNull(target.createCard());
     }
+
+    @Test
+    public void createPlayer_success() {
+        assertNotNull(target.createPlayer());
+    }
 }

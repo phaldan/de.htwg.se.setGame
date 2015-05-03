@@ -19,4 +19,9 @@ public interface ModelFactory {
      * @return Return new ICard instance
      */
     ICard createCard();
+
+    /**
+     * @return Return new IPlayer instance
+     */
+    IPlayer createPlayer();
 }
