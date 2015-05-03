@@ -28,6 +28,11 @@ public class SetControllerTest {
         public ICard createCard() {
             return new CardDummy();
         }
+
+        @Override
+        public IPlayer createPlayer() {
+            return new PlayerDummy();
+        }
     }
 
     private class Observer implements IObserver {
@@ -77,4 +82,10 @@ public class SetControllerTest {
         target.newGame();
     }
 
+    @Test
+    public void getPlayers_success() {
+        assertNotNull(target.getPlayers());
+        assertFalse(target.getPlayers().isEmpty());
+        assertEquals(2, target.getPlayers().size());
+    }
 }

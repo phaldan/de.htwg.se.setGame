@@ -29,8 +29,10 @@ public class SetController extends Observable implements IController {
     private ICardList unusedCards;
     private Resize resize;
     private int size = INITIAL_FIELD_SIZE;
+    private List<IPlayer> players = new LinkedList<>();
     private int playerOneCounter = 0;
     private int playerTwoCounter = 0;
+
 
     /**
      * @param factory Instance of ModelFactory
@@ -42,7 +44,20 @@ public class SetController extends Observable implements IController {
         cardSet = new CardSet(factory, checker);
         generator = new CardGenerator(factory);
         resize = new Resize(cardSet);
+        init();
+    }
+
+    private void init() {
         fieldCards = factory.createCardList();
+
+        players.add(createPlayer("Player One"));
+        players.add(createPlayer("Player Two"));
+    }
+
+    private IPlayer createPlayer(String name) {
+        IPlayer player = factory.createPlayer();
+        player.setName(name);
+        return player;
     }
 
     @Override
@@ -138,6 +153,6 @@ public class SetController extends Observable implements IController {
 
     @Override
     public List<IPlayer> getPlayers() {
-        return null;
+        return players;
     }
 }
