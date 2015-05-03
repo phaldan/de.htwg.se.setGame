@@ -18,11 +18,6 @@ public class ModelFactoryImplTest {
     }
 
     @Test
-    public void createPack_success() {
-        assertNotNull(target.createPack());
-    }
-
-    @Test
     public void createSet_success() {
         assertNotNull(target.createSet());
     }

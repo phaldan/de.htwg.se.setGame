@@ -8,11 +8,6 @@ import de.htwg.se.setgame.model.*;
 public class ModelFactoryImpl implements ModelFactory {
 
     @Override
-    public IPack createPack() {
-        return new Pack();
-    }
-
-    @Override
     public ISet createSet() {
         return new Set();
     }

@@ -6,11 +6,6 @@ package de.htwg.se.setgame.model;
 public class ModelFactoryDummy implements ModelFactory {
 
     @Override
-    public IPack createPack() {
-        return null;
-    }
-
-    @Override
     public ISet createSet() {
         return null;
     }
