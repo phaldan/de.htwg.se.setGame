@@ -1,9 +1,7 @@
 package de.htwg.se.setgame.aview.gui;
 
 import de.htwg.se.setgame.controller.ControllerDummy;
-import de.htwg.se.setgame.model.ICard;
-import de.htwg.se.setgame.model.IPlayer;
-import de.htwg.se.setgame.model.PlayerDummy;
+import de.htwg.se.setgame.model.*;
 import de.htwg.se.setgame.util.observer.Event;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,19 +21,25 @@ public class SetButtonTest {
 
     private SetButton target;
     private IPlayer player;
+    private ISet set;
     private Object paneMessage;
     private Object[] paneOptions;
     private Object paneValue;
     private boolean paneVisible;
     private String paneTitle;
 
-    private class ControllerStub extends ControllerDummy {
+    private class Controller extends ControllerDummy {
 
         @Override
         public List<IPlayer> getPlayers() {
             List<IPlayer> players = new LinkedList<>();
             players.add(player);
             return players;
+        }
+
+        @Override
+        public ISet createSet() {
+            return set;
         }
     }
 
@@ -89,7 +93,7 @@ public class SetButtonTest {
     @Before
     public void setUp() {
         player = new PlayerDummy();
-        target = new SetButton(new ControllerStub(), new PaneMock(), new Field());
+        target = new SetButton(new Controller(), new PaneMock(), new Field());
     }
 
     @Test
@@ -103,6 +107,7 @@ public class SetButtonTest {
     }
 
     private void assertActionPerformed(Object value) {
+        set = new SetDummy();
         paneValue = value;
         target.actionPerformed(null);
 
@@ -112,6 +117,6 @@ public class SetButtonTest {
         assertNotNull(paneOptions);
         assertTrue(paneOptions.length > 0);
 
-        //TODO check parameter of isASetForController call
+        //TODO check parameter of IController.add() call
     }
 }

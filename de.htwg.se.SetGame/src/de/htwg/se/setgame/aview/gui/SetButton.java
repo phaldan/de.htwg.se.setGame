@@ -4,6 +4,7 @@ import de.htwg.se.setgame.controller.IController;
 import de.htwg.se.setgame.controller.event.CloseEvent;
 import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.model.IPlayer;
+import de.htwg.se.setgame.model.ISet;
 import de.htwg.se.setgame.util.observer.Event;
 
 import java.awt.*;
@@ -23,7 +24,6 @@ public class SetButton extends Panel {
     public static final String DEFAULT_TEXT_FIELD = "0";
     public static final String DIALOG_TITLE = "Choice";
     public static final String DIALOG_MESSAGE = "Which Player?";
-    public static final String PLAYER1 = "Player 1";
     public static final int GRID_COLS = 4;
     public static final int GRID_ROWS = 1;
     private JOptionPane pane;
@@ -87,10 +87,14 @@ public class SetButton extends Panel {
 
     private void choice() {
         Object selected = getDialogValue();
-        int player = selected.equals(PLAYER1) ? 1 : 2;
-        LinkedList<ICard> list = new LinkedList<>(field.getSelected());
-        //TODO must be replaced with method to handle IPlayer instance
-        controller.isASetForController(list.poll(), list.poll(), list.poll(), player);
+        if (selected != null) {
+            LinkedList<ICard> list = new LinkedList<>(field.getSelected());
+            ISet set = controller.createSet();
+            set.setFirst(list.poll());
+            set.setSecond(list.poll());
+            set.setThird(list.poll());
+            controller.add(set, (IPlayer) selected);
+        }
     }
 
     private Object getDialogValue() {
