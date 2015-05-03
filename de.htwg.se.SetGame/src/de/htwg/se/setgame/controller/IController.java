@@ -5,6 +5,7 @@ import java.util.Map;
 
 import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.model.IPlayer;
+import de.htwg.se.setgame.model.ISet;
 import de.htwg.se.setgame.util.observer.IObservable;
 
 /**
@@ -19,6 +20,17 @@ public interface IController extends IObservable {
 	 * @param player which player is
 	 */
 	void isASetForController(ICard cardOne, ICard cardTwo, ICard cardThree, int player);
+
+	/**
+	 * @param set Instance of ISet
+	 * @param player Instance of IPlayer
+	 */
+	void add(ISet set, IPlayer player);
+
+	/**
+	 * @return Returns new instance of ISet
+	 */
+	ISet createSet();
 
 	/**
 	 * @return look trough the pack and see if still a set

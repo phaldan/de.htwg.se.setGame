@@ -100,6 +100,16 @@ public class SetController extends Observable implements IController {
     }
 
     @Override
+    public void add(ISet set, IPlayer player) {
+
+    }
+
+    @Override
+    public ISet createSet() {
+        return null;
+    }
+
+    @Override
     public boolean stillSetInGame() {
         return !getSetInField().isEmpty();
     }
