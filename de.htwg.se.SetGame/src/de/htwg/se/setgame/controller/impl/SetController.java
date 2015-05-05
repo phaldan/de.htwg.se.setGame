@@ -139,16 +139,6 @@ public class SetController extends Observable implements IController {
     }
 
     @Override
-    public int getPlayerOne() {
-        return SetController.PLAYER_ONE;
-    }
-
-    @Override
-    public int getPlayerTwo() {
-        return SetController.PLAYER_TWO;
-    }
-
-    @Override
     public Map<Integer, ICard> getCardsAndTheIndexOfCardInField() {
         Map<Integer, ICard> map = new TreeMap<>();
         List<ICard> list = fieldCards.getCards();

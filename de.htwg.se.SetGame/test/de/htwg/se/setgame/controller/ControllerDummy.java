@@ -51,16 +51,6 @@ public class ControllerDummy extends Observable implements IController {
     }
 
     @Override
-    public int getPlayerOne() {
-        return 0;
-    }
-
-    @Override
-    public int getPlayerTwo() {
-        return 0;
-    }
-
-    @Override
     public void newGame() {
 
     }

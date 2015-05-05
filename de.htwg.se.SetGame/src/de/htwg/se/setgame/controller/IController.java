@@ -53,16 +53,6 @@ public interface IController extends IObservable {
 	int getPlayerTwoPoints();
 
 	/**
-	 * @return player one
-	 */
-	int getPlayerOne();
-
-	/**
-	 * @return player two
-	 */
-	int getPlayerTwo();
-
-	/**
 	 * Reset game
 	 */
 	void newGame();
