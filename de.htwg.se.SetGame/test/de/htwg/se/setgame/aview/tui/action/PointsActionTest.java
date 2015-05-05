@@ -3,8 +3,13 @@ package de.htwg.se.setgame.aview.tui.action;
 import static org.junit.Assert.*;
 
 import de.htwg.se.setgame.controller.ControllerDummy;
+import de.htwg.se.setgame.model.IPlayer;
+import de.htwg.se.setgame.model.PlayerDummy;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author Philipp Daniels
@@ -12,25 +17,41 @@ import org.junit.Test;
 public class PointsActionTest {
 
     private PointsAction target;
-    private int pointsOne;
-    private int pointsTwo;
+    private List<IPlayer> players;
 
     private class Controller extends ControllerDummy {
 
         @Override
-        public int getPlayerOnePoints() {
-            return pointsOne;
+        public List<IPlayer> getPlayers() {
+            return players;
+        }
+    }
+
+    private class Player extends PlayerDummy {
+
+        private String name;
+        private int score;
+
+        public Player(String playerName, int playerScore) {
+            name = playerName;
+            score = playerScore;
         }
 
         @Override
-        public int getPlayerTwoPoints() {
-            return pointsTwo;
+        public String getName() {
+            return name;
+        }
+
+        @Override
+        public int getScore() {
+            return score;
         }
     }
 
     @Before
     public void setUp() {
         target = new PointsAction(new Controller());
+        players = new LinkedList<>();
     }
 
     @Test
@@ -47,13 +68,10 @@ public class PointsActionTest {
 
     @Test
     public void execute_success() {
-        pointsOne = 12;
-        pointsTwo = 5;
+        players.add(new Player("player", 1337));
 
         String result = target.execute(null);
         assertNotNull(result);
-        assertTrue(result.contains(Integer.toString(pointsOne)));
-        assertTrue(result.contains(Integer.toString(pointsTwo)));
-        assertEquals(String.format(PointsAction.OUTPUT, pointsOne, pointsTwo), result);
+        assertEquals(String.format(PointsAction.OUTPUT, "player", 1337), result);
     }
 }

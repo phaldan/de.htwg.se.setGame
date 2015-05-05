@@ -2,6 +2,7 @@ package de.htwg.se.setgame.aview.tui.action;
 
 import de.htwg.se.setgame.aview.tui.Action;
 import de.htwg.se.setgame.controller.IController;
+import de.htwg.se.setgame.model.IPlayer;
 
 /**
  * @author Philipp Daniels
@@ -10,7 +11,7 @@ public class PointsAction extends Action {
 
     public static final String CMD = "p";
     public static final String DESC = "If you want to know the game point";
-    public static final String OUTPUT = "Player one = %s%nPlayer Two = %s%n";
+    public static final String OUTPUT = "%s = %d Points%n";
 
     /**
      * @param controller Instance of IController
@@ -31,6 +32,10 @@ public class PointsAction extends Action {
 
     @Override
     public String execute(String[] input) {
-        return String.format(PointsAction.OUTPUT, getController().getPlayerOnePoints(), getController().getPlayerTwoPoints());
+        StringBuilder builder = new StringBuilder();
+        for (IPlayer player: getController().getPlayers()) {
+            builder.append(String.format(OUTPUT, player.getName(), player.getScore()));
+        }
+        return builder.toString();
     }
 }
