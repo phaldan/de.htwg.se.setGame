@@ -2,12 +2,13 @@ package de.htwg.se.setgame.aview.tui.action;
 
 import static org.junit.Assert.*;
 
-import de.htwg.se.setgame.model.CardDummy;
+import de.htwg.se.setgame.model.*;
 import de.htwg.se.setgame.controller.ControllerDummy;
-import de.htwg.se.setgame.model.ICard;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -18,10 +19,9 @@ public class SetActionTest {
 
     private SetAction target;
     private Map<Integer, ICard> cards;
-    private ICard setCardOne;
-    private ICard setCardTwo;
-    private ICard setCardThree;
-    private int setPlayer;
+    private List<IPlayer> players;
+    private ISet setSpy;
+    private IPlayer playerSpy;
 
     private class Controller extends ControllerDummy {
 
@@ -31,27 +31,63 @@ public class SetActionTest {
         }
 
         @Override
-        public int getPlayerOne() {
-            return 1;
+        public List<IPlayer> getPlayers() {
+            return players;
         }
 
         @Override
-        public int getPlayerTwo() {
-            return 2;
+        public ISet createSet() {
+            return new Set();
         }
 
         @Override
-        public void isASetForController(ICard cardOne, ICard cardTwo, ICard cardThree, int player) {
-            setCardOne = cardOne;
-            setCardTwo = cardTwo;
-            setCardThree = cardThree;
-            setPlayer = player;
+        public void add(ISet set, IPlayer player) {
+            setSpy = set;
+            playerSpy = player;
+        }
+    }
+
+    private class Set extends SetDummy {
+
+        private ICard one;
+        private ICard two;
+        private ICard three;
+
+        @Override
+        public ICard getFirst() {
+            return one;
+        }
+
+        @Override
+        public ICard getSecond() {
+            return two;
+        }
+
+        @Override
+        public ICard getThird() {
+            return three;
+        }
+
+        @Override
+        public void setFirst(ICard first) {
+            one = first;
+        }
+
+        @Override
+        public void setSecond(ICard second) {
+            two = second;
+        }
+
+        @Override
+        public void setThird(ICard third) {
+            three = third;
         }
     }
 
     @Before
     public void setUp() {
         target = new SetAction(new Controller());
+        players = new LinkedList<>();
     }
 
     @Test
@@ -81,7 +117,7 @@ public class SetActionTest {
 
     @Test
     public void execute_failPlayer() {
-        String result = target.execute(new String[]{"", "test", "0", "1", "2"});
+        String result = target.execute(new String[]{"", "0", "0", "1", "2"});
         assertNotNull(result);
         assertEquals(SetAction.INVALID_PLAYER, result);
     }
@@ -89,29 +125,34 @@ public class SetActionTest {
     @Test
     public void execute_failWrongCard() {
         cards = new TreeMap<>();
+        players.add(new PlayerDummy());
 
-        String result = target.execute(new String[]{"",SetAction.PLAYER1, "0", "1", "2"});
+        String result = target.execute(new String[]{"", "0", "0", "1", "2"});
         assertNotNull(result);
         assertEquals(SetAction.INVALID_CARD, result);
     }
 
     @Test
     public void execute_success() {
-        cards = new TreeMap<>();
-
         ICard one = new CardDummy();
-        cards.put(0, one);
         ICard two = new CardDummy();
-        cards.put(1, two);
         ICard three = new CardDummy();
+
+        cards = new TreeMap<>();
+        cards.put(0, one);
+        cards.put(1, two);
         cards.put(2, three);
 
-        String result = target.execute(new String[]{"",SetAction.PLAYER1, "0", "1", "2"});
+        IPlayer player = new PlayerDummy();
+        players.add(player);
+
+        String result = target.execute(new String[]{"","0", "0", "1", "2"});
         assertNotNull(result);
-        assertEquals(one, setCardOne);
-        assertEquals(two, setCardTwo);
-        assertEquals(three, setCardThree);
-        assertEquals(1, setPlayer);
         assertEquals(SetAction.OUTPUT, result);
+
+        assertEquals(one, setSpy.getFirst());
+        assertEquals(two, setSpy.getSecond());
+        assertEquals(three, setSpy.getThird());
+        assertEquals(player, playerSpy);
     }
 }
