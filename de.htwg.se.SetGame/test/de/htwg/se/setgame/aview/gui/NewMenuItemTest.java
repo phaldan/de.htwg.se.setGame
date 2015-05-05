@@ -1,12 +1,16 @@
 package de.htwg.se.setgame.aview.gui;
 
 import de.htwg.se.setgame.controller.ControllerDummy;
+import de.htwg.se.setgame.model.IPlayer;
+import de.htwg.se.setgame.model.PlayerStub;
 import org.junit.Before;
 import org.junit.Test;
 
 import javax.swing.*;
 
 import java.awt.*;
+import java.util.*;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -23,8 +27,7 @@ public class NewMenuItemTest {
     private String paneTitle;
     private boolean paneVisible;
     private Object paneValue;
-    private int points1;
-    private int points2;
+    private List<IPlayer> players;
 
     private class Controller extends ControllerDummy {
 
@@ -34,13 +37,8 @@ public class NewMenuItemTest {
         }
 
         @Override
-        public int getPlayerOnePoints() {
-            return points1;
-        }
-
-        @Override
-        public int getPlayerTwoPoints() {
-            return points2;
+        public List<IPlayer> getPlayers() {
+            return players;
         }
     }
 
@@ -86,10 +84,9 @@ public class NewMenuItemTest {
         newGame = false;
         paneVisible = false;
         paneValue = null;
-        points1 = 0;
-        points2 = 0;
 
         target = new NewMenuItem(controller, pane);
+        players = new LinkedList<>();
     }
 
     @Test
@@ -104,27 +101,42 @@ public class NewMenuItemTest {
         paneValue = JOptionPane.NO_OPTION;
         target.execute();
         assertFalse(newGame);
-        assertExecute(NewMenuItem.TITLE3, NewMenuItem.MESSAGE4);
+        assertExecute(NewMenuItem.TITLE_RESTART, NewMenuItem.MSG_RESTART);
     }
 
     @Test
     public void execute_success_nobodyWins() {
-        assertExecuteSuccess(NewMenuItem.TITLE2, NewMenuItem.MESSAGE3);
+        assertExecuteNew(NewMenuItem.TITLE_DRAW, NewMenuItem.MSG_DRAW);
     }
 
     @Test
-    public void execute_success_playerOneWins() {
-        points1 = 10;
-        assertExecuteSuccess(NewMenuItem.TITLE1, NewMenuItem.MESSAGE1);
+    public void execute_success_playerWins() {
+        players.add(new PlayerStub("player", 0));
+        assertExecuteNew(NewMenuItem.TITLE_WINNER, String.format(NewMenuItem.MSG_WINNER, "player"));
     }
 
     @Test
-    public void execute_success_playerTwoWins() {
-        points2 = 10;
-        assertExecuteSuccess(NewMenuItem.TITLE1, NewMenuItem.MESSAGE2);
+    public void execute_success_twoPlayerButNoWinner() {
+        players.add(new PlayerStub("player1", 0));
+        players.add(new PlayerStub("player2", 0));
+        assertExecuteNew(NewMenuItem.TITLE_DRAW, NewMenuItem.MSG_DRAW);
     }
 
-    private void assertExecuteSuccess(String title, String message) {
+    @Test
+    public void execute_success_twoPlayerWinnerIsPlayer1() {
+        players.add(new PlayerStub("player1", 10));
+        players.add(new PlayerStub("player2", 2));
+        assertExecuteNew(NewMenuItem.TITLE_WINNER, String.format(NewMenuItem.MSG_WINNER, "player1"));
+    }
+
+    @Test
+    public void execute_success_twoPlayerWinnerIsPlayer2() {
+        players.add(new PlayerStub("player1", 3));
+        players.add(new PlayerStub("player2", 7));
+        assertExecuteNew(NewMenuItem.TITLE_WINNER, String.format(NewMenuItem.MSG_WINNER, "player2"));
+    }
+
+    private void assertExecuteNew(String title, String message) {
         paneValue = JOptionPane.YES_OPTION;
         target.execute();
         assertTrue(newGame);

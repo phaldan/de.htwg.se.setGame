@@ -1,8 +1,10 @@
 package de.htwg.se.setgame.aview.gui;
 
 import de.htwg.se.setgame.controller.IController;
+import de.htwg.se.setgame.model.IPlayer;
 
 import javax.swing.*;
+import java.util.List;
 
 /**
  * @author Philipp Daniels
@@ -10,13 +12,12 @@ import javax.swing.*;
 public class NewMenuItem extends MenuItem {
 
     public static final String TEXT = "New Game";
-    public static final String TITLE1 = "Winner";
-    public static final String TITLE2 = "Fail";
-    public static final String TITLE3 = "Choice";
-    public static final String MESSAGE1 = "PlayerOne wins!";
-    public static final String MESSAGE2 = "PlayerTwo wins!";
-    public static final String MESSAGE3 = "Dead heat!";
-    public static final String MESSAGE4 = "Really start a new game?";
+    public static final String TITLE_WINNER = "Winner";
+    public static final String TITLE_DRAW = "Fail";
+    public static final String TITLE_RESTART = "Choice";
+    public static final String MSG_WINNER = "%s wins!";
+    public static final String MSG_DRAW = "Dead heat!";
+    public static final String MSG_RESTART = "Really start a new game?";
 
     /**
      * @param controller Instance of IController
@@ -28,7 +29,7 @@ public class NewMenuItem extends MenuItem {
 
     @Override
     public void execute() {
-        if (showConfirm(TITLE3, MESSAGE4)) {
+        if (showConfirm(TITLE_RESTART, MSG_RESTART)) {
             handleMessage();
             getController().newGame();
         }
@@ -41,25 +42,27 @@ public class NewMenuItem extends MenuItem {
     }
 
     private void handleMessage() {
-        if(getController().getPlayerOnePoints() > getController().getPlayerTwoPoints()) {
-            playerOneWin();
-        } else if (getController().getPlayerOnePoints() < getController().getPlayerTwoPoints()) {
-            playerTwoWin();
+        IPlayer player = getWinner();
+        if(player != null) {
+            showMessage(TITLE_WINNER, String.format(MSG_WINNER, player));
         } else {
-            noOneWin();
+            showMessage(TITLE_DRAW, MSG_DRAW);
         }
     }
 
-    private void playerOneWin() {
-        showMessage(TITLE1, MESSAGE1);
-    }
-
-    private void playerTwoWin() {
-        showMessage(TITLE1, MESSAGE2);
-    }
-
-    private void noOneWin() {
-        showMessage(TITLE2, MESSAGE3);
+    private IPlayer getWinner() {
+        List<IPlayer> players = getController().getPlayers();
+        int max = -1;
+        IPlayer winner = null;
+        for (IPlayer player: players) {
+            if (player.getScore() > max) {
+                max = player.getScore();
+                winner = player;
+            } else if (player.getScore() == max) {
+                winner = null;
+            }
+        }
+        return winner;
     }
 
     private void showMessage(String title, String message) {

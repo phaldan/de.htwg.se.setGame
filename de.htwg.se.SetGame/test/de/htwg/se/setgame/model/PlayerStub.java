@@ -22,4 +22,9 @@ public class PlayerStub extends PlayerDummy {
     public int getScore() {
         return score;
     }
+
+    @Override
+    public String toString() {
+        return getName();
+    }
 }
