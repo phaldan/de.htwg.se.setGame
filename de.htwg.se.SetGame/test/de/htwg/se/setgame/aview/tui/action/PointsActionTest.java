@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import de.htwg.se.setgame.controller.ControllerDummy;
 import de.htwg.se.setgame.model.IPlayer;
-import de.htwg.se.setgame.model.PlayerDummy;
+import de.htwg.se.setgame.model.PlayerStub;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,27 +24,6 @@ public class PointsActionTest {
         @Override
         public List<IPlayer> getPlayers() {
             return players;
-        }
-    }
-
-    private class Player extends PlayerDummy {
-
-        private String name;
-        private int score;
-
-        public Player(String playerName, int playerScore) {
-            name = playerName;
-            score = playerScore;
-        }
-
-        @Override
-        public String getName() {
-            return name;
-        }
-
-        @Override
-        public int getScore() {
-            return score;
         }
     }
 
@@ -68,7 +47,7 @@ public class PointsActionTest {
 
     @Test
     public void execute_success() {
-        players.add(new Player("player", 1337));
+        players.add(new PlayerStub("player", 1337));
 
         String result = target.execute(null);
         assertNotNull(result);
