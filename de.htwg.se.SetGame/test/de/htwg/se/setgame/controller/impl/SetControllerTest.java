@@ -7,6 +7,9 @@ import de.htwg.se.setgame.util.observer.IObserver;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 /**
@@ -183,5 +186,10 @@ public class SetControllerTest {
         target.newGame();
         target.add(set, null);
         assertNotNull(event);
+    }
+
+    @Test
+    public void getSet_fail() {
+        assertNull(target.getSet());
     }
 }
