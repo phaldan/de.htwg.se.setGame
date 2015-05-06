@@ -26,11 +26,6 @@ public class ControllerDummy extends Observable implements IController {
     }
 
     @Override
-    public List<ICard> getSetInField() {
-        return null;
-    }
-
-    @Override
     public ISet getSet() {
         return null;
     }

@@ -108,12 +108,6 @@ public class SetController extends Observable implements IController {
     }
 
     @Override
-    public List<ICard> getSetInField() {
-        ISet set = cardSet.getSet(fieldCards.getCards());
-        return (set == null) ? new LinkedList<ICard>() : set.getAll();
-    }
-
-    @Override
     public ISet getSet() {
         return cardSet.getSet(fieldCards.getCards());
     }

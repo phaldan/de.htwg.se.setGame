@@ -25,11 +25,6 @@ public interface IController extends IObservable {
 	ISet createSet();
 
 	/**
-	 * @return return the set in field
-	 */
-	List<ICard> getSetInField();
-
-	/**
 	 * @return Return instance of ISet or null, when no valid set exists.
 	 */
 	ISet getSet();

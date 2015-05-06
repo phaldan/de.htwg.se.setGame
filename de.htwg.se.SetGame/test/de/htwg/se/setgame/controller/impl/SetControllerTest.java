@@ -113,12 +113,6 @@ public class SetControllerTest {
     }
 
     @Test
-    public void getSetInField_fail() {
-        assertNotNull(target.getSetInField());
-        assertTrue(target.getSetInField().isEmpty());
-    }
-
-    @Test
     public void newGame_success() {
         target.newGame();
     }
