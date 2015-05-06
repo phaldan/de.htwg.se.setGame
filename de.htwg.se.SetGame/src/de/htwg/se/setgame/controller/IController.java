@@ -25,11 +25,6 @@ public interface IController extends IObservable {
 	ISet createSet();
 
 	/**
-	 * @return look trough the pack and see if still a set
-	 */
-	boolean stillSetInGame();
-
-	/**
 	 * @return return the set in field
 	 */
 	List<ICard> getSetInField();

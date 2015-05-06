@@ -119,11 +119,6 @@ public class SetControllerTest {
     }
 
     @Test
-    public void stillSetInGame_fail() {
-        assertFalse(target.stillSetInGame());
-    }
-
-    @Test
     public void newGame_success() {
         target.newGame();
     }

@@ -108,11 +108,6 @@ public class SetController extends Observable implements IController {
     }
 
     @Override
-    public boolean stillSetInGame() {
-        return !getSetInField().isEmpty();
-    }
-
-    @Override
     public List<ICard> getSetInField() {
         ISet set = cardSet.getSet(fieldCards.getCards());
         return (set == null) ? new LinkedList<ICard>() : set.getAll();
