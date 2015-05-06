@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import de.htwg.se.setgame.model.CardDummy;
 import de.htwg.se.setgame.controller.ControllerDummy;
 import de.htwg.se.setgame.model.ICard;
+import de.htwg.se.setgame.model.ISet;
+import de.htwg.se.setgame.model.SetDummy;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -22,13 +24,21 @@ public class SolutionActionTest {
     private class Controller extends ControllerDummy {
 
         @Override
-        public List<ICard> getSetInField() {
-            return set;
+        public ISet getSet() {
+            return new Set();
         }
 
         @Override
         public Map<Integer, ICard> getCardsAndTheIndexOfCardInField() {
             return map;
+        }
+    }
+
+    private class Set extends SetDummy {
+
+        @Override
+        public List<ICard> getAll() {
+            return set;
         }
     }
 

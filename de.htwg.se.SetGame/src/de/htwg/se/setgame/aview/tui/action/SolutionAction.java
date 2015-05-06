@@ -40,7 +40,7 @@ public class SolutionAction extends Action {
     }
 
     private StringBuilder process(StringBuilder builder) {
-        for (ICard card: getController().getSetInField()) {
+        for (ICard card: getController().getSet().getAll()) {
             iterateCards(builder, card);
         }
         return builder;
