@@ -43,6 +43,11 @@ public interface IController extends IObservable {
 	List<ICard> getSetInField();
 
 	/**
+	 * @return Return instance of ISet or null, when no valid set exists.
+	 */
+	ISet getSet();
+
+	/**
 	 * @return points player one
 	 */
 	int getPlayerOnePoints();

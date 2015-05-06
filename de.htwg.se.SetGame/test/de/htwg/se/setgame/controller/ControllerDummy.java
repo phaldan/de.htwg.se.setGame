@@ -41,6 +41,11 @@ public class ControllerDummy extends Observable implements IController {
     }
 
     @Override
+    public ISet getSet() {
+        return null;
+    }
+
+    @Override
     public int getPlayerOnePoints() {
         return 0;
     }
