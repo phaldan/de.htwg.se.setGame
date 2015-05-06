@@ -7,6 +7,8 @@ import de.htwg.se.setgame.model.CardDummy;
 import de.htwg.se.setgame.controller.ControllerDummy;
 import de.htwg.se.setgame.controller.event.CloseEvent;
 import de.htwg.se.setgame.model.ICard;
+import de.htwg.se.setgame.model.IPlayer;
+import de.htwg.se.setgame.model.PlayerStub;
 import de.htwg.se.setgame.util.observer.Event;
 import org.apache.log4j.Logger;
 import org.junit.Before;
@@ -26,11 +28,10 @@ public class TextUITest {
     private TextUI target;
     private Map<Integer, ICard> cards;
     private boolean setInGame;
-    private int player1;
-    private int player2;
     private Action action;
     private boolean actionExecute;
     private List<Action> actions;
+    private List<IPlayer> players;
 
     private class Controller extends ControllerDummy {
 
@@ -45,13 +46,8 @@ public class TextUITest {
         }
 
         @Override
-        public int getPlayerOnePoints() {
-            return player1;
-        }
-
-        @Override
-        public int getPlayerTwoPoints() {
-            return player2;
+        public List<IPlayer> getPlayers() {
+            return players;
         }
     }
 
@@ -108,10 +104,9 @@ public class TextUITest {
 
         cards = new TreeMap<>();
         setInGame = false;
-        player1 = 0;
-        player2 = 0;
         actionExecute = false;
         actions = new LinkedList<>();
+        players = new LinkedList<>();
 
         testAppender = new TestAppender();
         Logger.getRootLogger().removeAllAppenders();
@@ -152,19 +147,13 @@ public class TextUITest {
 
     @Test
     public void processInputLine_failNobodyWinsNoSet() {
-        assertWinner(TextUI.WINNER_NOBODY);
+        assertWinner(TextUI.MSG_DRAW);
     }
 
     @Test
     public void processInputLine_failPlayerWins() {
-        player1 = 1;
-        assertWinner(TextUI.WINNER_PLAYER1);
-    }
-
-    @Test
-    public void processInputLine_failPlayer2Wins() {
-        player2 = 1;
-        assertWinner(TextUI.WINNER_PLAYER2);
+        players.add(new PlayerStub("player", 1));
+        assertWinner(String.format(TextUI.MSG_WINNER, "player"));
     }
 
     private void assertWinner(String winner) {
@@ -173,7 +162,6 @@ public class TextUITest {
         String result = testAppender.getLog();
         assertFalse(result.isEmpty());
         assertTrue(result.contains(TextUI.GAME_FINISH));
-        assertTrue(result.contains(String.format(TextUI.PLAYER_POINTS, player1, player2)));
         assertTrue(result.contains(winner));
     }
 

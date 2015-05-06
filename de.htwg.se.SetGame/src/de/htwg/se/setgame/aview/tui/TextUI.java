@@ -2,6 +2,7 @@ package de.htwg.se.setgame.aview.tui;
 
 import de.htwg.se.setgame.controller.event.CloseEvent;
 import de.htwg.se.setgame.model.ICard;
+import de.htwg.se.setgame.model.IPlayer;
 import org.apache.log4j.Logger;
 
 import de.htwg.se.setgame.controller.IController;
@@ -10,6 +11,7 @@ import de.htwg.se.setgame.util.observer.IObserver;
 
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,10 +27,8 @@ public class TextUI implements IObserver {
 	public static final String MENU_HEADLINE = "MENU:\n";
 	public static final String FIELD_HEADLINE = "FIELD:\n";
 	public static final String GAME_FINISH = "Hey dude! there are no longer sets in game for you, here are the points ;)";
-	public static final String PLAYER_POINTS = "PlayerOne=%d | PlayerTwo=%d";
-	public static final String WINNER_NOBODY = "Nobody wins, nobody pays the dine! xD";
-	public static final String WINNER_PLAYER1 = "Congratulations PlayerOne!";
-	public static final String WINNER_PLAYER2 = "Congratulations PlayerTwo!";
+	public static final String MSG_DRAW = "Nobody wins, nobody pays the dine! xD";
+	public static final String MSG_WINNER = "Congratulations %s!";
 	public static final String CLOSE = "Stop input processing";
 
     private IController controller;
@@ -76,14 +76,27 @@ public class TextUI implements IObserver {
 
 	private void lastMessage() {
 		output(GAME_FINISH);
-		output(String.format(PLAYER_POINTS, controller.getPlayerOnePoints(), controller.getPlayerTwoPoints()));
-		if (controller.getPlayerTwoPoints() < controller.getPlayerOnePoints()) {
-			output(WINNER_PLAYER1);
-		} else if (controller.getPlayerTwoPoints() > controller.getPlayerOnePoints()) {
-			output(WINNER_PLAYER2);
+		IPlayer player = getWinner();
+		if (player != null) {
+			output(String.format(MSG_WINNER, player));
 		} else {
-			output(WINNER_NOBODY);
+			output(MSG_DRAW);
 		}
+	}
+
+	private IPlayer getWinner() {
+		List<IPlayer> players = controller.getPlayers();
+		int max = -1;
+		IPlayer winner = null;
+		for (IPlayer player: players) {
+			if (player.getScore() > max) {
+				max = player.getScore();
+				winner = player;
+			} else if (player.getScore() == max) {
+				winner = null;
+			}
+		}
+		return winner;
 	}
 
 	private void executeAction(String[] inputArray) {
