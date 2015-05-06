@@ -102,13 +102,23 @@ public class SetController extends Observable implements IController {
 
     @Override
     public void add(ISet set, IPlayer player) {
-        if (getPlayers().contains(player) && checker.isSet(set)) {
+        if (validatePlayer(player) && checker.isSet(set)) {
             fieldCards.removeCard(set.getFirst());
             fieldCards.removeCard(set.getSecond());
             fieldCards.removeCard(set.getThird());
             setFieldSize(size);
-            player.setScore(player.getScore() + 1);
+            increasePlayerScore(player);
             notifyObservers(new AddEvent());
+        }
+    }
+
+    private boolean validatePlayer(IPlayer player) {
+        return player == null || getPlayers().contains(player);
+    }
+
+    private void increasePlayerScore(IPlayer player) {
+        if  (player != null) {
+            player.setScore(player.getScore() + 1);
         }
     }
 

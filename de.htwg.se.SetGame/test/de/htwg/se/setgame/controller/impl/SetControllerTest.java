@@ -164,7 +164,7 @@ public class SetControllerTest {
     }
 
     @Test
-    public void add_success() {
+    public void add_success_withPlayer() {
         ICard card = new CardStub("color", "form", "fill", 0);
         ISet set = new SetStub(card, card, card);
         IPlayer player = target.getPlayers().get(0);
@@ -173,5 +173,15 @@ public class SetControllerTest {
         target.add(set, player);
         assertNotNull(event);
         assertEquals(1, player.getScore());
+    }
+
+    @Test
+    public void add_success_withoutPlayer() {
+        ICard card = new CardStub("color", "form", "fill", 0);
+        ISet set = new SetStub(card, card, card);
+
+        target.newGame();
+        target.add(set, null);
+        assertNotNull(event);
     }
 }
