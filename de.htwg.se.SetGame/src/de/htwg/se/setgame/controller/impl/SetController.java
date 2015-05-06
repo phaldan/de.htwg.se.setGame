@@ -81,26 +81,6 @@ public class SetController extends Observable implements IController {
     }
 
     @Override
-    public void isASetForController(ICard cardOne, ICard cardTwo,
-                                    ICard cardThree, int player) {
-        ISet set = factory.createSet();
-        set.setFirst(cardOne);
-        set.setSecond(cardTwo);
-        set.setThird(cardThree);
-        if (checker.isSet(set)) {
-            if (SetController.PLAYER_ONE == player) {
-                this.playerOneCounter = this.playerOneCounter + 1;
-            } else if (SetController.PLAYER_TWO == player) {
-                this.playerTwoCounter = this.playerTwoCounter + 1;
-
-            }
-            if (PLAYER_ONE == player || player == SetController.PLAYER_TWO || player >= 0) {
-                notifyObservers();
-            }
-        }
-    }
-
-    @Override
     public void add(ISet set, IPlayer player) {
         if (validatePlayer(player) && checker.isSet(set)) {
             fieldCards.removeCard(set.getFirst());
@@ -141,16 +121,6 @@ public class SetController extends Observable implements IController {
     @Override
     public ISet getSet() {
         return cardSet.getSet(fieldCards.getCards());
-    }
-
-    @Override
-    public int getPlayerOnePoints() {
-        return this.playerOneCounter;
-    }
-
-    @Override
-    public int getPlayerTwoPoints() {
-        return this.playerTwoCounter;
     }
 
     @Override

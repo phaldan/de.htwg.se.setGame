@@ -16,11 +16,6 @@ import java.util.TreeMap;
 public class ControllerDummy extends Observable implements IController {
 
     @Override
-    public void isASetForController(ICard cardOne, ICard cardTwo, ICard cardThree, int player) {
-
-    }
-
-    @Override
     public void add(ISet set, IPlayer player) {
 
     }
@@ -43,16 +38,6 @@ public class ControllerDummy extends Observable implements IController {
     @Override
     public ISet getSet() {
         return null;
-    }
-
-    @Override
-    public int getPlayerOnePoints() {
-        return 0;
-    }
-
-    @Override
-    public int getPlayerTwoPoints() {
-        return 0;
     }
 
     @Override

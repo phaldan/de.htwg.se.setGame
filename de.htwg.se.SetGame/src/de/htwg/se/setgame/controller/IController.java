@@ -14,14 +14,6 @@ import de.htwg.se.setgame.util.observer.IObservable;
 public interface IController extends IObservable {
 
 	/**
-	 * @param cardOne card for set
-	 * @param cardTwo card for set
-	 * @param cardThree card for set
-	 * @param player which player is
-	 */
-	void isASetForController(ICard cardOne, ICard cardTwo, ICard cardThree, int player);
-
-	/**
 	 * @param set Instance of ISet
 	 * @param player Instance of IPlayer
 	 */
@@ -46,16 +38,6 @@ public interface IController extends IObservable {
 	 * @return Return instance of ISet or null, when no valid set exists.
 	 */
 	ISet getSet();
-
-	/**
-	 * @return points player one
-	 */
-	int getPlayerOnePoints();
-
-	/**
-	 * @return points player two
-	 */
-	int getPlayerTwoPoints();
 
 	/**
 	 * Reset game
