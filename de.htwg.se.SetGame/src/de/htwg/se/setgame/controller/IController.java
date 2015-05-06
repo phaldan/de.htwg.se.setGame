@@ -55,11 +55,6 @@ public interface IController extends IObservable {
 	Map<Integer, ICard> getCardsAndTheIndexOfCardInField();
 
 	/**
-	 * @return Get first ICard of valid set.
-	 */
-	ICard getFirstInSet();
-
-	/**
 	 * Close game.
 	 */
 	void exit();

@@ -134,12 +134,6 @@ public class SetController extends Observable implements IController {
     }
 
     @Override
-    public ICard getFirstInSet() {
-        LinkedList<ICard> list = new LinkedList<>(getSetInField());
-        return list.peekFirst();
-    }
-
-    @Override
     public void exit() {
         notifyObservers(new CloseEvent());
     }

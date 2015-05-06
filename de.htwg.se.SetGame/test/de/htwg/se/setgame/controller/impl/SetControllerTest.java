@@ -124,11 +124,6 @@ public class SetControllerTest {
     }
 
     @Test
-    public void getFirstInSet_fail() {
-        assertNull(target.getFirstInSet());
-    }
-
-    @Test
     public void newGame_success() {
         target.newGame();
     }

@@ -56,11 +56,6 @@ public class ControllerDummy extends Observable implements IController {
     }
 
     @Override
-    public ICard getFirstInSet() {
-        return null;
-    }
-
-    @Override
     public void exit() {
 
     }
