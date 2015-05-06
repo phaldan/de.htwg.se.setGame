@@ -17,8 +17,6 @@ import java.util.TreeMap;
  */
 public class SetController extends Observable implements IController {
 
-    private static final int PLAYER_ONE = 1;
-    private static final int PLAYER_TWO = 2;
     private static final int INITIAL_FIELD_SIZE = 12;
     private static final int MIN_FIELD_SIZE = 3;
 
@@ -31,8 +29,6 @@ public class SetController extends Observable implements IController {
     private Resize resize;
     private int size = INITIAL_FIELD_SIZE;
     private List<IPlayer> players = new LinkedList<>();
-    private int playerOneCounter = 0;
-    private int playerTwoCounter = 0;
 
 
     /**

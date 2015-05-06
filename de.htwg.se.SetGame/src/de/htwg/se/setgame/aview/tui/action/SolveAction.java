@@ -2,10 +2,7 @@ package de.htwg.se.setgame.aview.tui.action;
 
 import de.htwg.se.setgame.aview.tui.Action;
 import de.htwg.se.setgame.controller.IController;
-import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.model.ISet;
-
-import java.util.List;
 
 /**
  * @author Philipp Daniels
