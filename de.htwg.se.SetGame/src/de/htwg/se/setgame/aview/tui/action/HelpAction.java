@@ -31,6 +31,6 @@ public class HelpAction extends Action {
 
     @Override
     public String execute(String[] input) {
-        return String.format(HelpAction.OUTPUT, getController().getFirstInSet());
+        return String.format(HelpAction.OUTPUT, getController().getSet().getFirst());
     }
 }

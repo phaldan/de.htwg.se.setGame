@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import de.htwg.se.setgame.model.CardDummy;
 import de.htwg.se.setgame.controller.ControllerDummy;
 import de.htwg.se.setgame.model.ICard;
+import de.htwg.se.setgame.model.ISet;
+import de.htwg.se.setgame.model.SetDummy;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,7 +21,15 @@ public class HelpActionTest {
     private class ControllerStub extends ControllerDummy {
 
         @Override
-        public ICard getFirstInSet() {
+        public ISet getSet() {
+            return new Set();
+        }
+    }
+
+    private class Set extends SetDummy {
+
+        @Override
+        public ICard getFirst() {
             return card;
         }
     }
