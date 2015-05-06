@@ -3,12 +3,9 @@ package de.htwg.se.setgame.aview.tui;
 import static org.junit.Assert.*;
 
 import de.htwg.se.setgame.TestAppender;
-import de.htwg.se.setgame.model.CardDummy;
+import de.htwg.se.setgame.model.*;
 import de.htwg.se.setgame.controller.ControllerDummy;
 import de.htwg.se.setgame.controller.event.CloseEvent;
-import de.htwg.se.setgame.model.ICard;
-import de.htwg.se.setgame.model.IPlayer;
-import de.htwg.se.setgame.model.PlayerStub;
 import de.htwg.se.setgame.util.observer.Event;
 import org.apache.log4j.Logger;
 import org.junit.Before;
@@ -27,7 +24,7 @@ public class TextUITest {
     private TestAppender testAppender;
     private TextUI target;
     private Map<Integer, ICard> cards;
-    private boolean setInGame;
+    private ISet set;
     private Action action;
     private boolean actionExecute;
     private List<Action> actions;
@@ -41,13 +38,13 @@ public class TextUITest {
         }
 
         @Override
-        public boolean stillSetInGame() {
-            return setInGame;
+        public List<IPlayer> getPlayers() {
+            return players;
         }
 
         @Override
-        public List<IPlayer> getPlayers() {
-            return players;
+        public ISet getSet() {
+            return set;
         }
     }
 
@@ -103,10 +100,10 @@ public class TextUITest {
         target = new TextUI(new Controller(), new ActionListStub());
 
         cards = new TreeMap<>();
-        setInGame = false;
         actionExecute = false;
         actions = new LinkedList<>();
         players = new LinkedList<>();
+        set = null;
 
         testAppender = new TestAppender();
         Logger.getRootLogger().removeAllAppenders();
@@ -167,7 +164,7 @@ public class TextUITest {
 
     @Test
     public void processInputLine_failInvalidAction() {
-        setInGame = true;
+        set = new SetDummy();
 
         assertTrue(target.processInputLine("test"));
         assertTrue(testAppender.getLog().contains(TextUI.INVALID_ACTION));
@@ -175,7 +172,7 @@ public class TextUITest {
 
     @Test
     public void processInputLine_success() {
-        setInGame = true;
+        set = new SetDummy();
         action = new ActionDummy();
 
         assertTrue(target.processInputLine("test"));
