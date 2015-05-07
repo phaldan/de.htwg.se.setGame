@@ -42,4 +42,14 @@ public interface IGame {
      * @param list ICardList instance
      */
     void setUnusedCardList(ICardList list);
+
+    /**
+     * @return Return IPlayer instance
+     */
+    IPlayer getWinner();
+
+    /**
+     * @param player IPlayer instance
+     */
+    void setWinner(IPlayer player);
 }
