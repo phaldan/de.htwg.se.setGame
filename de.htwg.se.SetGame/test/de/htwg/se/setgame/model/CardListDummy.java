@@ -7,6 +7,7 @@ import java.util.List;
  * @author Philipp Daniels
  */
 public class CardListDummy implements ICardList {
+
     @Override
     public void addCard(ICard card) {
 
@@ -20,5 +21,15 @@ public class CardListDummy implements ICardList {
     @Override
     public List<ICard> getCards() {
         return new LinkedList<>();
+    }
+
+    @Override
+    public IGame getGame() {
+        return null;
+    }
+
+    @Override
+    public void setGame(IGame game) {
+
     }
 }

@@ -22,4 +22,14 @@ public interface ICardList {
      * @return Returns a list of ICard instances
      */
     List<ICard> getCards();
+
+    /**
+     * @return Return IGame instance
+     */
+    IGame getGame();
+
+    /**
+     * @param game IGame instance
+     */
+    void setGame(IGame game);
 }
