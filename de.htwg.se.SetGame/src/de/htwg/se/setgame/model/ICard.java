@@ -50,4 +50,14 @@ public interface ICard {
      * @param numberOfComponents set count of card
      */
     void setNumberOfComponents(int numberOfComponents);
+
+    /**
+     * @return ICardList instance
+     */
+    ICardList getCardList();
+
+    /**
+     * @param list ICardList instance
+     */
+    void setCardList(ICardList list);
 }

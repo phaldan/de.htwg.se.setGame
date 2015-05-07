@@ -4,6 +4,7 @@ package de.htwg.se.setgame.model;
  * @author Philipp Daniels
  */
 public class CardDummy implements ICard {
+
     @Override
     public String getColor() {
         return null;
@@ -41,6 +42,16 @@ public class CardDummy implements ICard {
 
     @Override
     public void setNumberOfComponents(int numberOfComponents) {
+
+    }
+
+    @Override
+    public ICardList getCardList() {
+        return null;
+    }
+
+    @Override
+    public void setCardList(ICardList list) {
 
     }
 }

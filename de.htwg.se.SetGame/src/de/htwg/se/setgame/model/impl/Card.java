@@ -1,6 +1,7 @@
 package de.htwg.se.setgame.model.impl;
 
 import de.htwg.se.setgame.model.ICard;
+import de.htwg.se.setgame.model.ICardList;
 
 /**
  * @author David Simon & Raina Bertolini
@@ -58,6 +59,16 @@ public class Card implements ICard {
     @Override
     public void setNumberOfComponents(int numberOfComponents) {
         this.count = numberOfComponents;
+    }
+
+    @Override
+    public ICardList getCardList() {
+        return null;
+    }
+
+    @Override
+    public void setCardList(ICardList list) {
+
     }
 
     @Override
