@@ -27,5 +27,10 @@ public class ModelFactoryImpl implements ModelFactory {
         return new Player();
     }
 
+    @Override
+    public IGame createGame() {
+        return null;
+    }
+
 
 }

@@ -24,4 +24,9 @@ public interface ModelFactory {
      * @return Return new IPlayer instance
      */
     IPlayer createPlayer();
+
+    /**
+     * @return Return new IGame instance
+     */
+    IGame createGame();
 }

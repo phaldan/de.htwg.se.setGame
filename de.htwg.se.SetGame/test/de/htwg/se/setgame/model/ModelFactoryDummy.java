@@ -24,4 +24,9 @@ public class ModelFactoryDummy implements ModelFactory {
     public IPlayer createPlayer() {
         return null;
     }
+
+    @Override
+    public IGame createGame() {
+        return null;
+    }
 }
