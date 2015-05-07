@@ -35,4 +35,13 @@ public interface IPlayer {
      */
     void setScore(int score);
 
+    /**
+     * @return Return IGame instance
+     */
+    IGame getGame();
+
+    /**
+     * @param game IGame instance
+     */
+    void setGame(IGame game);
 }

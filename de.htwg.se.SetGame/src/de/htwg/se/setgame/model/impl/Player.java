@@ -1,5 +1,6 @@
 package de.htwg.se.setgame.model.impl;
 
+import de.htwg.se.setgame.model.IGame;
 import de.htwg.se.setgame.model.IPlayer;
 
 /**
@@ -39,6 +40,16 @@ public class Player implements IPlayer {
     @Override
     public void setScore(int score) {
         this.score = score;
+    }
+
+    @Override
+    public IGame getGame() {
+        return null;
+    }
+
+    @Override
+    public void setGame(IGame game) {
+
     }
 
     @Override

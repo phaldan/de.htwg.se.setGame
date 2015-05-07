@@ -34,4 +34,14 @@ public class PlayerDummy implements IPlayer {
     public void setScore(int score) {
 
     }
+
+    @Override
+    public IGame getGame() {
+        return null;
+    }
+
+    @Override
+    public void setGame(IGame game) {
+
+    }
 }
