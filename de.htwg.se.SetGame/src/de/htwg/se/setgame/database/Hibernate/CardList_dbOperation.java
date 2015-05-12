@@ -1,5 +1,6 @@
-package de.htwg.se.setgame.hibernate.dbOperations;
+package de.htwg.se.setgame.database.Hibernate;
 
+import de.htwg.se.setgame.database.ISession;
 import de.htwg.se.setgame.model.ICardList;
 import de.htwg.se.setgame.model.IGame;
 import de.htwg.se.setgame.util.persistence.CardListDao;
@@ -11,6 +12,18 @@ import org.hibernate.cfg.Configuration;
 
 public class CardList_dbOperation implements CardListDao {
 
+    private ISession session= null;
+
+
+    public CardList_dbOperation(ISession session){
+        this.session=session;
+    }
+
+    public Session getSession(){
+        return session.configureSession();
+    }
+
+
     @Override
     public ICardList create() {
         return null;
@@ -18,6 +31,7 @@ public class CardList_dbOperation implements CardListDao {
 
     @Override
     public ICardList getByGame(IGame game) {
+        Session session=loadConfiguration();
         Transaction t = session.beginTransaction();
         ICardList iCardList=null;
         Query query = session.createQuery("from CARDLIST_CARDS");
@@ -43,11 +57,5 @@ public class CardList_dbOperation implements CardListDao {
 
     }
 
-    private Session loadConfiguration(){
-        Configuration cfg=new Configuration();
-        cfg.configure("hibernate.cfg.xml");
-        SessionFactory factory=cfg.buildSessionFactory();
-        Session session=factory.openSession();
-        return session;
-    }
+
 }
