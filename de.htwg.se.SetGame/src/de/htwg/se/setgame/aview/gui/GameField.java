@@ -62,7 +62,9 @@ public class GameField extends Panel {
                 Field field = fields.get(entry.getKey());
                 setFieldImage(entry.getValue(), field);
             }
-        } catch (MalformedURLException e) {}
+        } catch (MalformedURLException e) {
+            System.out.println("#### Error message to show that no cards have been formed ");
+        }
     }
 
     private void setFieldImage(ICard card, Field field) throws MalformedURLException {

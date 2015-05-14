@@ -27,6 +27,7 @@ public class ViewFactory {
      * @return Return GraphicalUI instance
      */
     public GraphicalUI createGUI() {
+        System.out.println("################################ program called");
         GameField field = new GameField(controller);
         SetButton button = new SetButton(controller, new JOptionPane(), field);
         return new GraphicalUI(controller, field, button);
