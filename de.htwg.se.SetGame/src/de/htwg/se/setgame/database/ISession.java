@@ -1,4 +1,7 @@
 package de.htwg.se.setgame.database;
+import org.hibernate.*;
+
+
 
 public interface ISession{
 
