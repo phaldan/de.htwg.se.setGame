@@ -6,7 +6,7 @@
 
 <!--here we are mapping  CARD table with class Card in model impl    -->
 <hibernate-mapping>
-    <class name="Card" table="CARD">
+    <class name="CardPojo" table="CARD">
         <meta attribute="class-description">
             This class contains the employee detail.
         </meta>

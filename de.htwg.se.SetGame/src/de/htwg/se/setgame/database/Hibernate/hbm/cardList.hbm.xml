@@ -6,7 +6,7 @@
 
 <!--here we are mapping  CARD table with class Card in model impl    -->
 <hibernate-mapping>
-    <class name="CardList" table="CARD_LIST">
+    <class name="CardListPojo" table="CARD_LIST">
         <list name="cards" cascade="all">
             <key column="employee_id"/>
             <list-index column="CARD_LIST_ID"/>
