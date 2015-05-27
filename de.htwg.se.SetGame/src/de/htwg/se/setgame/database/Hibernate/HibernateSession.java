@@ -11,11 +11,17 @@ public class HibernateSession implements ISession {
     @Override
 
     public Session configureSession() {
-
-        Configuration cfg=new Configuration();
-        cfg.configure("hibernate.cfg.xml");
-        SessionFactory factory=cfg.buildSessionFactory();
-       Session session=factory.openSession();
+        Session session=null;
+       try {
+           Configuration cfg=new Configuration();
+           cfg.configure("hibernate.cfg.xml");
+           SessionFactory factory=cfg.buildSessionFactory();
+            session=factory.openSession();
+       }
+       catch (Throwable ex) {
+           System.err.println("Initial SessionFactory creation failed." + ex);
+           throw new ExceptionInInitializerError(ex);
+       }
         return session;
 
     }

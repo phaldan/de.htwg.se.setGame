@@ -36,11 +36,23 @@ public class Player_dbOperation implements PlayerDao{
     @Override
     public IPlayer getByName(String name) {
         Session session = getSession();
-        Transaction t = session.beginTransaction();
-        Query query = session.createQuery("from PLAYER where PLAYER.PLAYER_NAME="+name+"");
-        player = (IPlayer) query.list();
-        t.commit();
-        session.close();
+        Transaction t=null;
+        try {
+            t = session.beginTransaction();
+            Query query = session.createQuery("from PLAYER where PLAYER.PLAYER_NAME=" + name + "");
+            player = (IPlayer) query.list();
+            t.commit();
+        }
+        catch (Exception e) {
+            if (t != null) {
+                t.rollback();
+                throw e;
+            }
+        }
+        finally {
+            session.close();
+        }
+
         return player;
     }
 
@@ -56,11 +68,23 @@ public class Player_dbOperation implements PlayerDao{
     }
 
     public void addOrUpdateOperation(IPlayer player){
-        Session session=getSession();
-        Transaction t=session.beginTransaction();
-        session.saveOrUpdate(player);
-        t.commit();
-        session.close();
+        Transaction t=null;
+        Session session = getSession();
+        try {
+
+             t = session.beginTransaction();
+            session.saveOrUpdate(player);
+            t.commit();
+        }
+        catch (Exception e) {
+            if (t != null) {
+                t.rollback();
+                throw e;
+            }
+        }
+        finally {
+            session.close();
+        }
     }
 
 }

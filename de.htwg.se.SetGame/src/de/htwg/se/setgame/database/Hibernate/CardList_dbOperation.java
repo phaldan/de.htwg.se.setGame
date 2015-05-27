@@ -39,12 +39,24 @@ public class CardList_dbOperation implements CardListDao {
     @Override
     public ICardList getByGame(IGame game) {
         Session session = getSession();
-        Transaction t = session.beginTransaction();
-        ICardList iCardList=null;
-        Query query = session.createQuery("from CARDLIST_CARDS");
-        iCardList = (ICardList) query.list();
-        t.commit();
-        session.close();
+        Transaction t=null;
+        ICardList iCardList = null;
+        try {
+            t = session.beginTransaction();
+
+            Query query = session.createQuery("from CARDLIST_CARDS");
+            iCardList = (ICardList) query.list();
+            t.commit();
+        }
+        catch (Exception e) {
+            if (t != null) {
+                t.rollback();
+                throw e;
+            }
+        }
+        finally {
+            session.close();
+        }
         return iCardList;
     }
 
@@ -62,10 +74,21 @@ public class CardList_dbOperation implements CardListDao {
 
     public void addOrUpdateOperation(ICardList list){
         Session session=getSession();
-        Transaction t=session.beginTransaction();
-        session.saveOrUpdate(list);
-        t.commit();
-        session.close();
+        Transaction t=null;
+        try {
+             t = session.beginTransaction();
+              session.saveOrUpdate(list);
+             t.commit();
+        }
+        catch (Exception e) {
+            if (t != null) {
+                t.rollback();
+                throw e;
+            }
+        }
+        finally {
+            session.close();
+        }
     }
 
 }
