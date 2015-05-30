@@ -1,6 +1,10 @@
 package de.htwg.se.setgame.database.Hibernate;
 
 import de.htwg.se.setgame.database.ISession;
+import de.htwg.se.setgame.database.Pojo.CardListPojo;
+import de.htwg.se.setgame.database.Pojo.CardPojo;
+import de.htwg.se.setgame.database.Pojo.GamePojo;
+import de.htwg.se.setgame.database.Pojo.PlayerPojo;
 import de.htwg.se.setgame.model.ICardList;
 import de.htwg.se.setgame.util.persistence.*;
 
@@ -13,26 +17,26 @@ public class DaoManager_Operation implements DaoManager {
 
 
     @Override
-    public CardDao getCard(){
+    public CardPojo getCard(){
 
-        return new Card_dbOperation();
+        return new CardPojo();
     }
 
     @Override
-    public CardListDao getCardList() {
-        return new CardList_dbOperation();
+    public CardListPojo getCardList() {
+        return new CardListPojo();
     }
 
     @Override
-    public PlayerDao getPlayer() {
-        return new Player_dbOperation();
+    public PlayerPojo getPlayer() {
+        return new PlayerPojo();
     }
 
     @Override
-    public GameDao getGame() {
+    public GamePojo getGame() {
 
         /* Game_dbOperation is yet to be Implemented */
-        return new Game_dbOperation();
+        return new GamePojo();
     }
 
     /**

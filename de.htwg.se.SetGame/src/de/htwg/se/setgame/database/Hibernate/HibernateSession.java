@@ -12,16 +12,11 @@ public class HibernateSession implements ISession {
 
     public Session configureSession() {
         System.out.println("#-> configureSession()");
-        System.out.println("#    set 'session' to null");
         Session session=null;
        try {
-           System.out.println("#    TRY-BLOCK: new Configuration() ");
            Configuration cfg=new Configuration();
-           System.out.println("#    TRY-BLOCK: cfg.configure(hibernate.cfg.xml); ");
            cfg.configure("hibernate.cfg.xml");
-           System.out.println("#    TRY-BLOCK: factory=cfg.buildSessionFactory(); ");
            SessionFactory factory=cfg.buildSessionFactory();
-           System.out.println("#    TRY-BLOCK: session=factory.openSession();");
            session=factory.openSession();
        }
        catch (Throwable ex) {

@@ -2,44 +2,41 @@ package de.htwg.se.setgame.database.Hibernate;
 
 import de.htwg.se.setgame.database.ISession;
 import de.htwg.se.setgame.model.ICard;
-import de.htwg.se.setgame.model.ModelFactory;
-import de.htwg.se.setgame.model.impl.ModelFactoryImpl;
 import de.htwg.se.setgame.util.persistence.CardDao;
+import de.htwg.se.setgame.util.persistence.DaoManager;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 
 public class Card_dbOperation implements CardDao {
     private ISession hibernateSession= null;
-    private ICard card=null;
-    private ModelFactory modelFactory;
+    private ICard card;
+    private DaoManager daoManager;
 
 
     public Card_dbOperation(){
     }
 
-    public void  setSession(ISession session){
-        this.hibernateSession=session;
-    }
-
 
     private Session getSession(){
+        daoManager=new DaoManager_Operation();
+        hibernateSession=daoManager.createSession();
         return hibernateSession.configureSession();
     }
     @Override
     public ICard create() {
-        modelFactory=new ModelFactoryImpl();
-        card= modelFactory.createCard();
+        daoManager=new DaoManager_Operation();
+        card= (ICard) daoManager.getCard();
         return card;
 
     }
 
     @Override
     public void add(ICard card) {
-        Session session =getSession();
+        Session session = getSession();
         Transaction tx=null;
         try {
-             tx = session.beginTransaction();
+            tx = session.beginTransaction();
             session.save(card);
             tx.commit();
         }
