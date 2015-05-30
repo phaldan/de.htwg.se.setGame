@@ -2,8 +2,7 @@ package de.htwg.se.setgame.database.Hibernate;
 
 import de.htwg.se.setgame.database.ISession;
 import de.htwg.se.setgame.model.IPlayer;
-import de.htwg.se.setgame.model.ModelFactory;
-import de.htwg.se.setgame.model.impl.ModelFactoryImpl;
+import de.htwg.se.setgame.util.persistence.DaoManager;
 import de.htwg.se.setgame.util.persistence.PlayerDao;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -15,7 +14,7 @@ import org.hibernate.Transaction;
 public class Player_dbOperation implements PlayerDao{
     private ISession hibernateSession= null;
     private IPlayer player=null;
-    private ModelFactory modelFactory;
+    private DaoManager daoManager;
 
     public Player_dbOperation(){
     }
@@ -28,9 +27,10 @@ public class Player_dbOperation implements PlayerDao{
     }
     @Override
     public IPlayer create() {
-        modelFactory=new ModelFactoryImpl();
-        player= modelFactory.createPlayer();
+        daoManager=new DaoManager_Operation();
+        player=  daoManager.getPlayer();
         return player;
+
     }
 
     @Override

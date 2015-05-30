@@ -3,9 +3,8 @@ package de.htwg.se.setgame.database.Hibernate;
 import de.htwg.se.setgame.database.ISession;
 import de.htwg.se.setgame.model.ICardList;
 import de.htwg.se.setgame.model.IGame;
-import de.htwg.se.setgame.model.ModelFactory;
-import de.htwg.se.setgame.model.impl.ModelFactoryImpl;
 import de.htwg.se.setgame.util.persistence.CardListDao;
+import de.htwg.se.setgame.util.persistence.DaoManager;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -15,7 +14,7 @@ public class CardList_dbOperation implements CardListDao {
 
     private ISession hibernateSession= null;
     private ICardList cardList=null;
-    private ModelFactory modelFactory;
+    private DaoManager daoManager;
 
 
     public CardList_dbOperation(){
@@ -31,9 +30,10 @@ public class CardList_dbOperation implements CardListDao {
 
     @Override
     public ICardList create() {
-        modelFactory=new ModelFactoryImpl();
-        cardList= modelFactory.createCardList();
+        daoManager=new DaoManager_Operation();
+        cardList=  daoManager.getCardList();
         return cardList;
+
     }
 
     @Override

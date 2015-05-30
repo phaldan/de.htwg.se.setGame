@@ -2,7 +2,7 @@ package de.htwg.se.setgame.database.Hibernate;
 
 import de.htwg.se.setgame.database.ISession;
 import de.htwg.se.setgame.model.IGame;
-import de.htwg.se.setgame.model.ModelFactory;
+import de.htwg.se.setgame.util.persistence.DaoManager;
 import de.htwg.se.setgame.util.persistence.GameDao;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -14,7 +14,7 @@ import java.util.List;
  * Created by Pavan on 22/05/2015.
  */
 public class Game_dbOperation implements GameDao {
-    private ModelFactory modelFactory;
+    private DaoManager daoManager;
     private IGame game=null;
     private ISession hibernateSession=null;
     private Session getSession(){
@@ -27,8 +27,10 @@ public class Game_dbOperation implements GameDao {
 
     @Override
     public IGame create() {
-        game=modelFactory.createGame();
+        daoManager=new DaoManager_Operation();
+        game=  daoManager.getGame();
         return game;
+
     }
 
     @Override
