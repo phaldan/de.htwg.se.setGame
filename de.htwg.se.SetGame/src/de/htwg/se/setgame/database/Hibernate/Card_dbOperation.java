@@ -8,6 +8,7 @@ import de.htwg.se.setgame.util.persistence.CardDao;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+
 public class Card_dbOperation implements CardDao {
     private ISession hibernateSession= null;
     private ICard card=null;

@@ -1,9 +1,6 @@
 package de.htwg.se.setgame.database.Hibernate;
 
 import de.htwg.se.setgame.model.ICardList;
-import de.htwg.se.setgame.model.IGame;
-import de.htwg.se.setgame.model.IPlayer;
-import de.htwg.se.setgame.model.ModelFactory;
 import de.htwg.se.setgame.util.persistence.*;
 
 /**
@@ -15,7 +12,7 @@ public class DaoManager_Operation implements DaoManager {
 
 
     @Override
-    public CardDao getCard() {
+    public CardDao getCard(){
 
         return new Card_dbOperation();
     }

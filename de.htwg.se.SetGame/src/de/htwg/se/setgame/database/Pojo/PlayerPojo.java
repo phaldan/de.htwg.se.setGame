@@ -5,7 +5,7 @@ package de.htwg.se.setgame.database.Pojo;
  */
 public class PlayerPojo {
     private int id;
-    private String name;
+    private String playerName=" d";
     private int score = 0;
 
     public int getId() {
@@ -16,12 +16,12 @@ public class PlayerPojo {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getPlayerName() {
+        return playerName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
     }
 
     public int getScore() {

@@ -8,7 +8,7 @@ public class CardPojo {
     private String form;
     private String panelFilling;
     private Integer count;
-
+ private int id;
     public String getForm() {
         return form;
     }
@@ -27,6 +27,14 @@ public class CardPojo {
 
     public Integer getCount() {
         return count;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setCount(Integer count) {

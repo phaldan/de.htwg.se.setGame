@@ -68,6 +68,8 @@ public class Game_dbOperation implements GameDao {
     public void update(IGame game) {
         addOrUpdateOperation(game);
     }
+
+
     public void addOrUpdateOperation(IGame game){
         Session session=getSession();
         Transaction t=null;

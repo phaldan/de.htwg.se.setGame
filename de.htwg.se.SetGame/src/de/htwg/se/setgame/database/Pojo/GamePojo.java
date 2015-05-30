@@ -10,6 +10,16 @@ public class GamePojo {
    /* which property files are suppose to be added here ?? */
    private IPlayer player=null;
    private ICardList cardList=null;
+   private int id;
+
+   public int getId() {
+      return id;
+   }
+
+   public void setId(int id) {
+      this.id = id;
+   }
+
    public IPlayer getPlayer() {
       return player;
    }
