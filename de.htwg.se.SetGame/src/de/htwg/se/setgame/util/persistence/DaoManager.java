@@ -1,5 +1,7 @@
 package de.htwg.se.setgame.util.persistence;
 
+import de.htwg.se.setgame.database.ISession;
+
 /**
  * @author Philipp Daniels
  */
@@ -24,4 +26,10 @@ public interface DaoManager {
      * @return Return instance of GameDao
      */
     GameDao getGame();
+
+    /**
+     * @return Return instance of ISession
+     */
+    ISession createSession();
+
 }

@@ -1,5 +1,6 @@
 package de.htwg.se.setgame.database.Hibernate;
 
+import de.htwg.se.setgame.database.ISession;
 import de.htwg.se.setgame.model.ICardList;
 import de.htwg.se.setgame.util.persistence.*;
 
@@ -32,5 +33,13 @@ public class DaoManager_Operation implements DaoManager {
 
         /* Game_dbOperation is yet to be Implemented */
         return new Game_dbOperation();
+    }
+
+    /**
+     * @return Return instance of GameDao
+     */
+    @Override
+    public ISession createSession() {
+        return new HibernateSession();
     }
 }
