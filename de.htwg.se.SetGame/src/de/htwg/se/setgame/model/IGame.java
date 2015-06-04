@@ -10,6 +10,16 @@ public interface IGame {
     /**
      * @return Return list of IPlayer instance
      */
+    int getId();
+
+    /**
+     * @return Return list of IPlayer instance
+     */
+     void setId(int id);
+
+    /**
+     * @return Return list of IPlayer instance
+     */
     List<IPlayer> getPlayers();
 
     /**
