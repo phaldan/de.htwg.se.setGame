@@ -8,6 +8,8 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.List;
+
 /**
  * Created by Pavan on 16/05/2015.
  */
@@ -19,12 +21,15 @@ public class Player_dbOperation implements PlayerDao{
     public Player_dbOperation(){
     }
     private Session getSession(){
+        daoManager = new DaoManager_Operation();
+        hibernateSession = daoManager.createSession();
         return hibernateSession.configureSession();
     }
 
     private void setSession(ISession session){
         this.hibernateSession=session;
     }
+
     @Override
     public IPlayer create() {
         daoManager=new DaoManager_Operation();
@@ -33,14 +38,25 @@ public class Player_dbOperation implements PlayerDao{
 
     }
 
+
     @Override
     public IPlayer getByName(String name) {
         Session session = getSession();
         Transaction t=null;
         try {
             t = session.beginTransaction();
-            Query query = session.createQuery("from PLAYER where PLAYER.PLAYER_NAME=" + name + "");
-            player = (IPlayer) query.list();
+            String hqlClassName="de.htwg.se.setgame.database.Pojo.PlayerPojo";
+            String hql = "FROM " + hqlClassName + "   WHERE PLAYER_NAME='";
+            hql = hql + name + "'";
+            Query query = session.createQuery(hql);
+            //Query query = session.createQuery("FROM PLAYER where PLAYER.PLAYER_NAME=" + name + "");
+            //player = (IPlayer) query.list();
+            System.out.println("############################  query");
+            System.out.println(query);
+            List  result =  query.list();
+            if(result.isEmpty() == false){
+                player = (IPlayer) result.get(0);
+            }
             t.commit();
         }
         catch (Exception e) {
