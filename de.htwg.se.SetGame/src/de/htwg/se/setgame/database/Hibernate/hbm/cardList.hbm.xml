@@ -3,20 +3,16 @@
         "-//Hibernate/Hibernate Mapping DTD//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
-
-<!--here we are mapping  CARD table with class Card in model impl    -->
 <hibernate-mapping>
     <class name="de.htwg.se.setgame.database.Pojo.CardListPojo" table="CARD_LIST">
         <meta attribute="class-description">
             This class contains the CardList detail.
         </meta>
-        <id name="id" type="int" column="CARDLIST_ID">
-            <generator class="native"/>
-        </id>
-        <list name="cards" cascade="all">
-            <key column="CARD_ID"/>
-            <list-index column="CARD_LIST_ID"/>
-            <one-to-many class="de.htwg.se.setgame.database.Pojo.CardPojo"/>
-        </list>
+        <id name="cardList_id" type="int" column="CARDLIST_ID">
+            <generator class="native"/></id>
+        <bag name="cards" table="card" inverse="true" lazy="true" fetch="select">
+            <key column ="card_id" not-null="true"></key>
+            <one-to-many class="de.htwg.se.setgame.database.Pojo.CardPojo"></one-to-many></bag>
+
     </class>
-</hibernate-mapping>
+        </hibernate-mapping>

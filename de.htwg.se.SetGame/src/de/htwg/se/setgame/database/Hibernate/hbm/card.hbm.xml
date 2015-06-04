@@ -10,12 +10,17 @@
         <meta attribute="class-description">
             This class contains the employee detail.
         </meta>
-        <id name="id" type="int" column="CARD_ID">
+        <id name="card_id" type="int" column="CARD_ID">
             <generator class="native"/>
         </id>
         <property name="color" column="CARD_COLOR" type="string"/>
         <property name="form" column="CARD_FORM" type="string"/>
         <property name="panelFilling" column="CARD_PANELFILLING" type="string"/>
         <property name="count" column="CARD_COUNT" type="int"/>
+
+
+        <many-to-one name="cardList" class="de.htwg.se.setgame.database.Pojo.CardListPojo" fetch="select">
+            <column name="cardList_id" not-null="true"></column>
+        </many-to-one>
     </class>
 </hibernate-mapping>
