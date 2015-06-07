@@ -17,13 +17,14 @@ public class Game_dbOperation implements GameDao {
     private DaoManager daoManager;
     private IGame game=null;
     private ISession hibernateSession=null;
-    private Session getSession(){
-        return hibernateSession.configureSession();
+
+
+       private Session getSession(){
+           daoManager=new DaoManager_Operation();
+         hibernateSession= daoManager.createSession();
+          return (Session) hibernateSession.configureSession();
     }
 
-    private void setSession(ISession session){
-        this.hibernateSession=session;
-    }
 
     @Override
     public IGame create() {
