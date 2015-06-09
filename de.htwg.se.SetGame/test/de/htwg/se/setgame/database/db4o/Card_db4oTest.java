@@ -31,10 +31,13 @@ public class Card_db4oTest extends TestCase {
         daoManager = new DaoManager_Operation();
         card = daoManager.getCard();
         card_db4o = new Card_db4o();
-        card.setColor("red");
-        card.setForm("heart");
-        card.setPanelFilling("panelFilling_2");
+        card.setCard_id(121);
+        card.setColor("ExampleColor");
+        card.setForm("NewForm");
+        card.setPanelFilling("panelFilling_Example");
         card_db4o.add(card);
+
+        System.out.println("card added"+ card);
     }
 
     @Test
@@ -48,10 +51,10 @@ public class Card_db4oTest extends TestCase {
 
         card_db4o = new Card_db4o();
         card = daoManager.getCard();
-        card.setColor("red");
-        card.setForm("heart");
-        card.setPanelFilling("panelFilling_Update2");
-        card.setNumberOfComponents(2);
+       // card.setCard_id(121);
+        card.setColor("ExampleColor");
+        card.setForm("NewForm");
+        card.setPanelFilling("panelFilling_Example");
         card_db4o.update(card);
     }
 }
