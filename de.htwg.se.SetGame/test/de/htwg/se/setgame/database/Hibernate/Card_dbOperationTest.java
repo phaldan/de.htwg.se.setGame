@@ -48,7 +48,7 @@ public class Card_dbOperationTest extends TestCase {
         card.setPanelFilling("panelFilling_1");
         card_dbOperation=new Card_dbOperation();
         System.out.println("#   Adding Card (green, heart, panelFilling_1) to table");
-        card_id = card_dbOperation.add(card);
+        card_dbOperation.add(card);
         System.out.println("#   card_id");
         System.out.println(card_id);
         // missing to check if card is added

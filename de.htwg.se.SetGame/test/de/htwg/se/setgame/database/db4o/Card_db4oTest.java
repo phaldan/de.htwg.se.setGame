@@ -31,7 +31,6 @@ public class Card_db4oTest extends TestCase {
         daoManager = new DaoManager_Operation();
         card = daoManager.getCard();
         card_db4o = new Card_db4o();
-        card.setCard_id(121);
         card.setColor("ExampleColor");
         card.setForm("NewForm");
         card.setPanelFilling("panelFilling_Example");

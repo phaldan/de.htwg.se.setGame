@@ -72,7 +72,6 @@ public class Game_dbOperationTest extends TestCase {
         player= manager.getPlayer();
         String name = "rajiv gandhi";
         player.setName(name);
-        card.setCard_id(32);
         card.setForm("form");
         card.setColor("yellow");
         cardList.addCard(card);
@@ -102,7 +101,6 @@ public class Game_dbOperationTest extends TestCase {
         player= manager.getPlayer();
         String name = "rajiv gandhi";
         player.setName(name);
-        card.setCard_id(32);
         card.setForm("form");
         card.setColor("yellow");
         cardList.addCard(card);
@@ -132,7 +130,6 @@ public class Game_dbOperationTest extends TestCase {
         player= manager.getPlayer();
         String name = "rajiv gandhi";
         player.setName(name);
-        card.setCard_id(32);
         card.setForm("form");
         card.setColor("yellow");
         cardList.addCard(card);
