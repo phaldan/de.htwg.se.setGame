@@ -8,18 +8,6 @@ import java.util.List;
 public interface ICardList {
 
     /**
-     * @return Returns a list of ICard instances
-     */
-      int getCardList_id();
-
-    /**
-     * @return Returns a list of ICard instances
-     */
-     void setCardList_id(int id);
-
-
-
-    /**
      * @param card Instance of ICard
      */
     void addCard(ICard card);

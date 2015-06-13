@@ -6,19 +6,6 @@ package de.htwg.se.setgame.model;
 public interface ICard {
 
     /**
-     *
-     * Added by pavan
-     * @return Card ID
-     */
-    int getCard_id();
-
-
-    /**
-     * Added by pavan
-     * @set Card ID
-     */
-    void setCard_id(int id);
-    /**
      * @return colors
      */
     String getColor();

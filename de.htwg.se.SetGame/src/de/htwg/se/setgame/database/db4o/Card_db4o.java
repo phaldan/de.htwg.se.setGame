@@ -36,7 +36,7 @@ public class Card_db4o implements CardDao {
     }
 
 
-    public Integer add(ICard card){
+    public void add(ICard card){
         Integer retDefault = 0;
         ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), DB4OFILENAME);
 
@@ -50,7 +50,6 @@ public class Card_db4o implements CardDao {
         finally {
             db.close();
         }
-        return retDefault;
     }
 
 
