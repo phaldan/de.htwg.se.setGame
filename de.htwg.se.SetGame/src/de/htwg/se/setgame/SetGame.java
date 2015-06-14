@@ -1,7 +1,6 @@
 package de.htwg.se.setgame;
-import java.util.Scanner;
 
-import org.apache.log4j.PropertyConfigurator;
+import java.util.Scanner;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -47,7 +46,6 @@ public final class SetGame {
 	}
 
     private SetGame(boolean activateGui) {
-		PropertyConfigurator.configure("log4j.properties");
         initDependencyInjector();
         initUserInterface(activateGui);
     }
