@@ -12,12 +12,10 @@ import java.util.List;
 /**
  * @author Philipp Daniels
  */
-public class Player_dbOperation implements PlayerDao{
+public class Player_dbOperation extends HibernateBase implements PlayerDao {
 
-    private SessionFactory factory;
-
-    public Player_dbOperation(SessionFactory factory) {
-        this.factory = factory;
+    protected Player_dbOperation(SessionFactory factory) {
+        super(factory);
     }
 
     @Override
@@ -29,26 +27,24 @@ public class Player_dbOperation implements PlayerDao{
     @Override
     public IPlayer getByName(String name) {
         IPlayer player = null;
-        Session session = factory.openSession();
-        Transaction t=null;
+        Session session = getSession();
+        Transaction t = null;
         try {
             t = session.beginTransaction();
-            String hqlClassName="de.htwg.se.setgame.database.Pojo.PlayerPojo";
+            String hqlClassName = "de.htwg.se.setgame.database.Pojo.PlayerPojo";
             String hql = "FROM " + hqlClassName + "   WHERE PLAYER_NAME='" + name + "'";
             Query query = session.createQuery(hql);
             List result = query.list();
-            if(!result.isEmpty()){
+            if (!result.isEmpty()) {
                 player = (IPlayer) result.get(0);
             }
             t.commit();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             if (t != null) {
                 t.rollback();
                 throw e;
             }
-        }
-        finally {
+        } finally {
             session.close();
         }
 
@@ -66,22 +62,19 @@ public class Player_dbOperation implements PlayerDao{
         addOrUpdateOperation(player);
     }
 
-    public void addOrUpdateOperation(IPlayer player){
-        Transaction t=null;
-        Session session = factory.openSession();
+    public void addOrUpdateOperation(IPlayer player) {
+        Transaction t = null;
+        Session session = getSession();
         try {
-
-             t = session.beginTransaction();
+            t = session.beginTransaction();
             session.saveOrUpdate(player);
             t.commit();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             if (t != null) {
                 t.rollback();
                 throw e;
             }
-        }
-        finally {
+        } finally {
             session.close();
         }
     }
