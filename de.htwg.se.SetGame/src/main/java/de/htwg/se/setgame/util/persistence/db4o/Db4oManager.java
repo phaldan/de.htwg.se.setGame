@@ -29,7 +29,7 @@ public class Db4oManager implements DaoManager {
 
     @Override
     public CardDao getCard() {
-        return new CardDaoDb4o();
+        return new CardDaoDb4o(db, factory);
     }
 
     @Override
