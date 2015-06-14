@@ -1,15 +1,11 @@
 package de.htwg.se.setgame.util.persistence.hibernate;
 
-import de.htwg.se.setgame.util.persistence.Pojo.CardPojo;
-import de.htwg.se.setgame.model.ICardList;
 import de.htwg.se.setgame.util.persistence.*;
 
 /**
- * Created by Pavan on 22/05/2015.
+ * @author Philipp Daniels
  */
 public class HibernateManager implements DaoManager {
-    private CardDao cardDao = null;
-    private ICardList cardList = null;
 
     @Override
     public CardDao getCard() {
