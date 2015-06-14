@@ -27,7 +27,6 @@ public class CardList_dbOperation extends HibernateBase implements CardListDao {
         ICardList iCardList = null;
         try {
             t = session.beginTransaction();
-
             Query query = session.createQuery("from CARDLIST_CARDS");
             iCardList = (ICardList) query.list();
             t.commit();
@@ -44,31 +43,11 @@ public class CardList_dbOperation extends HibernateBase implements CardListDao {
 
     @Override
     public void add(ICardList list) {
-        addOrUpdateOperation(list);
-
+        persist(list);
     }
 
     @Override
     public void update(ICardList list) {
-        addOrUpdateOperation(list);
-
+        persist(list);
     }
-
-    private void addOrUpdateOperation(ICardList list) {
-        Session session = getSession();
-        Transaction t = null;
-        try {
-            t = session.beginTransaction();
-            session.saveOrUpdate(list);
-            t.commit();
-        } catch (Exception e) {
-            if (t != null) {
-                t.rollback();
-                throw e;
-            }
-        } finally {
-            session.close();
-        }
-    }
-
 }

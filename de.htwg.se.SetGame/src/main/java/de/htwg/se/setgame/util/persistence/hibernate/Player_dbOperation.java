@@ -23,7 +23,6 @@ public class Player_dbOperation extends HibernateBase implements PlayerDao {
         return null;
     }
 
-
     @Override
     public IPlayer getByName(String name) {
         IPlayer player = null;
@@ -47,36 +46,16 @@ public class Player_dbOperation extends HibernateBase implements PlayerDao {
         } finally {
             session.close();
         }
-
         return player;
     }
 
-
     @Override
     public void add(IPlayer player) {
-        addOrUpdateOperation(player);
+        persist(player);
     }
 
     @Override
     public void update(IPlayer player) {
-        addOrUpdateOperation(player);
+        persist(player);
     }
-
-    private void addOrUpdateOperation(IPlayer player) {
-        Transaction t = null;
-        Session session = getSession();
-        try {
-            t = session.beginTransaction();
-            session.saveOrUpdate(player);
-            t.commit();
-        } catch (Exception e) {
-            if (t != null) {
-                t.rollback();
-                throw e;
-            }
-        } finally {
-            session.close();
-        }
-    }
-
 }
