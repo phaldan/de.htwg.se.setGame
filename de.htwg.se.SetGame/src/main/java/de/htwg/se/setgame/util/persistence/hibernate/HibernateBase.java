@@ -7,7 +7,7 @@ import org.hibernate.Transaction;
 /**
  * @author Philipp Daniels
  */
-public abstract class HibernateBase {
+public class HibernateBase {
 
     private SessionFactory factory;
 

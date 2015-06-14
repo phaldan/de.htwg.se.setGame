@@ -4,7 +4,6 @@ import de.htwg.se.setgame.model.IPlayer;
 import de.htwg.se.setgame.util.persistence.PlayerDao;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import java.util.List;
@@ -12,10 +11,12 @@ import java.util.List;
 /**
  * @author Philipp Daniels
  */
-public class Player_dbOperation extends HibernateBase implements PlayerDao {
+public class Player_dbOperation implements PlayerDao {
 
-    protected Player_dbOperation(SessionFactory factory) {
-        super(factory);
+    private HibernateBase hibernate;
+
+    protected Player_dbOperation(HibernateBase hibernate) {
+        this.hibernate = hibernate;
     }
 
     @Override
@@ -26,7 +27,7 @@ public class Player_dbOperation extends HibernateBase implements PlayerDao {
     @Override
     public IPlayer getByName(String name) {
         IPlayer player = null;
-        Session session = getSession();
+        Session session = hibernate.getSession();
         Transaction t = null;
         try {
             t = session.beginTransaction();
@@ -51,11 +52,11 @@ public class Player_dbOperation extends HibernateBase implements PlayerDao {
 
     @Override
     public void add(IPlayer player) {
-        persist(player);
+        hibernate.persist(player);
     }
 
     @Override
     public void update(IPlayer player) {
-        persist(player);
+        hibernate.persist(player);
     }
 }

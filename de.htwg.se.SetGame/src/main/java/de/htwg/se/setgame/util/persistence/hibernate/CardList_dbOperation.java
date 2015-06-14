@@ -5,14 +5,15 @@ import de.htwg.se.setgame.model.IGame;
 import de.htwg.se.setgame.util.persistence.CardListDao;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 
-public class CardList_dbOperation extends HibernateBase implements CardListDao {
+public class CardList_dbOperation implements CardListDao {
 
-    protected CardList_dbOperation(SessionFactory factory) {
-        super(factory);
+    private HibernateBase hibernate;
+
+    protected CardList_dbOperation(HibernateBase hibernate) {
+        this.hibernate = hibernate;
     }
 
     @Override
@@ -22,7 +23,7 @@ public class CardList_dbOperation extends HibernateBase implements CardListDao {
 
     @Override
     public ICardList getByGame(IGame game) {
-        Session session = getSession();
+        Session session = hibernate.getSession();
         Transaction t = null;
         ICardList iCardList = null;
         try {
@@ -43,11 +44,11 @@ public class CardList_dbOperation extends HibernateBase implements CardListDao {
 
     @Override
     public void add(ICardList list) {
-        persist(list);
+        hibernate.persist(list);
     }
 
     @Override
     public void update(ICardList list) {
-        persist(list);
+        hibernate.persist(list);
     }
 }

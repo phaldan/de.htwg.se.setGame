@@ -13,32 +13,33 @@ import java.util.Properties;
  */
 public class HibernateManager implements DaoManager {
 
-    private SessionFactory factory;
+    private HibernateBase hibernate;
 
     public HibernateManager() {
         Configuration cfg = new Configuration();
         Properties prop = cfg.configure().getProperties();
         ServiceRegistry service = new StandardServiceRegistryBuilder().applySettings(prop).build();
-        factory = cfg.buildSessionFactory(service);
+        SessionFactory factory = cfg.buildSessionFactory(service);
+        hibernate = new HibernateBase(factory);
     }
 
     @Override
     public CardDao getCard() {
-        return new Card_dbOperation(factory);
+        return new Card_dbOperation(hibernate);
     }
 
     @Override
     public CardListDao getCardList() {
-        return new CardList_dbOperation(factory);
+        return new CardList_dbOperation(hibernate);
     }
 
     @Override
     public GameDao getGame() {
-        return new Game_dbOperation(factory);
+        return new Game_dbOperation(hibernate);
     }
 
     @Override
     public PlayerDao getPlayer() {
-        return new Player_dbOperation(factory);
+        return new Player_dbOperation(hibernate);
     }
 }

@@ -2,13 +2,14 @@ package de.htwg.se.setgame.util.persistence.hibernate;
 
 import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.util.persistence.CardDao;
-import org.hibernate.SessionFactory;
 
 
-public class Card_dbOperation extends HibernateBase implements CardDao {
+public class Card_dbOperation implements CardDao {
 
-    protected Card_dbOperation(SessionFactory factory) {
-        super(factory);
+    private HibernateBase hibernate;
+
+    protected Card_dbOperation(HibernateBase hibernate) {
+        this.hibernate = hibernate;
     }
 
     @Override
@@ -18,11 +19,11 @@ public class Card_dbOperation extends HibernateBase implements CardDao {
 
     @Override
     public void add(ICard card) {
-        persist(card);
+        hibernate.persist(card);
     }
 
     @Override
     public void update(ICard card) {
-        persist(card);
+        hibernate.persist(card);
     }
 }
