@@ -1,4 +1,4 @@
-package de.htwg.se.setgame.util.persistence.Hibernate;
+package de.htwg.se.setgame.util.persistence.hibernate;
 
 import de.htwg.se.setgame.util.persistence.ISession;
 import de.htwg.se.setgame.model.IPlayer;

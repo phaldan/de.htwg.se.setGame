@@ -14,9 +14,9 @@
         <property name="dialect">org.hibernate.dialect.SQLServerDialect</property>
 
         <!-- List of XML mapping files -->
-        <mapping resource="de/htwg/se/setgame/util/persistence/Hibernate/hbm/player.hbm.xml"/>
-        <mapping resource="de/htwg/se/setgame/util/persistence/Hibernate/hbm/cardList.hbm.xml"/>
-        <mapping resource="de/htwg/se/setgame/util/persistence/Hibernate/hbm/card.hbm.xml"/>
-        <mapping resource="de/htwg/se/setgame/util/persistence/Hibernate/hbm/game.hbm.xml"/>
+        <mapping resource="de/htwg/se/setgame/util/persistence/hibernate/hbm/player.hbm.xml"/>
+        <mapping resource="de/htwg/se/setgame/util/persistence/hibernate/hbm/cardList.hbm.xml"/>
+        <mapping resource="de/htwg/se/setgame/util/persistence/hibernate/hbm/card.hbm.xml"/>
+        <mapping resource="de/htwg/se/setgame/util/persistence/hibernate/hbm/game.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

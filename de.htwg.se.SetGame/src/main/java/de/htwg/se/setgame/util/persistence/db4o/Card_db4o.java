@@ -3,7 +3,7 @@ package de.htwg.se.setgame.util.persistence.db4o;
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
-import de.htwg.se.setgame.util.persistence.Hibernate.DaoManager_Operation;
+import de.htwg.se.setgame.util.persistence.hibernate.DaoManager_Operation;
 import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.util.persistence.CardDao;
 import de.htwg.se.setgame.util.persistence.DaoManager;
