@@ -33,12 +33,12 @@ public class HibernateManager implements DaoManager {
     }
 
     @Override
-    public PlayerDao getPlayer() {
-        return new Player_dbOperation();
+    public GameDao getGame() {
+        return new Game_dbOperation();
     }
 
     @Override
-    public GameDao getGame() {
-        return new Game_dbOperation();
+    public PlayerDao getPlayer() {
+        return new Player_dbOperation(factory);
     }
 }

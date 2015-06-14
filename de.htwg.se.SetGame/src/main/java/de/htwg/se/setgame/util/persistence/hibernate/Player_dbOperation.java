@@ -1,32 +1,23 @@
 package de.htwg.se.setgame.util.persistence.hibernate;
 
-import de.htwg.se.setgame.util.persistence.ISession;
 import de.htwg.se.setgame.model.IPlayer;
-import de.htwg.se.setgame.util.persistence.DaoManager;
 import de.htwg.se.setgame.util.persistence.PlayerDao;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import java.util.List;
 
 /**
- * Created by Pavan on 16/05/2015.
+ * @author Philipp Daniels
  */
 public class Player_dbOperation implements PlayerDao{
-    private ISession hibernateSession= null;
-    private IPlayer player=null;
-    private DaoManager daoManager;
 
-    public Player_dbOperation(){
-    }
-    private Session getSession(){
-        daoManager = new HibernateManager();
-        return hibernateSession.configureSession();
-    }
+    private SessionFactory factory;
 
-    private void setSession(ISession session){
-        this.hibernateSession=session;
+    public Player_dbOperation(SessionFactory factory) {
+        this.factory = factory;
     }
 
     @Override
@@ -37,20 +28,16 @@ public class Player_dbOperation implements PlayerDao{
 
     @Override
     public IPlayer getByName(String name) {
-        Session session = getSession();
+        IPlayer player = null;
+        Session session = factory.openSession();
         Transaction t=null;
         try {
             t = session.beginTransaction();
             String hqlClassName="de.htwg.se.setgame.database.Pojo.PlayerPojo";
-            String hql = "FROM " + hqlClassName + "   WHERE PLAYER_NAME='";
-            hql = hql + name + "'";
+            String hql = "FROM " + hqlClassName + "   WHERE PLAYER_NAME='" + name + "'";
             Query query = session.createQuery(hql);
-            //Query query = session.createQuery("FROM PLAYER where PLAYER.PLAYER_NAME=" + name + "");
-            //player = (IPlayer) query.list();
-            System.out.println("############################  query");
-            System.out.println(query);
-            List  result =  query.list();
-            if(result.isEmpty() == false){
+            List result = query.list();
+            if(!result.isEmpty()){
                 player = (IPlayer) result.get(0);
             }
             t.commit();
@@ -81,7 +68,7 @@ public class Player_dbOperation implements PlayerDao{
 
     public void addOrUpdateOperation(IPlayer player){
         Transaction t=null;
-        Session session = getSession();
+        Session session = factory.openSession();
         try {
 
              t = session.beginTransaction();
