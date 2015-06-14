@@ -1,6 +1,5 @@
 package de.htwg.se.setgame.util.persistence;
 
-import de.htwg.se.setgame.util.persistence.Pojo.CardListPojo;
 import de.htwg.se.setgame.util.persistence.Pojo.CardPojo;
 
 /**
@@ -16,7 +15,7 @@ public interface DaoManager {
     /**
      * @return Return instance of CardListDao
      */
-    CardListPojo getCardList();
+    CardListDao getCardList();
 
     /**
      * @return Return instance of PlayerDao

@@ -30,10 +30,7 @@ public class CardList_dbOperation implements CardListDao {
 
     @Override
     public ICardList create() {
-        daoManager=new DaoManager_Operation();
-        cardList=  daoManager.getCardList();
-        return cardList;
-
+        return null;
     }
 
     @Override

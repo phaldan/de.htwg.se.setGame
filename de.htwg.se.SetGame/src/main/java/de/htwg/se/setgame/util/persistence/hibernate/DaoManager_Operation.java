@@ -1,6 +1,5 @@
 package de.htwg.se.setgame.util.persistence.hibernate;
 
-import de.htwg.se.setgame.util.persistence.Pojo.CardListPojo;
 import de.htwg.se.setgame.util.persistence.Pojo.CardPojo;
 import de.htwg.se.setgame.model.ICardList;
 import de.htwg.se.setgame.util.persistence.*;
@@ -9,19 +8,17 @@ import de.htwg.se.setgame.util.persistence.*;
  * Created by Pavan on 22/05/2015.
  */
 public class DaoManager_Operation implements DaoManager {
-    private CardDao cardDao=null;
-    private ICardList cardList=null;
-
+    private CardDao cardDao = null;
+    private ICardList cardList = null;
 
     @Override
-    public CardPojo getCard(){
-
+    public CardPojo getCard() {
         return new CardPojo();
     }
 
     @Override
-    public CardListPojo getCardList() {
-        return new CardListPojo();
+    public CardListDao getCardList() {
+        return new CardList_dbOperation();
     }
 
     @Override
