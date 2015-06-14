@@ -11,9 +11,9 @@ import de.htwg.se.setgame.util.persistence.PlayerDao;
 /**
  * Created by Pavan on 03/06/2015.
  */
-public class Player_db4o implements PlayerDao{
+public class PlayerDaoDb4o implements PlayerDao{
 
-    final static String DB4OFILENAME = "Player_db4o.db";
+    final static String DB4OFILENAME = "PlayerDaoDb4o.db";
     private DaoManager daoManager;
 
 

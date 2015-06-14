@@ -9,13 +9,13 @@ import static org.junit.Assert.*;
 /**
  * @author Philipp Daniels
  */
-public class Player_db4oTest {
+public class PlayerDaoDb4oTest {
 
-    private Player_db4o target;
+    private PlayerDaoDb4o target;
 
     @Before
     public void setUp() throws Exception {
-        target = new Player_db4o();
+        target = new PlayerDaoDb4o();
     }
 
     @Test
