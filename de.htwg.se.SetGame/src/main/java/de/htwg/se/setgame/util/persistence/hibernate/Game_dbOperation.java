@@ -27,9 +27,7 @@ public class Game_dbOperation implements GameDao {
 
     @Override
     public IGame create() {
-        daoManager=new DaoManager_Operation();
-        game=  daoManager.getGame();
-        return game;
+        return null;
 
     }
 

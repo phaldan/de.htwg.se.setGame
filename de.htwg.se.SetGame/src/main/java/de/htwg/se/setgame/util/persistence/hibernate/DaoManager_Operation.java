@@ -2,7 +2,6 @@ package de.htwg.se.setgame.util.persistence.hibernate;
 
 import de.htwg.se.setgame.util.persistence.Pojo.CardListPojo;
 import de.htwg.se.setgame.util.persistence.Pojo.CardPojo;
-import de.htwg.se.setgame.util.persistence.Pojo.GamePojo;
 import de.htwg.se.setgame.util.persistence.Pojo.PlayerPojo;
 import de.htwg.se.setgame.model.ICardList;
 import de.htwg.se.setgame.util.persistence.*;
@@ -32,9 +31,7 @@ public class DaoManager_Operation implements DaoManager {
     }
 
     @Override
-    public GamePojo getGame() {
-
-        /* Game_dbOperation is yet to be Implemented */
-        return new GamePojo();
+    public GameDao getGame() {
+        return new Game_dbOperation();
     }
 }
