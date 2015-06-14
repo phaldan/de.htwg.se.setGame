@@ -12,8 +12,8 @@ public class DaoManager_Operation implements DaoManager {
     private ICardList cardList = null;
 
     @Override
-    public CardPojo getCard() {
-        return new CardPojo();
+    public CardDao getCard() {
+        return new Card_dbOperation();
     }
 
     @Override
