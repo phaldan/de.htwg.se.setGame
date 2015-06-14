@@ -1,7 +1,11 @@
 package de.htwg.se.setgame.model.impl;
 
+import de.htwg.se.setgame.model.IPlayer;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 
@@ -25,10 +29,9 @@ public class GameTest {
 
     @Test
     public void getPlayers_success() throws Exception {
-        Player entity = new Player();
-        target.addPlayer(entity);
-        assertNotNull(target.getPlayers());
-        assertTrue(target.getPlayers().contains(entity));
+        Set<IPlayer> list = new LinkedHashSet<>();
+        target.setPlayers(list);
+        assertSame(list, target.getPlayers());
     }
 
     @Test

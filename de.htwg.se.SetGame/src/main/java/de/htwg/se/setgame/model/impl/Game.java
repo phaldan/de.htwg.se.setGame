@@ -4,8 +4,8 @@ import de.htwg.se.setgame.model.ICardList;
 import de.htwg.se.setgame.model.IGame;
 import de.htwg.se.setgame.model.IPlayer;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * @author Philipp Daniels
@@ -13,7 +13,7 @@ import java.util.List;
 public class Game implements IGame {
 
     private Integer id;
-    private List<IPlayer> players = new LinkedList<>();
+    private Set<IPlayer> players = new LinkedHashSet<>();
     private ICardList fieldCardList;
     private ICardList unusedCardList;
     private IPlayer winner;
@@ -29,18 +29,13 @@ public class Game implements IGame {
     }
 
     @Override
-    public List<IPlayer> getPlayers() {
+    public Set<IPlayer> getPlayers() {
         return players;
     }
 
     @Override
-    public void addPlayer(IPlayer player) {
-        players.add(player);
-    }
-
-    @Override
-    public boolean removePlayer(IPlayer player) {
-        return players.remove(player);
+    public void setPlayers(Set<IPlayer> list) {
+        players = list;
     }
 
     @Override

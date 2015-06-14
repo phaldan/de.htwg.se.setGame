@@ -1,7 +1,11 @@
 package de.htwg.se.setgame.util.persistence.hibernate.pojo;
 
+import de.htwg.se.setgame.model.IPlayer;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 
@@ -46,9 +50,8 @@ public class GameHibernateTest {
 
     @Test
     public void getPlayers_success() throws Exception {
-        PlayerHibernate entity = new PlayerHibernate();
-        target.addPlayer(entity);
-        assertNotNull(target.getPlayers());
-        assertTrue(target.getPlayers().contains(entity));
+        Set<IPlayer> list = new LinkedHashSet<>();
+        target.setPlayers(list);
+        assertSame(list, target.getPlayers());
     }
 }

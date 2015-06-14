@@ -1,6 +1,7 @@
 package de.htwg.se.setgame.model;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Philipp Daniels
@@ -18,20 +19,14 @@ public interface IGame {
      void setId(Integer id);
 
     /**
-     * @return Return list of IPlayer instance
+     * @return Return list of IPlayer instances
      */
-    List<IPlayer> getPlayers();
+    Set<IPlayer> getPlayers();
 
     /**
-     * @param player Add IPlayer instance
+     * @param list Set list of IPlayer instances
      */
-    void addPlayer(IPlayer player);
-
-    /**
-     * @param player IPlayer instance
-     * @return Return true on success;
-     */
-    boolean removePlayer(IPlayer player);
+    void setPlayers(Set<IPlayer> list);
 
     /**
      * @return Return ICardList instance for field cards

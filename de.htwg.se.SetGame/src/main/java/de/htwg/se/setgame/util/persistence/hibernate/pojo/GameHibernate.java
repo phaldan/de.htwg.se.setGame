@@ -5,7 +5,7 @@ import de.htwg.se.setgame.model.IPlayer;
 import de.htwg.se.setgame.model.impl.Game;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 /**
  * @author Philipp Daniels
@@ -41,7 +41,7 @@ public class GameHibernate extends Game {
 
     @Override
     @OneToMany(targetEntity = PlayerHibernate.class)
-    public List<IPlayer> getPlayers() {
+    public Set<IPlayer> getPlayers() {
         return super.getPlayers();
     }
 }
