@@ -12,7 +12,19 @@ import java.util.List;
  */
 public class CardList implements ICardList {
 
+    private Integer id;
     private List<ICard> cards = new LinkedList<>();
+    private IGame game;
+
+    @Override
+    public Integer getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     @Override
     public void addCard(ICard card) {
@@ -31,11 +43,11 @@ public class CardList implements ICardList {
 
     @Override
     public IGame getGame() {
-        return null;
+        return game;
     }
 
     @Override
     public void setGame(IGame game) {
-
+        this.game = game;
     }
 }

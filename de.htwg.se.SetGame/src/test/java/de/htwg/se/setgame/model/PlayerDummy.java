@@ -6,7 +6,7 @@ package de.htwg.se.setgame.model;
 public class PlayerDummy implements IPlayer {
 
     @Override
-    public int getId() {
+    public Integer getId() {
         return 0;
     }
 
@@ -21,7 +21,7 @@ public class PlayerDummy implements IPlayer {
     }
 
     @Override
-    public void setId(int id) {
+    public void setId(Integer id) {
 
     }
 

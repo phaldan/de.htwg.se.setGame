@@ -8,14 +8,14 @@ import java.util.List;
 public interface IGame {
 
     /**
-     * @return Return list of IPlayer instance
+     * @return Return identifier
      */
-    int getId();
+    Integer getId();
 
     /**
-     * @return Return list of IPlayer instance
+     * @param id Set identifier
      */
-     void setId(int id);
+     void setId(Integer id);
 
     /**
      * @return Return list of IPlayer instance

@@ -8,7 +8,7 @@ public interface IPlayer {
     /**
      * @return Get player id.
      */
-    int getId();
+    Integer getId();
 
     /**
      * @return Get player name.
@@ -23,7 +23,7 @@ public interface IPlayer {
     /**
      * @param id Set player id.
      */
-    void setId(int id);
+    void setId(Integer id);
 
     /**
      * @param name Set player name.

@@ -10,10 +10,12 @@ public class Card implements ICard {
 
     public static final String SEPARATOR = "|";
 
+    private Integer id;
     private String color;
     private String form;
     private String panelFilling;
     private Integer count;
+    private ICardList cardList;
 
     /**
      * Default constructor
@@ -37,8 +39,18 @@ public class Card implements ICard {
     }
 
     @Override
+    public Integer getId() {
+        return id;
+    }
+
+    @Override
     public void setForm(String form) {
         this.form = form;
+    }
+
+    @Override
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @Override
@@ -63,12 +75,12 @@ public class Card implements ICard {
 
     @Override
     public ICardList getCardList() {
-        return null;
+        return cardList;
     }
 
     @Override
     public void setCardList(ICardList list) {
-
+        this.cardList = list;
     }
 
     @Override

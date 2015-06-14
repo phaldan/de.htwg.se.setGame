@@ -16,6 +16,11 @@ public class CardDummy implements ICard {
     }
 
     @Override
+    public Integer getId() {
+        return null;
+    }
+
+    @Override
     public String getPanelFilling() {
         return null;
     }
@@ -32,6 +37,11 @@ public class CardDummy implements ICard {
 
     @Override
     public void setForm(String form) {
+
+    }
+
+    @Override
+    public void setId(Integer id) {
 
     }
 

@@ -6,6 +6,11 @@ package de.htwg.se.setgame.model;
 public interface ICard {
 
     /**
+     * @return ICardList instance
+     */
+    ICardList getCardList();
+
+    /**
      * @return colors
      */
     String getColor();
@@ -15,6 +20,10 @@ public interface ICard {
      */
     String getForm();
 
+    /**
+     * @return Return id
+     */
+    Integer getId();
 
     /**
      * @return filling
@@ -27,9 +36,9 @@ public interface ICard {
     Integer getNumberOfComponents();
 
     /**
-     * @return string method
+     * @param list ICardList instance
      */
-    String toString();
+    void setCardList(ICardList list);
 
     /**
      * @param color set the color of a card
@@ -42,6 +51,11 @@ public interface ICard {
     void setForm(String form);
 
     /**
+     * @param id Set identifier
+     */
+    void setId(Integer id);
+
+    /**
      * @param panelFilling set filling of card
      */
     void setPanelFilling(String panelFilling);
@@ -52,12 +66,7 @@ public interface ICard {
     void setNumberOfComponents(int numberOfComponents);
 
     /**
-     * @return ICardList instance
+     * @return string method
      */
-    ICardList getCardList();
-
-    /**
-     * @param list ICardList instance
-     */
-    void setCardList(ICardList list);
+    String toString();
 }

@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 public class CardTest {
 
-    Card target;
+    private Card target;
 
     @Before
     public void setUp() {
@@ -49,5 +49,18 @@ public class CardTest {
         assertTrue(string.contains("1337"));
         assertTrue(string.contains("form"));
         assertTrue(string.contains("fill"));
+    }
+
+    @Test
+    public void setId_success() {
+        target.setId(1337);
+        assertEquals(new Integer(1337), target.getId());
+    }
+
+    @Test
+    public void setCardList_success() {
+        CardList entity = new CardList();
+        target.setCardList(entity);
+        assertSame(entity, target.getCardList());
     }
 }

@@ -40,4 +40,17 @@ public class CardListTest {
         assertFalse(target.getCards().contains(card));
         assertEquals(0, target.getCards().size());
     }
+
+    @Test
+    public void getId_success() {
+        target.setId(1337);
+        assertEquals(new Integer(1337), target.getId());
+    }
+
+    @Test
+    public void getGame_success() {
+        Game entity = new Game();
+        target.setGame(entity);
+        assertSame(entity, target.getGame());
+    }
 }

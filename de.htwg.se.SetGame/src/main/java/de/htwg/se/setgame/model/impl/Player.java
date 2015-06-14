@@ -11,9 +11,10 @@ public class Player implements IPlayer {
     private int id;
     private String name;
     private int score = 0;
+    private IGame game;
 
     @Override
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -28,7 +29,7 @@ public class Player implements IPlayer {
     }
 
     @Override
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -44,12 +45,12 @@ public class Player implements IPlayer {
 
     @Override
     public IGame getGame() {
-        return null;
+        return game;
     }
 
     @Override
     public void setGame(IGame game) {
-
+        this.game = game;
     }
 
     @Override

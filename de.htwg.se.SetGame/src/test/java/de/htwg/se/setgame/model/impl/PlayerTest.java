@@ -20,7 +20,7 @@ public class PlayerTest {
 
     @Test
     public void constructor() {
-        assertEquals(1337, target.getId());
+        assertEquals(new Integer(1337), target.getId());
         assertEquals("name", target.getName());
         assertEquals(0, target.getScore());
     }
@@ -28,7 +28,7 @@ public class PlayerTest {
     @Test
     public void setId_getId() {
         target.setId(12);
-        assertEquals(12, target.getId());
+        assertEquals(new Integer(12), target.getId());
     }
 
     @Test
@@ -47,5 +47,12 @@ public class PlayerTest {
     public void toString_success() {
         target.setName("name");
         assertTrue(target.toString().contains("name"));
+    }
+
+    @Test
+    public void getGame_success() {
+        Game entity = new Game();
+        target.setGame(entity);
+        assertSame(entity, target.getGame());
     }
 }

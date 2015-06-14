@@ -9,6 +9,16 @@ import java.util.List;
 public class CardListDummy implements ICardList {
 
     @Override
+    public Integer getId() {
+        return null;
+    }
+
+    @Override
+    public void setId(Integer id) {
+
+    }
+
+    @Override
     public void addCard(ICard card) {
 
     }
