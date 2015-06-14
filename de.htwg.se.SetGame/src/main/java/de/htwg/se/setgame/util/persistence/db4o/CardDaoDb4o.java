@@ -11,7 +11,7 @@ import de.htwg.se.setgame.util.persistence.DaoManager;
 /**
  * Created by Pavan on 03/06/2015.
  */
-public class Card_db4o implements CardDao {
+public class CardDaoDb4o implements CardDao {
 
     final static String DB4OFILENAME = "Card_db40.db";
     private DaoManager daoManager;
