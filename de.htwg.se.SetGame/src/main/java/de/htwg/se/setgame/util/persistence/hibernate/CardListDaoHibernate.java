@@ -8,11 +8,11 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 
-public class CardList_dbOperation implements CardListDao {
+public class CardListDaoHibernate implements CardListDao {
 
     private HibernateBase hibernate;
 
-    protected CardList_dbOperation(HibernateBase hibernate) {
+    protected CardListDaoHibernate(HibernateBase hibernate) {
         this.hibernate = hibernate;
     }
 

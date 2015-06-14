@@ -25,21 +25,21 @@ public class HibernateManager implements DaoManager {
 
     @Override
     public CardDao getCard() {
-        return new Card_dbOperation(hibernate);
+        return new CardDaoHibernate(hibernate);
     }
 
     @Override
     public CardListDao getCardList() {
-        return new CardList_dbOperation(hibernate);
+        return new CardListDaoHibernate(hibernate);
     }
 
     @Override
     public GameDao getGame() {
-        return new Game_dbOperation(hibernate);
+        return new GameDaoHibernate(hibernate);
     }
 
     @Override
     public PlayerDao getPlayer() {
-        return new Player_dbOperation(hibernate);
+        return new PlayerDaoHibernate(hibernate);
     }
 }

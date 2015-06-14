@@ -11,11 +11,11 @@ import java.util.List;
 /**
  * @author Philipp Daniels
  */
-public class Player_dbOperation implements PlayerDao {
+public class PlayerDaoHibernate implements PlayerDao {
 
     private HibernateBase hibernate;
 
-    protected Player_dbOperation(HibernateBase hibernate) {
+    protected PlayerDaoHibernate(HibernateBase hibernate) {
         this.hibernate = hibernate;
     }
 

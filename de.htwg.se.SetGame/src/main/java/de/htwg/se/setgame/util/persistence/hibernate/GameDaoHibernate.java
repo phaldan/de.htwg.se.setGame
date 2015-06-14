@@ -8,11 +8,11 @@ import java.util.List;
 /**
  * @author Philipp Daniels
  */
-public class Game_dbOperation implements GameDao {
+public class GameDaoHibernate implements GameDao {
 
     private HibernateBase hibernate;
 
-    protected Game_dbOperation(HibernateBase hibernate) {
+    protected GameDaoHibernate(HibernateBase hibernate) {
         this.hibernate = hibernate;
     }
 

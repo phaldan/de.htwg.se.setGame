@@ -4,11 +4,11 @@ import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.util.persistence.CardDao;
 
 
-public class Card_dbOperation implements CardDao {
+public class CardDaoHibernate implements CardDao {
 
     private HibernateBase hibernate;
 
-    protected Card_dbOperation(HibernateBase hibernate) {
+    protected CardDaoHibernate(HibernateBase hibernate) {
         this.hibernate = hibernate;
     }
 
