@@ -24,7 +24,7 @@ public class HibernateManager implements DaoManager {
 
     @Override
     public CardDao getCard() {
-        return new Card_dbOperation();
+        return new Card_dbOperation(factory);
     }
 
     @Override
