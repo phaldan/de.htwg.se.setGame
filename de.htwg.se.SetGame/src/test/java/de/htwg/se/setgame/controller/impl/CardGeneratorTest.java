@@ -4,8 +4,10 @@ import de.htwg.se.setgame.model.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 
@@ -14,22 +16,12 @@ import static org.junit.Assert.*;
  */
 public class CardGeneratorTest {
 
-    private List<ICard> cards;
+    private Set<ICard> cards;
 
     private class CardListSpy extends CardListDummy {
 
         @Override
-        public void addCard(ICard card) {
-            cards.add(card);
-        }
-
-        @Override
-        public ICard removeCard(ICard card) {
-            return cards.remove(card) ? card : null;
-        }
-
-        @Override
-        public List<ICard> getCards() {
+        public Set<ICard> getCards() {
             return cards;
         }
     }
@@ -85,7 +77,7 @@ public class CardGeneratorTest {
     @Before
     public void setUp() {
         target = new CardGenerator(new Factory());
-        cards = new LinkedList<>();
+        cards = new LinkedHashSet<>();
     }
 
     @Test

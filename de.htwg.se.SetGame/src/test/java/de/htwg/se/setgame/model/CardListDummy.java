@@ -1,7 +1,7 @@
 package de.htwg.se.setgame.model;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * @author Philipp Daniels
@@ -19,18 +19,13 @@ public class CardListDummy implements ICardList {
     }
 
     @Override
-    public void addCard(ICard card) {
-
+    public Set<ICard> getCards() {
+        return new LinkedHashSet<>();
     }
 
     @Override
-    public ICard removeCard(ICard card) {
-        return null;
-    }
+    public void setCards(Set<ICard> list) {
 
-    @Override
-    public List<ICard> getCards() {
-        return new LinkedList<>();
     }
 
     @Override

@@ -26,7 +26,7 @@ public class CardListHibernateTest {
     @Test
     public void getCards_success() throws Exception {
         CardHibernate entity = new CardHibernate();
-        target.addCard(entity);
+        target.getCards().add(entity);
         assertTrue(target.getCards().contains(entity));
     }
 

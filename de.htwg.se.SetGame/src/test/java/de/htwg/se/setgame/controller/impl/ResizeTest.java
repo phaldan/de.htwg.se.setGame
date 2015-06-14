@@ -1,12 +1,12 @@
 package de.htwg.se.setgame.controller.impl;
 
 import de.htwg.se.setgame.model.*;
-import de.htwg.se.setgame.model.impl.CardList;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.LinkedList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 
@@ -16,30 +16,20 @@ import static org.junit.Assert.*;
 public class ResizeTest {
 
     private Resize target;
-    private List<ICard> field;
-    private List<ICard> unused;
+    private Set<ICard> field;
+    private Set<ICard> unused;
     private boolean hasSet;
 
     private class CardListStub extends CardListDummy {
 
-        private List<ICard> cards = new LinkedList<>();
+        private Set<ICard> cards = new LinkedHashSet<>();
 
-        public CardListStub(List<ICard> cards) {
+        public CardListStub(Set<ICard> cards) {
             this.cards = cards;
         }
 
         @Override
-        public ICard removeCard(ICard card) {
-            return cards.remove(card) ? card : null;
-        }
-
-        @Override
-        public void addCard(ICard card) {
-            cards.add(card);
-        }
-
-        @Override
-        public List<ICard> getCards() {
+        public Set<ICard> getCards() {
             return cards;
         }
     }
@@ -60,8 +50,8 @@ public class ResizeTest {
     public void setUp() {
         target = new Resize(new CardSetStub());
 
-        field = new LinkedList<>();
-        unused = new LinkedList<>();
+        field = new LinkedHashSet<>();
+        unused = new LinkedHashSet<>();
         hasSet = false;
     }
 

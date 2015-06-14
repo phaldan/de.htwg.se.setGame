@@ -3,7 +3,8 @@ package de.htwg.se.setgame.controller.impl;
 import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.model.ICardList;
 
-import java.util.List;
+import java.util.LinkedList;
+import java.util.Set;
 
 /**
  * @author Philipp Daniels
@@ -45,24 +46,30 @@ public class Resize {
     }
 
     private void reduce(int diff) {
-        List<ICard> list = fieldCards.getCards();
+        Set<ICard> list = fieldCards.getCards();
         for (int i = 0; i < diff; i++) {
-            unusedCards.addCard(list.remove(0));
+            ICard card = list.iterator().next();
+            list.remove(card);
+            unusedCards.getCards().add(card);
         }
     }
 
     private void restock(int diff) {
-        List<ICard> list = unusedCards.getCards();
+        Set<ICard> list = unusedCards.getCards();
         for (int i = 0; i < diff && list.size() > 0; i++) {
-            fieldCards.addCard(list.remove(0));
+            ICard card = list.iterator().next();
+            list.remove(card);
+            fieldCards.getCards().add(card);
         }
     }
 
     private void hasSet() {
         int size = unusedCards.getCards().size();
-        List<ICard> list = fieldCards.getCards();
-        for (int i = 0; i < size && !checker.hasSet(list); i++) {
-            unusedCards.addCard(list.remove(0));
+        Set<ICard> list = fieldCards.getCards();
+        for (int i = 0; i < size && !checker.hasSet(new LinkedList<>(list)); i++) {
+            ICard card = list.iterator().next();
+            list.remove(card);
+            unusedCards.getCards().add(card);
             restock(1);
         }
     }

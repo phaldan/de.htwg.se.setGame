@@ -1,6 +1,6 @@
 package de.htwg.se.setgame.model;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * @author Philipp Daniels
@@ -18,20 +18,14 @@ public interface ICardList {
     void setId(Integer id);
 
     /**
-     * @param card Instance of ICard
-     */
-    void addCard(ICard card);
-
-    /**
-     * @param card Instance of ICard
-     * @return Returns removed ICard instance, or null
-     */
-    ICard removeCard(ICard card);
-
-    /**
      * @return Returns a list of ICard instances
      */
-    List<ICard> getCards();
+    Set<ICard> getCards();
+
+    /**
+     * @param list Set list of ICard instances
+     */
+    void setCards(Set<ICard> list);
 
     /**
      * @return Return IGame instance

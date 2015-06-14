@@ -1,8 +1,11 @@
 package de.htwg.se.setgame.model.impl;
 
-import de.htwg.se.setgame.model.CardDummy;
+import de.htwg.se.setgame.model.ICard;
 import org.junit.Before;
 import org.junit.Test;
+
+
+import java.util.LinkedHashSet;
 
 import static org.junit.Assert.*;
 
@@ -20,25 +23,10 @@ public class CardListTest {
 
     @Test
     public void getCards_success() {
+        java.util.Set<ICard> list = new LinkedHashSet<>();
+        target.setCards(list);
         assertNotNull(target.getCards());
-        assertEquals(0, target.getCards().size());
-    }
-
-    @Test
-    public void addCard_success() {
-        CardDummy card = new CardDummy();
-        target.addCard(card);
-        assertTrue(target.getCards().contains(card));
-        assertEquals(1, target.getCards().size());
-    }
-
-    @Test
-    public void removeCard_success() {
-        CardDummy card = new CardDummy();
-        target.addCard(card);
-        assertEquals(card, target.removeCard(card));
-        assertFalse(target.getCards().contains(card));
-        assertEquals(0, target.getCards().size());
+        assertSame(list, target.getCards());
     }
 
     @Test

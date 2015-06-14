@@ -5,7 +5,7 @@ import de.htwg.se.setgame.model.IGame;
 import de.htwg.se.setgame.model.impl.CardList;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 /**
  * @author Philipp Daniels
@@ -22,7 +22,7 @@ public class CardListHibernate extends CardList {
 
     @Override
     @OneToMany(targetEntity = CardHibernate.class)
-    public List<ICard> getCards() {
+    public Set<ICard> getCards() {
         return super.getCards();
     }
 

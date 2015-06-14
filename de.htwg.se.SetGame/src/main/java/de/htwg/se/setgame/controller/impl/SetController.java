@@ -7,10 +7,7 @@ import de.htwg.se.setgame.controller.event.CloseEvent;
 import de.htwg.se.setgame.model.*;
 import de.htwg.se.setgame.util.observer.Observable;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * @author raina
@@ -66,7 +63,7 @@ public class SetController extends Observable implements IController {
 
     private void clearField() {
         for (ICard card: fieldCards.getCards()) {
-            fieldCards.removeCard(card);
+            fieldCards.getCards().remove(card);
         }
     }
 
@@ -79,9 +76,9 @@ public class SetController extends Observable implements IController {
     @Override
     public void add(ISet set, IPlayer player) {
         if (validatePlayer(player) && checker.isSet(set)) {
-            fieldCards.removeCard(set.getFirst());
-            fieldCards.removeCard(set.getSecond());
-            fieldCards.removeCard(set.getThird());
+            fieldCards.getCards().remove(set.getFirst());
+            fieldCards.getCards().remove(set.getSecond());
+            fieldCards.getCards().remove(set.getThird());
             setFieldSize(size);
             increasePlayerScore(player);
             notifyObservers(new AddEvent());
@@ -105,15 +102,16 @@ public class SetController extends Observable implements IController {
 
     @Override
     public ISet getSet() {
-        return cardSet.getSet(fieldCards.getCards());
+        return cardSet.getSet(new LinkedList<>(fieldCards.getCards()));
     }
 
     @Override
     public Map<Integer, ICard> getCardsAndTheIndexOfCardInField() {
         Map<Integer, ICard> map = new TreeMap<>();
-        List<ICard> list = fieldCards.getCards();
-        for (int i = 0; i < list.size(); i++) {
-            map.put(i, list.get(i));
+        int i = 0;
+        for (ICard card: fieldCards.getCards()) {
+            map.put(i, card);
+            i++;
         }
         return map;
     }
