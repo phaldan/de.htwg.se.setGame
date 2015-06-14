@@ -22,15 +22,17 @@
         <property name="hibernate.connection.password">
             root123
         </property>
-        <property name="dialect">org.hibernate.dialect.SQLServerDialect</property>
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</property>
 
 
         <!-- List of XML mapping files -->
 
         <mapping resource="de/htwg/se/setgame/database/Hibernate/hbm/player.hbm.xml"/>
-        <mapping resource="de/htwg/se/setgame/database/Hibernate/hbm/cardList.hbm.xml"/>
-        <mapping resource="de/htwg/se/setgame/database/Hibernate/hbm/card.hbm.xml"/>
-        <mapping resource="de/htwg/se/setgame/database/Hibernate/hbm/game.hbm.xml"/>
-    </session-factory>
-</hibernate-configuration>
+       <mapping resource="de/htwg/se/setgame/database/Hibernate/hbm/cardList.hbm.xml"/>
+           <mapping resource="de/htwg/se/setgame/database/Hibernate/hbm/card.hbm.xml"/>
+         <mapping resource="de/htwg/se/setgame/database/Hibernate/hbm/game.hbm.xml"/>
+     <!--   <mapping class="de.htwg.se.setgame.database.Pojo.CardPojo"/>
+        <mapping class="de.htwg.se.setgame.database.Pojo.CardListPojo"/>-->
+     </session-factory>
+ </hibernate-configuration>

@@ -5,6 +5,8 @@ import de.htwg.se.setgame.database.Pojo.CardListPojo;
 import de.htwg.se.setgame.database.Pojo.CardPojo;
 import de.htwg.se.setgame.database.Pojo.GamePojo;
 import de.htwg.se.setgame.database.Pojo.PlayerPojo;
+import de.htwg.se.setgame.database.couchDB.Couch_BasicOperations;
+import de.htwg.se.setgame.database.couchDB.SetupDB;
 
 /**
  * @author Philipp Daniels
@@ -36,4 +38,16 @@ public interface DaoManager {
      */
     ISession createSession();
 
+    /**
+     * Only for CouchDB
+     * @return Return instance of SetupDB
+     */
+
+     SetupDB getCouchDB();
+
+    /**
+     * Only for CouchDB
+     * @return Return instance of Couch_BasicOperations
+     */
+     Couch_BasicOperations  performCouchOperations();
 }

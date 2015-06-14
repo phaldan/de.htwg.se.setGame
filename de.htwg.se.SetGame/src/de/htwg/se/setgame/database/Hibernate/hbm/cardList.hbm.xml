@@ -11,7 +11,7 @@
         <id name="cardList_id" type="int" column="CARDLIST_ID">
             <generator class="native"/></id>
         <bag name="cards" table="card" inverse="true" lazy="true" fetch="select">
-            <key column ="card_id" not-null="true"></key>
+            <key column ="cardlist_id" not-null="true"></key>
             <one-to-many class="de.htwg.se.setgame.database.Pojo.CardPojo"></one-to-many></bag>
 
     </class>

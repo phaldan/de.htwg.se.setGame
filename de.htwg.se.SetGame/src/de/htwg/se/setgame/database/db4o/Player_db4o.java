@@ -13,7 +13,7 @@ import de.htwg.se.setgame.util.persistence.PlayerDao;
  */
 public class Player_db4o implements PlayerDao{
 
-    final static String DB4OFILENAME = "Player_db4o.db";
+    final static String DB4OFILENAME = "db4o_Player.db";
     private DaoManager daoManager;
 
 
@@ -69,7 +69,6 @@ public class Player_db4o implements PlayerDao{
 
         try {
             db.store(player);
-            System.out.println("Player_db40: Added player " + player);
         }
         catch (Exception e){
             throw e;

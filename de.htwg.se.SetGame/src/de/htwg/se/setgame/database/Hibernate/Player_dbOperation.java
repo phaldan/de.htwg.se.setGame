@@ -23,7 +23,7 @@ public class Player_dbOperation implements PlayerDao{
     private Session getSession(){
         daoManager = new DaoManager_Operation();
         hibernateSession = daoManager.createSession();
-        return hibernateSession.configureSession();
+        return (Session) hibernateSession.configureSession();
     }
 
     private void setSession(ISession session){
@@ -51,7 +51,6 @@ public class Player_dbOperation implements PlayerDao{
             Query query = session.createQuery(hql);
             //Query query = session.createQuery("FROM PLAYER where PLAYER.PLAYER_NAME=" + name + "");
             //player = (IPlayer) query.list();
-            System.out.println("############################  query");
             System.out.println(query);
             List  result =  query.list();
             if(result.isEmpty() == false){
