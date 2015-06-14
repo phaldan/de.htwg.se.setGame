@@ -31,10 +31,7 @@ public class Player_dbOperation implements PlayerDao{
 
     @Override
     public IPlayer create() {
-        daoManager=new DaoManager_Operation();
-        player=  daoManager.getPlayer();
-        return player;
-
+        return null;
     }
 
 
