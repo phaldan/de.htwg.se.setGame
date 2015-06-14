@@ -1,9 +1,9 @@
-package de.htwg.se.setgame.database.db4o;
+package de.htwg.se.setgame.util.persistence.db4o;
 
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
-import de.htwg.se.setgame.database.Hibernate.DaoManager_Operation;
+import de.htwg.se.setgame.util.persistence.Hibernate.DaoManager_Operation;
 import de.htwg.se.setgame.model.IPlayer;
 import de.htwg.se.setgame.util.persistence.DaoManager;
 import de.htwg.se.setgame.util.persistence.PlayerDao;

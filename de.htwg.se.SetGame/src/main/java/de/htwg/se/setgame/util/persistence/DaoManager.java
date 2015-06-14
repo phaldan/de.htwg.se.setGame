@@ -1,10 +1,9 @@
 package de.htwg.se.setgame.util.persistence;
 
-import de.htwg.se.setgame.database.ISession;
-import de.htwg.se.setgame.database.Pojo.CardListPojo;
-import de.htwg.se.setgame.database.Pojo.CardPojo;
-import de.htwg.se.setgame.database.Pojo.GamePojo;
-import de.htwg.se.setgame.database.Pojo.PlayerPojo;
+import de.htwg.se.setgame.util.persistence.Pojo.CardListPojo;
+import de.htwg.se.setgame.util.persistence.Pojo.CardPojo;
+import de.htwg.se.setgame.util.persistence.Pojo.GamePojo;
+import de.htwg.se.setgame.util.persistence.Pojo.PlayerPojo;
 
 /**
  * @author Philipp Daniels

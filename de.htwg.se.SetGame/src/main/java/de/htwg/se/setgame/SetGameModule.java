@@ -3,8 +3,8 @@ package de.htwg.se.setgame;
 import com.google.inject.AbstractModule;
 import de.htwg.se.setgame.controller.IController;
 import de.htwg.se.setgame.controller.impl.SetController;
-import de.htwg.se.setgame.database.Hibernate.HibernateSession;
-import de.htwg.se.setgame.database.ISession;
+import de.htwg.se.setgame.util.persistence.Hibernate.HibernateSession;
+import de.htwg.se.setgame.util.persistence.ISession;
 import de.htwg.se.setgame.model.ModelFactory;
 import de.htwg.se.setgame.model.impl.ModelFactoryImpl;
 

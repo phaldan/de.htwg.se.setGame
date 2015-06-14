@@ -1,4 +1,4 @@
-package de.htwg.se.setgame.database.db4o;
+package de.htwg.se.setgame.util.persistence.db4o;
 
 import de.htwg.se.setgame.model.IPlayer;
 import org.junit.Before;

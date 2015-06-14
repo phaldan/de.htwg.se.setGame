@@ -1,6 +1,6 @@
-package de.htwg.se.setgame.database.db4o;
+package de.htwg.se.setgame.util.persistence.db4o;
 
-import de.htwg.se.setgame.database.Hibernate.DaoManager_Operation;
+import de.htwg.se.setgame.util.persistence.Hibernate.DaoManager_Operation;
 import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.util.persistence.DaoManager;
 import junit.framework.TestCase;

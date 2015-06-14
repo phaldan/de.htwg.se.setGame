@@ -1,4 +1,4 @@
-package de.htwg.se.setgame.database;
+package de.htwg.se.setgame.util.persistence;
 import org.hibernate.*;
 
 

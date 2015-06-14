@@ -1,4 +1,4 @@
-package de.htwg.se.setgame.database.Pojo;
+package de.htwg.se.setgame.util.persistence.Pojo;
 
 import de.htwg.se.setgame.model.IGame;
 import de.htwg.se.setgame.model.IPlayer;

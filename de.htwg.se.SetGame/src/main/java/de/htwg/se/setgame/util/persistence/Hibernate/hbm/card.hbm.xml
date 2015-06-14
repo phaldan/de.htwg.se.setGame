@@ -6,7 +6,7 @@
 
 <!--here we are mapping  CARD table with class Card in model impl    -->
 <hibernate-mapping>
-    <class name="de.htwg.se.setgame.database.Pojo.CardPojo" table="CARD">
+    <class name="de.htwg.se.setgame.util.persistence.Pojo.CardPojo" table="CARD">
         <meta attribute="class-description">
             This class contains the employee detail.
         </meta>
@@ -19,7 +19,7 @@
         <property name="count" column="CARD_COUNT" type="int"/>
 
 
-        <many-to-one name="cardList" class="de.htwg.se.setgame.database.Pojo.CardListPojo" fetch="select">
+        <many-to-one name="cardList" class="de.htwg.se.setgame.util.persistence.Pojo.CardListPojo" fetch="select">
             <column name="cardList_id" not-null="true"></column>
         </many-to-one>
     </class>

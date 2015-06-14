@@ -1,6 +1,6 @@
-package de.htwg.se.setgame.database.Hibernate;
+package de.htwg.se.setgame.util.persistence.Hibernate;
 
-import de.htwg.se.setgame.database.ISession;
+import de.htwg.se.setgame.util.persistence.ISession;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

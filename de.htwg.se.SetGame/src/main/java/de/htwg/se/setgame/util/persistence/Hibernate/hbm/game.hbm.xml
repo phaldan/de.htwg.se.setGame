@@ -6,13 +6,13 @@
 
 <!--here we are mapping  Game table with Game Card in model impl    -->
 <hibernate-mapping>
-    <class name="de.htwg.se.setgame.database.Pojo.GamePojo" table="GAME">
+    <class name="de.htwg.se.setgame.util.persistence.Pojo.GamePojo" table="GAME">
         <id name="id" type="int" column="GAME_ID">
             <generator class="native"/>
         </id>
-        <one-to-one name="player" class="de.htwg.se.setgame.database.Pojo.PlayerPojo"
+        <one-to-one name="player" class="de.htwg.se.setgame.util.persistence.Pojo.PlayerPojo"
                     cascade="save-update"></one-to-one>
-        <one-to-one name="cardList" class="de.htwg.se.setgame.database.Pojo.CardPojo"
+        <one-to-one name="cardList" class="de.htwg.se.setgame.util.persistence.Pojo.CardPojo"
                     cascade="save-update"></one-to-one>
     </class>
 </hibernate-mapping>
