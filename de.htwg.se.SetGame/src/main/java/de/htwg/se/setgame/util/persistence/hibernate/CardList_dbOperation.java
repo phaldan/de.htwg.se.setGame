@@ -1,31 +1,18 @@
 package de.htwg.se.setgame.util.persistence.hibernate;
 
-import de.htwg.se.setgame.util.persistence.ISession;
 import de.htwg.se.setgame.model.ICardList;
 import de.htwg.se.setgame.model.IGame;
 import de.htwg.se.setgame.util.persistence.CardListDao;
-import de.htwg.se.setgame.util.persistence.DaoManager;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 
-public class CardList_dbOperation implements CardListDao {
+public class CardList_dbOperation extends HibernateBase implements CardListDao {
 
-    private ISession hibernateSession= null;
-    private ICardList cardList=null;
-    private DaoManager daoManager;
-
-
-    public CardList_dbOperation(){
-    }
-
-    private Session getSession(){
-        return hibernateSession.configureSession();
-    }
-
-    private void setSession(ISession session){
-        this.hibernateSession=session;
+    protected CardList_dbOperation(SessionFactory factory) {
+        super(factory);
     }
 
     @Override
@@ -36,7 +23,7 @@ public class CardList_dbOperation implements CardListDao {
     @Override
     public ICardList getByGame(IGame game) {
         Session session = getSession();
-        Transaction t=null;
+        Transaction t = null;
         ICardList iCardList = null;
         try {
             t = session.beginTransaction();
@@ -44,14 +31,12 @@ public class CardList_dbOperation implements CardListDao {
             Query query = session.createQuery("from CARDLIST_CARDS");
             iCardList = (ICardList) query.list();
             t.commit();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             if (t != null) {
                 t.rollback();
                 throw e;
             }
-        }
-        finally {
+        } finally {
             session.close();
         }
         return iCardList;
@@ -69,21 +54,19 @@ public class CardList_dbOperation implements CardListDao {
 
     }
 
-    public void addOrUpdateOperation(ICardList list){
-        Session session=getSession();
-        Transaction t=null;
+    private void addOrUpdateOperation(ICardList list) {
+        Session session = getSession();
+        Transaction t = null;
         try {
-             t = session.beginTransaction();
-              session.saveOrUpdate(list);
-             t.commit();
-        }
-        catch (Exception e) {
+            t = session.beginTransaction();
+            session.saveOrUpdate(list);
+            t.commit();
+        } catch (Exception e) {
             if (t != null) {
                 t.rollback();
                 throw e;
             }
-        }
-        finally {
+        } finally {
             session.close();
         }
     }

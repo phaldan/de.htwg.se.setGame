@@ -29,7 +29,7 @@ public class HibernateManager implements DaoManager {
 
     @Override
     public CardListDao getCardList() {
-        return new CardList_dbOperation();
+        return new CardList_dbOperation(factory);
     }
 
     @Override

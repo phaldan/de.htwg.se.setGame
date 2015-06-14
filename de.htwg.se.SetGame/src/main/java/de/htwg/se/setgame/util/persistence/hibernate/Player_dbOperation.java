@@ -62,7 +62,7 @@ public class Player_dbOperation extends HibernateBase implements PlayerDao {
         addOrUpdateOperation(player);
     }
 
-    public void addOrUpdateOperation(IPlayer player) {
+    private void addOrUpdateOperation(IPlayer player) {
         Transaction t = null;
         Session session = getSession();
         try {
