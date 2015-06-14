@@ -48,4 +48,9 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 
-setgame.log
+# Logs
+*.log
+*.log.*
+
+# Db4o database
+db4o.db

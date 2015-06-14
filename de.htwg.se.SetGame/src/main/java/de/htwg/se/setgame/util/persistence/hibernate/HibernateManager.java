@@ -15,6 +15,8 @@ public class HibernateManager implements DaoManager {
 
     private HibernateBase hibernate;
 
+    /**
+     */
     public HibernateManager() {
         Configuration cfg = new Configuration();
         Properties prop = cfg.configure().getProperties();
