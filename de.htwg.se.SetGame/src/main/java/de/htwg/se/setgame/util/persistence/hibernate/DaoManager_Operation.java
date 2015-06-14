@@ -1,6 +1,5 @@
 package de.htwg.se.setgame.util.persistence.hibernate;
 
-import de.htwg.se.setgame.util.persistence.ISession;
 import de.htwg.se.setgame.util.persistence.Pojo.CardListPojo;
 import de.htwg.se.setgame.util.persistence.Pojo.CardPojo;
 import de.htwg.se.setgame.util.persistence.Pojo.GamePojo;
@@ -37,13 +36,5 @@ public class DaoManager_Operation implements DaoManager {
 
         /* Game_dbOperation is yet to be Implemented */
         return new GamePojo();
-    }
-
-    /**
-     * @return Return instance of GameDao
-     */
-    @Override
-    public ISession createSession() {
-        return new HibernateSession();
     }
 }

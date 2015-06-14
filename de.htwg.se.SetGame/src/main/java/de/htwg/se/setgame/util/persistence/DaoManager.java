@@ -30,9 +30,4 @@ public interface DaoManager {
      */
     GamePojo getGame();
 
-    /**
-     * @return Return instance of ISession
-     */
-    ISession createSession();
-
 }

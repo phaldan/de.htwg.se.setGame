@@ -22,7 +22,6 @@ public class Player_dbOperation implements PlayerDao{
     }
     private Session getSession(){
         daoManager = new DaoManager_Operation();
-        hibernateSession = daoManager.createSession();
         return hibernateSession.configureSession();
     }
 

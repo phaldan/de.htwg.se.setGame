@@ -20,7 +20,6 @@ public class Card_dbOperation implements CardDao {
 
     private Session getSession(){
         daoManager=new DaoManager_Operation();
-        hibernateSession=daoManager.createSession();
         return hibernateSession.configureSession();
     }
     @Override

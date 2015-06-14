@@ -21,7 +21,6 @@ public class Game_dbOperation implements GameDao {
 
        private Session getSession(){
            daoManager=new DaoManager_Operation();
-         hibernateSession= daoManager.createSession();
           return (Session) hibernateSession.configureSession();
     }
 
