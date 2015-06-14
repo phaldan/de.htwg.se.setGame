@@ -7,7 +7,7 @@ import de.htwg.se.setgame.util.persistence.*;
 /**
  * Created by Pavan on 22/05/2015.
  */
-public class DaoManager_Operation implements DaoManager {
+public class HibernateManager implements DaoManager {
     private CardDao cardDao = null;
     private ICardList cardList = null;
 

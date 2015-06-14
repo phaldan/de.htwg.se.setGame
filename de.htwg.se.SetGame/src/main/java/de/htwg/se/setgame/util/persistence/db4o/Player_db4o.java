@@ -3,7 +3,7 @@ package de.htwg.se.setgame.util.persistence.db4o;
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
-import de.htwg.se.setgame.util.persistence.hibernate.DaoManager_Operation;
+import de.htwg.se.setgame.util.persistence.hibernate.HibernateManager;
 import de.htwg.se.setgame.model.IPlayer;
 import de.htwg.se.setgame.util.persistence.DaoManager;
 import de.htwg.se.setgame.util.persistence.PlayerDao;
@@ -23,7 +23,7 @@ public class Player_db4o implements PlayerDao{
     @Override
     public IPlayer create() {
         IPlayer player = null;
-        daoManager = new DaoManager_Operation();
+        daoManager = new HibernateManager();
         player = (IPlayer) daoManager.getPlayer();
         return player;
     }

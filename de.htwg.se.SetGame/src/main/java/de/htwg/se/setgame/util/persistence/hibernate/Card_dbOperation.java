@@ -19,12 +19,12 @@ public class Card_dbOperation implements CardDao {
 
 
     private Session getSession(){
-        daoManager=new DaoManager_Operation();
+        daoManager=new HibernateManager();
         return hibernateSession.configureSession();
     }
     @Override
     public ICard create() {
-        daoManager=new DaoManager_Operation();
+        daoManager=new HibernateManager();
         card= (ICard) daoManager.getCard();
         return card;
 
