@@ -3,54 +3,42 @@ package de.htwg.se.setgame.util.persistence.hibernate;
 import de.htwg.se.setgame.model.ICardList;
 import de.htwg.se.setgame.model.IGame;
 import de.htwg.se.setgame.util.persistence.CardListDao;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import de.htwg.se.setgame.util.persistence.hibernate.pojo.CardListHibernate;
+import org.hibernate.criterion.Restrictions;
 
 /**
  * @author Philipp Daniels
  */
 public class CardListDaoHibernate implements CardListDao {
 
-    private HibernateBase hibernate;
+    private HibernateBase db;
 
-    protected CardListDaoHibernate(HibernateBase hibernate) {
-        this.hibernate = hibernate;
+    protected CardListDaoHibernate(HibernateBase db) {
+        this.db = db;
     }
 
     @Override
     public ICardList create() {
-        return null;
+        return new CardListHibernate();
     }
 
     @Override
     public ICardList getByGame(IGame game) {
-        Session session = hibernate.getSession();
-        Transaction t = null;
-        ICardList iCardList = null;
-        try {
-            t = session.beginTransaction();
-            Query query = session.createQuery("from CARDLIST_CARDS");
-            iCardList = (ICardList) query.list();
-            t.commit();
-        } catch (Exception e) {
-            if (t != null) {
-                t.rollback();
-                throw e;
-            }
-        } finally {
-            session.close();
-        }
-        return iCardList;
+        ICardList entity = (ICardList) db.getCriteria(CardListHibernate.class)
+                .add(Restrictions.eq("game", game))
+                .createAlias("game", "g")
+                .uniqueResult();
+        db.close();
+        return entity;
     }
 
     @Override
     public void add(ICardList list) {
-        hibernate.persist(list);
+        db.persist(list);
     }
 
     @Override
     public void update(ICardList list) {
-        hibernate.persist(list);
+        db.persist(list);
     }
 }

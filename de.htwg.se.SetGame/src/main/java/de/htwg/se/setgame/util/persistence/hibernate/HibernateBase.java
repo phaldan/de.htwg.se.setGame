@@ -1,5 +1,6 @@
 package de.htwg.se.setgame.util.persistence.hibernate;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -10,6 +11,7 @@ import org.hibernate.Transaction;
 public class HibernateBase {
 
     private SessionFactory factory;
+    private Session session;
 
     protected HibernateBase(SessionFactory factory) {
         this.factory = factory;
@@ -34,5 +36,14 @@ public class HibernateBase {
         } finally {
             session.close();
         }
+    }
+
+    protected Criteria getCriteria(Class aClass) {
+        session = getSession();
+        return session.createCriteria(aClass);
+    }
+
+    protected void close() {
+        session.close();
     }
 }

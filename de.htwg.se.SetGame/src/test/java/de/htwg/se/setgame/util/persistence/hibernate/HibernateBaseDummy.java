@@ -1,5 +1,6 @@
 package de.htwg.se.setgame.util.persistence.hibernate;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 
 /**
@@ -18,6 +19,16 @@ public class HibernateBaseDummy extends HibernateBase {
 
     @Override
     protected void persist(Object object) {
+
+    }
+
+    @Override
+    protected Criteria getCriteria(Class aClass) {
+        return null;
+    }
+
+    @Override
+    protected void close() {
 
     }
 }
