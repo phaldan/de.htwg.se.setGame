@@ -3,7 +3,9 @@ package de.htwg.se.setgame.util.persistence.hibernate;
 import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.util.persistence.CardDao;
 
-
+/**
+ * @author Philipp Daniels
+ */
 public class CardDaoHibernate implements CardDao {
 
     private HibernateBase hibernate;

@@ -6,6 +6,7 @@ import de.htwg.se.setgame.aview.gui.SetButton;
 import de.htwg.se.setgame.aview.tui.TextUI;
 import de.htwg.se.setgame.aview.tui.action.ActionListImpl;
 import de.htwg.se.setgame.controller.IController;
+import org.apache.log4j.Logger;
 
 import javax.swing.*;
 
@@ -14,6 +15,7 @@ import javax.swing.*;
  */
 public class ViewFactory {
 
+    private static final Logger LOGGER = Logger.getLogger(ViewFactory.class.getName());
     private IController controller;
 
     /**
@@ -27,7 +29,7 @@ public class ViewFactory {
      * @return Return GraphicalUI instance
      */
     public GraphicalUI createGUI() {
-        System.out.println("################################ program called");
+        LOGGER.info("Initiate GUI");
         GameField field = new GameField(controller);
         SetButton button = new SetButton(controller, new JOptionPane(), field);
         return new GraphicalUI(controller, field, button);
@@ -37,6 +39,7 @@ public class ViewFactory {
      * @return Return TextUI instance
      */
     public TextUI createTUI() {
+        LOGGER.info("Initiate TUI");
         TextUI tui = new TextUI(controller, new ActionListImpl(controller));
         tui.printTUI();
         return tui;

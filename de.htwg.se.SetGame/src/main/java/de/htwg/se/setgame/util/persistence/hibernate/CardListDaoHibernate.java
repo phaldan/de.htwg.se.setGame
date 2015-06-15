@@ -7,7 +7,9 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-
+/**
+ * @author Philipp Daniels
+ */
 public class CardListDaoHibernate implements CardListDao {
 
     private HibernateBase hibernate;

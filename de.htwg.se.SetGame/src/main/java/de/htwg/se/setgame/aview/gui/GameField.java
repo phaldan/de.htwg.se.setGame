@@ -10,6 +10,7 @@ import java.util.Map;
 import de.htwg.se.setgame.controller.IController;
 import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.util.observer.Event;
+import org.apache.log4j.Logger;
 
 /**
  * @author raina
@@ -17,6 +18,7 @@ import de.htwg.se.setgame.util.observer.Event;
 public class GameField extends Panel {
 
     private static final long serialVersionUID = 1L;
+    private static final Logger LOGGER = Logger.getLogger(GameField.class.getName());
 
     public static final int MAX_SELECTED = 3;
     public static final String DIALOG_MESSAGE = "Only THREE cards addicted a SET :)";
@@ -63,7 +65,7 @@ public class GameField extends Panel {
                 setFieldImage(entry.getValue(), field);
             }
         } catch (MalformedURLException e) {
-            System.out.println("#### Error message to show that no cards have been formed ");
+            LOGGER.error(e);
         }
     }
 

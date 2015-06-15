@@ -16,6 +16,9 @@ public class Db4oManager implements DaoManager {
     private ModelFactory factory;
     private ObjectContainer db;
 
+    /**
+     * @param factory ModelFactory instance
+     */
     @Inject
     public Db4oManager(ModelFactory factory) {
         this.factory = factory;
