@@ -1,118 +1,46 @@
 package de.htwg.se.setgame.util.persistence.db4o;
 
-import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
-import com.db4o.ObjectSet;
-import de.htwg.se.setgame.util.persistence.hibernate.HibernateManager;
+import com.db4o.query.Predicate;
+import de.htwg.se.setgame.model.ModelFactory;
 import de.htwg.se.setgame.model.IPlayer;
-import de.htwg.se.setgame.util.persistence.DaoManager;
 import de.htwg.se.setgame.util.persistence.PlayerDao;
 
+import java.util.List;
+
 /**
- * Created by Pavan on 03/06/2015.
+ * @author Philipp Daniels
  */
-public class PlayerDaoDb4o implements PlayerDao{
+public class PlayerDaoDb4o extends Db4oBase implements PlayerDao{
 
-    final static String DB4OFILENAME = "PlayerDaoDb4o.db";
-    private DaoManager daoManager;
+    protected PlayerDaoDb4o(ObjectContainer db, ModelFactory factory) {
+        super(db, factory);
+    }
 
-
-    /**
-     * @return Return new IPlayer instance
-     */
     @Override
     public IPlayer create() {
-        IPlayer player = null;
-        daoManager = new HibernateManager();
-        player = (IPlayer) daoManager.getPlayer();
-        return player;
+        return getFactory().createPlayer();
     }
 
-    /**
-     * @param name Player name
-     * @return Return IPlayer instance with IGame
-     */
     @Override
-    public IPlayer getByName(String name) {
-        ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), DB4OFILENAME);
-        IPlayer playerFound = null; //this.create();
-        IPlayer playerPrototype = null;
-        playerPrototype = this.create();
-        playerPrototype.setName(name);
-        playerPrototype.setScore(0);
-        playerPrototype.setGame(null);
+    public IPlayer getByName(final String name) {
+        List<IPlayer> list = getDb().query(new Predicate<IPlayer>() {
 
-        try {
-            ObjectSet <IPlayer> result = db.queryByExample(playerPrototype);
-            if (result.isEmpty() == false) {
-                playerFound = (IPlayer) result.next();
+            @Override
+            public boolean match(IPlayer player) {
+                return player.getName().equals(name);
             }
-        }
-        catch (Exception e){
-            throw e;
-        }
-        finally {
-            db.close();
-        }
-
-        return playerFound;
+        });
+        return (list == null || list.isEmpty()) ? null : list.get(0);
     }
 
-    /**
-     * Insert new entry
-     *
-     * @param player IPlayer instance
-     */
     @Override
     public void add(IPlayer player) {
-        ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), DB4OFILENAME);
-
-        try {
-            db.store(player);
-            System.out.println("Player_db40: Added player " + player);
-        }
-        catch (Exception e){
-            throw e;
-        }
-        finally {
-            db.close();
-        }
+        store(player);
     }
 
-    /**
-     * Update existent entry
-     *
-     * @param player IPlayer instance
-     */
     @Override
     public void update(IPlayer player) {
-        ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), DB4OFILENAME);
-
-        try {
-          /*  IPlayer playerPrototype = null;
-            playerPrototype = this.create();
-            playerPrototype.setName(player.getName());
-            playerPrototype.setScore(0);
-            playerPrototype.setGame(null);
-
-            ObjectSet <IPlayer> result = db.queryByExample(playerPrototype);
-            System.out.println("##### PLAYER_DB40:  update() : before if###");
-            if(result.isEmpty() == false){
-                System.out.println("##### PLAYER_DB40:  update() : IN if###");
-                IPlayer playerFound = (IPlayer) result.next();
-                playerFound.setGame(player.getGame());
-                playerFound.setScore(player.getScore());
-                db.store(playerFound);
-                System.out.println("Updated Player " + player);
-            }
-            */
-            db.store(player);
-        }
-        catch (Exception e){
-            throw e;
-        }
-        finally {
-            db.close();
-        }
+        store(player);
     }
 }

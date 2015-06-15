@@ -39,7 +39,7 @@ public class Db4oManager implements DaoManager {
 
     @Override
     public PlayerDao getPlayer() {
-        return new PlayerDaoDb4o();
+        return new PlayerDaoDb4o(db, factory);
     }
 
     @Override
