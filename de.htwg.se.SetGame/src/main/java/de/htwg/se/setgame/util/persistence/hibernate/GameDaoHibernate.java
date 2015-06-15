@@ -1,6 +1,7 @@
 package de.htwg.se.setgame.util.persistence.hibernate;
 
 import de.htwg.se.setgame.model.IGame;
+import de.htwg.se.setgame.model.IPlayer;
 import de.htwg.se.setgame.util.persistence.GameDao;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class GameDaoHibernate implements GameDao {
     }
 
     @Override
-    public List<IGame> getByPlayer() {
+    public List<IGame> getByPlayer(IPlayer player) {
         return null;
     }
 

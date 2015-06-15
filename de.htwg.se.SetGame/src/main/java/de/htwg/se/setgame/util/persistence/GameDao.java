@@ -1,6 +1,7 @@
 package de.htwg.se.setgame.util.persistence;
 
 import de.htwg.se.setgame.model.IGame;
+import de.htwg.se.setgame.model.IPlayer;
 
 import java.util.List;
 
@@ -16,8 +17,9 @@ public interface GameDao {
 
     /**
      * @return Return list of IGame instances with winner
+     * @param player IPlayer instance
      */
-    List<IGame> getByPlayer();
+    List<IGame> getByPlayer(IPlayer player);
 
     /**
      * Create new entry
