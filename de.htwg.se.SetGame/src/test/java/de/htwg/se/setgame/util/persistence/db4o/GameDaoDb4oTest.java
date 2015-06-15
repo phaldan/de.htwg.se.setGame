@@ -6,8 +6,11 @@ import com.db4o.ext.DatabaseReadOnlyException;
 import com.db4o.ext.Db4oIOException;
 import com.db4o.query.Predicate;
 import de.htwg.se.setgame.model.*;
-import de.htwg.se.setgame.model.impl.GameDummy;
+import de.htwg.se.setgame.model.impl.Game;
 import org.junit.*;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 
@@ -20,7 +23,7 @@ public class GameDaoDb4oTest {
 
         @Override
         public IGame createGame() {
-            return new GameDummy();
+            return new Game();
         }
     }
 
@@ -33,18 +36,18 @@ public class GameDaoDb4oTest {
 
         @Override
         public <TargetType> ObjectSet<TargetType> query(Predicate<TargetType> predicate) throws Db4oIOException, DatabaseClosedException {
-            return (ObjectSet) list;
+            TargetType entity = (TargetType) game;
+            return predicate.match(entity) ? new ObjectSetDummy<TargetType>(): null;
         }
     }
 
     private GameDaoDb4o target;
     private Object object;
-    private ObjectSetDummy<GameDummy> list;
+    private Game game;
 
     @Before
     public void setUp() throws Exception {
         target = new GameDaoDb4o(new ObjectContainer(), new ModelFactory());
-        list = new ObjectSetDummy<>();
     }
 
     @Test
@@ -54,19 +57,25 @@ public class GameDaoDb4oTest {
 
     @Test
     public void getByPlayer_success() throws Exception {
-        assertSame(list, target.getByPlayer(new PlayerDummy()));
+        IPlayer player = new PlayerDummy();
+        Set<IPlayer> players = new LinkedHashSet<>();
+        players.add(player);
+
+        game = new Game();
+        game.setPlayers(players);
+        assertNotNull(target.getByPlayer(player));
     }
 
     @Test
     public void add_success() throws Exception {
-        GameDummy entity = new GameDummy();
+        Game entity = new Game();
         target.add(entity);
         assertSame(entity, object);
     }
 
     @Test
     public void update_success() throws Exception {
-        GameDummy entity = new GameDummy();
+        Game entity = new Game();
         target.update(entity);
         assertSame(entity, object);
     }

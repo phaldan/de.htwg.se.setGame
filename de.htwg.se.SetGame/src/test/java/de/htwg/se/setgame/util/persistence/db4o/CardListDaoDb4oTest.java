@@ -6,6 +6,8 @@ import com.db4o.ext.DatabaseReadOnlyException;
 import com.db4o.ext.Db4oIOException;
 import com.db4o.query.Predicate;
 import de.htwg.se.setgame.model.*;
+import de.htwg.se.setgame.model.impl.CardList;
+import de.htwg.se.setgame.model.impl.Game;
 import de.htwg.se.setgame.model.impl.GameDummy;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +23,7 @@ public class CardListDaoDb4oTest {
 
         @Override
         public ICardList createCardList() {
-            return new CardListDummy();
+            return new CardList();
         }
     }
 
@@ -34,18 +36,20 @@ public class CardListDaoDb4oTest {
 
         @Override
         public <TargetType> ObjectSet<TargetType> query(Predicate<TargetType> predicate) throws Db4oIOException, DatabaseClosedException {
-            return (ObjectSet) list;
+            ObjectSet<TargetType> list = new ObjectSetDummy<>();
+            TargetType entity = (TargetType) cardList;
+            list.add(entity);
+            return predicate.match(entity) ? list: null;
         }
     }
 
     private CardListDaoDb4o target;
     private Object object;
-    private ObjectSet<CardListDummy> list;
+    private CardList cardList;
 
     @Before
     public void setUp() throws Exception {
         target = new CardListDaoDb4o(new ObjectContainer(), new ModelFactory());
-        list = new ObjectSetDummy<>();
     }
 
     @Test
@@ -55,22 +59,22 @@ public class CardListDaoDb4oTest {
 
     @Test
     public void getByGame_success() throws Exception {
-        CardListDummy entity = new CardListDummy();
-        list.add(entity);
+        cardList = new CardList();
+        cardList.setGame(new Game());
 
-        assertSame(entity, target.getByGame(new GameDummy()));
+        assertSame(cardList, target.getByGame(cardList.getGame()));
     }
 
     @Test
     public void add_success() throws Exception {
-        CardListDummy entity = new CardListDummy();
+        CardList entity = new CardList();
         target.add(entity);
         assertSame(entity, object);
     }
 
     @Test
     public void update_success() throws Exception {
-        CardListDummy entity = new CardListDummy();
+        CardList entity = new CardList();
         target.update(entity);
         assertSame(entity, object);
     }

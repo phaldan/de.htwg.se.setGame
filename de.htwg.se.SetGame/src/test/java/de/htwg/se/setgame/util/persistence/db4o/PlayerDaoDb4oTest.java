@@ -8,6 +8,7 @@ import com.db4o.query.Predicate;
 import de.htwg.se.setgame.model.IPlayer;
 import de.htwg.se.setgame.model.ModelFactoryDummy;
 import de.htwg.se.setgame.model.PlayerDummy;
+import de.htwg.se.setgame.model.impl.Player;
 import org.junit.*;
 
 import static org.junit.Assert.*;
@@ -34,18 +35,20 @@ public class PlayerDaoDb4oTest {
 
         @Override
         public <TargetType> ObjectSet<TargetType> query(Predicate<TargetType> predicate) throws Db4oIOException, DatabaseClosedException {
-            return (ObjectSet) list;
+            ObjectSetDummy<TargetType> list = new ObjectSetDummy<>();
+            TargetType entity = (TargetType) player;
+            list.add(entity);
+            return predicate.match(entity) ? list : null;
         }
     }
 
     private PlayerDaoDb4o target;
     private Object object;
-    private ObjectSetDummy<IPlayer> list;
+    private Player player;
 
     @Before
     public void setUp() throws Exception {
         target = new PlayerDaoDb4o(new ObjectContainer(), new ModelFactory());
-        list = new ObjectSetDummy<>();
     }
 
     @Test
@@ -68,10 +71,10 @@ public class PlayerDaoDb4oTest {
     }
 
     @Test
-    public void get_success() throws Exception {
-        PlayerDummy entity = new PlayerDummy();
-        list.add(entity);
+    public void getByName_success() throws Exception {
+        player = new Player();
+        player.setName("test");
 
-        assertSame(entity, target.getByName("test"));
+        assertSame(player, target.getByName(player.getName()));
     }
 }
