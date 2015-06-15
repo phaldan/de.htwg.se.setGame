@@ -2,6 +2,7 @@ package de.htwg.se.setgame.util.persistence.hibernate;
 
 import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.util.persistence.CardDao;
+import de.htwg.se.setgame.util.persistence.hibernate.pojo.CardHibernate;
 
 /**
  * @author Philipp Daniels
@@ -16,7 +17,7 @@ public class CardDaoHibernate implements CardDao {
 
     @Override
     public ICard create() {
-        return null;
+        return new CardHibernate();
     }
 
     @Override
