@@ -13,35 +13,42 @@ import java.util.Properties;
  */
 public class HibernateManager implements DaoManager {
 
-    private HibernateBase hibernate;
+    private HibernateBase db;
+
+    private static SessionFactory createFactory() {
+        Configuration cfg = new Configuration();
+        Properties prop = cfg.configure().getProperties();
+        ServiceRegistry service = new StandardServiceRegistryBuilder().applySettings(prop).build();
+        return cfg.buildSessionFactory(service);
+    }
 
     /**
      */
     public HibernateManager() {
-        Configuration cfg = new Configuration();
-        Properties prop = cfg.configure().getProperties();
-        ServiceRegistry service = new StandardServiceRegistryBuilder().applySettings(prop).build();
-        SessionFactory factory = cfg.buildSessionFactory(service);
-        hibernate = new HibernateBase(factory);
+        this(createFactory());
+    }
+
+    protected HibernateManager(SessionFactory factory) {
+        db = new HibernateBase(factory);
     }
 
     @Override
     public CardDao getCard() {
-        return new CardDaoHibernate(hibernate);
+        return new CardDaoHibernate(db);
     }
 
     @Override
     public CardListDao getCardList() {
-        return new CardListDaoHibernate(hibernate);
+        return new CardListDaoHibernate(db);
     }
 
     @Override
     public GameDao getGame() {
-        return new GameDaoHibernate(hibernate);
+        return new GameDaoHibernate(db);
     }
 
     @Override
     public PlayerDao getPlayer() {
-        return new PlayerDaoHibernate(hibernate);
+        return new PlayerDaoHibernate(db);
     }
 }
