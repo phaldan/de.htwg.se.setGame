@@ -36,4 +36,9 @@ public class ModelFactoryImplTest {
     public void createPlayer_success() {
         assertNotNull(target.createPlayer());
     }
+
+    @Test
+    public void createGame_success() {
+        assertNotNull(target.createGame());
+    }
 }

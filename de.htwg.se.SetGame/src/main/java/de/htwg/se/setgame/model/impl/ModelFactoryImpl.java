@@ -29,7 +29,7 @@ public class ModelFactoryImpl implements ModelFactory {
 
     @Override
     public IGame createGame() {
-        return null;
+        return new Game();
     }
 
 
