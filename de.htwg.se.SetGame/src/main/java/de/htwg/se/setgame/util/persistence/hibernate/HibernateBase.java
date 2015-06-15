@@ -18,14 +18,14 @@ public class HibernateBase {
     }
 
     protected Session getSession() {
-        return factory.openSession();
+        session = factory.openSession();
+        return session;
     }
 
     protected void persist(Object object) {
-        Session session = getSession();
         Transaction tx = null;
         try {
-            tx = session.beginTransaction();
+            tx = getSession().beginTransaction();
             session.saveOrUpdate(object);
             tx.commit();
         } catch (Exception e) {
@@ -34,13 +34,12 @@ public class HibernateBase {
                 throw e;
             }
         } finally {
-            session.close();
+            close();
         }
     }
 
     protected Criteria getCriteria(Class aClass) {
-        session = getSession();
-        return session.createCriteria(aClass);
+        return getSession().createCriteria(aClass);
     }
 
     protected void close() {
