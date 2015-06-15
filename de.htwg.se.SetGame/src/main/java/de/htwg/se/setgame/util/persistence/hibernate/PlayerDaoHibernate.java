@@ -2,61 +2,39 @@ package de.htwg.se.setgame.util.persistence.hibernate;
 
 import de.htwg.se.setgame.model.IPlayer;
 import de.htwg.se.setgame.util.persistence.PlayerDao;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
-import java.util.List;
+import de.htwg.se.setgame.util.persistence.hibernate.pojo.PlayerHibernate;
 
 /**
  * @author Philipp Daniels
  */
 public class PlayerDaoHibernate implements PlayerDao {
 
-    private HibernateBase hibernate;
+    private HibernateBase db;
 
-    protected PlayerDaoHibernate(HibernateBase hibernate) {
-        this.hibernate = hibernate;
+    protected PlayerDaoHibernate(HibernateBase db) {
+        this.db = db;
     }
 
     @Override
     public IPlayer create() {
-        return null;
+        return new PlayerHibernate();
     }
 
     @Override
     public IPlayer getByName(String name) {
-        IPlayer player = null;
-        Session session = hibernate.getSession();
-        Transaction t = null;
-        try {
-            t = session.beginTransaction();
-            String hqlClassName = "de.htwg.se.setgame.database.Pojo.PlayerPojo";
-            String hql = "FROM " + hqlClassName + "   WHERE PLAYER_NAME='" + name + "'";
-            Query query = session.createQuery(hql);
-            List result = query.list();
-            if (!result.isEmpty()) {
-                player = (IPlayer) result.get(0);
-            }
-            t.commit();
-        } catch (Exception e) {
-            if (t != null) {
-                t.rollback();
-                throw e;
-            }
-        } finally {
-            session.close();
-        }
+        IPlayer player = (IPlayer) db.getCriteria(PlayerHibernate.class)
+                .uniqueResult();
+        db.close();
         return player;
     }
 
     @Override
     public void add(IPlayer player) {
-        hibernate.persist(player);
+        db.persist(player);
     }
 
     @Override
     public void update(IPlayer player) {
-        hibernate.persist(player);
+        db.persist(player);
     }
 }
