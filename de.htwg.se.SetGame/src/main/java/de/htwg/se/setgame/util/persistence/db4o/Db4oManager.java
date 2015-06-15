@@ -37,7 +37,7 @@ public class Db4oManager implements DaoManager {
 
     @Override
     public CardListDao getCardList() {
-        return new CardListDaoDb4o();
+        return new CardListDaoDb4o(db, factory);
     }
 
     @Override
