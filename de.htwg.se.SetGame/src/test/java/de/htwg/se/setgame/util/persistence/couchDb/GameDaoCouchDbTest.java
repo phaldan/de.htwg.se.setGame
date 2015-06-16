@@ -1,6 +1,7 @@
 package de.htwg.se.setgame.util.persistence.couchDb;
 
 import de.htwg.se.setgame.model.IGame;
+import de.htwg.se.setgame.model.impl.GameDummy;
 import de.htwg.se.setgame.model.impl.Player;
 import de.htwg.se.setgame.util.persistence.couchDb.pojo.GameCouchDb;
 import org.ektorp.ViewQuery;
@@ -58,14 +59,14 @@ public class GameDaoCouchDbTest {
 
     @Test
     public void add_success() throws Exception {
-        GameCouchDb entity = new GameCouchDb();
+        GameDummy entity = new GameDummy();
         target.add(entity);
         assertSame(create, entity);
     }
 
     @Test
     public void update_success() throws Exception {
-        GameCouchDb entity = new GameCouchDb();
+        GameDummy entity = new GameDummy();
         target.update(entity);
         assertSame(update, entity);
 

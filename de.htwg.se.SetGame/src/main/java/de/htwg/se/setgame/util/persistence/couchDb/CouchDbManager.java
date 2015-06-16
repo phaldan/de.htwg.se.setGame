@@ -14,9 +14,9 @@ import java.net.MalformedURLException;
  */
 public class CouchDbManager implements DaoManager {
 
-    protected static final String DATABASE = "de-htwg-se-setgame2";
+    private static final String DATABASE = "de-htwg-se-setgame2";
 
-    protected CouchDbConnector db;
+    private CouchDbConnector db;
 
     private static CouchDbConnector create() throws MalformedURLException {
         HttpClient client = new StdHttpClient.Builder()

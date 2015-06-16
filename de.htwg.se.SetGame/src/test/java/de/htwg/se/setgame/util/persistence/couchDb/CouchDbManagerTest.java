@@ -1,12 +1,10 @@
 package de.htwg.se.setgame.util.persistence.couchDb;
 
-import de.htwg.se.setgame.model.IGame;
+import org.apache.http.conn.ConnectTimeoutException;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * @author Philipp Daniels
@@ -38,5 +36,14 @@ public class CouchDbManagerTest {
     @Test
     public void getGame_success() throws Exception {
         assertNotNull(target.getGame());
+    }
+
+    @Test
+    public void constructor() throws Exception {
+        try {
+            new CouchDbManager();
+        } catch (Exception e) {
+
+        }
     }
 }
