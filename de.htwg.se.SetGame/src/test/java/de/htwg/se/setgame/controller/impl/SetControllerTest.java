@@ -2,13 +2,20 @@ package de.htwg.se.setgame.controller.impl;
 
 import de.htwg.se.setgame.controller.event.CloseEvent;
 import de.htwg.se.setgame.model.*;
+import de.htwg.se.setgame.model.impl.Card;
+import de.htwg.se.setgame.model.impl.CardList;
+import de.htwg.se.setgame.model.impl.Game;
+import de.htwg.se.setgame.model.impl.GameDummy;
 import de.htwg.se.setgame.util.observer.Event;
 import de.htwg.se.setgame.util.observer.IObserver;
+import de.htwg.se.setgame.util.persistence.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 
@@ -16,32 +23,6 @@ import static org.junit.Assert.*;
  * @author Philipp Daniels
  */
 public class SetControllerTest {
-
-    private SetController target;
-    private Event event;
-
-    private class FactoryStub extends ModelFactoryDummy {
-
-        @Override
-        public ICardList createCardList() {
-            return new CardListDummy();
-        }
-
-        @Override
-        public ICard createCard() {
-            return new CardDummy();
-        }
-
-        @Override
-        public IPlayer createPlayer() {
-            return new Player();
-        }
-
-        @Override
-        public ISet createSet() {
-            return new SetDummy();
-        }
-    }
 
     private class Player extends PlayerDummy {
 
@@ -93,10 +74,68 @@ public class SetControllerTest {
         }
     }
 
+    private class ModelFactory extends ModelFactoryDummy {
+
+        @Override
+        public ISet createSet() {
+            return new de.htwg.se.setgame.model.impl.Set();
+        }
+    }
+
+    private class DaoManager extends DaoManagerDummy {
+
+        @Override
+        public PlayerDao getPlayer() {
+            return new PlayerDaoDummy() {
+
+                @Override
+                public IPlayer create() {
+                    return new Player();
+                }
+            };
+        }
+
+        @Override
+        public GameDao getGame() {
+            return new GameDaoDummy() {
+
+                @Override
+                public IGame create() {
+                    return new Game();
+                }
+            };
+        }
+
+        @Override
+        public CardListDao getCardList() {
+            return new CardListDaoDummy() {
+
+                @Override
+                public ICardList create() {
+                    return new CardList();
+                }
+            };
+        }
+
+        @Override
+        public CardDao getCard() {
+            return new CardDaoDummy() {
+
+                @Override
+                public ICard create() {
+                    return new Card();
+                }
+            };
+        }
+    }
+
+    private SetController target;
+    private Event event;
+
     @Before
     public void setUp() {
         event = null;
-        target = new SetController(new FactoryStub());
+        target = new SetController(new ModelFactory(), new DaoManager());
         target.addObserver(new Observer());
     }
 
@@ -120,8 +159,7 @@ public class SetControllerTest {
     @Test
     public void getPlayers_success() {
         assertNotNull(target.getPlayers());
-        assertFalse(target.getPlayers().isEmpty());
-        assertEquals(2, target.getPlayers().size());
+        assertTrue(target.getPlayers().isEmpty());
     }
 
     @Test
@@ -139,13 +177,20 @@ public class SetControllerTest {
     }
 
     @Test
+    public void add_fail_noGame() {
+        target.add(null, null);
+    }
+
+    @Test
     public void add_fail_notValidSet() {
         ICard card1 = new CardStub("color", "form", "fill", 0);
         ICard card2 = new CardStub("color", "form", "fill", 1);
         ISet set = new SetStub(card1, card1, card2);
-        IPlayer player = target.getPlayers().get(0);
 
+        target.registerPlayer("test");
+        IPlayer player = target.getPlayers().get(0);
         target.add(set, player);
+
         assertNull(event);
         assertEquals(0, player.getScore());
     }
@@ -154,10 +199,11 @@ public class SetControllerTest {
     public void add_success_withPlayer() {
         ICard card = new CardStub("color", "form", "fill", 0);
         ISet set = new SetStub(card, card, card);
-        IPlayer player = target.getPlayers().get(0);
 
-        target.newGame();
+        target.registerPlayer("test");
+        IPlayer player = target.getPlayers().get(0);
         target.add(set, player);
+
         assertNotNull(event);
         assertEquals(1, player.getScore());
     }
@@ -167,7 +213,7 @@ public class SetControllerTest {
         ICard card = new CardStub("color", "form", "fill", 0);
         ISet set = new SetStub(card, card, card);
 
-        target.newGame();
+        target.registerPlayer("test");
         target.add(set, null);
         assertNotNull(event);
     }
@@ -175,5 +221,21 @@ public class SetControllerTest {
     @Test
     public void getSet_fail() {
         assertNull(target.getSet());
+    }
+
+    @Test
+    public void registerPlayer_newPlayer() {
+        target.registerPlayer("test");
+        IGame game = target.getGame();
+        assertNotNull(game);
+        assertNull(game.getWinner());
+        assertNotNull(game.getPlayers());
+        assertFalse(game.getPlayers().isEmpty());
+        assertNotNull(game.getFieldCardList());
+        assertNotNull(game.getFieldCardList().getGame());
+        assertTrue(game.getFieldCardList().getCards().isEmpty());
+        assertNotNull(game.getUnusedCardList());
+        assertNotNull(game.getUnusedCardList().getGame());
+        assertFalse(game.getUnusedCardList().getCards().isEmpty());
     }
 }

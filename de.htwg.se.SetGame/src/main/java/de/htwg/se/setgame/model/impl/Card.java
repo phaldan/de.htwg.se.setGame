@@ -17,12 +17,6 @@ public class Card implements ICard {
     private Integer count;
     private ICardList cardList;
 
-    /**
-     * Default constructor
-     */
-    protected Card() {
-    }
-
     @Override
     public String getColor() {
         return color;

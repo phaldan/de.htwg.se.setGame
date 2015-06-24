@@ -27,13 +27,11 @@ public class SetGameTest {
         System.setIn(input);
     }
 
-    @Test
     public void getInstance_withoutGUI() throws IOException {
         SetGame.clearInstance();
         assertNotNull(SetGame.getInstance(false));
     }
 
-    @Test
     public void getInstance_withGUI() throws IOException {
         SetGame.clearInstance();
         SetGame target = SetGame.getInstance(true);

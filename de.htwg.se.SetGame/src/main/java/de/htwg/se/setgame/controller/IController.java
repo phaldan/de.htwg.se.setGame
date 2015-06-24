@@ -54,4 +54,9 @@ public interface IController extends IObservable {
 	 */
 	List<IPlayer> getPlayers();
 
+	/**
+	 * @param name Name of a player
+	 * @return Returns true, when IPlayer has IGame instance
+	 */
+	void registerPlayer(String name);
 }

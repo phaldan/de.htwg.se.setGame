@@ -3,6 +3,7 @@ package de.htwg.se.setgame.controller.impl;
 import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.model.ICardList;
 import de.htwg.se.setgame.model.ModelFactory;
+import de.htwg.se.setgame.util.persistence.CardDao;
 
 /**
  * @author Philipp Daniels
@@ -26,20 +27,19 @@ public class CardGenerator {
     protected static final Integer COUNT_3 = 3;
     protected static final Integer[] COUNT = {COUNT_1, COUNT_2, COUNT_3};
 
-    private ModelFactory factory;
+    private CardDao dao;
     private ICardList list;
 
     /**
-     * @param factory Instance of ModelFactory
+     * @param dao Instance of ModelFactory
      */
-    protected CardGenerator(ModelFactory factory) {
-        this.factory = factory;
+    protected CardGenerator(CardDao dao) {
+        this.dao = dao;
     }
 
-    protected ICardList generate() {
-        list = factory.createCardList();
+    protected void generate(ICardList cardList) {
+        list = cardList;
         addForm();
-        return list;
     }
 
     private void addForm() {
@@ -67,11 +67,13 @@ public class CardGenerator {
     }
 
     private ICard createCard(String form, String fill, String color, Integer count) {
-        ICard card = factory.createCard();
+        ICard card = dao.create();
         card.setNumberOfComponents(count);
         card.setPanelFilling(fill);
         card.setForm(form);
         card.setColor(color);
+        card.setCardList(list);
+        dao.add(card);
         return card;
     }
 }

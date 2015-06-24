@@ -54,4 +54,9 @@ public class ControllerDummy extends Observable implements IController {
     public List<IPlayer> getPlayers() {
         return new LinkedList<>();
     }
+
+    @Override
+    public void registerPlayer(String name) {
+
+    }
 }

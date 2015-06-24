@@ -3,8 +3,8 @@ package de.htwg.se.setgame.controller.impl;
 import de.htwg.se.setgame.model.*;
 import de.htwg.se.setgame.util.persistence.DaoManager;
 
+import java.util.Collection;
 import java.util.LinkedHashSet;
-import java.util.List;
 
 /**
  * @author Philipp Daniels
@@ -12,12 +12,14 @@ import java.util.List;
 public class GameCreator {
 
     private DaoManager dao;
+    private CardGenerator generator;
 
     protected GameCreator(DaoManager dao) {
         this.dao = dao;
+        this.generator = new CardGenerator(dao.getCard());
     }
 
-    public IGame create(List<IPlayer> list) {
+    public IGame create(Collection<IPlayer> list) {
         IGame game = createGame();
         for (IPlayer player: list) {
             addPlayer(game, player);
@@ -54,6 +56,8 @@ public class GameCreator {
         game.setFieldCardList(createCardList(game));
         game.setUnusedCardList(createCardList(game));
         dao.getGame().update(game);
+
+        generator.generate(game.getUnusedCardList());
         return game;
     }
 

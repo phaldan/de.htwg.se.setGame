@@ -1,6 +1,7 @@
 package de.htwg.se.setgame.controller.impl;
 
 import de.htwg.se.setgame.model.*;
+import de.htwg.se.setgame.util.persistence.CardDaoDummy;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,29 +16,6 @@ import static org.junit.Assert.*;
  * @author Philipp Daniels
  */
 public class CardGeneratorTest {
-
-    private Set<ICard> cards;
-
-    private class CardListSpy extends CardListDummy {
-
-        @Override
-        public Set<ICard> getCards() {
-            return cards;
-        }
-    }
-
-    private class Factory extends ModelFactoryDummy {
-
-        @Override
-        public ICard createCard() {
-            return new CardSpy();
-        }
-
-        @Override
-        public ICardList createCardList() {
-            return new CardListSpy();
-        }
-    }
 
     private class CardSpy extends CardDummy {
 
@@ -72,17 +50,34 @@ public class CardGeneratorTest {
         }
     }
 
+    private class CardListSpy extends CardListDummy {
+
+        @Override
+        public Set<ICard> getCards() {
+            return cards;
+        }
+    }
+
+    private class CardDao extends CardDaoDummy {
+
+        @Override
+        public ICard create() {
+            return new CardSpy();
+        }
+    }
+
     private CardGenerator target;
+    private Set<ICard> cards;
 
     @Before
     public void setUp() {
-        target = new CardGenerator(new Factory());
+        target = new CardGenerator(new CardDao());
         cards = new LinkedHashSet<>();
     }
 
     @Test
     public void generate_success() {
-        assertNotNull(target.generate());
+        target.generate(new CardListSpy());
         int size = CardGenerator.COLOR.length * CardGenerator.FILL.length * CardGenerator.FORM.length * CardGenerator.COUNT.length;
         assertEquals(size, cards.size());
     }

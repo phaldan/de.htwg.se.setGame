@@ -6,6 +6,8 @@ import de.htwg.se.setgame.controller.event.AddEvent;
 import de.htwg.se.setgame.controller.event.CloseEvent;
 import de.htwg.se.setgame.model.*;
 import de.htwg.se.setgame.util.observer.Observable;
+import de.htwg.se.setgame.util.persistence.DaoManager;
+import de.htwg.se.setgame.util.persistence.PlayerDao;
 
 import java.util.*;
 
@@ -18,67 +20,48 @@ public class SetController extends Observable implements IController {
     private static final int MIN_FIELD_SIZE = 3;
 
     private ModelFactory factory;
+    private DaoManager dao;
     private SetChecker checker;
     private CardSet cardSet;
-    private CardGenerator generator;
-    private ICardList fieldCards;
-    private ICardList unusedCards;
     private Resize resize;
+    private GameCreator gameCreator;
+    private IGame game;
     private int size = INITIAL_FIELD_SIZE;
-    private List<IPlayer> players = new LinkedList<>();
-
 
     /**
      * @param factory Instance of ModelFactory
      */
     @Inject
-    public SetController(ModelFactory factory) {
+    public SetController(ModelFactory factory, DaoManager dao) {
         this.factory = factory;
+        this.dao = dao;
+
         checker = new SetChecker();
         cardSet = new CardSet(factory, checker);
-        generator = new CardGenerator(factory);
         resize = new Resize(cardSet);
-        init();
-    }
-
-    private void init() {
-        fieldCards = factory.createCardList();
-
-        players.add(createPlayer("Player One"));
-        players.add(createPlayer("Player Two"));
-    }
-
-    private IPlayer createPlayer(String name) {
-        IPlayer player = factory.createPlayer();
-        player.setName(name);
-        return player;
+        gameCreator = new GameCreator(dao);
     }
 
     @Override
     public void newGame() {
-        unusedCards = generator.generate();
-        clearField();
-        setFieldSize(size);
-    }
-
-    private void clearField() {
-        for (ICard card: fieldCards.getCards()) {
-            fieldCards.getCards().remove(card);
+        if (game != null) {
+            game = gameCreator.create(game.getPlayers());
+            setFieldSize(size);
         }
     }
 
     @Override
     public void setFieldSize(int size) {
         this.size = (size > MIN_FIELD_SIZE) ? size : MIN_FIELD_SIZE;
-        resize.resize(fieldCards, unusedCards, this.size);
+        resize.resize(game.getFieldCardList(), game.getUnusedCardList(), this.size);
     }
 
     @Override
     public void add(ISet set, IPlayer player) {
-        if (validatePlayer(player) && checker.isSet(set)) {
-            fieldCards.getCards().remove(set.getFirst());
-            fieldCards.getCards().remove(set.getSecond());
-            fieldCards.getCards().remove(set.getThird());
+        if (game != null && validatePlayer(player) && checker.isSet(set)) {
+            getFieldCards().remove(set.getFirst());
+            getFieldCards().remove(set.getSecond());
+            getFieldCards().remove(set.getThird());
             setFieldSize(size);
             increasePlayerScore(player);
             notifyObservers(new AddEvent());
@@ -102,18 +85,22 @@ public class SetController extends Observable implements IController {
 
     @Override
     public ISet getSet() {
-        return cardSet.getSet(new LinkedList<>(fieldCards.getCards()));
+        return cardSet.getSet(new LinkedList<>(getFieldCards()));
     }
 
     @Override
     public Map<Integer, ICard> getCardsAndTheIndexOfCardInField() {
         Map<Integer, ICard> map = new TreeMap<>();
         int i = 0;
-        for (ICard card: fieldCards.getCards()) {
+        for (ICard card: getFieldCards()) {
             map.put(i, card);
             i++;
         }
         return map;
+    }
+
+    private Collection<ICard> getFieldCards() {
+        return (game == null || game.getFieldCardList() == null) ? new LinkedList<ICard>() : game.getFieldCardList().getCards();
     }
 
     @Override
@@ -123,6 +110,33 @@ public class SetController extends Observable implements IController {
 
     @Override
     public List<IPlayer> getPlayers() {
-        return players;
+        List<IPlayer> list = new LinkedList<>();
+        if (game != null) {
+            list.addAll(game.getPlayers());
+        }
+        return list;
     }
+
+    @Override
+    public void registerPlayer(String name) {
+        IPlayer player = getPlayer(name);
+        game = gameCreator.create(game, player);
+        notifyObservers();
+    }
+
+    private IPlayer getPlayer(String name) {
+        PlayerDao playerDao = dao.getPlayer();
+        IPlayer player = playerDao.getByName(name);
+        if (player == null) {
+            player = dao.getPlayer().create();
+            player.setName(name);
+            playerDao.add(player);
+        }
+        return player;
+    }
+
+    protected IGame getGame() {
+        return game;
+    }
+
 }
