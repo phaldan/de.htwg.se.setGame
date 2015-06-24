@@ -3,6 +3,8 @@ package de.htwg.se.setgame.controller.impl;
 import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.model.ICardList;
 import de.htwg.se.setgame.util.persistence.CardDao;
+import de.htwg.se.setgame.util.persistence.CardListDao;
+import de.htwg.se.setgame.util.persistence.DaoManager;
 
 import java.util.LinkedList;
 import java.util.Set;
@@ -13,7 +15,8 @@ import java.util.Set;
 public class Resize {
 
     private CardSet checker;
-    private CardDao dao;
+    private CardDao cardDao;
+    private CardListDao cardListDao;
     private ICardList fieldCards;
     private ICardList unusedCards;
     private int newSize;
@@ -21,9 +24,10 @@ public class Resize {
     /**
      * @param checker Instance of CardSet
      */
-    public Resize(CardSet checker, CardDao dao) {
+    public Resize(CardSet checker, DaoManager dao) {
         this.checker = checker;
-        this.dao = dao;
+        this.cardDao = dao.getCard();
+        this.cardListDao = dao.getCardList();
     }
 
     private void remove(Set<ICard> set, ICardList list) {
@@ -31,7 +35,7 @@ public class Resize {
         set.remove(card);
         list.getCards().add(card);
         card.setCardList(list);
-        dao.update(card);
+        cardDao.update(card);
     }
 
     /**
@@ -45,6 +49,8 @@ public class Resize {
         this.newSize = newSize;
         process();
         hasSet();
+        cardListDao.update(fieldCards);
+        cardListDao.update(unusedCards);
     }
 
     private void process() {

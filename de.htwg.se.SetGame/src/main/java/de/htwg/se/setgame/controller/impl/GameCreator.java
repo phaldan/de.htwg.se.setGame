@@ -18,7 +18,7 @@ public class GameCreator {
     protected GameCreator(DaoManager dao, CardSet cardSet) {
         this.dao = dao;
         this.generator = new CardGenerator(dao.getCard());
-        this.resize = new Resize(cardSet, dao.getCard());
+        this.resize = new Resize(cardSet, dao);
     }
 
     public IGame create(Collection<IPlayer> list, int size) {
@@ -26,6 +26,7 @@ public class GameCreator {
         for (IPlayer player: list) {
             addPlayer(game, player);
         }
+        dao.getGame().update(game);
         setFieldSize(game, size);
         return game;
     }
@@ -39,14 +40,20 @@ public class GameCreator {
     public IGame create(IGame game, IPlayer player, int size) {
         if (game != null) {
             addPlayer(game, player);
+            dao.getGame().update(game);
         } else if (player.getGame() != null) {
             game = player.getGame();
         } else {
-            game = createGame();
-            addPlayer(game, player);
-            setFieldSize(game, size);
-
+            game = newGameWithPlayer(player, size);
         }
+        return game;
+    }
+
+    private IGame newGameWithPlayer(IPlayer player, int size) {
+        IGame game = createGame();
+        addPlayer(game, player);
+        dao.getGame().update(game);
+        setFieldSize(game, size);
         return game;
     }
 

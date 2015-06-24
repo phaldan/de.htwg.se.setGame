@@ -1,7 +1,7 @@
 package de.htwg.se.setgame.controller.impl;
 
 import de.htwg.se.setgame.model.*;
-import de.htwg.se.setgame.util.persistence.CardDaoDummy;
+import de.htwg.se.setgame.util.persistence.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -47,9 +47,22 @@ public class ResizeTest {
         }
     }
 
+    private class DaoManager extends DaoManagerDummy {
+
+        @Override
+        public CardDao getCard() {
+            return new CardDaoDummy();
+        }
+
+        @Override
+        public CardListDao getCardList() {
+            return new CardListDaoDummy();
+        }
+    }
+
     @Before
     public void setUp() {
-        target = new Resize(new CardSetStub(), new CardDaoDummy());
+        target = new Resize(new CardSetStub(), new DaoManager());
 
         field = new LinkedHashSet<>();
         unused = new LinkedHashSet<>();

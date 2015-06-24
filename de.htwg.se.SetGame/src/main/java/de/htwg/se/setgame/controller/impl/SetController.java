@@ -57,13 +57,20 @@ public class SetController extends Observable implements IController {
     @Override
     public void add(ISet set, IPlayer player) {
         if (game != null && validatePlayer(player) && checker.isSet(set)) {
-            getFieldCards().remove(set.getFirst());
-            getFieldCards().remove(set.getSecond());
-            getFieldCards().remove(set.getThird());
+            remove(set.getFirst());
+            remove(set.getSecond());
+            remove(set.getThird());
+            dao.getCardList().update(getGame().getFieldCardList());
             setFieldSize(size);
             increasePlayerScore(player);
             notifyObservers(new AddEvent());
         }
+    }
+
+    private void remove(ICard card) {
+        getGame().getFieldCardList().getCards().remove(card);
+        card.setCardList(null);
+        dao.getCard().update(card);
     }
 
     private boolean validatePlayer(IPlayer player) {
