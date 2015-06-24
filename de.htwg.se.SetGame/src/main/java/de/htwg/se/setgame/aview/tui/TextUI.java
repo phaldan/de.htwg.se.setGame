@@ -9,10 +9,7 @@ import de.htwg.se.setgame.controller.IController;
 import de.htwg.se.setgame.util.observer.Event;
 import de.htwg.se.setgame.util.observer.IObserver;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author raina
@@ -72,7 +69,7 @@ public class TextUI implements IObserver {
 	}
 
 	private void output(String message) {
-        if (message != null) {
+        if (message != null && !message.isEmpty()) {
             LOGGER.info(message);
         }
 	}
@@ -105,6 +102,7 @@ public class TextUI implements IObserver {
 	private void executeAction(String[] inputArray) {
 		LinkedList<String> list = new LinkedList<>(Arrays.asList(inputArray));
 		Action action = actions.get(list.peekFirst());
+        output("Execute action: " + ((action == null) ? null: action.getClass().getName()));
 		output((action == null) ? INVALID_ACTION : action.execute(inputArray));
 	}
 
@@ -127,7 +125,8 @@ public class TextUI implements IObserver {
 
 	private void printField() {
 		StringBuilder builder = new StringBuilder(FIELD_HEADLINE);
-		for (Map.Entry<Integer, ICard> entry: controller.getCardsAndTheIndexOfCardInField().entrySet()) {
+        Set<Map.Entry<Integer, ICard>> map = controller.getCardsAndTheIndexOfCardInField().entrySet();
+		for (Map.Entry<Integer, ICard> entry: map) {
 			builder.append(String.format(FIELD, entry.getKey(), entry.getValue()));
 		}
 		output(builder.toString());

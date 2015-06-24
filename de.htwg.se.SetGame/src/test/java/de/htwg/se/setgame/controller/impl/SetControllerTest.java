@@ -233,7 +233,7 @@ public class SetControllerTest {
         assertFalse(game.getPlayers().isEmpty());
         assertNotNull(game.getFieldCardList());
         assertNotNull(game.getFieldCardList().getGame());
-        assertTrue(game.getFieldCardList().getCards().isEmpty());
+        assertFalse(game.getFieldCardList().getCards().isEmpty());
         assertNotNull(game.getUnusedCardList());
         assertNotNull(game.getUnusedCardList().getGame());
         assertFalse(game.getUnusedCardList().getCards().isEmpty());

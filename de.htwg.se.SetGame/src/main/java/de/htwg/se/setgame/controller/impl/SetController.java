@@ -17,13 +17,12 @@ import java.util.*;
 public class SetController extends Observable implements IController {
 
     private static final int INITIAL_FIELD_SIZE = 12;
-    private static final int MIN_FIELD_SIZE = 3;
+    public static final int MIN_FIELD_SIZE = 3;
 
     private ModelFactory factory;
     private DaoManager dao;
     private SetChecker checker;
     private CardSet cardSet;
-    private Resize resize;
     private GameCreator gameCreator;
     private IGame game;
     private int size = INITIAL_FIELD_SIZE;
@@ -36,24 +35,23 @@ public class SetController extends Observable implements IController {
         this.factory = factory;
         this.dao = dao;
 
-        checker = new SetChecker();
-        cardSet = new CardSet(factory, checker);
-        resize = new Resize(cardSet, dao.getCard());
-        gameCreator = new GameCreator(dao);
+        this.checker = new SetChecker();
+        this.cardSet = new CardSet(factory, checker);
+        this.gameCreator = new GameCreator(dao, cardSet);
     }
 
     @Override
     public void newGame() {
-        if (game != null) {
-            game = gameCreator.create(game.getPlayers());
+        if (game != null && !getPlayers().isEmpty()) {
+            game = gameCreator.create(game.getPlayers(), size);
             setFieldSize(size);
+            notifyObservers();
         }
     }
 
     @Override
     public void setFieldSize(int size) {
-        this.size = (size > MIN_FIELD_SIZE) ? size : MIN_FIELD_SIZE;
-        resize.resize(game.getFieldCardList(), game.getUnusedCardList(), this.size);
+        this.size = gameCreator.setFieldSize(game, size);
     }
 
     @Override
@@ -120,7 +118,7 @@ public class SetController extends Observable implements IController {
     @Override
     public void registerPlayer(String name) {
         IPlayer player = getPlayer(name);
-        game = gameCreator.create(game, player);
+        game = gameCreator.create(game, player, size);
         notifyObservers();
     }
 
