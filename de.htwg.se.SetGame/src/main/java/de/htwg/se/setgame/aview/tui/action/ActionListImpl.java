@@ -13,6 +13,7 @@ public class ActionListImpl extends ActionList {
      */
     public ActionListImpl(IController controller) {
         add(new HelpAction(controller));
+        add(new AddPlayer(controller));
         add(new PointsAction(controller));
         add(new ResizeAction(controller));
         add(new NewAction(controller));

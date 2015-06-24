@@ -144,6 +144,8 @@ public class TextUITest {
 
     @Test
     public void processInputLine_failNobodyWinsNoSet() {
+        players.add(new PlayerStub("player", 1));
+        players.add(new PlayerStub("player", 1));
         assertWinner(TextUI.MSG_DRAW);
     }
 
@@ -154,7 +156,7 @@ public class TextUITest {
     }
 
     private void assertWinner(String winner) {
-        assertFalse(target.processInputLine(null));
+        assertTrue(target.processInputLine(null));
 
         String result = testAppender.getLog();
         assertFalse(result.isEmpty());
