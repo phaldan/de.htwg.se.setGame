@@ -1,6 +1,7 @@
 package de.htwg.se.setgame.controller.impl;
 
 import de.htwg.se.setgame.model.*;
+import de.htwg.se.setgame.util.persistence.CardDaoDummy;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -48,7 +49,7 @@ public class ResizeTest {
 
     @Before
     public void setUp() {
-        target = new Resize(new CardSetStub());
+        target = new Resize(new CardSetStub(), new CardDaoDummy());
 
         field = new LinkedHashSet<>();
         unused = new LinkedHashSet<>();

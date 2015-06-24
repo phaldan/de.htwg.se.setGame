@@ -38,7 +38,7 @@ public class SetController extends Observable implements IController {
 
         checker = new SetChecker();
         cardSet = new CardSet(factory, checker);
-        resize = new Resize(cardSet);
+        resize = new Resize(cardSet, dao.getCard());
         gameCreator = new GameCreator(dao);
     }
 

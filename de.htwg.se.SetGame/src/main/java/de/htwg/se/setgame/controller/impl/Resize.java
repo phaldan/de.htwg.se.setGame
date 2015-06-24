@@ -2,6 +2,7 @@ package de.htwg.se.setgame.controller.impl;
 
 import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.model.ICardList;
+import de.htwg.se.setgame.util.persistence.CardDao;
 
 import java.util.LinkedList;
 import java.util.Set;
@@ -12,6 +13,7 @@ import java.util.Set;
 public class Resize {
 
     private CardSet checker;
+    private CardDao dao;
     private ICardList fieldCards;
     private ICardList unusedCards;
     private int newSize;
@@ -19,8 +21,17 @@ public class Resize {
     /**
      * @param checker Instance of CardSet
      */
-    public Resize(CardSet checker) {
+    public Resize(CardSet checker, CardDao dao) {
         this.checker = checker;
+        this.dao = dao;
+    }
+
+    private void remove(Set<ICard> set, ICardList list) {
+        ICard card = set.iterator().next();
+        set.remove(card);
+        list.getCards().add(card);
+        card.setCardList(list);
+        dao.update(card);
     }
 
     /**
@@ -46,30 +57,24 @@ public class Resize {
     }
 
     private void reduce(int diff) {
-        Set<ICard> list = fieldCards.getCards();
+        Set<ICard> set = fieldCards.getCards();
         for (int i = 0; i < diff; i++) {
-            ICard card = list.iterator().next();
-            list.remove(card);
-            unusedCards.getCards().add(card);
+            remove(set, unusedCards);
         }
     }
 
     private void restock(int diff) {
-        Set<ICard> list = unusedCards.getCards();
-        for (int i = 0; i < diff && list.size() > 0; i++) {
-            ICard card = list.iterator().next();
-            list.remove(card);
-            fieldCards.getCards().add(card);
+        Set<ICard> set = unusedCards.getCards();
+        for (int i = 0; i < diff && set.size() > 0; i++) {
+            remove(set, fieldCards);
         }
     }
 
     private void hasSet() {
         int size = unusedCards.getCards().size();
-        Set<ICard> list = fieldCards.getCards();
-        for (int i = 0; i < size && !checker.hasSet(new LinkedList<>(list)); i++) {
-            ICard card = list.iterator().next();
-            list.remove(card);
-            unusedCards.getCards().add(card);
+        Set<ICard> set = fieldCards.getCards();
+        for (int i = 0; i < size && !checker.hasSet(new LinkedList<>(set)); i++) {
+            remove(set, unusedCards);
             restock(1);
         }
     }
