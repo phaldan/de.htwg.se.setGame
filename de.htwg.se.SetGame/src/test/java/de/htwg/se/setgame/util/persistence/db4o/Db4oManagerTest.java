@@ -16,7 +16,7 @@ public class Db4oManagerTest {
 
     @Before
     public void setUp() throws Exception {
-        target = new Db4oManager(new ModelFactoryDummy());
+        target = new Db4oManager(new ModelFactoryDummy(), new ObjectContainerDummy());
     }
 
     @After

@@ -16,14 +16,22 @@ public class Db4oManager implements DaoManager {
     private ModelFactory factory;
     private ObjectContainer db;
 
+    private static EmbeddedObjectContainer create() {
+        EmbeddedConfiguration configuration = Db4oEmbedded.newConfiguration();
+        return Db4oEmbedded.openFile(configuration, FILENAME);
+    }
+
     /**
      * @param factory ModelFactory instance
      */
     @Inject
     public Db4oManager(ModelFactory factory) {
+        this(factory, create());
+    }
+
+    protected Db4oManager(ModelFactory factory, ObjectContainer db) {
         this.factory = factory;
-        EmbeddedConfiguration configuration = Db4oEmbedded.newConfiguration();
-        db = Db4oEmbedded.openFile(configuration, FILENAME);
+        this.db = db;
     }
 
     protected ObjectContainer getDb() {
