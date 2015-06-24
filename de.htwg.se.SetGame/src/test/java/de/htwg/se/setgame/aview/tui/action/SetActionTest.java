@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import de.htwg.se.setgame.model.*;
 import de.htwg.se.setgame.controller.ControllerDummy;
+import de.htwg.se.setgame.model.impl.Player;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -125,7 +126,9 @@ public class SetActionTest {
     @Test
     public void execute_failWrongCard() {
         cards = new TreeMap<>();
-        players.add(new PlayerDummy());
+        IPlayer player = new Player();
+        player.setName("0");
+        players.add(player);
 
         String result = target.execute(new String[]{"", "0", "0", "1", "2"});
         assertNotNull(result);
@@ -143,7 +146,8 @@ public class SetActionTest {
         cards.put(1, two);
         cards.put(2, three);
 
-        IPlayer player = new PlayerDummy();
+        IPlayer player = new Player();
+        player.setName("0");
         players.add(player);
 
         String result = target.execute(new String[]{"","0", "0", "1", "2"});

@@ -26,8 +26,6 @@ public class SetAction extends Action {
     public static final int FIELD2 = 3;
     public static final int FIELD3 = 4;
 
-    private List<IPlayer> players;
-
     /**
      * @param controller Instance of IController
      */
@@ -54,17 +52,21 @@ public class SetAction extends Action {
         return (input == null || input.length < MIN_PARAMETER);
     }
 
-    private String validatePlayer(String player, String field1, String field2, String field3) {
-        int index = Integer.parseInt(player);
-        return hasPlayer(index) ? processSet(index, field1, field2, field3) : INVALID_PLAYER;
+    private String validatePlayer(String playerName, String field1, String field2, String field3) {
+        IPlayer player = getPlayer(playerName);
+        return player != null ? processSet(player, field1, field2, field3) : INVALID_PLAYER;
     }
 
-    private boolean hasPlayer(int index) {
-        players = getController().getPlayers();
-        return index < players.size();
+    private IPlayer getPlayer(String playerName) {
+        for (IPlayer player: getController().getPlayers()) {
+            if (player.getName() != null && player.getName().equals(playerName)) {
+                return player;
+            }
+        }
+        return null;
     }
 
-    private String processSet(int player, String field1, String field2, String field3) {
+    private String processSet(IPlayer player, String field1, String field2, String field3) {
         Map<Integer, ICard> list = getController().getCardsAndTheIndexOfCardInField();
         ICard card1 = list.get(Integer.parseInt(field1));
         ICard card2 = list.get(Integer.parseInt(field2));
@@ -72,12 +74,12 @@ public class SetAction extends Action {
         return (card1 == null || card2 == null || card3 == null) ? INVALID_CARD: set(player, card1, card2, card3);
     }
 
-    private String set(int playerIndex, ICard one, ICard two, ICard three) {
+    private String set(IPlayer player, ICard one, ICard two, ICard three) {
         ISet set = getController().createSet();
         set.setFirst(one);
         set.setSecond(two);
         set.setThird(three);
-        getController().add(set, players.get(playerIndex));
+        getController().add(set, player);
         return OUTPUT;
     }
 }
