@@ -30,11 +30,6 @@ public class CardListDaoDb4oTest {
     private class ObjectContainer extends ObjectContainerDummy {
 
         @Override
-        public void store(Object o) throws DatabaseClosedException, DatabaseReadOnlyException {
-            object = o;
-        }
-
-        @Override
         public <TargetType> ObjectSet<TargetType> query(Predicate<TargetType> predicate) throws Db4oIOException, DatabaseClosedException {
             ObjectSet<TargetType> list = new ObjectSetDummy<>();
             TargetType entity = (TargetType) cardList;
@@ -44,7 +39,6 @@ public class CardListDaoDb4oTest {
     }
 
     private CardListDaoDb4o target;
-    private Object object;
     private CardList cardList;
 
     @Before
@@ -68,14 +62,14 @@ public class CardListDaoDb4oTest {
     @Test
     public void add_success() throws Exception {
         CardList entity = new CardList();
+        entity.setGame(new Game());
         target.add(entity);
-        assertSame(entity, object);
     }
 
     @Test
     public void update_success() throws Exception {
         CardList entity = new CardList();
+        entity.setGame(new Game());
         target.update(entity);
-        assertSame(entity, object);
     }
 }

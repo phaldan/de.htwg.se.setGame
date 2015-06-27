@@ -38,11 +38,11 @@ public class CardListDaoDb4o extends Db4oBase implements CardListDao {
 
     @Override
     public void add(ICardList list) {
-        store(list);
+        store(list.getGame());
     }
 
     @Override
     public void update(ICardList list) {
-        store(list);
+        store(list.getGame());
     }
 }
