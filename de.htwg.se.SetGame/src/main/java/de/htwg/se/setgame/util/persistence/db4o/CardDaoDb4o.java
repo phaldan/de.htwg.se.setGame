@@ -21,11 +21,11 @@ public class CardDaoDb4o extends Db4oBase implements CardDao {
 
     @Override
     public void add(ICard card) {
-        store(card);
+        store(card.getCardList().getGame());
     }
 
     @Override
     public void update(ICard card) {
-        store(card);
+        store(card.getCardList().getGame());
     }
 }

@@ -1,10 +1,8 @@
 package de.htwg.se.setgame.util.persistence.db4o;
 
-import com.db4o.ext.DatabaseClosedException;
-import com.db4o.ext.DatabaseReadOnlyException;
-import de.htwg.se.setgame.model.CardDummy;
 import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.model.ModelFactoryDummy;
+import de.htwg.se.setgame.model.impl.*;
 import org.junit.*;
 
 import static org.junit.Assert.*;
@@ -18,24 +16,15 @@ public class CardDaoDb4oTest {
 
         @Override
         public ICard createCard() {
-            return new CardDummy();
-        }
-    }
-
-    private class ObjectContainer extends ObjectContainerDummy {
-
-        @Override
-        public void store(Object o) throws DatabaseClosedException, DatabaseReadOnlyException {
-            object = o;
+            return new Card();
         }
     }
 
     private CardDaoDb4o target;
-    private Object object;
 
     @Before
     public void setUp() {
-        target = new CardDaoDb4o(new ObjectContainer(), new ModelFactory());
+        target = new CardDaoDb4o(new ObjectContainerDummy(), new ModelFactory());
     }
 
     @Test
@@ -45,15 +34,19 @@ public class CardDaoDb4oTest {
 
     @Test
     public void add_success() throws Exception {
-        CardDummy entity = new CardDummy();
+        CardList list = new CardList();
+        list.setGame(new Game());
+        Card entity = new Card();
+        entity.setCardList(list);
         target.add(entity);
-        assertSame(entity, object);
     }
 
     @Test
     public void update_success() throws Exception {
-        CardDummy entity = new CardDummy();
+        CardList list = new CardList();
+        list.setGame(new Game());
+        Card entity = new Card();
+        entity.setCardList(list);
         target.update(entity);
-        assertSame(entity, object);
     }
 }
