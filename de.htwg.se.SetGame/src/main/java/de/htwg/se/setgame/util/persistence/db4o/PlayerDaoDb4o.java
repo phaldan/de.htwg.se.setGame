@@ -2,6 +2,7 @@ package de.htwg.se.setgame.util.persistence.db4o;
 
 import com.db4o.ObjectContainer;
 import com.db4o.query.Predicate;
+import de.htwg.se.setgame.model.IGame;
 import de.htwg.se.setgame.model.ModelFactory;
 import de.htwg.se.setgame.model.IPlayer;
 import de.htwg.se.setgame.util.persistence.PlayerDao;
@@ -24,23 +25,43 @@ public class PlayerDaoDb4o extends Db4oBase implements PlayerDao{
 
     @Override
     public IPlayer getByName(final String name) {
-        List<IPlayer> list = getDb().query(new Predicate<IPlayer>() {
+        List<IGame> list = getDb().query(new Predicate<IGame>() {
 
             @Override
-            public boolean match(IPlayer player) {
-                return player.getName().equals(name);
+            public boolean match(IGame game) {
+                for (IPlayer player: game.getPlayers()) {
+                    if (checkPlayer(game, player)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            private boolean checkPlayer(IGame game, IPlayer player) {
+                return player.getGame().equals(game) && player.getName().equals(name);
             }
         });
-        return (list == null || list.isEmpty()) ? null : list.get(0);
+        return processPlayer(list, name);
+    }
+
+    private IPlayer processPlayer(List<IGame> list, String name) {
+        for (IGame game: list) {
+            for (IPlayer player: game.getPlayers()) {
+                if (player.getName().equals(name)) {
+                    return player;
+                }
+            }
+        }
+        return null;
     }
 
     @Override
     public void add(IPlayer player) {
-        store(player);
+        store(player.getGame());
     }
 
     @Override
     public void update(IPlayer player) {
-        store(player);
+        store(player.getGame());
     }
 }

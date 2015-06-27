@@ -2,14 +2,17 @@ package de.htwg.se.setgame.util.persistence.db4o;
 
 import com.db4o.ObjectSet;
 import com.db4o.ext.DatabaseClosedException;
-import com.db4o.ext.DatabaseReadOnlyException;
 import com.db4o.ext.Db4oIOException;
 import com.db4o.query.Predicate;
 import de.htwg.se.setgame.model.IPlayer;
 import de.htwg.se.setgame.model.ModelFactoryDummy;
 import de.htwg.se.setgame.model.PlayerDummy;
+import de.htwg.se.setgame.model.impl.Game;
 import de.htwg.se.setgame.model.impl.Player;
 import org.junit.*;
+
+import java.util.LinkedList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -29,22 +32,16 @@ public class PlayerDaoDb4oTest {
     private class ObjectContainer extends ObjectContainerDummy {
 
         @Override
-        public void store(Object o) throws DatabaseClosedException, DatabaseReadOnlyException {
-            object = o;
-        }
-
-        @Override
         public <TargetType> ObjectSet<TargetType> query(Predicate<TargetType> predicate) throws Db4oIOException, DatabaseClosedException {
             ObjectSetDummy<TargetType> list = new ObjectSetDummy<>();
-            TargetType entity = (TargetType) player;
+            TargetType entity = (TargetType) game;
             list.add(entity);
             return predicate.match(entity) ? list : null;
         }
     }
 
     private PlayerDaoDb4o target;
-    private Object object;
-    private Player player;
+    private Game game;
 
     @Before
     public void setUp() throws Exception {
@@ -57,23 +54,26 @@ public class PlayerDaoDb4oTest {
     }
 
     @Test
-    public void add_success () throws Exception{
-        PlayerDummy entity = new PlayerDummy();
-        target.add(entity);
-        assertSame(entity, object);
+    public void add_success () throws Exception {
+        Player player = new Player();
+        player.setGame(new Game());
+        target.add(player);
     }
 
     @Test
     public void update_success() throws Exception {
-        PlayerDummy entity = new PlayerDummy();
-        target.update(entity);
-        assertSame(entity, object);
+        Player player = new Player();
+        player.setGame(new Game());
+        target.update(player);
     }
 
     @Test
     public void getByName_success() throws Exception {
-        player = new Player();
+        Player player = new Player();
         player.setName("test");
+        game = new Game();
+        game.getPlayers().add(player);
+        player.setGame(game);
 
         assertSame(player, target.getByName(player.getName()));
     }
