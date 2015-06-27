@@ -26,7 +26,6 @@ public class GameCreator {
         for (IPlayer player: list) {
             addPlayer(game, player);
         }
-        dao.getGame().update(game);
         setFieldSize(game, size);
         return game;
     }
@@ -40,7 +39,6 @@ public class GameCreator {
     public IGame create(IGame game, IPlayer player, int size) {
         if (game != null) {
             addPlayer(game, player);
-            dao.getGame().update(game);
         } else if (player.getGame() != null) {
             game = player.getGame();
         } else {
@@ -52,7 +50,6 @@ public class GameCreator {
     private IGame newGameWithPlayer(IPlayer player, int size) {
         IGame game = createGame();
         addPlayer(game, player);
-        dao.getGame().update(game);
         setFieldSize(game, size);
         return game;
     }

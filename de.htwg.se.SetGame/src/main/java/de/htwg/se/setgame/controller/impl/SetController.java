@@ -60,7 +60,6 @@ public class SetController extends Observable implements IController {
             remove(set.getFirst());
             remove(set.getSecond());
             remove(set.getThird());
-            dao.getCardList().update(getGame().getFieldCardList());
             setFieldSize(size);
             increasePlayerScore(player);
             notifyObservers(new AddEvent());
@@ -80,6 +79,7 @@ public class SetController extends Observable implements IController {
     private void increasePlayerScore(IPlayer player) {
         if  (player != null) {
             player.setScore(player.getScore() + 1);
+            dao.getPlayer().update(player);
         }
     }
 
@@ -133,7 +133,7 @@ public class SetController extends Observable implements IController {
         PlayerDao playerDao = dao.getPlayer();
         IPlayer player = playerDao.getByName(name);
         if (player == null) {
-            player = dao.getPlayer().create();
+            player = playerDao.create();
             player.setName(name);
             playerDao.add(player);
         }
