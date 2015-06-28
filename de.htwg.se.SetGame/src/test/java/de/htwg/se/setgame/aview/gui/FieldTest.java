@@ -21,6 +21,8 @@ public class FieldTest {
         }
     }
 
+    private class ClassLoaderDummy extends ClassLoader {}
+
     private class Dialog extends MessageDialog {
 
         @Override
@@ -36,7 +38,7 @@ public class FieldTest {
 
     @Before
     public void setUp() {
-        target = new Field(new GameFieldDummy(), new Dialog());
+        target = new Field(new GameFieldDummy(), new Dialog(), new ClassLoaderDummy());
 
         dialogTitle = null;
         dialogMessage = null;

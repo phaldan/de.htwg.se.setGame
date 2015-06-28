@@ -49,11 +49,11 @@ public class GameField extends Panel {
     }
 
     private void initFields() {
-        fields.clear();
+        MessageDialog dialog = new MessageDialog();
+        ClassLoader loader = getClass().getClassLoader();
         for (int i = 0; i < cards.size(); i++) {
-            fields.add(new Field(this, new MessageDialog()));
+            fields.add(new Field(this, dialog, loader));
         }
-        updateFields();
     }
 
     private void updateFields() {
@@ -99,10 +99,16 @@ public class GameField extends Panel {
     public void update(Event e) {
         LOGGER.debug("Receive controller update");
         cards = controller.getCardsAndTheIndexOfCardInField();
+        clearFieldList();
+        initFields();
+        updateFields();
+    }
+
+    private void clearFieldList() {
         for (Field field: fields) {
             remove(field);
         }
-        initFields();
+        fields.clear();
     }
 
     /**

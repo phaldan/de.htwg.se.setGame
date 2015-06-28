@@ -21,17 +21,19 @@ public class Field extends JButton implements ActionListener {
 
     private boolean selected;
     private MessageDialog dialog;
+    private ClassLoader loader;
 
     /**
      * @param gameField Instance of GameField
      */
-    public Field(GameField gameField, MessageDialog dialog) {
+    public Field(GameField gameField, MessageDialog dialog, ClassLoader loader) {
+        this.dialog = dialog;
+        this.loader = loader;
+
         addActionListener(gameField);
         addActionListener(this);
         gameField.add(this);
-
         setInitialState();
-        this.dialog = dialog;
     }
 
     private void setInitialState() {
@@ -43,7 +45,7 @@ public class Field extends JButton implements ActionListener {
      * @param filename String of URL
      */
     public void setImage(String filename) {
-        URL url = getClass().getClassLoader().getResource(filename);
+        URL url = loader.getResource(filename);
         if (url == null) {
             LOGGER.error("File not exist: " + filename);
         } else {
