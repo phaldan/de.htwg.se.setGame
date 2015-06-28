@@ -4,6 +4,7 @@ import de.htwg.se.setgame.model.IGame;
 import de.htwg.se.setgame.model.IPlayer;
 import de.htwg.se.setgame.util.persistence.GameDao;
 import de.htwg.se.setgame.util.persistence.hibernate.pojo.GameHibernate;
+import org.apache.log4j.Logger;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
@@ -12,6 +13,8 @@ import java.util.List;
  * @author Philipp Daniels
  */
 public class GameDaoHibernate implements GameDao {
+
+    private static final Logger LOGGER = Logger.getLogger(GameDaoHibernate.class);
 
     private HibernateBase db;
 
@@ -36,10 +39,12 @@ public class GameDaoHibernate implements GameDao {
     @Override
     public void add(IGame game) {
         db.persist(game);
+        LOGGER.debug("Add new: " + game.getId());
     }
 
     @Override
     public void update(IGame game) {
         db.persist(game);
+        LOGGER.debug("Update existing: " + game.getId());
     }
 }

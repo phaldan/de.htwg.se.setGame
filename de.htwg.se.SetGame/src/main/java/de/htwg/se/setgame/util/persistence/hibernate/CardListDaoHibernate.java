@@ -4,12 +4,15 @@ import de.htwg.se.setgame.model.ICardList;
 import de.htwg.se.setgame.model.IGame;
 import de.htwg.se.setgame.util.persistence.CardListDao;
 import de.htwg.se.setgame.util.persistence.hibernate.pojo.CardListHibernate;
+import org.apache.log4j.Logger;
 import org.hibernate.criterion.Restrictions;
 
 /**
  * @author Philipp Daniels
  */
 public class CardListDaoHibernate implements CardListDao {
+
+    private static final Logger LOGGER = Logger.getLogger(CardListDaoHibernate.class);
 
     private HibernateBase db;
 
@@ -35,10 +38,12 @@ public class CardListDaoHibernate implements CardListDao {
     @Override
     public void add(ICardList list) {
         db.persist(list);
+        LOGGER.debug("Add new: " + list.getId());
     }
 
     @Override
     public void update(ICardList list) {
         db.persist(list);
+        LOGGER.debug("Update existing: " + list.getId());
     }
 }

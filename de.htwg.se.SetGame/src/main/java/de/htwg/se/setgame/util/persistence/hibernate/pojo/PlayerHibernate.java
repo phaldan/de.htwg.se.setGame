@@ -9,7 +9,7 @@ import javax.persistence.*;
  * @author Philipp Daniels
  */
 @Entity
-@Table
+@Table(name = "player")
 public class PlayerHibernate extends Player {
 
     @Override

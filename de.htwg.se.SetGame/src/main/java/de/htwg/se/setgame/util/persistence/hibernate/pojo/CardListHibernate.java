@@ -11,17 +11,18 @@ import java.util.Set;
  * @author Philipp Daniels
  */
 @Entity
-@Table
+@Table(name = "cardlist")
 public class CardListHibernate extends CardList {
 
     @Override
     @Id
+    @GeneratedValue
     public Integer getId() {
         return super.getId();
     }
 
     @Override
-    @OneToMany(targetEntity = CardHibernate.class)
+    @OneToMany(targetEntity = CardHibernate.class, mappedBy = "cardList")
     public Set<ICard> getCards() {
         return super.getCards();
     }

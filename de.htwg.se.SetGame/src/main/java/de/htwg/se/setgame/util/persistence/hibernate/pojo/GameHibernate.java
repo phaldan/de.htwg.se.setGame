@@ -11,7 +11,7 @@ import java.util.Set;
  * @author Philipp Daniels
  */
 @Entity
-@Table
+@Table(name = "game")
 public class GameHibernate extends Game {
 
     @Override
@@ -40,7 +40,7 @@ public class GameHibernate extends Game {
     }
 
     @Override
-    @OneToMany(targetEntity = PlayerHibernate.class)
+    @OneToMany(targetEntity = PlayerHibernate.class, mappedBy = "game")
     public Set<IPlayer> getPlayers() {
         return super.getPlayers();
     }
