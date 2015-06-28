@@ -77,8 +77,7 @@ public class FieldTest {
 
     @Test
     public void setImage_success() {
-        URL url = getClass().getProtectionDomain().getCodeSource().getLocation();
-        target.setImage(url);
-        assertNotNull(target.getIcon());
+        target.setImage("test");
+        assertNull(target.getIcon());
     }
 }

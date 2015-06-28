@@ -1,11 +1,10 @@
 package de.htwg.se.setgame.aview.gui;
 
-import java.io.File;
-import java.net.MalformedURLException;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.TreeMap;
 
 import de.htwg.se.setgame.controller.IController;
 import de.htwg.se.setgame.model.ICard;
@@ -18,17 +17,18 @@ import org.apache.log4j.Logger;
 public class GameField extends Panel {
 
     private static final long serialVersionUID = 1L;
-    private static final Logger LOGGER = Logger.getLogger(GameField.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(GameField.class);
 
     public static final int MAX_SELECTED = 3;
     public static final String DIALOG_MESSAGE = "Only THREE cards addicted a SET :)";
     public static final String DIALOG_TITLE = "Warning";
-    private List<Field> fields;
 
     private IController controller;
     private MessageDialog dialog;
     private CardToImageMapper mapper;
-    private Map<Integer, ICard> cards;
+
+    private List<Field> fields = new LinkedList<>();
+    private Map<Integer, ICard> cards = new TreeMap<>();
 
     /**
      * @param controller Instance of IController
@@ -44,14 +44,12 @@ public class GameField extends Panel {
     protected GameField(IController controller, MessageDialog dialog) {
         this.controller = controller;
         this.dialog = dialog;
-        mapper = new CardToImageMapper();
-        cards = controller.getCardsAndTheIndexOfCardInField();
-
-        initFields();
+        this.mapper = new CardToImageMapper();
+        controller.addObserver(this);
     }
 
     private void initFields() {
-        fields = new LinkedList<>();
+        fields.clear();
         for (int i = 0; i < cards.size(); i++) {
             fields.add(new Field(this, new MessageDialog()));
         }
@@ -59,20 +57,10 @@ public class GameField extends Panel {
     }
 
     private void updateFields() {
-        try {
-            for (Map.Entry<Integer, ICard> entry : cards.entrySet()) {
-                Field field = fields.get(entry.getKey());
-                setFieldImage(entry.getValue(), field);
-            }
-        } catch (MalformedURLException e) {
-            LOGGER.error(e);
+        for (Map.Entry<Integer, ICard> entry : cards.entrySet()) {
+            Field field = fields.get(entry.getKey());
+            field.setImage(mapper.getImage(entry.getValue()));
         }
-    }
-
-    private void setFieldImage(ICard card, Field field) throws MalformedURLException {
-        String image = mapper.getImage(card);
-        File file = new File(image);
-        field.setImage(file.toURI().toURL());
     }
 
     @Override
@@ -109,10 +97,12 @@ public class GameField extends Panel {
 
     @Override
     public void update(Event e) {
+        LOGGER.debug("Receive controller update");
         cards = controller.getCardsAndTheIndexOfCardInField();
-        updateFields();
-
-        reset();
+        for (Field field: fields) {
+            remove(field);
+        }
+        initFields();
     }
 
     /**

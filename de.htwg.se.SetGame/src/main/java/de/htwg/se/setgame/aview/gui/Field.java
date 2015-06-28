@@ -1,5 +1,7 @@
 package de.htwg.se.setgame.aview.gui;
 
+import org.apache.log4j.Logger;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -12,6 +14,7 @@ import java.net.URL;
  */
 public class Field extends JButton implements ActionListener {
 
+    private static final Logger LOGGER = Logger.getLogger(Field.class);
     public static final String DIALOG_MESSAGE = "Not a second time :P";
     public static final String DIALOG_TITLE = "Warning";
     private static final int BORDER_WIDTH = 3;
@@ -37,11 +40,15 @@ public class Field extends JButton implements ActionListener {
     }
 
     /**
-     * @param resource Instance of URL
+     * @param filename String of URL
      */
-    public void setImage(URL resource) {
-        ImageIcon icon = new ImageIcon(resource);
-        setIcon(icon);
+    public void setImage(String filename) {
+        URL url = getClass().getClassLoader().getResource(filename);
+        if (url == null) {
+            LOGGER.error("File not exist: " + filename);
+        } else {
+            setIcon(new ImageIcon(url));
+        }
     }
 
     @Override

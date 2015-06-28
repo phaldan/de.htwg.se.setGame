@@ -26,7 +26,7 @@ public class CardToImageMapper {
     private static final int COUNT_OFFSET = 9;
     private static final int FILL_OFFSET = 3;
     private static final int FORM_OFFSET = 1;
-    public static final String NAME = "de.htwg.se.SetGame/src/pack/%d.gif";
+    public static final String NAME = "pack/%d.gif";
 
     private Map<String, Integer> color = new HashMap<>();
     private Map<Integer, Integer> count = new HashMap<>();

@@ -97,17 +97,8 @@ public class GameFieldTest {
 
     @Test
     public void getSelected_success_emptyList() {
-        assertTrue(cardsRequested);
+        assertFalse(cardsRequested);
         assertTrue(target.getSelected().isEmpty());
-        assertNull(dialogTitle);
-        assertNull(dialogMessage);
-    }
-
-    @Test
-    public void getSelected_success_notEmptyList() {
-        selectField();
-        assertEquals(cards.size(), target.getSelected().size());
-        assertTrue(target.getSelected().size() > GameField.MAX_SELECTED);
         assertNull(dialogTitle);
         assertNull(dialogMessage);
     }
@@ -131,6 +122,7 @@ public class GameFieldTest {
 
     @Test
     public void actionPerformed_success() {
+        target.update(new EventDummy());
         selectField();
         target.actionPerformed(null);
         assertEquals(GameField.DIALOG_TITLE, dialogTitle);
