@@ -1,4 +1,4 @@
-package de.htwg.se.setgame.controller.cpu;
+package de.htwg.se.setgame.controller;
 
 /**
  * @author Philipp Daniels

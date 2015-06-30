@@ -3,7 +3,7 @@ package de.htwg.se.setgame;
 import com.google.inject.AbstractModule;
 import com.google.inject.multibindings.Multibinder;
 import de.htwg.se.setgame.controller.*;
-import de.htwg.se.setgame.controller.cpu.*;
+import de.htwg.se.setgame.controller.impl.cpu.*;
 import de.htwg.se.setgame.controller.impl.SetController;
 import de.htwg.se.setgame.model.ModelFactory;
 import de.htwg.se.setgame.model.impl.ModelFactoryImpl;

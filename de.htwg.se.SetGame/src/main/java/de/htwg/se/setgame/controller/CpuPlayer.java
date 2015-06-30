@@ -1,7 +1,5 @@
 package de.htwg.se.setgame.controller;
 
-import de.htwg.se.setgame.controller.cpu.CpuLevel;
-
 /**
  * @author Philipp Daniels
  */

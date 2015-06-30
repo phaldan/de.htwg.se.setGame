@@ -1,4 +1,4 @@
-package de.htwg.se.setgame.controller.cpu;
+package de.htwg.se.setgame.controller.impl.cpu;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -8,13 +8,13 @@ import static org.junit.Assert.*;
 /**
  * @author Philipp Daniels
  */
-public class CpuNormalTest {
+public class CpuHardTest {
 
-    private CpuNormal target;
+    private CpuHard target;
 
     @Before
     public void setUp() throws Exception {
-        target = new CpuNormal();
+        target = new CpuHard();
     }
 
     @Test
