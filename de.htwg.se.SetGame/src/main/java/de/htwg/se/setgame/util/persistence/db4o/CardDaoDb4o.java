@@ -26,6 +26,8 @@ public class CardDaoDb4o extends Db4oBase implements CardDao {
 
     @Override
     public void update(ICard card) {
-        store(card.getCardList().getGame());
+        if (card.getCardList() != null) {
+            store(card.getCardList().getGame());
+        }
     }
 }
