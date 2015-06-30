@@ -1,5 +1,6 @@
 package de.htwg.se.setgame.controller.impl;
 
+import de.htwg.se.setgame.controller.CpuPlayer;
 import de.htwg.se.setgame.controller.event.CloseEvent;
 import de.htwg.se.setgame.model.*;
 import de.htwg.se.setgame.model.impl.Card;
@@ -12,10 +13,7 @@ import de.htwg.se.setgame.util.persistence.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -135,7 +133,7 @@ public class SetControllerTest {
     @Before
     public void setUp() {
         event = null;
-        target = new SetController(new ModelFactory(), new DaoManager());
+        target = new SetController(new ModelFactory(), new DaoManager(), new TreeSet<CpuPlayer>());
         target.addObserver(new Observer());
     }
 

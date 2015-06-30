@@ -5,10 +5,7 @@ import de.htwg.se.setgame.model.IPlayer;
 import de.htwg.se.setgame.model.ISet;
 import de.htwg.se.setgame.util.observer.Observable;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * @author Philipp Daniels
@@ -57,6 +54,21 @@ public class ControllerDummy extends Observable implements IController {
 
     @Override
     public void registerPlayer(String name) {
+
+    }
+
+    @Override
+    public Collection<String> getCpus() {
+        return null;
+    }
+
+    @Override
+    public String getActiveCpu() {
+        return null;
+    }
+
+    @Override
+    public void setCpu(String name) {
 
     }
 }

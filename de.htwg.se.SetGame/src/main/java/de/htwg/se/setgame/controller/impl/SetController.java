@@ -1,6 +1,7 @@
 package de.htwg.se.setgame.controller.impl;
 
 import com.google.inject.Inject;
+import de.htwg.se.setgame.controller.CpuPlayer;
 import de.htwg.se.setgame.controller.IController;
 import de.htwg.se.setgame.controller.event.AddEvent;
 import de.htwg.se.setgame.controller.event.CloseEvent;
@@ -21,6 +22,7 @@ public class SetController extends Observable implements IController {
 
     private ModelFactory factory;
     private DaoManager dao;
+    private Map<String, CpuPlayer> cpuPlayers = new TreeMap<>();
     private SetChecker checker;
     private CardSet cardSet;
     private GameCreator gameCreator;
@@ -31,13 +33,21 @@ public class SetController extends Observable implements IController {
      * @param factory Instance of ModelFactory
      */
     @Inject
-    public SetController(ModelFactory factory, DaoManager dao) {
+    public SetController(ModelFactory factory, DaoManager dao, Set<CpuPlayer> cpuPlayers) {
         this.factory = factory;
         this.dao = dao;
 
         this.checker = new SetChecker();
         this.cardSet = new CardSet(factory, checker);
         this.gameCreator = new GameCreator(dao, cardSet);
+
+        initiateCpuPlayer(cpuPlayers);
+    }
+
+    private void initiateCpuPlayer(Set<CpuPlayer> cpuPlayers) {
+        for (CpuPlayer cpu: cpuPlayers) {
+            this.cpuPlayers.put(cpu.getLevel().toString(), cpu);
+        }
     }
 
     @Override
@@ -126,7 +136,36 @@ public class SetController extends Observable implements IController {
     public void registerPlayer(String name) {
         IPlayer player = getPlayer(name);
         game = gameCreator.create(game, player, size);
+        if (game.getCpu() != null) {
+            cpuPlayers.get(game.getCpu()).activate(this);
+        }
         notifyObservers();
+    }
+
+    @Override
+    public Collection<String> getCpus() {
+        return new LinkedList<>(cpuPlayers.keySet());
+    }
+
+    @Override
+    public String getActiveCpu() {
+        return (game == null) ? null: game.getCpu();
+    }
+
+    @Override
+    public void setCpu(String name) {
+        if (game != null) {
+            if (game.getCpu() != null) {
+                cpuPlayers.get(game.getCpu()).disable(this);
+            }
+
+            game.setCpu(name);
+            dao.getGame().update(game);
+
+            if (game.getCpu() != null) {
+                cpuPlayers.get(name).activate(this);
+            }
+        }
     }
 
     private IPlayer getPlayer(String name) {

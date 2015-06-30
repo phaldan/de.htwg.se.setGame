@@ -1,5 +1,6 @@
 package de.htwg.se.setgame.controller;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -59,4 +60,19 @@ public interface IController extends IObservable {
 	 * @return Returns true, when IPlayer has IGame instance
 	 */
 	void registerPlayer(String name);
+
+	/**
+	 * @return Return a list of available CpuLevel
+	 */
+	Collection<String> getCpus();
+
+	/**
+	 * @return Return null or name of CpuLevel
+	 */
+	String getActiveCpu();
+
+	/**
+	 * @param name Name of CpuLevel
+	 */
+	void setCpu(String name);
 }
