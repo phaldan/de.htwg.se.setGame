@@ -56,4 +56,14 @@ public interface IGame {
      * @param player IPlayer instance
      */
     void setWinner(IPlayer player);
+
+    /**
+     * @return Return name of CpuLevel
+     */
+    String getCpu();
+
+    /**
+     * @param cpu Set name of CpuLevel
+     */
+    void setCpu(String cpu);
 }

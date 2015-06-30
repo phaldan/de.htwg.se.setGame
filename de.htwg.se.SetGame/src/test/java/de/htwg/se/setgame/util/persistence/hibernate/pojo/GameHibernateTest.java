@@ -54,4 +54,10 @@ public class GameHibernateTest {
         target.setPlayers(list);
         assertSame(list, target.getPlayers());
     }
+
+    @Test
+    public void getCpu_success() throws Exception {
+        target.setCpu("cpu");
+        assertEquals("cpu", target.getCpu());
+    }
 }

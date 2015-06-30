@@ -60,4 +60,14 @@ public class GameDummy implements IGame {
     public void setWinner(IPlayer player) {
 
     }
+
+    @Override
+    public String getCpu() {
+        return null;
+    }
+
+    @Override
+    public void setCpu(String cpu) {
+
+    }
 }

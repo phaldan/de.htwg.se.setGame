@@ -54,4 +54,10 @@ public class GameTest {
         target.setWinner(entity);
         assertSame(entity, target.getWinner());
     }
+
+    @Test
+    public void getCpu_success() throws Exception {
+        target.setCpu("cpu");
+        assertEquals("cpu", target.getCpu());
+    }
 }

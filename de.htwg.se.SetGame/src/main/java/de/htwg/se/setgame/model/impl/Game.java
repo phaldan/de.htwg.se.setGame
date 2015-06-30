@@ -17,6 +17,7 @@ public class Game implements IGame {
     private ICardList fieldCardList;
     private ICardList unusedCardList;
     private IPlayer winner;
+    private String cpu;
 
     @Override
     public Integer getId() {
@@ -66,5 +67,15 @@ public class Game implements IGame {
     @Override
     public void setWinner(IPlayer player) {
         winner = player;
+    }
+
+    @Override
+    public String getCpu() {
+        return cpu;
+    }
+
+    @Override
+    public void setCpu(String cpu) {
+        this.cpu = cpu;
     }
 }

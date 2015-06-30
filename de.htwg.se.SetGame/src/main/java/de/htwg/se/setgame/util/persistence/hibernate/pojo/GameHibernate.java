@@ -44,4 +44,10 @@ public class GameHibernate extends Game {
     public Set<IPlayer> getPlayers() {
         return super.getPlayers();
     }
+
+    @Override
+    @Column
+    public String getCpu() {
+        return super.getCpu();
+    }
 }
