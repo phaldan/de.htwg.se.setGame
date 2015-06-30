@@ -59,9 +59,4 @@ public abstract class AbstractCpu extends TimerTask implements CpuPlayer {
             controller.add(controller.getSet(), null);
         }
     }
-
-    /**
-     * @return Return skill level of CpuPlayer
-     */
-    public abstract CpuLevel getLevel();
 }
