@@ -49,7 +49,6 @@ public class GameField extends Panel {
     }
 
     private void initFields() {
-        MessageDialog dialog = new MessageDialog();
         ClassLoader loader = getClass().getClassLoader();
         for (int i = 0; i < cards.size(); i++) {
             fields.add(new Field(this, dialog, loader));

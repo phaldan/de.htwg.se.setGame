@@ -9,7 +9,6 @@ import de.htwg.se.setgame.model.ModelFactory;
 import de.htwg.se.setgame.model.impl.ModelFactoryImpl;
 import de.htwg.se.setgame.util.persistence.DaoManager;
 import de.htwg.se.setgame.util.persistence.db4o.Db4oManager;
-import de.htwg.se.setgame.util.persistence.hibernate.HibernateManager;
 
 /**
  * @author Philipp Daniels

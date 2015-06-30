@@ -5,8 +5,10 @@ package de.htwg.se.setgame.controller.cpu;
  */
 public class CpuHard extends AbstractCpu {
 
+    public static final int SECONDS = 30;
+
     public CpuHard() {
-        super(30 * 1000);
+        super(SECONDS * MS);
     }
 
     @Override

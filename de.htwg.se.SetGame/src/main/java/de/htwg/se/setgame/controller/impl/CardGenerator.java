@@ -2,7 +2,6 @@ package de.htwg.se.setgame.controller.impl;
 
 import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.model.ICardList;
-import de.htwg.se.setgame.model.ModelFactory;
 import de.htwg.se.setgame.util.persistence.CardDao;
 
 /**

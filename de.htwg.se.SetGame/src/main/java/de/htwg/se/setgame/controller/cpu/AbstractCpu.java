@@ -13,6 +13,7 @@ import java.util.TimerTask;
  */
 public abstract class AbstractCpu extends TimerTask implements CpuPlayer {
 
+    public static final int MS = 1000;
     private List<IController> list = new LinkedList<>();
     private long waitTime;
     private Timer timer;
@@ -44,17 +45,14 @@ public abstract class AbstractCpu extends TimerTask implements CpuPlayer {
         if (timer == null && !list.isEmpty()) {
             timer = new Timer();
             timer.scheduleAtFixedRate(this, waitTime, waitTime);
-            System.out.println("add timer");
         } else if (timer != null && list.isEmpty()) {
             timer.cancel();
             timer = null;
-            System.out.println("clear timer");
         }
     }
 
     @Override
     public void run() {
-        System.out.println("call timer");
         for (IController controller: list) {
             controller.add(controller.getSet(), null);
         }

@@ -36,15 +36,16 @@ public class GameCreator {
         return result;
     }
 
-    public IGame create(IGame game, IPlayer player, int size) {
-        if (game != null) {
-            addPlayer(game, player);
+    public IGame create(final IGame game, IPlayer player, int size) {
+        IGame current = game;
+        if (current != null) {
+            addPlayer(current, player);
         } else if (player.getGame() != null) {
-            game = player.getGame();
+            current = player.getGame();
         } else {
-            game = newGameWithPlayer(player, size);
+            current = newGameWithPlayer(player, size);
         }
-        return game;
+        return current;
     }
 
     private IGame newGameWithPlayer(IPlayer player, int size) {

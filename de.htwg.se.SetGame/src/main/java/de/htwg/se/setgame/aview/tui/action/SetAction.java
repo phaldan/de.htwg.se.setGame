@@ -6,7 +6,6 @@ import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.model.IPlayer;
 import de.htwg.se.setgame.model.ISet;
 
-import java.util.List;
 import java.util.Map;
 
 /**
