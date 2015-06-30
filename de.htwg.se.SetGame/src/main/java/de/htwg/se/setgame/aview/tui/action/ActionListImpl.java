@@ -21,5 +21,6 @@ public class ActionListImpl extends ActionList {
         add(new SolveAction(controller));
         add(new CloseAction(controller));
         add(new SetAction(controller));
+        add(new CpuAction(controller));
     }
 }

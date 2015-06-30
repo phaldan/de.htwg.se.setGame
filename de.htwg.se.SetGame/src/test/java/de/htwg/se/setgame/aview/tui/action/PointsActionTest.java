@@ -51,6 +51,6 @@ public class PointsActionTest {
 
         String result = target.execute(null);
         assertNotNull(result);
-        assertEquals(String.format(PointsAction.OUTPUT, "player", 1337), result);
+        assertTrue(result.contains(String.format(PointsAction.OUTPUT, "player", 1337)));
     }
 }
