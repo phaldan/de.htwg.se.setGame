@@ -14,7 +14,7 @@ public class CardListDaoCouchDbTest {
 
     @Before
     public void setUp() throws Exception {
-        target = new CardListDaoCouchDb();
+        target = new CardListDaoCouchDb(new CouchDbConnectorDummy());
     }
 
     @Test

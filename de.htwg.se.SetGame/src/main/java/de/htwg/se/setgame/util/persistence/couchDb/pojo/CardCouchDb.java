@@ -1,6 +1,8 @@
 package de.htwg.se.setgame.util.persistence.couchDb.pojo;
 
+import de.htwg.se.setgame.model.ICardList;
 import de.htwg.se.setgame.model.impl.Card;
+import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
@@ -8,26 +10,29 @@ import org.codehaus.jackson.annotate.JsonProperty;
  */
 public class CardCouchDb extends Card {
 
-    private String dbId;
-    private String dbRev;
-
-    @JsonProperty("_id")
-    public String getDbId() {
-        return dbId;
+    @Override
+    @JsonBackReference
+    public ICardList getCardList() {
+        return super.getCardList();
     }
 
-    @JsonProperty("_id")
-    public void setDbId(String dbId) {
-        this.dbId = dbId;
+    @Override
+    public Integer getNumberOfComponents() {
+        return super.getNumberOfComponents();
     }
 
-    @JsonProperty("_rev")
-    public String getDbRev() {
-        return dbRev;
+    @Override
+    public String getColor() {
+        return super.getColor();
     }
 
-    @JsonProperty("_rev")
-    public void setDbRev(String dbRev) {
-        this.dbRev = dbRev;
+    @Override
+    public String getForm() {
+        return super.getForm();
+    }
+
+    @Override
+    public String getPanelFilling() {
+        return super.getPanelFilling();
     }
 }

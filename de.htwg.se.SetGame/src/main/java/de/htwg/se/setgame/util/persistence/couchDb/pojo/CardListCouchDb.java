@@ -1,33 +1,29 @@
 package de.htwg.se.setgame.util.persistence.couchDb.pojo;
 
+import de.htwg.se.setgame.model.ICard;
+import de.htwg.se.setgame.model.IGame;
 import de.htwg.se.setgame.model.impl.CardList;
+import org.codehaus.jackson.annotate.JsonBackReference;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonManagedReference;
 import org.codehaus.jackson.annotate.JsonProperty;
+
+import java.util.Set;
 
 /**
  * @author Philipp Daniels
  */
 public class CardListCouchDb extends CardList {
 
-    private String dbId;
-    private String dbRev;
-
-    @JsonProperty("_id")
-    public String getDbId() {
-        return dbId;
+    @Override
+    @JsonBackReference
+    public IGame getGame() {
+        return super.getGame();
     }
 
-    @JsonProperty("_id")
-    public void setDbId(String dbId) {
-        this.dbId = dbId;
-    }
-
-    @JsonProperty("_rev")
-    public String getDbRev() {
-        return dbRev;
-    }
-
-    @JsonProperty("_rev")
-    public void setDbRev(String dbRev) {
-        this.dbRev = dbRev;
+    @Override
+    @JsonManagedReference
+    public Set<ICard> getCards() {
+        return super.getCards();
     }
 }

@@ -39,17 +39,17 @@ public class CouchDbManager implements DaoManager {
 
     @Override
     public CardDao getCard() {
-        return new CardDaoCouchDb();
+        return new CardDaoCouchDb(db);
     }
 
     @Override
     public CardListDao getCardList() {
-        return new CardListDaoCouchDb();
+        return new CardListDaoCouchDb(db);
     }
 
     @Override
     public PlayerDao getPlayer() {
-        return new PlayerDaoCouchDb();
+        return new PlayerDaoCouchDb(db);
     }
 
     @Override

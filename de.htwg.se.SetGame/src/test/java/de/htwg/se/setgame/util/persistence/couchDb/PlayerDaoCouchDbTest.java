@@ -14,7 +14,7 @@ public class PlayerDaoCouchDbTest {
 
     @Before
     public void setUp() throws Exception {
-        target = new PlayerDaoCouchDb();
+        target = new PlayerDaoCouchDb(new CouchDbConnectorDummy());
     }
 
     @Test
