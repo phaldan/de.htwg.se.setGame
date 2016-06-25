@@ -1,5 +1,6 @@
 package de.htwg.se.setgame.util.persistence.db4o;
 
+import com.db4o.ext.Db4oIOException;
 import de.htwg.se.setgame.model.ModelFactoryDummy;
 import org.junit.After;
 import org.junit.Before;
@@ -13,10 +14,17 @@ import static org.junit.Assert.*;
 public class Db4oManagerTest {
 
     private Db4oManager target;
+    private boolean shutdown;
 
     @Before
     public void setUp() throws Exception {
-        target = new Db4oManager(new ModelFactoryDummy(), new ObjectContainerDummy());
+        target = new Db4oManager(new ModelFactoryDummy(), new ObjectContainerDummy() {
+            @Override
+            public boolean close() throws Db4oIOException {
+                shutdown = true;
+                return true;
+            }
+        });
     }
 
     @After
@@ -42,5 +50,12 @@ public class Db4oManagerTest {
     @Test
     public void getGame_success() throws Exception {
         assertNotNull(target.getGame());
+    }
+
+    @Test
+    public void exit_success() {
+        shutdown = false;
+        target.exit();
+        assertTrue(shutdown);
     }
 }

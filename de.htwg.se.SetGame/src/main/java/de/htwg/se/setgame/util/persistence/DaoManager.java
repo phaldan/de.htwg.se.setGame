@@ -24,4 +24,6 @@ public interface DaoManager {
      * @return Return instance of GameDao
      */
     GameDao getGame();
+
+    void exit();
 }

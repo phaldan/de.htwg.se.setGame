@@ -51,4 +51,9 @@ public class HibernateManager implements DaoManager {
     public PlayerDao getPlayer() {
         return new PlayerDaoHibernate(db);
     }
+
+    @Override
+    public void exit() {
+        db.close();
+    }
 }

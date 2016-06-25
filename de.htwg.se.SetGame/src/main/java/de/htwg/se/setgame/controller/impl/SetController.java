@@ -121,6 +121,7 @@ public class SetController extends Observable implements IController {
     @Override
     public void exit() {
         notifyObservers(new CloseEvent());
+        dao.exit();
     }
 
     @Override

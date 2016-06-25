@@ -24,4 +24,9 @@ public class DaoManagerDummy implements DaoManager {
     public GameDao getGame() {
         return null;
     }
+
+    @Override
+    public void exit() {
+
+    }
 }

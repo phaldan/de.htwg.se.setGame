@@ -43,6 +43,6 @@ public class HibernateBase {
     }
 
     protected void close() {
-        session.close();
+        getSession().close();
     }
 }

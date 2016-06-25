@@ -1,8 +1,14 @@
 package de.htwg.se.setgame.util.persistence.hibernate;
 
+import de.htwg.se.setgame.TestAppender;
+import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
 import org.hibernate.exception.JDBCConnectionException;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.sql.Connection;
 
 import static org.junit.Assert.*;
 
@@ -12,10 +18,24 @@ import static org.junit.Assert.*;
 public class HibernateManagerTest {
 
     private HibernateManager target;
+    private boolean shutdown;
 
     @Before
     public void setUp() throws Exception {
-        target = new HibernateManager(new SessionFactoryDummy());
+        target = new HibernateManager(new SessionFactoryDummy() {
+
+            @Override
+            public Session openSession() throws HibernateException {
+                return new SessionDummy() {
+
+                    @Override
+                    public Connection close() throws HibernateException {
+                        shutdown = true;
+                        return null;
+                    }
+                };
+            }
+        });
     }
 
     @Test
@@ -41,9 +61,19 @@ public class HibernateManagerTest {
     @Test
     public void test() throws Exception {
         try {
+            TestAppender appender = new TestAppender();
+            Logger.getRootLogger().removeAllAppenders();
+            Logger.getRootLogger().addAppender(appender);
             new HibernateManager();
         } catch (JDBCConnectionException e) {
 
         }
+    }
+
+    @Test
+    public void exit_success() {
+        shutdown = false;
+        target.exit();
+        assertTrue(shutdown);
     }
 }

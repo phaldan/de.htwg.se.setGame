@@ -56,4 +56,9 @@ public class CouchDbManager implements DaoManager {
     public GameDao getGame() {
         return new GameDaoCouchDb(db);
     }
+
+    @Override
+    public void exit() {
+        db.getConnection().shutdown();
+    }
 }

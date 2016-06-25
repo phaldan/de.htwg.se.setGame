@@ -1,12 +1,11 @@
 package de.htwg.se.setgame.util.persistence.couchDb;
 
 import org.ektorp.DbAccessException;
+import org.ektorp.http.HttpClient;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 /**
  * @author Philipp Daniels
@@ -14,10 +13,23 @@ import static org.junit.Assert.fail;
 public class CouchDbManagerTest {
 
     private CouchDbManager target;
+    private boolean shutdown;
 
     @Before
     public void setUp() throws Exception {
-        target = new CouchDbManager(new CouchDbConnectorDummy());
+        target = new CouchDbManager(new CouchDbConnectorDummy() {
+
+            @Override
+            public HttpClient getConnection() {
+                return new HttpClientDummy() {
+
+                    @Override
+                    public void shutdown() {
+                        shutdown = true;
+                    }
+                };
+            }
+        });
     }
 
     @Test
@@ -48,5 +60,12 @@ public class CouchDbManagerTest {
         } catch (Exception e) {
             assertEquals(DbAccessException.class.getName(), e.getClass().getName());
         }
+    }
+
+    @Test
+    public void exit_success() {
+        shutdown = false;
+        target.exit();
+        assertTrue(shutdown);
     }
 }

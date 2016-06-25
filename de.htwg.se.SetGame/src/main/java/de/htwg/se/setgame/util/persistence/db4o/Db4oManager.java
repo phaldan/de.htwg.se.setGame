@@ -57,4 +57,9 @@ public class Db4oManager implements DaoManager {
     public GameDao getGame() {
         return new GameDaoDb4o(db, factory);
     }
+
+    @Override
+    public void exit() {
+        db.close();
+    }
 }
