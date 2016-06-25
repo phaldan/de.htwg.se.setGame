@@ -1,10 +1,12 @@
 package de.htwg.se.setgame.util.persistence.couchDb;
 
-import org.apache.http.conn.ConnectTimeoutException;
+import org.ektorp.DbAccessException;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 /**
  * @author Philipp Daniels
@@ -42,8 +44,9 @@ public class CouchDbManagerTest {
     public void constructor() throws Exception {
         try {
             new CouchDbManager();
+            fail();
         } catch (Exception e) {
-
+            assertEquals(DbAccessException.class.getName(), e.getClass().getName());
         }
     }
 }

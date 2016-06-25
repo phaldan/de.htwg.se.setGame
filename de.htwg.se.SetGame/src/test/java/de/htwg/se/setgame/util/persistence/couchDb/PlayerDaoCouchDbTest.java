@@ -1,5 +1,6 @@
 package de.htwg.se.setgame.util.persistence.couchDb;
 
+import de.htwg.se.setgame.model.impl.Player;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,11 +30,11 @@ public class PlayerDaoCouchDbTest {
 
     @Test
     public void add_success() throws Exception {
-        target.add(null);
+        target.add(new Player());
     }
 
     @Test
     public void update_success() throws Exception {
-        target.update(null);
+        target.update(new Player());
     }
 }

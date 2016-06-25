@@ -1,5 +1,7 @@
 package de.htwg.se.setgame.util.persistence.couchDb;
 
+import de.htwg.se.setgame.model.impl.CardList;
+import de.htwg.se.setgame.util.persistence.couchDb.pojo.GameCouchDb;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,11 +31,23 @@ public class CardListDaoCouchDbTest {
 
     @Test
     public void add_success() throws Exception {
-        target.add(null);
+        CardList list = new CardList();
+        list.setGame(new GameCouchDb());
+        target.add(list);
+    }
+
+    @Test
+    public void add_successWithId() throws Exception {
+        GameCouchDb game = new GameCouchDb();
+        game.setDbId("1337");
+
+        CardList list = new CardList();
+        list.setGame(game);
+        target.add(list);
     }
 
     @Test
     public void update_success() throws Exception {
-        target.update(null);
+        target.update(new CardList());
     }
 }

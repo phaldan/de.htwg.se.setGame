@@ -3,7 +3,6 @@ package de.htwg.se.setgame.util.persistence.couchDb.pojo;
 import de.htwg.se.setgame.model.ICardList;
 import de.htwg.se.setgame.model.impl.Card;
 import org.codehaus.jackson.annotate.JsonBackReference;
-import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
  * @author Philipp Daniels

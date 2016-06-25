@@ -4,9 +4,7 @@ import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.model.IGame;
 import de.htwg.se.setgame.model.impl.CardList;
 import org.codehaus.jackson.annotate.JsonBackReference;
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonManagedReference;
-import org.codehaus.jackson.annotate.JsonProperty;
 
 import java.util.Set;
 
