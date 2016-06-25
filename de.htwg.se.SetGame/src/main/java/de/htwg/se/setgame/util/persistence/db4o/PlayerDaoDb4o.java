@@ -7,6 +7,7 @@ import de.htwg.se.setgame.model.ModelFactory;
 import de.htwg.se.setgame.model.IPlayer;
 import de.htwg.se.setgame.util.persistence.PlayerDao;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -45,10 +46,12 @@ public class PlayerDaoDb4o extends Db4oBase implements PlayerDao{
     }
 
     private IPlayer processPlayer(List<IGame> list, String name) {
-        for (IGame game: list) {
-            for (IPlayer player: game.getPlayers()) {
-                if (player.getName().equals(name)) {
-                    return player;
+        if (list != null) {
+            for (IGame game: list) {
+                for (IPlayer player: game.getPlayers()) {
+                    if (player.getName().equals(name)) {
+                        return player;
+                    }
                 }
             }
         }

@@ -11,9 +11,6 @@ import de.htwg.se.setgame.model.impl.Game;
 import de.htwg.se.setgame.model.impl.Player;
 import org.junit.*;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import static org.junit.Assert.*;
 
 /**
@@ -34,6 +31,7 @@ public class PlayerDaoDb4oTest {
         @Override
         public <TargetType> ObjectSet<TargetType> query(Predicate<TargetType> predicate) throws Db4oIOException, DatabaseClosedException {
             ObjectSetDummy<TargetType> list = new ObjectSetDummy<>();
+            list.add((TargetType) new Game());
             TargetType entity = (TargetType) game;
             list.add(entity);
             return predicate.match(entity) ? list : null;
@@ -44,37 +42,49 @@ public class PlayerDaoDb4oTest {
     private Game game;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         target = new PlayerDaoDb4o(new ObjectContainer(), new ModelFactory());
     }
 
     @Test
-    public void create_success() throws Exception{
+    public void create_success() {
         assertNotNull(target.create());
     }
 
     @Test
-    public void add_success () throws Exception {
+    public void add_success () {
         Player player = new Player();
         player.setGame(new Game());
         target.add(player);
     }
 
     @Test
-    public void update_success() throws Exception {
+    public void update_success() {
         Player player = new Player();
         player.setGame(new Game());
         target.update(player);
     }
 
-    @Test
-    public void getByName_success() throws Exception {
+    private Player createPlayer(String name) {
         Player player = new Player();
-        player.setName("test");
-        game = new Game();
+        player.setName(name);
         game.getPlayers().add(player);
         player.setGame(game);
+        return player;
+    }
 
-        assertSame(player, target.getByName(player.getName()));
+    @Test
+    public void getByName_success() {
+        game = new Game();
+        createPlayer("player1");
+        Player player = createPlayer("player2");
+        assertSame(player, target.getByName("player2"));
+    }
+
+    @Test
+    public void getByName_fail() {
+        game = new Game();
+        createPlayer("player1");
+        assertNull(target.getByName("player2"));
     }
 }
