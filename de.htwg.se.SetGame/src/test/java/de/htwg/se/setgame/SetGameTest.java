@@ -1,6 +1,6 @@
 package de.htwg.se.setgame;
 
-import de.htwg.se.setgame.controller.event.CloseEvent;
+import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,34 +20,40 @@ public class SetGameTest {
 
     @Before
     public void setUp() {
-        this.input = System.in;
+        Logger.getRootLogger().removeAllAppenders();
+        Logger.getRootLogger().addAppender(new TestAppender());
 
+        this.input = System.in;
         String command = "x";
         InputStream input = new ByteArrayInputStream(command.getBytes());
         System.setIn(input);
     }
 
-    public void getInstance_withoutGUI() throws IOException {
-        SetGame.clearInstance();
-        assertNotNull(SetGame.getInstance(false));
+    @After
+    public void tearDown() {
+        System.setIn(input);
     }
 
-    public void getInstance_withGUI() throws IOException {
+    private void assertGetInstance(boolean gui) {
         SetGame.clearInstance();
-        SetGame target = SetGame.getInstance(true);
-        target.getIController().notifyObservers(new CloseEvent());
-
+        SetGame target = SetGame.getInstance(gui);
+        target.getIController().exit();
         assertNotNull(target);
+    }
+
+    @Test
+    public void getInstance_withoutGUI() throws IOException {
+        assertGetInstance(false);
+    }
+
+    @Test
+    public void getInstance_withGUI() throws IOException {
+        assertGetInstance(false);
     }
 
     @Test
     public void main_success() throws IOException {
         SetGame.clearInstance();
         SetGame.main(new String[]{});
-    }
-
-    @After
-    public void tearDown() {
-        System.setIn(input);
     }
 }
