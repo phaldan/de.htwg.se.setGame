@@ -23,7 +23,6 @@ public class GameField extends Panel {
     public static final String DIALOG_MESSAGE = "Only THREE cards addicted a SET :)";
     public static final String DIALOG_TITLE = "Warning";
 
-    private IController controller;
     private MessageDialog dialog;
     private CardToImageMapper mapper;
 
@@ -42,7 +41,7 @@ public class GameField extends Panel {
      * @param dialog Instance of MessageDialog
      */
     protected GameField(IController controller, MessageDialog dialog) {
-        this.controller = controller;
+        super(controller);
         this.dialog = dialog;
         this.mapper = new CardToImageMapper();
         controller.addObserver(this);
@@ -97,7 +96,7 @@ public class GameField extends Panel {
     @Override
     public void update(Event e) {
         LOGGER.debug("Receive controller update");
-        cards = controller.getCardsAndTheIndexOfCardInField();
+        cards = getController().getCardsAndTheIndexOfCardInField();
         clearFieldList();
         initFields();
         updateFields();

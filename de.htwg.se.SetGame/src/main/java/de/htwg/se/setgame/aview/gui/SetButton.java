@@ -19,7 +19,6 @@ import javax.swing.*;
  */
 public class SetButton extends Panel {
     private static final long serialVersionUID = 1L;
-    private IController controller;
 
     public static final String DIALOG_TITLE = "Choice";
     public static final String DIALOG_MESSAGE = "Which Player?";
@@ -33,7 +32,7 @@ public class SetButton extends Panel {
      * @param controller Instance of IController
      */
     public SetButton(IController controller, JOptionPane pane, GameField field) {
-        this.controller = controller;
+        super(controller);
         controller.addObserver(this);
         this.field = field;
         this.pane = pane;
@@ -65,7 +64,7 @@ public class SetButton extends Panel {
     }
 
     private void createPlayers(JPanel panel) {
-        for (IPlayer player: controller.getPlayers()) {
+        for (IPlayer player: getController().getPlayers()) {
             JTextField textField = createPlayer(player, panel);
             players.put(textField, player);
         }
@@ -90,11 +89,11 @@ public class SetButton extends Panel {
         Object selected = getDialogValue();
         if (selected != null) {
             LinkedList<ICard> list = new LinkedList<>(field.getSelected());
-            ISet set = controller.createSet();
+            ISet set = getController().createSet();
             set.setFirst(list.poll());
             set.setSecond(list.poll());
             set.setThird(list.poll());
-            controller.add(set, (IPlayer) selected);
+            getController().add(set, (IPlayer) selected);
         }
     }
 

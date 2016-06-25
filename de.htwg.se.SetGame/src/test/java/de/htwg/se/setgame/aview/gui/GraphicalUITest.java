@@ -1,6 +1,7 @@
 package de.htwg.se.setgame.aview.gui;
 
 import de.htwg.se.setgame.controller.ControllerDummy;
+import de.htwg.se.setgame.controller.IController;
 import de.htwg.se.setgame.controller.event.CloseEvent;
 import de.htwg.se.setgame.util.observer.Event;
 import org.junit.Before;
@@ -18,6 +19,10 @@ public class GraphicalUITest {
 
     private class PanelDummy extends Panel {
 
+        protected PanelDummy(IController controller) {
+            super(controller);
+        }
+
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
         }
@@ -31,7 +36,8 @@ public class GraphicalUITest {
 
     @Before
     public void setUp() {
-        target = new GraphicalUI(new ControllerDummy(), new PanelDummy(), new PanelDummy());
+        ControllerDummy controller = new ControllerDummy();
+        target = new GraphicalUI(controller, new PanelDummy(controller), new PanelDummy(controller));
     }
 
     @Test
