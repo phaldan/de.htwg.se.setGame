@@ -1,7 +1,9 @@
 package de.htwg.se.setgame.controller.impl;
 
+import de.htwg.se.setgame.controller.CpuLevel;
 import de.htwg.se.setgame.controller.CpuPlayer;
 import de.htwg.se.setgame.controller.event.CloseEvent;
+import de.htwg.se.setgame.controller.impl.cpu.CpuEasy;
 import de.htwg.se.setgame.model.*;
 import de.htwg.se.setgame.model.impl.Card;
 import de.htwg.se.setgame.model.impl.CardList;
@@ -133,7 +135,9 @@ public class SetControllerTest {
     @Before
     public void setUp() {
         event = null;
-        target = new SetController(new ModelFactory(), new DaoManager(), new TreeSet<CpuPlayer>());
+        Set<CpuPlayer> cpus = new LinkedHashSet<>();
+        cpus.add(new CpuEasy());
+        target = new SetController(new ModelFactory(), new DaoManager(), cpus);
         target.addObserver(new Observer());
     }
 
@@ -144,13 +148,15 @@ public class SetControllerTest {
     }
 
     @Test
-    public void getCardsAndTheIndexOfCardInField_fail() {
+    public void getCardsAndTheIndexOfCardInField_success() {
+        target.registerPlayer("player1");
         assertNotNull(target.getCardsAndTheIndexOfCardInField());
-        assertTrue(target.getCardsAndTheIndexOfCardInField().isEmpty());
+        assertFalse(target.getCardsAndTheIndexOfCardInField().isEmpty());
     }
 
     @Test
     public void newGame_success() {
+        target.registerPlayer("player1");
         target.newGame();
     }
 
@@ -235,5 +241,38 @@ public class SetControllerTest {
         assertNotNull(game.getUnusedCardList());
         assertNotNull(game.getUnusedCardList().getGame());
         assertFalse(game.getUnusedCardList().getCards().isEmpty());
+    }
+
+
+    @Test
+    public void registerPlayer_successCpu() {
+        target.registerPlayer("player1");
+        target.setCpu(CpuLevel.EASY.toString());
+        target.registerPlayer("player2");
+    }
+
+    @Test
+    public void setCpu_success() {
+        target.registerPlayer("player");
+        target.setCpu(CpuLevel.EASY.toString());
+        assertEquals(CpuLevel.EASY.toString(), target.getActiveCpu());
+    }
+
+    @Test
+    public void setCpu_successSwitch() {
+        target.registerPlayer("player");
+        target.setCpu(CpuLevel.EASY.toString());
+        target.setCpu(CpuLevel.EASY.toString());
+        assertEquals(CpuLevel.EASY.toString(), target.getActiveCpu());
+    }
+
+    @Test
+    public void getCpus_success() {
+        assertFalse(target.getCpus().isEmpty());
+    }
+
+    @Test
+    public void getActiveCpu_fail() {
+        assertNull(target.getActiveCpu());
     }
 }

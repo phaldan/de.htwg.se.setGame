@@ -29,7 +29,7 @@ public abstract class AbstractCpu extends TimerTask implements CpuPlayer {
     public void activate(IController controller) {
         if (!list.contains(controller)) {
             list.add(controller);
-            updateTimer();
+            initiateTimer();
         }
     }
 
@@ -37,17 +37,13 @@ public abstract class AbstractCpu extends TimerTask implements CpuPlayer {
     public void disable(IController controller) {
         if (list.contains(controller)) {
             list.remove(controller);
-            updateTimer();
         }
     }
 
-    private void updateTimer() {
-        if (timer == null && !list.isEmpty()) {
+    private void initiateTimer() {
+        if (timer == null) {
             timer = new Timer();
             timer.scheduleAtFixedRate(this, waitTime, waitTime);
-        } else if (timer != null && list.isEmpty()) {
-            timer.cancel();
-            timer = null;
         }
     }
 

@@ -155,7 +155,7 @@ public class SetController extends Observable implements IController {
 
     @Override
     public void setCpu(String name) {
-        if (game != null) {
+        if (game != null && cpuPlayers.get(name) != null) {
             if (game.getCpu() != null) {
                 cpuPlayers.get(game.getCpu()).disable(this);
             }
