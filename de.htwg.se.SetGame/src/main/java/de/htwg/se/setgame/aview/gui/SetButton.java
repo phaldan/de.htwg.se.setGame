@@ -21,7 +21,6 @@ public class SetButton extends Panel {
     private static final long serialVersionUID = 1L;
     private IController controller;
 
-    public static final String DEFAULT_TEXT_FIELD = "0";
     public static final String DIALOG_TITLE = "Choice";
     public static final String DIALOG_MESSAGE = "Which Player?";
     public static final int GRID_COLS = 4;
@@ -43,6 +42,8 @@ public class SetButton extends Panel {
 
     private void initPanel() {
         setLayout(new GridLayout(2, 1));
+        players = new HashMap<>();
+        removeAll();
         add(createButton());
         add(createTextFields());
     }
@@ -65,15 +66,15 @@ public class SetButton extends Panel {
 
     private void createPlayers(JPanel panel) {
         for (IPlayer player: controller.getPlayers()) {
-            JTextField textField = createPlayer(player.getName(), panel);
+            JTextField textField = createPlayer(player, panel);
             players.put(textField, player);
         }
     }
 
-    private JTextField createPlayer(String text, JPanel panel) {
-        panel.add(new JLabel(text));
+    private JTextField createPlayer(IPlayer player, JPanel panel) {
+        panel.add(new JLabel(player.getName()));
 
-        JTextField textField = new JTextField(DEFAULT_TEXT_FIELD);
+        JTextField textField = new JTextField("" + player.getScore());
         textField.setEditable(false);
         panel.add(textField);
         return textField;
@@ -82,7 +83,7 @@ public class SetButton extends Panel {
     @Override
     public void actionPerformed(ActionEvent e) {
         choice();
-        updateSB();
+        initPanel();
     }
 
     private void choice() {
@@ -121,7 +122,7 @@ public class SetButton extends Panel {
     @Override
     public void update(Event e) {
         if (e == null || !e.getClass().equals(CloseEvent.class)) {
-            updateSB();
+            initPanel();
         }
     }
 }
