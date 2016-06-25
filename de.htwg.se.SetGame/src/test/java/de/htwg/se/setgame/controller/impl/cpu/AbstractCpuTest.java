@@ -7,6 +7,8 @@ import de.htwg.se.setgame.model.ISet;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.*;
+
 /**
  * @author Philipp Daniels
  */
@@ -42,9 +44,25 @@ public class AbstractCpuTest {
     }
 
     @Test
-    public void test() throws Exception {
+    public void activate_success() throws Exception {
+        Controller c = new Controller();
+        target.activate(c);
+        assertTrue(target.getController().contains(c));
+    }
+
+    @Test
+    public void disable_success() throws Exception {
         Controller c = new Controller();
         target.activate(c);
         target.disable(c);
+        assertFalse(target.getController().contains(c));
+    }
+
+    @Test
+    public void run_success() {
+        Controller c = new Controller();
+        target.activate(c);
+        target.run();
+        assertTrue(called);
     }
 }

@@ -14,8 +14,8 @@ import java.util.TimerTask;
 public abstract class AbstractCpu extends TimerTask implements CpuPlayer {
 
     public static final int MS = 1000;
-    private List<IController> list = new LinkedList<>();
-    private long waitTime;
+    private final List<IController> list = new LinkedList<>();
+    private final long waitTime;
     private Timer timer;
 
     /**
@@ -56,5 +56,12 @@ public abstract class AbstractCpu extends TimerTask implements CpuPlayer {
         for (IController controller: list) {
             controller.add(controller.getSet(), null);
         }
+    }
+
+    /**
+     * @return Returns list of IController instances.
+     */
+    public List<IController> getController() {
+        return list;
     }
 }
