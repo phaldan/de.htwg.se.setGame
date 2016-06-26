@@ -59,6 +59,21 @@ public class Db4oManager implements DaoManager {
     }
 
     @Override
+    public OptionDao getOption() {
+        return new OptionDaoDb4o(db, factory);
+    }
+
+    @Override
+    public OptionValueDao getOptionValue() {
+        return new OptionValueDaoDb4o(db, factory);
+    }
+
+    @Override
+    public CardOptionDao getCardOption() {
+        return new CardOptionDaoDb4o(db, factory);
+    }
+
+    @Override
     public void exit() {
         db.close();
     }

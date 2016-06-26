@@ -58,6 +58,21 @@ public class CouchDbManager implements DaoManager {
     }
 
     @Override
+    public OptionDao getOption() {
+        return new OptionDaoCouchDb(db);
+    }
+
+    @Override
+    public OptionValueDao getOptionValue() {
+        return new OptionValueDaoCouchDb(db);
+    }
+
+    @Override
+    public CardOptionDao getCardOption() {
+        return new CardOptionDaoCouchDb(db);
+    }
+
+    @Override
     public void exit() {
         db.getConnection().shutdown();
     }

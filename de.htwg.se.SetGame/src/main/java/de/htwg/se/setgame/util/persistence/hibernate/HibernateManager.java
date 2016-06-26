@@ -48,6 +48,21 @@ public class HibernateManager implements DaoManager {
     }
 
     @Override
+    public OptionDao getOption() {
+        return new OptionDaoHibernate(db);
+    }
+
+    @Override
+    public OptionValueDao getOptionValue() {
+        return new OptionValueDaoHibernate(db);
+    }
+
+    @Override
+    public CardOptionDao getCardOption() {
+        return new CardOptionDaoHibernate(db);
+    }
+
+    @Override
     public PlayerDao getPlayer() {
         return new PlayerDaoHibernate(db);
     }

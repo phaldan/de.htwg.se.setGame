@@ -26,6 +26,21 @@ public class DaoManagerDummy implements DaoManager {
     }
 
     @Override
+    public OptionDao getOption() {
+        return null;
+    }
+
+    @Override
+    public OptionValueDao getOptionValue() {
+        return null;
+    }
+
+    @Override
+    public CardOptionDao getCardOption() {
+        return null;
+    }
+
+    @Override
     public void exit() {
 
     }

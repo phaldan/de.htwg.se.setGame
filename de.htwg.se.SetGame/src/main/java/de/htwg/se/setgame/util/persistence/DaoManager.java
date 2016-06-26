@@ -25,5 +25,23 @@ public interface DaoManager {
      */
     GameDao getGame();
 
+    /**
+     * @return Return instance of OptionDao
+     */
+    OptionDao getOption();
+
+    /**
+     * @return Return instance of OptionValueDao
+     */
+    OptionValueDao getOptionValue();
+
+    /**
+     * @return Return instance of CardOptionDao
+     */
+    CardOptionDao getCardOption();
+
+    /**
+     * Trigger to close database connections
+     */
     void exit();
 }

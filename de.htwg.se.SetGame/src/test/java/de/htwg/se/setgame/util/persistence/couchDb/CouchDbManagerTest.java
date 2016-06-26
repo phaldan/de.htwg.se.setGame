@@ -53,6 +53,21 @@ public class CouchDbManagerTest {
     }
 
     @Test
+    public void getOption_success() throws Exception {
+        assertNotNull(target.getOption());
+    }
+
+    @Test
+    public void getOptionValue_success() throws Exception {
+        assertNotNull(target.getOptionValue());
+    }
+
+    @Test
+    public void getCardOption_success() throws Exception {
+        assertNotNull(target.getCardOption());
+    }
+
+    @Test
     public void constructor() throws Exception {
         try {
             new CouchDbManager();
