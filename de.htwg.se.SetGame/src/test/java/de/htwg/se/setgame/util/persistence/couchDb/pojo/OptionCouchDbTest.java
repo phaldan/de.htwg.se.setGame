@@ -1,7 +1,10 @@
 package de.htwg.se.setgame.util.persistence.couchDb.pojo;
 
+import de.htwg.se.setgame.model.IOptionValue;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.LinkedHashSet;
 
 import static org.junit.Assert.*;
 
@@ -18,8 +21,16 @@ public class OptionCouchDbTest {
     }
 
     @Test
-    public void testGetName() throws Exception {
+    public void getName_success() throws Exception {
         target.setName("count");
         assertEquals("count", target.getName());
+    }
+
+    @Test
+    public void getOptionValues_success() throws Exception {
+        LinkedHashSet<IOptionValue> list = new LinkedHashSet<>();
+        target.setOptionValues(list);
+        assertNotNull(target.getOptionValues());
+        assertSame(list, target.getOptionValues());
     }
 }

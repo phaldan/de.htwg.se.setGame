@@ -1,7 +1,10 @@
 package de.htwg.se.setgame.util.persistence.hibernate.pojo;
 
+import de.htwg.se.setgame.model.IOptionValue;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.LinkedHashSet;
 
 import static org.junit.Assert.*;
 
@@ -27,5 +30,13 @@ public class OptionHibernateTest {
     public void getName_success() throws Exception {
         target.setName("count");
         assertEquals("count", target.getName());
+    }
+
+    @Test
+    public void getOptionValues_success() throws Exception {
+        LinkedHashSet<IOptionValue> list = new LinkedHashSet<>();
+        target.setOptionValues(list);
+        assertNotNull(target.getOptionValues());
+        assertSame(list, target.getOptionValues());
     }
 }

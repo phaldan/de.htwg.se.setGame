@@ -1,5 +1,7 @@
 package de.htwg.se.setgame.model;
 
+import java.util.Set;
+
 /**
  * @author Philipp Daniels
  */
@@ -24,4 +26,14 @@ public interface IOption {
      * @param name Set name of IOption instance
      */
     void setName(String name);
+
+    /**
+     * @return Return list of IOptionValue instances
+     */
+    Set<IOptionValue> getOptionValues();
+
+    /**
+     * @param set Set list of IOptionValue instances
+     */
+    void setOptionValues(Set<IOptionValue> set);
 }
