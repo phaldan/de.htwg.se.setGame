@@ -29,4 +29,14 @@ public interface ModelFactory {
      * @return Return new IGame instance
      */
     IGame createGame();
+
+    /**
+     * @return Return new IOption instance
+     */
+    IOption createOption();
+
+    /**
+     * @return Return new IOptionValue instance
+     */
+    IOptionValue createOptionValue();
 }

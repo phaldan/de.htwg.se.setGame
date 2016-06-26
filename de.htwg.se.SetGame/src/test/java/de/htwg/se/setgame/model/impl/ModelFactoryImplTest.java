@@ -41,4 +41,14 @@ public class ModelFactoryImplTest {
     public void createGame_success() {
         assertNotNull(target.createGame());
     }
+
+    @Test
+    public void createOption_success() {
+        assertNotNull(target.createOption());
+    }
+
+    @Test
+    public void createOptionValue_success() {
+        assertNotNull(target.createOptionValue());
+    }
 }

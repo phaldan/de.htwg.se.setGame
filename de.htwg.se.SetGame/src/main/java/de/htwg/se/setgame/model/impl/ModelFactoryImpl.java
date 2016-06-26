@@ -32,5 +32,13 @@ public class ModelFactoryImpl implements ModelFactory {
         return new Game();
     }
 
+    @Override
+    public IOption createOption() {
+        return new Option();
+    }
 
+    @Override
+    public IOptionValue createOptionValue() {
+        return new OptionValue();
+    }
 }

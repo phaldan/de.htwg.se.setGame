@@ -29,4 +29,14 @@ public class ModelFactoryDummy implements ModelFactory {
     public IGame createGame() {
         return null;
     }
+
+    @Override
+    public IOption createOption() {
+        return null;
+    }
+
+    @Override
+    public IOptionValue createOptionValue() {
+        return null;
+    }
 }
