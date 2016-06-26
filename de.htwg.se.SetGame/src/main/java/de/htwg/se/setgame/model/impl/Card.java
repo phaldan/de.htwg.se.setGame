@@ -2,6 +2,10 @@ package de.htwg.se.setgame.model.impl;
 
 import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.model.ICardList;
+import de.htwg.se.setgame.model.ICardOption;
+
+import java.util.*;
+import java.util.Set;
 
 /**
  * @author David Simon & Raina Bertolini
@@ -16,6 +20,7 @@ public class Card implements ICard {
     private String panelFilling;
     private Integer count;
     private ICardList cardList;
+    private Set<ICardOption> cardOptions = new LinkedHashSet<>();
 
     @Override
     public String getColor() {
@@ -33,8 +38,18 @@ public class Card implements ICard {
     }
 
     @Override
+    public Integer getNumberOfComponents() {
+        return count;
+    }
+
+    @Override
     public Integer getId() {
         return id;
+    }
+
+    @Override
+    public Set<ICardOption> getCardOptions() {
+        return cardOptions;
     }
 
     @Override
@@ -58,13 +73,13 @@ public class Card implements ICard {
     }
 
     @Override
-    public Integer getNumberOfComponents() {
-        return count;
+    public void setNumberOfComponents(int numberOfComponents) {
+        this.count = numberOfComponents;
     }
 
     @Override
-    public void setNumberOfComponents(int numberOfComponents) {
-        this.count = numberOfComponents;
+    public void setCardOptions(Set<ICardOption> list) {
+        this.cardOptions = list;
     }
 
     @Override

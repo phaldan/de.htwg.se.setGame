@@ -1,5 +1,7 @@
 package de.htwg.se.setgame.model;
 
+import java.util.Set;
+
 /**
  * @author Philipp Daniels
  */
@@ -31,6 +33,11 @@ public class CardDummy implements ICard {
     }
 
     @Override
+    public Set<ICardOption> getCardOptions() {
+        return null;
+    }
+
+    @Override
     public void setColor(String color) {
 
     }
@@ -52,6 +59,11 @@ public class CardDummy implements ICard {
 
     @Override
     public void setNumberOfComponents(int numberOfComponents) {
+
+    }
+
+    @Override
+    public void setCardOptions(Set<ICardOption> list) {
 
     }
 

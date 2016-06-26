@@ -1,5 +1,7 @@
 package de.htwg.se.setgame.model;
 
+import java.util.Set;
+
 /**
  * @author Philipp
  */
@@ -36,6 +38,11 @@ public interface ICard {
     Integer getNumberOfComponents();
 
     /**
+     * @return Return list of ICardOption instances
+     */
+    Set<ICardOption> getCardOptions();
+
+    /**
      * @param list ICardList instance
      */
     void setCardList(ICardList list);
@@ -64,6 +71,11 @@ public interface ICard {
      * @param numberOfComponents set count of card
      */
     void setNumberOfComponents(int numberOfComponents);
+
+    /**
+     * @param list Set list of ICardOption instances
+     */
+    void setCardOptions(Set<ICardOption> list);
 
     /**
      * @return string method

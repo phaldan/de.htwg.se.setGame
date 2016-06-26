@@ -1,8 +1,11 @@
 package de.htwg.se.setgame.util.persistence.couchDb.pojo;
 
+import de.htwg.se.setgame.model.ICardOption;
 import de.htwg.se.setgame.model.impl.CardList;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.LinkedHashSet;
 
 import static org.junit.Assert.*;
 
@@ -47,5 +50,13 @@ public class CardCouchDbTest {
     public void getPanelFilling_success() {
         target.setPanelFilling("full");
         assertEquals("full", target.getPanelFilling());
+    }
+
+    @Test
+    public void getCardOptions_success() {
+        LinkedHashSet<ICardOption> list = new LinkedHashSet<>();
+        target.setCardOptions(list);
+        assertNotNull(list);
+        assertSame(list, target.getCardOptions());
     }
 }
