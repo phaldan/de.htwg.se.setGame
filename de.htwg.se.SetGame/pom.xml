@@ -30,6 +30,7 @@
                 <configuration>
                     <classpathScope>compile</classpathScope>
                     <mainClass>de.htwg.se.setgame.SetGame</mainClass>
+					<cleanupDaemonThreads>false</cleanupDaemonThreads>
                 </configuration>
 			</plugin>
 		</plugins>
