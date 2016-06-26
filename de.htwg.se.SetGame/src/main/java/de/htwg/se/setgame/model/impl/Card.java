@@ -16,32 +16,8 @@ public class Card implements ICard {
     public static final String SEPARATOR = "|";
 
     private Integer id;
-    private String color;
-    private String form;
-    private String panelFilling;
-    private Integer count;
     private ICardList cardList;
     private Set<ICardOption> cardOptions = new LinkedHashSet<>();
-
-    @Override
-    public String getColor() {
-        return color;
-    }
-
-    @Override
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    @Override
-    public String getForm() {
-        return form;
-    }
-
-    @Override
-    public Integer getNumberOfComponents() {
-        return count;
-    }
 
     @Override
     public Integer getId() {
@@ -49,38 +25,8 @@ public class Card implements ICard {
     }
 
     @Override
-    public Set<ICardOption> getCardOptions() {
-        return cardOptions;
-    }
-
-    @Override
-    public void setForm(String form) {
-        this.form = form;
-    }
-
-    @Override
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    @Override
-    public String getPanelFilling() {
-        return panelFilling;
-    }
-
-    @Override
-    public void setPanelFilling(String panelFilling) {
-        this.panelFilling = panelFilling;
-    }
-
-    @Override
-    public void setNumberOfComponents(int numberOfComponents) {
-        this.count = numberOfComponents;
-    }
-
-    @Override
-    public void setCardOptions(Set<ICardOption> list) {
-        this.cardOptions = list;
     }
 
     @Override
@@ -91,6 +37,16 @@ public class Card implements ICard {
     @Override
     public void setCardList(ICardList list) {
         this.cardList = list;
+    }
+
+    @Override
+    public Set<ICardOption> getCardOptions() {
+        return cardOptions;
+    }
+
+    @Override
+    public void setCardOptions(Set<ICardOption> list) {
+        this.cardOptions = list;
     }
 
     @Override

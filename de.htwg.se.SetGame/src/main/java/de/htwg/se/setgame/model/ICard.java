@@ -8,54 +8,9 @@ import java.util.Set;
 public interface ICard {
 
     /**
-     * @return ICardList instance
-     */
-    ICardList getCardList();
-
-    /**
-     * @return colors
-     */
-    String getColor();
-
-    /**
-     * @return form
-     */
-    String getForm();
-
-    /**
      * @return Return id
      */
     Integer getId();
-
-    /**
-     * @return filling
-     */
-    String getPanelFilling();
-
-    /**
-     * @return number of components
-     */
-    Integer getNumberOfComponents();
-
-    /**
-     * @return Return list of ICardOption instances
-     */
-    Set<ICardOption> getCardOptions();
-
-    /**
-     * @param list ICardList instance
-     */
-    void setCardList(ICardList list);
-
-    /**
-     * @param color set the color of a card
-     */
-    void setColor(String color);
-
-    /**
-     * @param form set form of card
-     */
-    void setForm(String form);
 
     /**
      * @param id Set identifier
@@ -63,14 +18,19 @@ public interface ICard {
     void setId(Integer id);
 
     /**
-     * @param panelFilling set filling of card
+     * @return ICardList instance
      */
-    void setPanelFilling(String panelFilling);
+    ICardList getCardList();
 
     /**
-     * @param numberOfComponents set count of card
+     * @param list ICardList instance
      */
-    void setNumberOfComponents(int numberOfComponents);
+    void setCardList(ICardList list);
+
+    /**
+     * @return Return list of ICardOption instances
+     */
+    Set<ICardOption> getCardOptions();
 
     /**
      * @param list Set list of ICardOption instances

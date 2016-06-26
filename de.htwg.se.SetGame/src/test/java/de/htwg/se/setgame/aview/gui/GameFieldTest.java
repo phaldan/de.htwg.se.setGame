@@ -3,6 +3,7 @@ package de.htwg.se.setgame.aview.gui;
 import de.htwg.se.setgame.controller.ControllerDummy;
 import de.htwg.se.setgame.model.CardDummy;
 import de.htwg.se.setgame.model.ICard;
+import de.htwg.se.setgame.model.impl.Card;
 import de.htwg.se.setgame.util.observer.Event;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,41 +24,6 @@ public class GameFieldTest {
         public Map<Integer, ICard> getCardsAndTheIndexOfCardInField() {
             cardsRequested = true;
             return cards;
-        }
-    }
-
-    private class Card extends CardDummy {
-
-        private String cardColor;
-        private Integer cardCount;
-        private String cardFill;
-        private String cardForm;
-
-        public Card(String color, Integer count, String fill, String form) {
-            cardColor = color;
-            cardCount = count;
-            cardFill = fill;
-            cardForm = form;
-        }
-
-        @Override
-        public String getColor() {
-            return cardColor;
-        }
-
-        @Override
-        public Integer getNumberOfComponents() {
-            return cardCount;
-        }
-
-        @Override
-        public String getPanelFilling() {
-            return cardFill;
-        }
-
-        @Override
-        public String getForm() {
-            return cardForm;
         }
     }
 
@@ -83,10 +49,10 @@ public class GameFieldTest {
     @Before
     public void setUp() {
         cards = new TreeMap<>();
-        cards.put(0, new Card("red", 1, "empty", "balk"));
-        cards.put(1, new Card("red", 2, "empty", "balk"));
-        cards.put(2, new Card("red", 3, "empty", "balk"));
-        cards.put(3, new Card("green", 1, "empty", "balk"));
+        cards.put(0, new Card());
+        cards.put(1, new Card());
+        cards.put(2, new Card());
+        cards.put(3, new Card());
 
         cardsRequested = false;
         dialogTitle = null;

@@ -18,30 +18,6 @@ public class CardTest {
     }
 
     @Test
-    public void setColor_success() {
-        target.setColor("color");
-        assertEquals("color", target.getColor());
-    }
-
-    @Test
-    public void setForm_success() {
-        target.setForm("form");
-        assertEquals("form", target.getForm());
-    }
-
-    @Test
-    public void setPanelFilling_success() {
-        target.setPanelFilling("filling");
-        assertEquals("filling", target.getPanelFilling());
-    }
-
-    @Test
-    public void setNumberOfComponents_success() {
-        target.setNumberOfComponents(1337);
-        assertEquals(new Integer(1337), target.getNumberOfComponents());
-    }
-
-    @Test
     public void toString_success() {
         Option option = new Option();
         option.setName("Count");

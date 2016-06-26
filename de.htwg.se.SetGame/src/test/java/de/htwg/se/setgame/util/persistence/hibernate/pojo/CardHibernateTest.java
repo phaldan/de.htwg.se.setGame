@@ -27,30 +27,6 @@ public class CardHibernateTest {
     }
 
     @Test
-    public void getPanelFilling_success() throws Exception {
-        target.setPanelFilling("fill");
-        assertEquals("fill", target.getPanelFilling());
-    }
-
-    @Test
-    public void getForm_success() throws Exception {
-        target.setForm("form");
-        assertEquals("form", target.getForm());
-    }
-
-    @Test
-    public void getColor_success() throws Exception {
-        target.setColor("color");
-        assertEquals("color", target.getColor());
-    }
-
-    @Test
-    public void getNumberOfComponents_success() throws Exception {
-        target.setNumberOfComponents(1337);
-        assertEquals(new Integer(1337), target.getNumberOfComponents());
-    }
-
-    @Test
     public void getCardList_success() {
         CardListHibernate entity = new CardListHibernate();
         target.setCardList(entity);

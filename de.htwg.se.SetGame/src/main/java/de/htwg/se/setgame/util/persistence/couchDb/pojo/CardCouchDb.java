@@ -20,26 +20,6 @@ public class CardCouchDb extends Card {
     }
 
     @Override
-    public Integer getNumberOfComponents() {
-        return super.getNumberOfComponents();
-    }
-
-    @Override
-    public String getColor() {
-        return super.getColor();
-    }
-
-    @Override
-    public String getForm() {
-        return super.getForm();
-    }
-
-    @Override
-    public String getPanelFilling() {
-        return super.getPanelFilling();
-    }
-
-    @Override
     @JsonManagedReference
     public Set<ICardOption> getCardOptions() {
         return super.getCardOptions();

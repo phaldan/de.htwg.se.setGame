@@ -72,23 +72,7 @@ public class CardToImageMapper {
      * @return Returns filename
      */
     public String getImage(ICard c) {
-        int index = getColor(c) + getCount(c) + getFill(c) + getForm(c);
+        int index = (c == null) ? 0 : 1;
         return String.format(NAME, index);
-    }
-
-    private int getColor(ICard card) {
-        return color.get(card.getColor()) * COLOR_OFFSET;
-    }
-
-    private int getCount(ICard card) {
-        return count.get(card.getNumberOfComponents()) * COUNT_OFFSET;
-    }
-
-    private int getFill(ICard card) {
-        return fill.get(card.getPanelFilling()) * FILL_OFFSET;
-    }
-
-    private int getForm(ICard card) {
-        return form.get(card.getForm()) * FORM_OFFSET;
     }
 }

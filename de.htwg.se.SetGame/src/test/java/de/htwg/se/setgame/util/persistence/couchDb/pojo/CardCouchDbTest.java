@@ -29,30 +29,6 @@ public class CardCouchDbTest {
     }
 
     @Test
-    public void getNumberOfComponents_success() {
-        target.setNumberOfComponents(1);
-        assertEquals(new Integer(1), target.getNumberOfComponents());
-    }
-
-    @Test
-    public void getColor_success() {
-        target.setColor("green");
-        assertEquals("green", target.getColor());
-    }
-
-    @Test
-    public void getForm_success() {
-        target.setForm("circle");
-        assertEquals("circle", target.getForm());
-    }
-
-    @Test
-    public void getPanelFilling_success() {
-        target.setPanelFilling("full");
-        assertEquals("full", target.getPanelFilling());
-    }
-
-    @Test
     public void getCardOptions_success() {
         LinkedHashSet<ICardOption> list = new LinkedHashSet<>();
         target.setCardOptions(list);
