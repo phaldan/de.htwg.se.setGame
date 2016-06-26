@@ -5,10 +5,7 @@ import de.htwg.se.setgame.controller.CpuPlayer;
 import de.htwg.se.setgame.controller.event.CloseEvent;
 import de.htwg.se.setgame.controller.impl.cpu.CpuEasy;
 import de.htwg.se.setgame.model.*;
-import de.htwg.se.setgame.model.impl.Card;
-import de.htwg.se.setgame.model.impl.CardList;
-import de.htwg.se.setgame.model.impl.Game;
-import de.htwg.se.setgame.model.impl.GameDummy;
+import de.htwg.se.setgame.model.impl.*;
 import de.htwg.se.setgame.util.observer.Event;
 import de.htwg.se.setgame.util.observer.IObserver;
 import de.htwg.se.setgame.util.persistence.*;
@@ -16,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.*;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 
@@ -124,6 +122,39 @@ public class SetControllerTest {
                 @Override
                 public ICard create() {
                     return new Card();
+                }
+            };
+        }
+
+        @Override
+        public CardOptionDao getCardOption() {
+            return new CardOptionDaoDummy() {
+
+                @Override
+                public ICardOption create() {
+                    return new CardOption();
+                }
+            };
+        }
+
+        @Override
+        public OptionDao getOption() {
+            return new OptionDaoDummy() {
+
+                @Override
+                public IOption create() {
+                    return new Option();
+                }
+            };
+        }
+
+        @Override
+        public OptionValueDao getOptionValue() {
+            return new OptionValueDaoDummy() {
+
+                @Override
+                public IOptionValue create() {
+                    return new OptionValue();
                 }
             };
         }

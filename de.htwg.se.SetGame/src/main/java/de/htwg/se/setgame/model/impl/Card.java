@@ -3,6 +3,7 @@ package de.htwg.se.setgame.model.impl;
 import de.htwg.se.setgame.model.ICard;
 import de.htwg.se.setgame.model.ICardList;
 import de.htwg.se.setgame.model.ICardOption;
+import de.htwg.se.setgame.model.IOptionValue;
 
 import java.util.*;
 import java.util.Set;
@@ -95,16 +96,17 @@ public class Card implements ICard {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        addEntry(sb, color);
-        addEntry(sb, form);
-        addEntry(sb, panelFilling);
-        addEntry(sb, count.toString());
+        for (ICardOption option: getCardOptions()) {
+            addEntry(sb, option.getOption());
+        }
         sb.append(SEPARATOR);
         return sb.toString();
     }
 
-    private void addEntry(StringBuilder builder, String string) {
+    private void addEntry(StringBuilder builder, IOptionValue value) {
         builder.append(SEPARATOR);
-        builder.append(string);
+        builder.append(value.getOption().getName());
+        builder.append('=');
+        builder.append(value.getValue());
     }
 }

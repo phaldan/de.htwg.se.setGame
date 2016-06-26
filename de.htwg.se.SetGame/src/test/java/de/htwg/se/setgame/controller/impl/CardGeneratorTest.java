@@ -1,7 +1,14 @@
 package de.htwg.se.setgame.controller.impl;
 
 import de.htwg.se.setgame.model.*;
+import de.htwg.se.setgame.model.impl.Card;
+import de.htwg.se.setgame.model.impl.CardOption;
+import de.htwg.se.setgame.model.impl.Option;
+import de.htwg.se.setgame.model.impl.OptionValue;
 import de.htwg.se.setgame.util.persistence.CardDaoDummy;
+import de.htwg.se.setgame.util.persistence.CardOptionDaoDummy;
+import de.htwg.se.setgame.util.persistence.OptionDaoDummy;
+import de.htwg.se.setgame.util.persistence.OptionValueDaoDummy;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,39 +24,6 @@ import static org.junit.Assert.*;
  */
 public class CardGeneratorTest {
 
-    private class CardSpy extends CardDummy {
-
-        private String form;
-        private String fill;
-        private Integer count;
-        private String color;
-
-        @Override
-        public void setForm(String form) {
-            this.form = form;
-        }
-
-        @Override
-        public void setPanelFilling(String panelFilling) {
-            fill = panelFilling;
-        }
-
-        @Override
-        public void setNumberOfComponents(int numberOfComponents) {
-            count = numberOfComponents;
-        }
-
-        @Override
-        public void setColor(String color) {
-            this.color = color;
-        }
-
-        @Override
-        public String toString() {
-            return form + fill + count + color;
-        }
-    }
-
     private class CardListSpy extends CardListDummy {
 
         @Override
@@ -62,7 +36,31 @@ public class CardGeneratorTest {
 
         @Override
         public ICard create() {
-            return new CardSpy();
+            return new Card();
+        }
+    }
+
+    private class CardOptionDao extends CardOptionDaoDummy {
+
+        @Override
+        public ICardOption create() {
+            return new CardOption();
+        }
+    }
+
+    private class OptionDao extends OptionDaoDummy {
+
+        @Override
+        public IOption create() {
+            return new Option();
+        }
+    }
+
+    private class OptionValueDao extends OptionValueDaoDummy {
+
+        @Override
+        public IOptionValue create() {
+            return new OptionValue();
         }
     }
 
@@ -71,7 +69,8 @@ public class CardGeneratorTest {
 
     @Before
     public void setUp() {
-        target = new CardGenerator(new CardDao());
+        CardOptions cardOptions = new CardOptions(new OptionDao(), new OptionValueDao());
+        target = new CardGenerator(new CardDao(), new CardOptionDao(), cardOptions);
         cards = new LinkedHashSet<>();
     }
 

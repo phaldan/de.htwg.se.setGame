@@ -43,16 +43,22 @@ public class CardTest {
 
     @Test
     public void toString_success() {
-        target.setColor("color");
-        target.setNumberOfComponents(1337);
-        target.setForm("form");
-        target.setPanelFilling("fill");
+        Option option = new Option();
+        option.setName("Count");
+
+        OptionValue optionValue = new OptionValue();
+        optionValue.setValue("one");
+        optionValue.setOption(option);
+
+        CardOption cardOption = new CardOption();
+        cardOption.setCard(target);
+        cardOption.setOption(optionValue);
+
+        target.getCardOptions().add(cardOption);
 
         String string = target.toString();
-        assertTrue(string.contains("color"));
-        assertTrue(string.contains("1337"));
-        assertTrue(string.contains("form"));
-        assertTrue(string.contains("fill"));
+        assertTrue(string.contains("Count"));
+        assertTrue(string.contains("one"));
     }
 
     @Test
