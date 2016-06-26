@@ -39,4 +39,9 @@ public interface ModelFactory {
      * @return Return new IOptionValue instance
      */
     IOptionValue createOptionValue();
+
+    /**
+     * @return Return new ICardOption instance
+     */
+    ICardOption createCardOption();
 }

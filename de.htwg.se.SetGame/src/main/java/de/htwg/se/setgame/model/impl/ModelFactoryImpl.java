@@ -41,4 +41,9 @@ public class ModelFactoryImpl implements ModelFactory {
     public IOptionValue createOptionValue() {
         return new OptionValue();
     }
+
+    @Override
+    public ICardOption createCardOption() {
+        return new CardOption();
+    }
 }

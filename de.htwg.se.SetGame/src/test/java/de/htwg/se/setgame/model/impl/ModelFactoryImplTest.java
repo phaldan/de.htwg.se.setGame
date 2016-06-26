@@ -51,4 +51,9 @@ public class ModelFactoryImplTest {
     public void createOptionValue_success() {
         assertNotNull(target.createOptionValue());
     }
+
+    @Test
+    public void createCardOption_success() {
+        assertNotNull(target.createCardOption());
+    }
 }

@@ -39,4 +39,9 @@ public class ModelFactoryDummy implements ModelFactory {
     public IOptionValue createOptionValue() {
         return null;
     }
+
+    @Override
+    public ICardOption createCardOption() {
+        return null;
+    }
 }
