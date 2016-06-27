@@ -122,6 +122,7 @@ public class SetButton extends Panel {
     public void update(Event e) {
         if (e == null || !e.getClass().equals(CloseEvent.class)) {
             initPanel();
+            updateSB();
         }
     }
 }

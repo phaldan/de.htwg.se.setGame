@@ -66,10 +66,11 @@ public class CardGeneratorTest {
 
     private CardGenerator target;
     private Set<ICard> cards;
+    private CardOptions cardOptions;
 
     @Before
     public void setUp() {
-        CardOptions cardOptions = new CardOptions(new OptionDao(), new OptionValueDao());
+        cardOptions = new CardOptions(new OptionDao(), new OptionValueDao());
         target = new CardGenerator(new CardDao(), new CardOptionDao(), cardOptions);
         cards = new LinkedHashSet<>();
     }
@@ -77,7 +78,10 @@ public class CardGeneratorTest {
     @Test
     public void generate_success() {
         target.generate(new CardListSpy());
-        int size = CardGenerator.COLOR.length * CardGenerator.FILL.length * CardGenerator.FORM.length * CardGenerator.COUNT.length;
+        int size = 1;
+        for (IOption option: cardOptions.getValues()) {
+            size = size * option.getOptionValues().size();
+        }
         assertEquals(size, cards.size());
     }
 
