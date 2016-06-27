@@ -5,10 +5,7 @@ import de.htwg.se.setgame.model.impl.Card;
 import de.htwg.se.setgame.model.impl.CardOption;
 import de.htwg.se.setgame.model.impl.Option;
 import de.htwg.se.setgame.model.impl.OptionValue;
-import de.htwg.se.setgame.util.persistence.CardDaoDummy;
-import de.htwg.se.setgame.util.persistence.CardOptionDaoDummy;
-import de.htwg.se.setgame.util.persistence.OptionDaoDummy;
-import de.htwg.se.setgame.util.persistence.OptionValueDaoDummy;
+import de.htwg.se.setgame.util.persistence.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -32,46 +29,15 @@ public class CardGeneratorTest {
         }
     }
 
-    private class CardDao extends CardDaoDummy {
-
-        @Override
-        public ICard create() {
-            return new Card();
-        }
-    }
-
-    private class CardOptionDao extends CardOptionDaoDummy {
-
-        @Override
-        public ICardOption create() {
-            return new CardOption();
-        }
-    }
-
-    private class OptionDao extends OptionDaoDummy {
-
-        @Override
-        public IOption create() {
-            return new Option();
-        }
-    }
-
-    private class OptionValueDao extends OptionValueDaoDummy {
-
-        @Override
-        public IOptionValue create() {
-            return new OptionValue();
-        }
-    }
-
     private CardGenerator target;
     private Set<ICard> cards;
     private CardOptions cardOptions;
 
     @Before
     public void setUp() {
-        cardOptions = new CardOptions(new OptionDao(), new OptionValueDao());
-        target = new CardGenerator(new CardDao(), new CardOptionDao(), cardOptions);
+        DaoManagerStub dao = new DaoManagerStub();
+        cardOptions = new CardOptions(dao);
+        target = new CardGenerator(dao);
         cards = new LinkedHashSet<>();
     }
 

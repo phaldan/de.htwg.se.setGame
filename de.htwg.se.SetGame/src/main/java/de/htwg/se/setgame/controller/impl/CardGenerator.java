@@ -4,6 +4,7 @@ import de.htwg.se.setgame.model.*;
 import de.htwg.se.setgame.model.impl.Option;
 import de.htwg.se.setgame.util.persistence.CardDao;
 import de.htwg.se.setgame.util.persistence.CardOptionDao;
+import de.htwg.se.setgame.util.persistence.DaoManager;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -18,12 +19,12 @@ public class CardGenerator {
     private CardOptions cardOptions;
 
     /**
-     * @param cardDao Instance of CardDao
+     * @param dao Instance of DaoManager
      */
-    protected CardGenerator(CardDao cardDao, CardOptionDao cardOptionDao, CardOptions cardOptions) {
-        this.dao = cardDao;
-        this.cardOptionDao = cardOptionDao;
-        this.cardOptions = cardOptions;
+    protected CardGenerator(DaoManager dao) {
+        this.dao = dao.getCard();
+        this.cardOptionDao = dao.getCardOption();
+        this.cardOptions = new CardOptions(dao);
     }
 
     protected void generate(ICardList cardList) {

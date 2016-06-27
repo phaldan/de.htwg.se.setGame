@@ -2,6 +2,7 @@ package de.htwg.se.setgame.controller.impl;
 
 import de.htwg.se.setgame.model.IOption;
 import de.htwg.se.setgame.model.IOptionValue;
+import de.htwg.se.setgame.util.persistence.DaoManager;
 import de.htwg.se.setgame.util.persistence.OptionDao;
 import de.htwg.se.setgame.util.persistence.OptionValueDao;
 
@@ -18,12 +19,11 @@ public class CardOptions {
     private final OptionValueDao optionValueDao;
 
     /**
-     * @param optionDao Instance of OptionDao
-     * @param optionValueDao Instance of OptionValueDao
+     * @param dao Instance of DaoManager
      */
-    protected CardOptions(OptionDao optionDao, OptionValueDao optionValueDao) {
-        this.optionDao = optionDao;
-        this.optionValueDao = optionValueDao;
+    protected CardOptions(DaoManager dao) {
+        this.optionDao = dao.getOption();
+        this.optionValueDao = dao.getOptionValue();
     }
 
     /**

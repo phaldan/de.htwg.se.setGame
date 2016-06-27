@@ -17,8 +17,7 @@ public class GameCreator {
 
     protected GameCreator(DaoManager dao, CardSet cardSet) {
         this.dao = dao;
-        CardOptions cardOptions = new CardOptions(dao.getOption(), dao.getOptionValue());
-        this.generator = new CardGenerator(dao.getCard(), dao.getCardOption(), cardOptions);
+        this.generator = new CardGenerator(dao);
         this.resize = new Resize(cardSet, dao);
     }
 
